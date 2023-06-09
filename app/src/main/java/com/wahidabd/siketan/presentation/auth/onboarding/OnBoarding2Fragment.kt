@@ -3,7 +3,9 @@ package com.wahidabd.siketan.presentation.auth.onboarding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.wahidabd.library.presentation.fragment.BaseFragment
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.siketan.databinding.FragmentOnBoarding2Binding
+import com.wahidabd.siketan.utils.navDirection
 
 class OnBoarding2Fragment : BaseFragment<FragmentOnBoarding2Binding>() {
 
@@ -17,7 +19,11 @@ class OnBoarding2Fragment : BaseFragment<FragmentOnBoarding2Binding>() {
 
     override fun initUI() {}
 
-    override fun initAction() {}
+    override fun initAction() {
+        binding.btnNext.onClick {
+            navDirection(OnBoarding2FragmentDirections.actionOnBoarding2FragmentToLoginFragment())
+        }
+    }
 
     override fun initProcess() {}
 

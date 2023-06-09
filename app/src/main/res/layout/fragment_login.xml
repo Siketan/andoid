@@ -1,14 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.auth.authentication.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/img_bg_login" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_28dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/bg_rounded_black_opacity_10"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.wahidabd.siketan.utils.components.FormAuthentication
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:hintLabel="@string/hint_email_phone"
+            app:iconLabel="@drawable/ic_email"
+            app:input_type="email" />
+
+        <com.wahidabd.siketan.utils.components.FormAuthentication
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:hintLabel="@string/hint_password"
+            app:iconLabel="@drawable/ic_password"
+            app:input_type="password" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnlogin"
+            style="@style/MyText.Medium.White"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_rounded_secondary_4"
+            android:text="@string/label_login"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="@dimen/dimen_6dp">
+
+            <TextView
+                android:id="@+id/tvCreateAccount"
+                style="@style/MyText.Medium.White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_new_account" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:gravity="end"
+                android:text="@string/label_forgot_password"
+                android:textColor="#A3A3A3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dimen_10dp">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="1.5dp"
+                android:layout_weight="1"
+                app:dividerColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                style="@style/MyText.White"
+                android:textSize="12sp"
+                android:text="@string/label_login_with"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="1.5dp"
+                android:layout_weight="1"
+                app:dividerColor="@color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="@dimen/dimen_14dp"
+            android:layout_marginBottom="26dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_white_4"
+                android:text="@string/label_login_with_google"
+                style="@style/MyText"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:textSize="8sp"
+                android:drawableStart="@drawable/ic_google"
+                android:paddingHorizontal="8dp"
+                tools:ignore="SmallSp" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rounded_blue_4"
+                android:text="@string/label_login_with_fb"
+                style="@style/MyText"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="8sp"
+                android:drawableStart="@drawable/ic_facebook"
+                android:paddingHorizontal="8dp"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        style="@style/MyText.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:text="@string/label_login"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/ll"
+        app:layout_constraintStart_toStartOf="@id/ll"
+        app:layout_constraintTop_toTopOf="@id/ll" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
