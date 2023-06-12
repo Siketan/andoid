@@ -3,6 +3,7 @@ package com.wahidabd.siketan.utils.components
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.InputType
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.LinearLayout
@@ -28,6 +29,7 @@ class FormAuthentication @JvmOverloads constructor(
     private lateinit var binding: LayoutFormAuthBinding
 
     val editText by lazy { binding.edt}
+    private var isHide = true
 
     private var hint = emptyString()
     private var iconLabel = 0
@@ -47,7 +49,10 @@ class FormAuthentication @JvmOverloads constructor(
             edt.inputType = type.value
             imgIcon.setImageResource(iconLabel)
 
-            if (isPassword) edt.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_google), null)
+            if (isPassword) {
+                edt.setCompoundDrawables(null, null, ContextCompat.getDrawable(context, R.drawable.ic_google), null)
+                edt.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
         }
     }
 
@@ -82,7 +87,7 @@ class FormAuthentication @JvmOverloads constructor(
     enum class MyInputType(val value: Int) {
         TEXT(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL ),
         EMAIL(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS),
-        PASSWORD(InputType.TYPE_TEXT_VARIATION_PASSWORD),
+        PASSWORD(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD),
         NUMBER(InputType.TYPE_CLASS_PHONE)
     }
 

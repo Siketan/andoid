@@ -1,10 +1,11 @@
 package com.wahidabd.siketan.di
 
+import com.wahidabd.library.data.libs.ApiService
 import com.wahidabd.library.data.libs.OkHttpClientFactory
 import com.wahidabd.library.data.libs.interceptor.HeaderInterceptor
+import com.wahidabd.library.utils.coroutine.handler.ErrorParses
 import com.wahidabd.siketan.BuildConfig
 import com.wahidabd.siketan.utils.PrefManager
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import okhttp3.Interceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -18,7 +19,7 @@ import org.koin.dsl.module
 
 const val BASE_URL: String = "baseUrl"
 
-val apiModule = module {
+val appModule = module {
 
     single { PrefManager(get()) }
 
@@ -34,8 +35,14 @@ val apiModule = module {
     single(named(BASE_URL)) { BuildConfig.BASE_URL }
 }
 
-val rxModule = module {
-    factory { CompositeDisposable() }
+val apiModule = module {
+    single {
+        ApiService.createService(
+            get(), get(named(BASE_URL))
+        )
+    }
+
+    factory { ErrorParses(get()) }
 }
 
 private fun getHeaderInterceptor(pref: PrefManager): Interceptor {

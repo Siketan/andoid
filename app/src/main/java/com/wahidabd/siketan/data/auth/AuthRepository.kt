@@ -1,10 +1,13 @@
 package com.wahidabd.siketan.data.auth
 
 import com.wahidabd.library.data.BaseRepository
+import com.wahidabd.library.data.Resource
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -13,7 +16,7 @@ import io.reactivex.rxjava3.core.Single
  */
 
 
-interface AuthRepository: BaseRepository {
-    fun login(data: LoginDataRequest): Single<AuthDataResponse>
-    fun register(data: RegisterDataRequest): Single<AuthDataResponse>
+interface AuthRepository : BaseRepository {
+    suspend fun login(data: LoginDataRequest): Flow<Resource<AuthDataResponse>>
+    suspend fun register(data: RegisterDataRequest): Flow<Resource<AuthDataResponse>>
 }

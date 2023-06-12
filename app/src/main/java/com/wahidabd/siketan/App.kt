@@ -3,8 +3,8 @@ package com.wahidabd.siketan
 import androidx.appcompat.app.AppCompatDelegate
 import com.wahidabd.library.presentation.BaseApplication
 import com.wahidabd.siketan.di.apiModule
+import com.wahidabd.siketan.di.appModule
 import com.wahidabd.siketan.di.authModule
-import com.wahidabd.siketan.di.rxModule
 import org.koin.core.module.Module
 import timber.log.Timber
 
@@ -19,8 +19,8 @@ class App : BaseApplication() {
 
     override fun getDefineModule(): List<Module> =
         listOf(
+            appModule,
             apiModule,
-            rxModule,
             authModule
         )
 

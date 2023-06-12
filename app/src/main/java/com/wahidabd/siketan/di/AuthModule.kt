@@ -11,6 +11,7 @@ import com.wahidabd.siketan.presentation.auth.authentication.AuthViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import retrofit2.Retrofit
 
 
 /**
@@ -21,15 +22,9 @@ import org.koin.dsl.module
 
 val authModule = module {
 
-    single {
-        ApiService.createReactiveService(
-            AuthApiClient::class.java,
-            get(), get(named(BASE_URL))
-        )
-    }
-
+    single { get<Retrofit>().create(AuthApiClient::class.java) }
     single { AuthApi(get()) }
-    single<AuthRepository> { AuthDataSource(get()) }
+    single<AuthRepository> { AuthDataSource(get(), get()) }
     single<AuthUseCase> { AuthInteractor(get()) }
-    viewModel { AuthViewModel(get(), get()) }
+    viewModel { AuthViewModel(get()) }
 }

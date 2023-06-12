@@ -19,4 +19,9 @@
     <string name="label_login_with_google">Login dengan Google</string>
     <string name="label_login_with_fb">Login dengan Facebook</string>
     <string name="label_register2">Daftar</string>
+    <string name="message_invalid_email">Email tidak valid</string>
+    <string name="messsage_not_matches_password">Password tidak sama</string>
+    <string name="format_message_required">%s harus diisi</string>
+    <string name="message_error_check">Gagal melakukan autentikasi, cek kembali inputan anda</string>
+    <string name="data_farming">Data Pertanian</string>
 </resources>

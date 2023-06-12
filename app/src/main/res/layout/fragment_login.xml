@@ -41,13 +41,14 @@
             android:layout_marginTop="@dimen/dimen_20dp"
             app:hintLabel="@string/hint_password"
             app:iconLabel="@drawable/ic_password"
+            app:is_password="true"
             app:input_type="password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnlogin"
             style="@style/MyText.Medium.White"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_rounded_secondary_4"

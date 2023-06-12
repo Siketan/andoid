@@ -1,11 +1,11 @@
 package com.wahidabd.siketan.utils
 
-import android.app.Dialog
-import androidx.appcompat.app.AlertDialog
+import android.text.TextUtils
+import android.util.Patterns
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.wahidabd.siketan.databinding.LayoutLoadingBinding
 
 
 /**
@@ -16,3 +16,6 @@ import com.wahidabd.siketan.databinding.LayoutLoadingBinding
 
 fun Fragment.navDirection(direction: NavDirections) =
     findNavController().navigate(direction)
+
+fun emailMatches(value: String): Boolean =
+    !TextUtils.isEmpty(value) && Patterns.EMAIL_ADDRESS.matcher(value).matches()

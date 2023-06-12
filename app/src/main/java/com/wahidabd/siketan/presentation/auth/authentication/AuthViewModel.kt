@@ -2,15 +2,22 @@ package com.wahidabd.siketan.presentation.auth.authentication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.presentation.BaseViewModel
 import com.wahidabd.library.utils.exts.addTo
 import com.wahidabd.library.utils.rx.apihandlers.genericErrorHandler
+import com.wahidabd.library.utils.rx.transformers.observerScheduler
 import com.wahidabd.library.utils.rx.transformers.singleScheduler
 import com.wahidabd.siketan.domain.auth.AuthUseCase
 import com.wahidabd.siketan.domain.auth.model.AuthResponse
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
+import com.wahidabd.siketan.domain.auth.model.RegisterRequest
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
 /**
@@ -21,8 +28,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class AuthViewModel(
     private val useCase: AuthUseCase,
-    disposable: CompositeDisposable
-) : BaseViewModel(disposable) {
+) : ViewModel(){
 
     private val _login = MutableLiveData<Resource<AuthResponse>>()
     val login: LiveData<Resource<AuthResponse>> get() = _login
@@ -36,14 +42,15 @@ class AuthViewModel(
     }
 
     fun login(data: LoginRequest){
-        _login.value = Resource.loading()
-
         useCase.login(data)
-            .compose(singleScheduler())
-            .subscribe({
-                _login.value = Resource.success(it)
-            }, { genericErrorHandler(it, _login) })
-            .addTo(disposable)
+            .onEach { _login.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun register(data: RegisterRequest){
+        useCase.register(data)
+            .onEach { _register.value = it }
+            .launchIn(viewModelScope)
     }
 
 }

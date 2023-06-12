@@ -3,9 +3,11 @@ package com.wahidabd.siketan.data.auth.remote
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 
@@ -17,13 +19,13 @@ import retrofit2.http.POST
 
 interface AuthApiClient {
 
-    @POST("/auth/login")
-    fun login(
+    @POST("auth/login")
+    suspend fun login(
         @Body data: LoginDataRequest
-    ): Single<Response<AuthDataResponse>>
+    ): Response<AuthDataResponse>
 
     @POST("auth/register")
-    fun register(
+    suspend fun register(
         @Body data: RegisterDataRequest
-    ): Single<Response<AuthDataResponse>>
+    ): Response<AuthDataResponse>
 }

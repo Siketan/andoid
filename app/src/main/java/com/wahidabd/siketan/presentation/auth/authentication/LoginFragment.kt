@@ -10,9 +10,12 @@ import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.library.utils.exts.visible
+import com.wahidabd.siketan.R
 import com.wahidabd.siketan.databinding.FragmentLoginBinding
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
+import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.emailMatches
 import com.wahidabd.siketan.utils.navDirection
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,7 +50,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 val password = edtPassword.editText.toStringTrim()
                 val data = LoginRequest(email, password)
 
-                viewModel.login(data)
+                when {
+                    emailMatches(edtEmail.editText.toString()) -> showToast(getString(R.string.message_invalid_email))
+                    edtPassword.editText.toStringTrim().isEmpty() -> showToast(getString(R.string.format_message_required, "Password"))
+                    else -> viewModel.login(data)
+                }
             }
         }
     }
@@ -56,7 +63,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         viewModel.login.observerLiveData(
             viewLifecycleOwner,
             onEmpty = {},
-            onLoading = {binding.progress.visible()},
+            onLoading = { binding.progress.visible() },
             onFailure = { _, m ->
                 binding.progress.gone()
                 showToast(m.toString())
@@ -66,6 +73,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
                 pref.login(true)
                 pref.setToken(it.token.toString())
+
+                MainActivity.start(requireContext())
+                activity?.finish()
             }
         )
     }

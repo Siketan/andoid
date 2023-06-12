@@ -1,13 +1,18 @@
 package com.wahidabd.siketan.data.auth
 
 import com.wahidabd.library.data.LocalDb
-import com.wahidabd.library.data.WebApi
-import com.wahidabd.library.utils.rx.operators.getSingleApiError
+import com.wahidabd.library.data.Resource
+import com.wahidabd.library.utils.coroutine.enqueue
+import com.wahidabd.library.utils.coroutine.handler.ErrorParses
+import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
 import com.wahidabd.siketan.data.auth.remote.AuthApi
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 
 /**
@@ -17,23 +22,22 @@ import io.reactivex.rxjava3.core.Single
 
 
 class AuthDataSource(
-    api: AuthApi
+    api: AuthApi,
+    private val err: ErrorParses
 ) : AuthRepository {
 
     override val dbService: LocalDb? = null
     override val webService = api
 
-    override fun login(data: LoginDataRequest): Single<AuthDataResponse> {
-        return webService.login(data)
-            .lift(getSingleApiError())
-            .map { it }
-    }
+    override suspend fun login(data: LoginDataRequest): Flow<Resource<AuthDataResponse>> = flow {
+        enqueue(data, err::convertGenericError, webService::login, onEmit = { emit(it) })
+        debug { "DATA --> $data" }
+    }.flowOn(Dispatchers.IO)
 
-    override fun register(data: RegisterDataRequest): Single<AuthDataResponse> {
-        return webService.register(data)
-            .lift(getSingleApiError())
-            .map { it }
-    }
+    override suspend fun register(data: RegisterDataRequest): Flow<Resource<AuthDataResponse>> =
+        flow {
+            enqueue(data, err::convertGenericError, webService::register, onEmit = { emit(it) })
+        }
 
 
 }

@@ -1,12 +1,15 @@
 package com.wahidabd.siketan.domain.auth
 
+import com.wahidabd.library.data.Resource
+import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import com.wahidabd.siketan.data.auth.AuthRepository
+import com.wahidabd.siketan.data.auth.model.AuthDataResponse
 import com.wahidabd.siketan.domain.auth.model.AuthResponse
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
 import com.wahidabd.siketan.domain.auth.model.RegisterRequest
 import com.wahidabd.siketan.domain.auth.model.toData
 import com.wahidabd.siketan.domain.auth.model.toDomain
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -16,15 +19,30 @@ import io.reactivex.rxjava3.core.Single
 
 
 class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
-    override fun login(data: LoginRequest): Single<AuthResponse> {
-        return repository.login(data.toData()).map {
-            it.toDomain()
-        }
-    }
 
-    override fun register(data: RegisterRequest): Single<AuthResponse> {
-        return repository.register(data.toData()).map {
-            it.toDomain()
-        }
-    }
+    override fun login(data: LoginRequest): Flow<Resource<AuthResponse>> =
+        object : InternetBoundResource<AuthResponse, AuthDataResponse>() {
+            override suspend fun createCall(): Flow<Resource<AuthDataResponse>> {
+                return repository.login(data.toData())
+            }
+
+            override suspend fun saveCallRequest(data: AuthDataResponse): AuthResponse {
+                return data.toDomain()
+            }
+
+        }.asFlow()
+
+    override fun register(data: RegisterRequest): Flow<Resource<AuthResponse>> =
+        object : InternetBoundResource<AuthResponse, AuthDataResponse>() {
+            override suspend fun createCall(): Flow<Resource<AuthDataResponse>> {
+                return repository.register(data.toData())
+            }
+
+
+            override suspend fun saveCallRequest(data: AuthDataResponse): AuthResponse {
+                return data.toDomain()
+            }
+
+        }.asFlow()
+
 }

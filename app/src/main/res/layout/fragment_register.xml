@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_28dp"
             android:layout_marginTop="@dimen/dimen_20dp"
-            app:hintLabel="@string/hint_email_phone"
+            app:hintLabel="@string/hint_whatsapp"
             app:iconLabel="@drawable/ic_whatsapp"
             app:input_type="number" />
 
@@ -60,6 +60,7 @@
             android:layout_marginHorizontal="@dimen/dimen_28dp"
             android:layout_marginTop="@dimen/dimen_20dp"
             app:hintLabel="@string/hint_password"
+            app:is_password="true"
             app:iconLabel="@drawable/ic_password"
             app:input_type="password" />
 
@@ -71,13 +72,14 @@
             android:layout_marginTop="@dimen/dimen_20dp"
             app:hintLabel="@string/hint_password_conf"
             app:iconLabel="@drawable/ic_password"
+            app:is_password="true"
             app:input_type="password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnlogin"
             style="@style/MyText.Medium.White"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_rounded_secondary_4"
@@ -100,5 +102,16 @@
         app:layout_constraintBottom_toTopOf="@id/ll"
         app:layout_constraintStart_toStartOf="@id/ll"
         app:layout_constraintTop_toTopOf="@id/ll" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

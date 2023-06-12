@@ -1,9 +1,10 @@
 package com.wahidabd.siketan.domain.auth
 
+import com.wahidabd.library.data.Resource
 import com.wahidabd.siketan.domain.auth.model.AuthResponse
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
 import com.wahidabd.siketan.domain.auth.model.RegisterRequest
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -13,6 +14,6 @@ import io.reactivex.rxjava3.core.Single
 
 
 interface AuthUseCase {
-    fun login(data: LoginRequest): Single<AuthResponse>
-    fun register(data: RegisterRequest): Single<AuthResponse>
+    fun login(data: LoginRequest): Flow<Resource<AuthResponse>>
+    fun register(data: RegisterRequest): Flow<Resource<AuthResponse>>
 }
