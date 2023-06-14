@@ -24,4 +24,8 @@
     <string name="format_message_required">%s harus diisi</string>
     <string name="message_error_check">Gagal melakukan autentikasi, cek kembali inputan anda</string>
     <string name="data_farming">Data Pertanian</string>
+    <string name="format_underline"><u>%s</u></string>
+    <string name="label_read_more"><u>Baca Selengkapnya</u></string>
+    <string name="format_label_price">Harga : %s,-</string>
+    <string name="format_label_stock">Stok : %s</string>
 </resources>

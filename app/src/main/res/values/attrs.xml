@@ -11,4 +11,8 @@
             <enum name="number" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="FormInput">
+        <attr name="labelHint" format="string"/>
+    </declare-styleable>
 </resources>

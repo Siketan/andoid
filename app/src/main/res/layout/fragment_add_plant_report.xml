@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.plant.AddPlantReportFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:layout_marginEnd="-10dp"
+        android:gravity="center"
+        android:background="@drawable/img_app_bar">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            style="@style/MyText.Bold"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Tambah Laporan Tanaman"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="18dp"
+            android:src="@drawable/img_statistics_white" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menuContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rounded_white_4"
+                    android:elevation="4dp"
+                    android:padding="@dimen/dimen_6dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/primary" />
+
+                <ImageView
+                    android:id="@+id/imgSetting"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rounded_white_4"
+                    android:elevation="4dp"
+                    android:padding="@dimen/dimen_6dp"
+                    android:src="@drawable/ic_setting"
+                    app:tint="@color/primary" />
+            </LinearLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilNik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="12dp"
+                app:labelHint="NOMOR NIK" />
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                app:labelHint="Nama Petani" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilKecamatan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Kecamatan" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilDesa"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Nama Desa" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilGapoktan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Gapoktan" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilKelompok"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Nama Kelompok" />
+            </LinearLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilPenyuluh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                app:labelHint="Penyuluh" />
+
+            <!--     DIVIDER       -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilStatusTanah"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Status Tanah" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilLuasLahan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Luas Lahan Tanam" />
+            </LinearLayout>
+
+            <!--     Group Button     -->
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilKomuditas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                app:labelHint="Komuditas" />
+
+            <TextView
+                style="@style/MyText.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="10dp"
+                android:text="Tanggal"
+                android:textColor="@color/secondary"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/bg_rounded_white_10"
+                android:elevation="4dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/MyText.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:hint="Tanggal"
+                    android:textColor="@color/blackOpacity48" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_arrow_down" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

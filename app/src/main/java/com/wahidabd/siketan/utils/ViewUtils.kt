@@ -19,3 +19,8 @@ fun Fragment.navDirection(direction: NavDirections) =
 
 fun emailMatches(value: String): Boolean =
     !TextUtils.isEmpty(value) && Patterns.EMAIL_ADDRESS.matcher(value).matches()
+
+
+fun Fragment.navigate(navDirections: NavDirections){
+    findNavController().navigate(navDirections)
+}

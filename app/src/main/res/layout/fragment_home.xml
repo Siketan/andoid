@@ -106,7 +106,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_20dp"
         android:layout_marginTop="12dp"
-        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -114,6 +113,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardData"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -140,6 +140,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardAnnouncement"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -171,6 +172,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardStore"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -191,12 +193,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="12dp"
-                    android:text="Toko Toko Tani"
+                    android:text="Toko-Toko Tani"
                     android:textColor="@color/primary"
                     android:textSize="@dimen/text_size_20sp" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardForm"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -226,11 +229,120 @@
 
     <!--  List Layout Container Menu  -->
     <LinearLayout
-        android:id="@+id/listConrtainer"
+        android:id="@+id/listContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_10"
+            android:elevation="2dp"
+            android:paddingHorizontal="@dimen/dimen_8dp"
+            android:paddingVertical="@dimen/dimen_6dp">
 
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/img_statistic" />
+
+            <TextView
+                style="@style/MyText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="@string/data_farming"
+                android:textColor="@color/primary"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_10"
+            android:elevation="2dp"
+            android:paddingHorizontal="@dimen/dimen_8dp"
+            android:paddingVertical="@dimen/dimen_6dp">
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/img_announcement" />
+
+            <TextView
+                style="@style/MyText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Info Pertanian"
+                android:textColor="@color/primary"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_10"
+            android:elevation="2dp"
+            android:paddingHorizontal="@dimen/dimen_8dp"
+            android:paddingVertical="@dimen/dimen_6dp">
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/img_store" />
+
+            <TextView
+                style="@style/MyText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Toko-Toko Tani"
+                android:textColor="@color/primary"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_10"
+            android:elevation="2dp"
+            android:paddingHorizontal="@dimen/dimen_8dp"
+            android:paddingVertical="@dimen/dimen_6dp">
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/img_form_data" />
+
+            <TextView
+                style="@style/MyText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Info Penyuluhan"
+                android:textColor="@color/primary"
+                android:textSize="30sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
