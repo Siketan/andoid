@@ -28,4 +28,5 @@
     <string name="label_read_more"><u>Baca Selengkapnya</u></string>
     <string name="format_label_price">Harga : %s,-</string>
     <string name="format_label_stock">Stok : %s</string>
+    <string name="format_label_author">Ditulis Oleh : %s</string>
 </resources>

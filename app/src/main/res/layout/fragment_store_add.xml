@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".presentation.store.StoreAddFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:layout_marginEnd="-10dp"
+        android:background="@drawable/img_app_bar"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            style="@style/MyText.Bold"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Toko Petani Ngawi"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="18dp"
+            android:src="@drawable/img_statistics_white" />
+    </LinearLayout>
+
+    <com.wahidabd.siketan.utils.components.FormInput
+        android:id="@+id/tilNik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        app:labelHint="Nomor Nik" />
+
+    <com.wahidabd.siketan.utils.components.FormInput
+        android:id="@+id/tilName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        app:labelHint="Nama Petani" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilKecamatan"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            app:labelHint="Kecamatan" />
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilDesa"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            app:labelHint="Nama Desa" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilGapoktan"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            app:labelHint="Gapoktan" />
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilKelompok"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            app:labelHint="Nama Kelompok" />
+    </LinearLayout>
+
+    <com.wahidabd.siketan.utils.components.FormInput
+        android:id="@+id/tilPenyuluh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        app:labelHint="Penyuluh" />
+
+    <!--  Divider  -->
+
+    <com.wahidabd.siketan.utils.components.FormInput
+        android:id="@+id/tilProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        app:labelHint="Nama Produk" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilStok"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dimen_12dp"
+            app:labelHint="Stok" />
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilUnit"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/dimen_8dp"
+            app:labelHint="Satuan" />
+
+        <com.wahidabd.siketan.utils.components.FormInput
+            android:id="@+id/tilPrice"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/dimen_12dp"
+            app:labelHint="Harga" />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDesc"
+        style="@style/TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:layout_marginHorizontal="@dimen/dimen_12dp"
+        android:hint="Deskripsi">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:gravity="top|start"
+            android:minHeight="@dimen/dimen_100dp"
+            android:maxHeight="@dimen/dimen_120dp"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

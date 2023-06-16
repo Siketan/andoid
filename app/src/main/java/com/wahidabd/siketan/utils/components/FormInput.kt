@@ -2,7 +2,6 @@ package com.wahidabd.siketan.utils.components
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.wahidabd.library.utils.common.emptyString
 import com.wahidabd.library.utils.exts.layoutInflater

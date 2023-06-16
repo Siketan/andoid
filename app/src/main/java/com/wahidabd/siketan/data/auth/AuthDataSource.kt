@@ -31,7 +31,6 @@ class AuthDataSource(
 
     override suspend fun login(data: LoginDataRequest): Flow<Resource<AuthDataResponse>> = flow {
         enqueue(data, err::convertGenericError, webService::login, onEmit = { emit(it) })
-        debug { "DATA --> $data" }
     }.flowOn(Dispatchers.IO)
 
     override suspend fun register(data: RegisterDataRequest): Flow<Resource<AuthDataResponse>> =

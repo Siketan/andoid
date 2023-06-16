@@ -7,6 +7,7 @@ import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.siketan.databinding.FragmentHomeBinding
+import com.wahidabd.siketan.utils.navigate
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -31,10 +32,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 listContainer.visible()
             }
 
-            cardData.onClick {  }
-            cardAnnouncement.onClick {  }
-            cardForm.onClick {  }
+            cardData.onClick {}
+            cardAnnouncement.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToAnnouncementFragment())
+            }
+            cardForm.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment())
+            }
             cardStore.onClick {  }
+
+            listInfo.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToAnnouncementFragment())
+            }
+
+            listForm.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment())
+            }
         }
     }
 

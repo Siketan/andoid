@@ -9,5 +9,31 @@
         android:id="@+id/homeFragment"
         android:name="com.wahidabd.siketan.presentation.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_announcementFragment"
+            app:destination="@id/announcementFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_journalFragment"
+            app:destination="@id/journalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementFragment"
+        android:name="com.wahidabd.siketan.presentation.announcement.AnnouncementFragment"
+        android:label="fragment_announcement"
+        tools:layout="@layout/fragment_announcement" />
+    <fragment
+        android:id="@+id/journalFragment"
+        android:name="com.wahidabd.siketan.presentation.journal.JournalFragment"
+        android:label="fragment_journal"
+        tools:layout="@layout/fragment_journal" >
+        <action
+            android:id="@+id/action_journalFragment_to_journalAddFragment"
+            app:destination="@id/journalAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/journalAddFragment"
+        android:name="com.wahidabd.siketan.presentation.journal.JournalAddFragment"
+        android:label="fragment_journal_add"
+        tools:layout="@layout/fragment_journal_add" />
 </navigation>

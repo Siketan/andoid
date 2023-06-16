@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".presentation.plant.AddPlantReportFragment">
+    tools:context=".presentation.journal.JournalAddFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="-10dp"
         android:layout_marginEnd="-10dp"
-        android:gravity="center"
-        android:background="@drawable/img_app_bar">
+        android:background="@drawable/img_app_bar"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/imgBack"
@@ -29,7 +29,7 @@
             android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="Tambah Laporan Tanaman"
+            android:text="Input Jurnal Penyeluhan"
             android:textColor="@color/white"
             android:textSize="26sp" />
 
@@ -50,145 +50,56 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/menuContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp">
-
-                <ImageView
-                    android:id="@+id/imgSearch"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_rounded_white_4"
-                    android:elevation="4dp"
-                    android:padding="@dimen/dimen_6dp"
-                    android:src="@drawable/ic_search"
-                    app:tint="@color/primary" />
-
-                <ImageView
-                    android:id="@+id/imgSetting"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_rounded_white_4"
-                    android:elevation="4dp"
-                    android:padding="@dimen/dimen_6dp"
-                    android:src="@drawable/ic_setting"
-                    app:tint="@color/primary" />
-            </LinearLayout>
-
             <com.wahidabd.siketan.utils.components.FormInput
-                android:id="@+id/tilNik"
+                android:id="@+id/tilNip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="12dp"
-                app:labelHint="Nomor Nik" />
+                app:labelHint="Nomor Nip" />
 
             <com.wahidabd.siketan.utils.components.FormInput
                 android:id="@+id/tilName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                app:labelHint="Nama Petani" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilKecamatan"
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_weight="1"
-                    app:labelHint="Kecamatan" />
-
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilDesa"
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_weight="1"
-                    app:labelHint="Nama Desa" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilGapoktan"
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_weight="1"
-                    app:labelHint="Gapoktan" />
-
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilKelompok"
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_weight="1"
-                    app:labelHint="Nama Kelompok" />
-            </LinearLayout>
+                app:labelHint="Nama Penyuluh" />
 
             <com.wahidabd.siketan.utils.components.FormInput
-                android:id="@+id/tilPenyuluh"
+                android:id="@+id/tilRegion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                app:labelHint="Penyuluh" />
-
-            <!--     DIVIDER       -->
+                app:labelHint="Kecamatan" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:layout_marginVertical="@dimen/dimen_20dp"
+                android:layout_marginHorizontal="@dimen/dimen_12dp">
 
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilStatusTanah"
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash"/>
+
+                <TextView
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
                     android:layout_weight="1"
-                    app:labelHint="Status Tanah" />
+                    android:layout_marginHorizontal="@dimen/dimen_10dp"
+                    style="@style/MyText"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:text="Masukan Laporan Jurnal Kegiatan"/>
 
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilLuasLahan"
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_weight="1"
-                    app:labelHint="Luas Lahan Tanam" />
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash"/>
             </LinearLayout>
-
-            <!--     Group Button     -->
-
-            <com.wahidabd.siketan.utils.components.FormInput
-                android:id="@+id/tilKomuditas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                app:labelHint="Komuditas" />
-
-            <TextView
-                style="@style/MyText.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="14dp"
-                android:layout_marginTop="10dp"
-                android:text="Tanggal"
-                android:textColor="@color/secondary"
-                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -217,6 +128,33 @@
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_arrow_down" />
             </LinearLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilJournal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                app:labelHint="Judul Jurnal" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDesc"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:hint="Deskripsi Tanam">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:gravity="top|start"
+                    android:minHeight="@dimen/dimen_100dp"
+                    android:maxHeight="@dimen/dimen_120dp"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -248,7 +186,6 @@
                     app:icon="@drawable/ic_save"
                     android:backgroundTint="@color/secondary"/>
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
