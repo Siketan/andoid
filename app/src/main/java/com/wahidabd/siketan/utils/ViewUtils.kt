@@ -6,6 +6,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -34,5 +35,10 @@ fun String.dateFormat(): String{
     val output = SimpleDateFormat("dd MMMM yyyy", localeIndonesia)
     val date = input.parse(this)
     return output.format(date)
+}
+
+fun Double.toCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(localeIndonesia)
+    return format.format(this)
 }
 

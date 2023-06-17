@@ -1,4 +1,4 @@
-package com.wahidabd.siketan.data.farm.model
+package com.wahidabd.siketan.data.farm.model.farm
 
 
 /**

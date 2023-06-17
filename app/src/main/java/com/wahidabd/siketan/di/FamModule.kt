@@ -7,6 +7,7 @@ import com.wahidabd.siketan.data.farm.remote.FarmApiClient
 import com.wahidabd.siketan.domain.farm.FarmInteractor
 import com.wahidabd.siketan.domain.farm.FarmUseCase
 import com.wahidabd.siketan.presentation.announcement.AnnouncementViewModel
+import com.wahidabd.siketan.presentation.store.viewmodel.StoreViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -25,5 +26,6 @@ val farmModule = module {
     single<FarmRepository> { FarmDataSource(get(), get()) }
     single<FarmUseCase> { FarmInteractor(get()) }
     viewModel { AnnouncementViewModel(get()) }
+    viewModel { StoreViewModel(get()) }
 
 }

@@ -40,6 +40,54 @@
             android:src="@drawable/img_statistics_white" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/menuContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/imgMyStore"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_4"
+            android:elevation="4dp"
+            android:padding="@dimen/dimen_6dp"
+            android:src="@drawable/ic_store"
+            app:tint="@color/primary" />
+
+        <Space
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_4"
+            android:elevation="4dp"
+            android:padding="@dimen/dimen_6dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/primary" />
+
+        <ImageView
+            android:id="@+id/imgList"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rounded_white_4"
+            android:elevation="4dp"
+            android:padding="@dimen/dimen_6dp"
+            android:src="@drawable/ic_setting"
+            app:tint="@color/primary" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStore"
         android:layout_width="match_parent"
@@ -49,5 +97,14 @@
         android:paddingVertical="@dimen/dimen_10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
+        android:visibility="gone"
         tools:listitem="@layout/item_store" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_200dp"
+        android:indeterminateTint="@color/secondary"/>
 </LinearLayout>

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_journalFragment"
             app:destination="@id/journalFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storeFragment"
+            app:destination="@id/storeFragment" />
     </fragment>
     <fragment
         android:id="@+id/announcementFragment"
@@ -36,4 +39,18 @@
         android:name="com.wahidabd.siketan.presentation.journal.JournalAddFragment"
         android:label="fragment_journal_add"
         tools:layout="@layout/fragment_journal_add" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.wahidabd.siketan.presentation.store.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment_to_storeAddFragment"
+            app:destination="@id/storeAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/storeAddFragment"
+        android:name="com.wahidabd.siketan.presentation.store.StoreAddFragment"
+        android:label="fragment_store_add"
+        tools:layout="@layout/fragment_store_add" />
 </navigation>

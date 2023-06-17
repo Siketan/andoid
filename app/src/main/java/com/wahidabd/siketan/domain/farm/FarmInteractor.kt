@@ -3,8 +3,10 @@ package com.wahidabd.siketan.domain.farm
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import com.wahidabd.siketan.data.farm.FarmRepository
-import com.wahidabd.siketan.data.farm.model.InfoTaniDataResponse
+import com.wahidabd.siketan.data.farm.model.farm.InfoTaniDataResponse
+import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.domain.farm.model.InfoTani
+import com.wahidabd.siketan.domain.farm.model.Product
 import com.wahidabd.siketan.domain.farm.model.toDomain
 import kotlinx.coroutines.flow.Flow
 
@@ -28,6 +30,20 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
                     it.toDomain()
                 }
             }
+        }.asFlow()
+
+    override fun getProduct(): Flow<Resource<List<Product>>> =
+        object : InternetBoundResource<List<Product>, ProductDataResponse>() {
+            override suspend fun createCall(): Flow<Resource<ProductDataResponse>> {
+                return repository.getProduct()
+            }
+
+            override suspend fun saveCallRequest(data: ProductDataResponse): List<Product> {
+                return data.productPetani.map {
+                    it.toDomain()
+                }
+            }
+
         }.asFlow()
 
 }

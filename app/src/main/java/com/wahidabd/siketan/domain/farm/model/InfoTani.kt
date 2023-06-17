@@ -1,7 +1,7 @@
 package com.wahidabd.siketan.domain.farm.model
 
 import com.wahidabd.library.utils.common.emptyString
-import com.wahidabd.siketan.data.farm.model.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.InfoTaniResponse
 
 
 /**

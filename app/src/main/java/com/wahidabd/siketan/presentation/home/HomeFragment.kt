@@ -39,7 +39,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             cardForm.onClick {
                 navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment())
             }
-            cardStore.onClick {  }
+            cardStore.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToStoreFragment())
+            }
 
             listInfo.onClick {
                 navigate(HomeFragmentDirections.actionHomeFragmentToAnnouncementFragment())
@@ -47,6 +49,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             listForm.onClick {
                 navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment())
+            }
+
+            listStore.onClick {
+                navigate(HomeFragmentDirections.actionHomeFragmentToStoreFragment())
             }
         }
     }
