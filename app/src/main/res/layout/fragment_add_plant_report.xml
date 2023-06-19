@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".presentation.plant.AddPlantReportFragment">
 
@@ -12,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="-10dp"
         android:layout_marginEnd="-10dp"
-        android:gravity="center"
-        android:background="@drawable/img_app_bar">
+        android:background="@drawable/img_app_bar"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/imgBack"
@@ -147,7 +148,34 @@
                 android:layout_marginHorizontal="12dp"
                 app:labelHint="Penyuluh" />
 
-            <!--     DIVIDER       -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="@dimen/dimen_20dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+
+                <TextView
+                    style="@style/MyText"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Masukan Data Laporan Progress Tanam"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,14 +199,99 @@
                     app:labelHint="Luas Lahan Tanam" />
             </LinearLayout>
 
-            <!--     Group Button     -->
-
-            <com.wahidabd.siketan.utils.components.FormInput
-                android:id="@+id/tilKomuditas"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                app:labelHint="Komuditas" />
+                android:layout_marginTop="@dimen/dimen_8dp">
+
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_12dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:background="@drawable/bg_rounded_stroke_gray"
+                    android:gravity="center">
+
+                    <RadioGroup
+                        android:id="@+id/rg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_12dp">
+
+                        <RadioButton
+                            android:id="@+id/rb1"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="Sangat Baik"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb22"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="Baik Sebagian"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb3"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="75% Kurang Baik"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb4"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="Buruk"
+                            android:textColor="@color/primary" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/MyText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/ll"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/dimen_30dp"
+                    android:background="@color/white"
+                    android:paddingHorizontal="@dimen/dimen_12dp"
+                    android:text="Isikan Foto Produk"
+                    android:textColor="@color/primary" />
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDesc"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="4dp"
+                android:hint="Deskripsi">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:maxHeight="@dimen/dimen_120dp"
+                    android:maxLines="1"
+                    android:minHeight="@dimen/dimen_180dp"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 style="@style/MyText.Medium"
@@ -221,32 +334,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="28dp"
-                android:layout_marginHorizontal="@dimen/dimen_12dp">
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="28dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:cornerRadius="@dimen/dimen_8dp"
-                    app:iconGravity="textStart"
+                    android:backgroundTint="@color/colorRed"
                     android:text="Cancel"
+                    app:cornerRadius="@dimen/dimen_8dp"
                     app:icon="@drawable/ic_save"
-                    android:backgroundTint="@color/colorRed"/>
+                    app:iconGravity="textStart" />
 
                 <Space
                     android:layout_width="@dimen/dimen_44dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:cornerRadius="@dimen/dimen_8dp"
-                    app:iconGravity="textStart"
+                    android:backgroundTint="@color/secondary"
                     android:text="Simpan"
+                    app:cornerRadius="@dimen/dimen_8dp"
                     app:icon="@drawable/ic_save"
-                    android:backgroundTint="@color/secondary"/>
+                    app:iconGravity="textStart" />
             </LinearLayout>
 
         </LinearLayout>

@@ -6,9 +6,11 @@ import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showSnackbarMessage
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.siketan.databinding.FragmentStoreBinding
 import com.wahidabd.siketan.presentation.store.viewmodel.StoreViewModel
+import com.wahidabd.siketan.utils.navigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StoreFragment : BaseFragment<FragmentStoreBinding>() {
@@ -30,7 +32,11 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>() {
         binding.rvStore.adapter = storeAdapter
     }
 
-    override fun initAction() {}
+    override fun initAction() {
+        binding.imgMyStore.onClick {
+            navigate(StoreFragmentDirections.actionStoreFragmentToStoreAddFragment())
+        }
+    }
 
     override fun initProcess() {
         viewModel.product()

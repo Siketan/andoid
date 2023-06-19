@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dimen_8dp"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
         android:paddingVertical="@dimen/dimen_10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_farm_info" />
-
 
 </RelativeLayout>
