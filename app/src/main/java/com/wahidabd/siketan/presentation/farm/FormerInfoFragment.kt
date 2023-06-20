@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.siketan.databinding.FragmentFormerInfoBinding
-import com.wahidabd.siketan.presentation.announcement.AnnouncementAdapter
+import com.wahidabd.siketan.presentation.announcement.adapter.AnnouncementAdapter
 
 class FormerInfoFragment : BaseFragment<FragmentFormerInfoBinding>() {
 

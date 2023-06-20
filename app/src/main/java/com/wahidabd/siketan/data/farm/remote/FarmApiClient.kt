@@ -1,12 +1,11 @@
 package com.wahidabd.siketan.data.farm.remote
 
-import com.wahidabd.siketan.data.farm.model.farm.InfoTaniDataResponse
-import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
+import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
 
 
 /**
@@ -18,7 +17,11 @@ import retrofit2.http.POST
 interface FarmApiClient {
 
     @GET("info-tani")
-    suspend fun getInfoTani(): Response<InfoTaniDataResponse>
+    suspend fun getInfoTani(): Response<InfoTaniDataResponse<InfoTaniResponse>>
+
+    @GET("event-tani")
+    suspend fun getEvent()
+            : Response<InfoTaniDataResponse<EventTaniResponse>>
 
     @GET("product-petani")
     suspend fun getProduct(): Response<ProductDataResponse>

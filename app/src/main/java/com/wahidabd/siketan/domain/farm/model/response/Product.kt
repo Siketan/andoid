@@ -1,4 +1,4 @@
-package com.wahidabd.siketan.domain.farm.model
+package com.wahidabd.siketan.domain.farm.model.response
 
 import com.wahidabd.library.utils.common.emptyString
 import com.wahidabd.siketan.data.farm.model.store.ProductResponse

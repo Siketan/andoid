@@ -24,9 +24,18 @@
     <string name="format_message_required">%s harus diisi</string>
     <string name="message_error_check">Gagal melakukan autentikasi, cek kembali inputan anda</string>
     <string name="data_farming">Data Pertanian</string>
+    <string name="label_close">CLOSE</string>
+    <string name="label_cancel">YA CANCEL</string>
+    <string name="format_label_start_date">Waktu Mulai : %s WIB</string>
+    <string name="format_label_end_date">Waktu Pulang : %s WIB</string>
+    <string name="format_label_location"><u>Tampat : %s</u></string>
     <string name="format_underline"><u>%s </u></string>
     <string name="label_read_more"><u>Baca Selengkapnya</u></string>
     <string name="format_label_price">Harga : %s,-</string>
     <string name="format_label_stock">Stok : %s</string>
     <string name="format_label_author">Ditulis Oleh : %s</string>
+    <string name="message_about">SIKETAN adalah aplikasi Sistem Informasi Kegiatan Penyuluhan pertanian.\n\nAplikasi ini merupakan suatu platform untuk menjalin sinergi antara penyuluh pertanian dengan-petani Kab. Ngawi.\n\nDiharapkan, dapat membantu meningkatkan hubungan dengan petani dilapangan sehingga dapat membantu meningkatkan produktivitas petani di Kab. Ngawi</string>
+    <string name="message_maintenance">Mohon maaf… Saat ini. Halaman ini sedang dalam perbaikan.</string>
+    <string name="format_message_success">TERIMA KASIH… DATA PRODUK TELAH BERHASIL DI SIMPA</string>
+    <string name="message_cancel_input">APAKAH ANDA YAQIN UNTUK MEMBATALKAN INPUT DATA ?</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.wahidabd.siketan.presentation.announcement
+package com.wahidabd.siketan.presentation.announcement.adapter
 
 import android.content.Context
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import com.wahidabd.library.utils.exts.layoutInflater
 import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.siketan.R
 import com.wahidabd.siketan.databinding.ItemFarmInfoBinding
-import com.wahidabd.siketan.domain.farm.model.InfoTani
+import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import com.wahidabd.siketan.utils.dateFormat
 
 

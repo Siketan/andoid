@@ -7,10 +7,9 @@ import com.wahidabd.library.presentation.adapter.BaseAsyncRecyclerAdapter
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
 import com.wahidabd.library.utils.exts.layoutInflater
 import com.wahidabd.library.utils.exts.setImageUrl
-import com.wahidabd.library.utils.exts.toDoubleOrZero
 import com.wahidabd.siketan.R
 import com.wahidabd.siketan.databinding.ItemStoreBinding
-import com.wahidabd.siketan.domain.farm.model.Product
+import com.wahidabd.siketan.domain.farm.model.response.Product
 import com.wahidabd.siketan.utils.toCurrency
 
 

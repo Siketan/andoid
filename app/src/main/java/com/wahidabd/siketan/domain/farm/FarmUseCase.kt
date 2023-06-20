@@ -1,9 +1,9 @@
 package com.wahidabd.siketan.domain.farm
 
 import com.wahidabd.library.data.Resource
-import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
-import com.wahidabd.siketan.domain.farm.model.InfoTani
-import com.wahidabd.siketan.domain.farm.model.Product
+import com.wahidabd.siketan.domain.farm.model.response.EventTani
+import com.wahidabd.siketan.domain.farm.model.response.InfoTani
+import com.wahidabd.siketan.domain.farm.model.response.Product
 import kotlinx.coroutines.flow.Flow
 
 
@@ -15,5 +15,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface FarmUseCase {
     fun getInfoTani(): Flow<Resource<List<InfoTani>>>
+    fun getEvent(): Flow<Resource<List<EventTani>>>
     fun getProduct(): Flow<Resource<List<Product>>>
 }

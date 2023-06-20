@@ -2,7 +2,9 @@ package com.wahidabd.siketan.data.farm
 
 import com.wahidabd.library.data.BaseRepository
 import com.wahidabd.library.data.Resource
-import com.wahidabd.siketan.data.farm.model.farm.InfoTaniDataResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import kotlinx.coroutines.flow.Flow
 
@@ -15,7 +17,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface FarmRepository : BaseRepository {
 
-    suspend fun getInfoTani(): Flow<Resource<InfoTaniDataResponse>>
+    suspend fun getInfoTani(): Flow<Resource<InfoTaniDataResponse<InfoTaniResponse>>>
+    suspend fun getEvent(): Flow<Resource<InfoTaniDataResponse<EventTaniResponse>>>
     suspend fun getProduct(): Flow<Resource<ProductDataResponse>>
 
 }

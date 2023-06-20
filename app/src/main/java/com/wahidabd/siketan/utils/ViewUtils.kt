@@ -11,6 +11,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.text.DateFormatSymbols
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -23,6 +24,7 @@ import java.util.Locale
  */
 
 val localeIndonesia = Locale("ID", "id")
+val listMonth = DateFormatSymbols(localeIndonesia).months.toList()
 
 fun Fragment.navDirection(direction: NavDirections) =
     findNavController().navigate(direction)

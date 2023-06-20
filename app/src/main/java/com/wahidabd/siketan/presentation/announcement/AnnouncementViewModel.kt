@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import com.wahidabd.siketan.domain.farm.FarmUseCase
-import com.wahidabd.siketan.domain.farm.model.InfoTani
+import com.wahidabd.siketan.domain.farm.model.response.EventTani
+import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onEmpty
 
 
 /**
@@ -24,9 +26,19 @@ class AnnouncementViewModel(
     private val _infoTani = MutableLiveData<Resource<List<InfoTani>>>()
     val infoTani: LiveData<Resource<List<InfoTani>>> get() = _infoTani
 
+    private val _event = MutableLiveData<Resource<List<EventTani>>>()
+    val event: LiveData<Resource<List<EventTani>>> get() = _event
+
     fun infoTani() {
         useCase.getInfoTani()
             .onEach { _infoTani.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun event() {
+        useCase.getEvent()
+            .onEach { _event.value = it }
+            .onEmpty { _event.value = Resource.empty() }
             .launchIn(viewModelScope)
     }
 
