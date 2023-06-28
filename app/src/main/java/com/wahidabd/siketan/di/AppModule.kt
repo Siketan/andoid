@@ -47,8 +47,8 @@ val apiModule = module {
 
 private fun getHeaderInterceptor(pref: PrefManager): Interceptor {
     val headers = HashMap<String, String>()
-    headers["Content-Type"] = "application/json"
     headers["Authorization"] = pref.getToken()
+    headers["Content-Type"] = "application/json"
 
     return HeaderInterceptor(headers)
 }

@@ -19,12 +19,12 @@ import retrofit2.http.POST
 
 interface AuthApiClient {
 
-    @POST("auth/login")
+    @POST("auth/petani-login")
     suspend fun login(
         @Body data: LoginDataRequest
     ): Response<AuthDataResponse>
 
-    @POST("auth/register")
+    @POST("auth/petani-register")
     suspend fun register(
         @Body data: RegisterDataRequest
     ): Response<AuthDataResponse>

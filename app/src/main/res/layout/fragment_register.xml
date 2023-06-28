@@ -24,13 +24,13 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.wahidabd.siketan.utils.components.FormAuthentication
-            android:id="@+id/edtEmail"
+            android:id="@+id/edtNik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="28dp"
             android:layout_marginTop="@dimen/dimen_20dp"
-            app:hintLabel="@string/hint_email"
-            app:iconLabel="@drawable/ic_email"
+            app:hintLabel="NIK"
+            app:iconLabel="@drawable/ic_person"
             app:input_type="email" />
 
         <com.wahidabd.siketan.utils.components.FormAuthentication

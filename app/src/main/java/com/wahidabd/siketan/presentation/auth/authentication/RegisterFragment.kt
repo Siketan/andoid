@@ -14,7 +14,6 @@ import com.wahidabd.siketan.databinding.FragmentRegisterBinding
 import com.wahidabd.siketan.domain.auth.model.RegisterRequest
 import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.utils.PrefManager
-import com.wahidabd.siketan.utils.emailMatches
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,11 +38,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
             btnlogin.onClick {
                 when {
-                    emailMatches(edtEmail.editText.toString()) -> showToast(getString(R.string.message_invalid_email))
                     edtPassword.editText.toStringTrim() != edtPasswordConf.editText.toStringTrim() -> showToast(
                         getString(R.string.messsage_not_matches_password)
                     )
-
                     else -> reqToObservers()
                 }
             }
@@ -77,12 +74,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     }
 
     private fun reqToObservers() = with(binding) {
-        val email = edtEmail.editText.toStringTrim()
+        val nik = edtNik.editText.toStringTrim()
         val no_wa = edtWhatsapp.editText.toStringTrim()
         val nama = edtName.editText.toStringTrim()
         val password = edtPassword.editText.toStringTrim()
 
-        val data = RegisterRequest(email, no_wa, nama, password)
+        val data = RegisterRequest(nik, no_wa, nama, password)
         viewModel.register(data)
     }
 

@@ -38,7 +38,6 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
                 return repository.register(data.toData())
             }
 
-
             override suspend fun saveCallRequest(data: AuthDataResponse): AuthResponse {
                 return data.toDomain()
             }

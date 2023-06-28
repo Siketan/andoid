@@ -10,5 +10,6 @@ import com.wahidabd.library.utils.common.emptyString
 
 data class AuthResponse(
     val message: String? = emptyString(),
-    val token: String? = emptyString()
+    val token: String? = emptyString(),
+    val user: User? = null
 )

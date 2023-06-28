@@ -8,5 +8,6 @@ package com.wahidabd.siketan.data.auth.model
 
 data class AuthDataResponse(
     val message: String? = null,
-    val token: String? = null
+    val token: String? = null,
+    val user: UserResponse? = null
 )

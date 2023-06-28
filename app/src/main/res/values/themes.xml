@@ -5,5 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.SiKetan" parent="Base.Theme.SiKetan" />
+    <style name="Theme.SiKetan" parent="Base.Theme.SiKetan">
+        <item name="android:statusBarColor">@color/primary</item>
+    </style>
 </resources>

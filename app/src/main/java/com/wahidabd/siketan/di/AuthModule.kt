@@ -1,6 +1,5 @@
 package com.wahidabd.siketan.di
 
-import com.wahidabd.library.data.libs.ApiService
 import com.wahidabd.siketan.data.auth.AuthDataSource
 import com.wahidabd.siketan.data.auth.AuthRepository
 import com.wahidabd.siketan.data.auth.remote.AuthApi
@@ -9,7 +8,6 @@ import com.wahidabd.siketan.domain.auth.AuthInteractor
 import com.wahidabd.siketan.domain.auth.AuthUseCase
 import com.wahidabd.siketan.presentation.auth.authentication.AuthViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

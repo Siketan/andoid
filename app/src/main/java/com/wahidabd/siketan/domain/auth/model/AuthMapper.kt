@@ -11,13 +11,13 @@ import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
  */
 
 fun AuthDataResponse.toDomain(): AuthResponse =
-    AuthResponse(message, token)
+    AuthResponse(message, token, user?.toDomain())
 
 fun AuthResponse.toData(): AuthDataResponse =
     AuthDataResponse(message, token)
 
 fun LoginRequest.toData(): LoginDataRequest =
-    LoginDataRequest(email, password)
+    LoginDataRequest(nik, password)
 
 fun RegisterRequest.toData(): RegisterDataRequest =
-    RegisterDataRequest(email, no_wa, nama, password)
+    RegisterDataRequest(nik, no_wa, nama, password)

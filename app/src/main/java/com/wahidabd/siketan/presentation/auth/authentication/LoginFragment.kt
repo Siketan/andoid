@@ -46,12 +46,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun initProcess() {
         with(binding) {
             btnlogin.onClick {
-                val email = edtEmail.editText.toStringTrim()
+                val email = edtNik.editText.toStringTrim()
                 val password = edtPassword.editText.toStringTrim()
                 val data = LoginRequest(email, password)
+                pref.setAttemptLogin(data)
 
                 when {
-                    emailMatches(edtEmail.editText.toString()) -> showToast(getString(R.string.message_invalid_email))
+                    emailMatches(edtNik.editText.toString()) -> showToast(getString(R.string.message_invalid_email))
                     edtPassword.editText.toStringTrim().isEmpty() -> showToast(getString(R.string.format_message_required, "Password"))
                     else -> viewModel.login(data)
                 }
@@ -71,8 +72,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             onSuccess = {
                 binding.progress.gone()
 
+                debug { "${it.token}" }
+
                 pref.login(true)
                 pref.setToken(it.token.toString())
+                pref.setUser(it.user!!)
 
                 MainActivity.start(requireContext())
                 activity?.finish()

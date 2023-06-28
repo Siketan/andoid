@@ -23,28 +23,75 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_14dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:background="@drawable/bg_oval_white"
             android:padding="@dimen/dimen_8dp"
             android:src="@drawable/ic_notifications"
             app:tint="@color/primary" />
 
-        <ImageView
-            android:id="@+id/imgMenu"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@drawable/bg_oval_white"
-            android:padding="@dimen/dimen_8dp"
-            android:src="@drawable/ic_menu"
-            app:tint="@color/primary" />
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_7dp"
+                android:layout_marginTop="@dimen/dimen_3dp"
+                app:backgroundTint="@color/white"
+                android:src="@drawable/ic_menu"
+                app:fabCustomSize="@dimen/dimen_36dp"/>
+
+            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                app:layout_behavior="@string/fab_transformation_scrim_behavior"
+                android:layout_marginTop="@dimen/dimen_14dp"
+                android:layout_marginStart="@dimen/dimen_54dp">
+
+                <ImageView
+                    android:id="@+id/imgSetting"
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:src="@drawable/img_maintenance"
+                    android:background="@drawable/bg_oval_white"
+                    android:padding="@dimen/dimen_10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgAbout"
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:src="@drawable/img_about"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:background="@drawable/bg_oval_white"
+                    android:padding="@dimen/dimen_10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgUser"
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:src="@drawable/img_person"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:background="@drawable/bg_oval_white"
+                    android:padding="@dimen/dimen_10dp"/>
+
+            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="152dp"
-            android:layout_below="@id/imgMenu"
+            android:layout_below="@id/floating"
             android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
             app:cardCornerRadius="@dimen/dimen_10dp">
 
             <ImageView
