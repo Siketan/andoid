@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FormAuthentication">
+        <attr name="hintLabel" format="string"/>
+        <attr name="iconLabel" format="reference"/>
+        <attr name="is_password" format="boolean"/>
+        <attr name="input_type" format="enum">
+            <enum name="text" value="0"/>
+            <enum name="email" value="1"/>
+            <enum name="password" value="2"/>
+            <enum name="number" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FormInput">
+        <attr name="labelHint" format="string"/>
+        <attr name="isActive" format="boolean"/>
+        <attr name="formInputType" format="enum">
+            <enum name="text" value="0"/>
+            <enum name="textMultiLine" value="1"/>
+            <enum name="number" value="2"/>
+            <enum name="autoComplete" value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>

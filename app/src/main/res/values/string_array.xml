@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit">
+        <item>Pcs</item>
+        <item>Kg</item>
+        <item>Kw</item>
+    </string-array>
+
+    <string-array name="status_product">
+        <item>STOK HABIS</item>
+        <item>BARU</item>
+        <item>DISKON</item>
+    </string-array>
+    
+    <string-array name="land_status">
+        <item>Lahan Sendiri</item>
+        <item>Lahan Sewa</item>
+    </string-array>
+    
+    <string-array name="food">
+        <item>Padi Konvensional</item>
+        <item>Padi Ramah Lingkungan</item>
+        <item>Padi Organik</item>
+        <item>Jagung</item>
+        <item>Kedelai</item>
+        <item>Ubi Jalar</item>
+        <item>Ubi Kayu</item>
+        <item>Kacang Tanah</item>
+        <item>Kacang Hijau</item>
+    </string-array>
+
+    <string-array name="plantation">
+        <item>Tanaman Kopi</item>
+        <item>Tanaman Kakao</item>
+        <item>Tanaman Cengkeh</item>
+        <item>Tanaman Teh</item>
+        <item>Tanaman Karet</item>
+        <item>Tanaman Kelapa</item>
+        <item>Tanaman Tembakau</item>
+        <item>Tanaman Tebu</item>
+    </string-array>
+    
+    <string-array name="holtikultura_fruit">
+        <item>MELON</item>
+        <item>SEMANGKA</item>
+        <item>PISAN</item>
+        <item>BLEWAH</item>
+        <item>MANGGA</item>
+        <item>DURIAN</item>
+        <item>MANGGIS</item>
+        <item>ALPUKAT</item>
+        <item>RAMBUTAN</item>
+        <item>JERUK LEMON</item>
+        <item>JERUK NIPIS</item>
+        <item>JERUK KEPROT</item>
+        <item>JERUT BESAR</item>
+        <item>NANGKA</item>
+        <item>JAMBU BIJI</item>
+        <item>JAMBU AIR</item>
+        <item>SUKUN</item>
+        <item>SIRSAT</item>
+        <item>SAWO</item>
+        <item>DUKU</item>
+    </string-array>
+
+    <string-array name="holtikultura_vegetable">
+        <item>SAYUR</item>
+        <item>CABE KECIL</item>
+        <item>CABE BESAR</item>
+        <item>BAWANG MERAH</item>
+        <item>TOMAT</item>
+        <item>TERONG</item>
+        <item>PARE</item>
+        <item>GAMBAS</item>
+        <item>BAYAM</item>
+        <item>KANGKUNG</item>
+        <item>SAWI</item>
+        <item>KACANG PANJANG</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>JANUARI</item>
+        <item>FEBRUARI</item>
+        <item>MARET</item>
+        <item>APRIL</item>
+        <item>MEI</item>
+        <item>JUNI</item>
+        <item>JULI</item>
+        <item>AGUSTUS</item>
+        <item>SEPTEMBER</item>
+        <item>OKTOBER</item>
+        <item>NOVEMBER</item>
+        <item>DESEMBER</item>
+    </string-array>
+</resources>

@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".presentation.plant.add.AddPlantReportFragment">
+
+    <LinearLayout
+        android:id="@+id/linearTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-10dp"
+        android:layout_marginEnd="-10dp"
+        android:background="@drawable/img_app_bar"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            style="@style/MyText.Bold"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Tambah Laporan Tanaman"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="18dp"
+            android:src="@drawable/img_statistics_white" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menuContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rounded_white_4"
+                    android:elevation="4dp"
+                    android:padding="@dimen/dimen_6dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/primary" />
+
+                <ImageView
+                    android:id="@+id/imgSetting"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rounded_white_4"
+                    android:elevation="4dp"
+                    android:padding="@dimen/dimen_6dp"
+                    android:src="@drawable/ic_setting"
+                    app:tint="@color/primary" />
+            </LinearLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilNik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="12dp"
+                app:labelHint="Nomor Nik" />
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                app:labelHint="Nama Petani" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilKecamatan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Kecamatan" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilDesa"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Nama Desa" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilGapoktan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Gapoktan" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilKelompok"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Nama Kelompok" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilBakuLahan"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Luas Baku Lahan" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilPenyuluh"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_weight="1"
+                    app:labelHint="Nama Penyuluh" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="@dimen/dimen_20dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+
+                <TextView
+                    style="@style/MyText"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="BACA DATA\nLAPORAN REALISASI TANAM"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMonth"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:hint="Bulan Panen"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:boxStrokeColor="@color/primary"
+                    app:hintTextColor="@color/primary">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/autoCompleteMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        android:padding="10dp"
+                        android:popupBackground="@color/white"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="@dimen/dimen_10dp"
+                    android:layout_height="wrap_content" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilCropAreaTop"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:layout_weight="1"
+                    app:formInputType="number"
+                    app:labelHint="Luas Lahan Tanam" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp">
+
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_12dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:background="@drawable/bg_rounded_stroke_gray"
+                    android:gravity="center">
+
+                    <RadioGroup
+                        android:id="@+id/rg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_12dp">
+
+                        <RadioButton
+                            android:id="@+id/rb1"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="TANAMAN PANGAN"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb2"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="TANAMAN PERKEBUNAN"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb3"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="TANAMAN HOLTIKULTURA | BUAH"
+                            android:textColor="@color/primary" />
+
+                        <RadioButton
+                            android:id="@+id/rb4"
+                            style="@style/MyText.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dimen_0dp"
+                            android:text="TANAMAN HOLTIKULTURA | SAYUR"
+                            android:textColor="@color/primary" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/MyText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/ll"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/dimen_30dp"
+                    android:background="@color/white"
+                    android:paddingHorizontal="@dimen/dimen_12dp"
+                    android:text="Kategpri Tanaman"
+                    android:textColor="@color/primary" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_white_10"
+                android:paddingHorizontal="@dimen/dimen_24dp"
+                android:paddingVertical="@dimen/dimen_4dp"
+                android:elevation="@dimen/dimen_2dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:layout_marginHorizontal="@dimen/dimen_12dp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbSeason"
+                        style="@style/MyText.Bold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="SEMUSIM"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/rbYear"
+                        style="@style/MyText.Bold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="TAHUNAN"
+                        android:textColor="@color/primary" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKomuditasAutoComplete"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:hint="Komoditas"
+                app:endIconDrawable="@drawable/ic_arrow_down"
+                app:boxStrokeColor="@color/primary"
+                app:hintTextColor="@color/primary">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/autoCompleteKomuditas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:popupBackground="@color/white"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilKomuditas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_weight="1"
+                app:formInputType="text"
+                app:labelHint="Komoditas" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="@dimen/dimen_20dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+
+                <TextView
+                    style="@style/MyText"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="BACA DATA\nLAPORAN PRAKIRAAN PANEN"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMonthPrediction"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:hint="Bulan Panen"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:boxStrokeColor="@color/primary"
+                    app:hintTextColor="@color/primary">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/autoCompleteMonthPrediction"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        android:popupBackground="@color/white"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="@dimen/dimen_10dp"
+                    android:layout_height="wrap_content" />
+
+                <com.wahidabd.siketan.utils.components.FormInput
+                    android:id="@+id/tilJumlahPrediction"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_12dp"
+                    android:layout_weight="1"
+                    app:formInputType="number"
+                    app:labelHint="Jumlah Panen" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="@dimen/dimen_20dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+
+                <TextView
+                    style="@style/MyText"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="BACA DATA\nLAPORAN REALISASI PANEN"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <View
+                    android:layout_width="@dimen/dimen_58dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/bg_stroke_dash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/bg_rounded_white_10"
+                android:elevation="4dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/MyText.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:hint="Tanggal"
+                    android:textColor="@color/blackOpacity48" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_arrow_down" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llkondisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/bg_rounded_stroke_gray"
+                android:gravity="center">
+
+                <RadioGroup
+                    android:id="@+id/rgkondisi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_12dp">
+
+                    <RadioButton
+                        android:id="@+id/rbk1"
+                        style="@style/MyText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="SANGAT BAIK"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/rbk2"
+                        style="@style/MyText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="@string/baik_kerusakan_25"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/rbk3"
+                        style="@style/MyText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="@string/sedang_kerusakan_25_50"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/rbk4"
+                        style="@style/MyText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="@string/berat_kerusakan_50_75"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/rbk5"
+                        style="@style/MyText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dimen_0dp"
+                        android:text="@string/puso_kerusakan_70"
+                        android:textColor="@color/primary" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDesc"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                android:layout_marginVertical="4dp"
+                android:hint="Deskripsi">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:maxHeight="@dimen/dimen_120dp"
+                    android:maxLines="1"
+                    android:minHeight="@dimen/dimen_180dp"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12dp">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/linearImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:background="@drawable/bg_rounded_stroke_gray"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/dimen_96dp"
+                            android:layout_height="@dimen/dimen_96dp"
+                            android:layout_margin="@dimen/dimen_20dp"
+                            android:elevation="@dimen/dimen_0dp"
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardCornerRadius="@dimen/dimen_4dp">
+
+                            <ImageView
+                                android:id="@+id/img"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_image_placeholder" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/MyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/linearImage"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:background="@color/white"
+                        android:paddingHorizontal="@dimen/dimen_12dp"
+                        android:text="Upload Foto Tanaman"
+                        android:textColor="@color/primary" />
+                </RelativeLayout>
+
+                <Space
+                    android:layout_width="@dimen/dimen_4dp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:orientation="vertical">
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="28dp"
+                    android:layout_marginHorizontal="@dimen/dimen_12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancel"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cornerRadius="@dimen/dimen_8dp"
+                        app:iconGravity="textStart"
+                        android:text="Cancel"
+                        app:icon="@drawable/ic_save"
+                        android:backgroundTint="@color/colorRed"/>
+
+                    <Space
+                        android:layout_width="@dimen/dimen_44dp"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cornerRadius="@dimen/dimen_8dp"
+                        app:iconGravity="textStart"
+                        android:text="Simpan"
+                        app:icon="@drawable/ic_save"
+                        android:backgroundTint="@color/secondary"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

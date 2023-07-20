@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/bg_rounded_white_10"
+    android:layout_marginHorizontal="@dimen/dimen_10dp"
+    android:elevation="4dp"
+    android:padding="@dimen/dimen_8dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/MyText.Bold"
+        android:textColor="@color/primary"
+        android:textSize="20sp"
+        tools:text="MUTU PUPUK CAIR"/>
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="60dp"
+        android:layout_height="82dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:cardCornerRadius="@dimen/dimen_6dp"
+        android:elevation="@dimen/dimen_0dp"
+        android:layout_marginTop="4dp">
+
+        <ImageView
+            android:id="@+id/imgImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@tools:sample/avatars"
+            android:scaleType="centerCrop"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        tools:text="Ditulis Oleh: Abd. Wahid"
+        style="@style/MyText.Bold"
+        android:textColor="@color/colorGray"
+        app:layout_constraintTop_toTopOf="@id/card"
+        app:layout_constraintStart_toEndOf="@id/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        tools:text="12 April 2023"
+        style="@style/MyText"
+        android:textColor="@color/yellow"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        app:layout_constraintStart_toEndOf="@id/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvToMore"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_read_more"
+        style="@style/MyText"
+        android:textColor="@color/yellow"
+        app:layout_constraintStart_toEndOf="@id/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
