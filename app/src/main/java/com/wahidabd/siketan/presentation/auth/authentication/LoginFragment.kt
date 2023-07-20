@@ -37,9 +37,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun initAction() {
         with(binding) {
-            tvCreateAccount.onClick {
-                navDirection(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
-            }
+            tvCreateAccount.onClick { navDirection(LoginFragmentDirections.actionLoginFragmentToRegisterFragment()) }
+            tvLoginPenyuluh.onClick { navDirection(LoginFragmentDirections.actionLoginFragmentToLoginPenyuluhFragment()) }
         }
     }
 

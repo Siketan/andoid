@@ -1,6 +1,8 @@
 package com.wahidabd.siketan.domain.farm.model.request
 
 import com.wahidabd.library.utils.common.emptyString
+import com.wahidabd.siketan.utils.convertToRequestBody
+import okhttp3.RequestBody
 import java.io.File
 
 
@@ -18,5 +20,6 @@ data class ProductParam(
     val satuan: String? = emptyString(),
     val harga: String? = emptyString(),
     val deskripsi: String? = emptyString(),
-    val fotoTanaman: File? = null
+    val fotoTanaman: File? = null,
+    val status: String = "Tersedia"
 )

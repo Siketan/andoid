@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,7 @@
     tools:context=".presentation.store.StoreAddFragment">
 
     <LinearLayout
+        android:id="@+id/llTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="-10dp"
@@ -43,7 +44,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llTop">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,12 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="12dp"
+                app:isActive="false"
                 app:labelHint="Nomor Nik" />
 
             <com.wahidabd.siketan.utils.components.FormInput
                 android:id="@+id/tilName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:isActive="false"
                 android:layout_marginHorizontal="12dp"
                 app:labelHint="Nama Petani" />
 
@@ -74,6 +78,7 @@
                     android:id="@+id/tilKecamatan"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
+                    app:isActive="false"
                     android:layout_marginHorizontal="12dp"
                     android:layout_weight="1"
                     app:labelHint="Kecamatan" />
@@ -82,6 +87,7 @@
                     android:id="@+id/tilDesa"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
+                    app:isActive="false"
                     android:layout_marginHorizontal="12dp"
                     android:layout_weight="1"
                     app:labelHint="Nama Desa" />
@@ -170,15 +176,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_12dp"
                     android:layout_weight="1"
+                    app:formInputType="number"
                     app:labelHint="Stok" />
 
-                <com.wahidabd.siketan.utils.components.FormInput
-                    android:id="@+id/tilUnit"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAutoComplete"
                     android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Satuan"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:endIconTint="@color/primary"
+                    app:boxStrokeColor="@color/primary"
+                    app:hintTextColor="@color/primary"
                     android:layout_marginHorizontal="@dimen/dimen_8dp"
                     android:layout_weight="1"
-                    app:labelHint="Satuan" />
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/autoComplete"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:inputType="none"
+                        android:popupBackground="@color/white"
+                        android:textColor="@color/black"
+                        android:padding="10dp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.wahidabd.siketan.utils.components.FormInput
                     android:id="@+id/tilPrice"
@@ -186,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dimen_12dp"
                     android:layout_weight="1"
+                    app:formInputType="number"
                     app:labelHint="Harga" />
             </LinearLayout>
 
@@ -262,6 +288,7 @@
                 android:layout_marginHorizontal="@dimen/dimen_12dp">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -276,6 +303,7 @@
                     android:layout_height="wrap_content"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -287,4 +315,14 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/primary"/>
+
+
+</RelativeLayout>

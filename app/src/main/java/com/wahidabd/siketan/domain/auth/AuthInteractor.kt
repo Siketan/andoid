@@ -4,6 +4,7 @@ import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import com.wahidabd.siketan.data.auth.AuthRepository
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
+import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.domain.auth.model.AuthResponse
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
 import com.wahidabd.siketan.domain.auth.model.RegisterRequest
@@ -24,6 +25,18 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
         object : InternetBoundResource<AuthResponse, AuthDataResponse>() {
             override suspend fun createCall(): Flow<Resource<AuthDataResponse>> {
                 return repository.login(data.toData())
+            }
+
+            override suspend fun saveCallRequest(data: AuthDataResponse): AuthResponse {
+                return data.toDomain()
+            }
+
+        }.asFlow()
+
+    override fun loginPenyuluh(data: LoginPenyuluhRequest): Flow<Resource<AuthResponse>> =
+        object : InternetBoundResource<AuthResponse, AuthDataResponse>() {
+            override suspend fun createCall(): Flow<Resource<AuthDataResponse>> {
+                return repository.loginPenyuluh(data)
             }
 
             override suspend fun saveCallRequest(data: AuthDataResponse): AuthResponse {

@@ -88,7 +88,7 @@ class FormAuthentication @JvmOverloads constructor(
         TEXT(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL ),
         EMAIL(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS),
         PASSWORD(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD),
-        NUMBER(InputType.TYPE_CLASS_PHONE)
+        NUMBER(InputType.TYPE_CLASS_PHONE),
     }
 
 }

@@ -14,10 +14,12 @@
 
     <declare-styleable name="FormInput">
         <attr name="labelHint" format="string"/>
+        <attr name="isActive" format="boolean"/>
         <attr name="formInputType" format="enum">
             <enum name="text" value="0"/>
             <enum name="textMultiLine" value="1"/>
-            <enum name="autoComplete" value="2"/>
+            <enum name="number" value="2"/>
+            <enum name="autoComplete" value="3"/>
         </attr>
     </declare-styleable>
 </resources>

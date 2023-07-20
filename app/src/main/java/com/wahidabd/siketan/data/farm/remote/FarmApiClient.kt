@@ -1,11 +1,18 @@
 package com.wahidabd.siketan.data.farm.remote
 
+import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
+import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
 
 
 /**
@@ -26,9 +33,14 @@ interface FarmApiClient {
     @GET("product-petani")
     suspend fun getProduct(): Response<ProductDataResponse>
 
-//    @POST("daftar-penjual/add")
-//    suspend fun postStore(
-//        @Body data: ProductRequest
-//    ): Response<>
+    @POST("daftar-penjual/add")
+    suspend fun postStore(
+        @Body body: MultipartBody
+    ): Response<ProductAddResponse>
+
+    @POST("jurnal-kegiatan/add")
+    suspend fun addJournal(
+        @Body body: MultipartBody
+    ): Response<ProductAddResponse>
 
 }

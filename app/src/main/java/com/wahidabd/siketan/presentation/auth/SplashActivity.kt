@@ -5,10 +5,12 @@ import android.os.CountDownTimer
 import com.wahidabd.library.presentation.activity.BaseActivity
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.observerLiveData
+import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.databinding.ActivitySplashBinding
 import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.presentation.auth.authentication.AuthViewModel
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.UserRole
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +40,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                 override fun onFinish() {
                     if (pref.getLogin()) {
-                        viewModel.login(pref.getAttemptLogin())
+                        if (pref.getUser().role == UserRole.PENYULUH.role){
+                            viewModel.loginPenyuluh(pref.getAttemptLoginPenyuluh())
+                        }else{
+                            viewModel.login(pref.getAttemptLogin())
+                        }
+
                         viewModel.login.observerLiveData(
                             this@SplashActivity,
                             onLoading = {},

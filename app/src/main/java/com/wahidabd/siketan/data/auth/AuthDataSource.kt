@@ -7,6 +7,7 @@ import com.wahidabd.library.utils.coroutine.handler.ErrorParses
 import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
+import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
 import com.wahidabd.siketan.data.auth.remote.AuthApi
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,10 @@ class AuthDataSource(
 
     override suspend fun login(data: LoginDataRequest): Flow<Resource<AuthDataResponse>> = flow {
         enqueue(data, err::convertGenericError, webService::login, onEmit = { emit(it) })
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun loginPenyuluh(data: LoginPenyuluhRequest): Flow<Resource<AuthDataResponse>> = flow {
+        enqueue(data, err::convertGenericError, webService::loginPenyuluh, onEmit = {emit(it)})
     }.flowOn(Dispatchers.IO)
 
     override suspend fun register(data: RegisterDataRequest): Flow<Resource<AuthDataResponse>> =

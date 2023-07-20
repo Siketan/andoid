@@ -2,7 +2,7 @@ package com.wahidabd.siketan
 
 import androidx.appcompat.app.AppCompatDelegate
 import com.wahidabd.library.presentation.BaseApplication
-import com.wahidabd.siketan.di.apiModule
+import com.wahidabd.siketan.di.addressModule
 import com.wahidabd.siketan.di.appModule
 import com.wahidabd.siketan.di.authModule
 import com.wahidabd.siketan.di.farmModule
@@ -21,9 +21,10 @@ class App : BaseApplication() {
     override fun getDefineModule(): List<Module> =
         listOf(
             appModule,
-            apiModule,
+//            apiModule,
             authModule,
-            farmModule
+            farmModule,
+            addressModule,
         )
 
     override fun initApp() {

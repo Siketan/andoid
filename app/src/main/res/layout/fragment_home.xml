@@ -82,6 +82,15 @@
                     android:background="@drawable/bg_oval_white"
                     android:padding="@dimen/dimen_10dp"/>
 
+                <ImageView
+                    android:id="@+id/imgLogout"
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:src="@drawable/ic_logout"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:background="@drawable/bg_oval_white"
+                    android:padding="@dimen/dimen_10dp"/>
+
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

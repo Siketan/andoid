@@ -5,6 +5,8 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.wahidabd.library.utils.common.emptyString
+import com.wahidabd.library.utils.exts.disable
+import com.wahidabd.library.utils.exts.enable
 import com.wahidabd.library.utils.exts.layoutInflater
 import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.siketan.R
@@ -25,9 +27,11 @@ class FormInput @JvmOverloads constructor(
 
     private lateinit var binding: LayoutFormInputBinding
     val edittext by lazy { binding.til.toStringTrim() }
+    val til by lazy { binding.til }
 
     private var hint = emptyString()
     private var type: FormType = FormType.TEXT
+    private var isActive: Boolean = true
 
     init {
         setupAttributes(attrs)
@@ -39,21 +43,28 @@ class FormInput @JvmOverloads constructor(
 
         binding.til.hint = hint
         binding.edt.inputType = type.typeInfo
-
+        if(!isActive) binding.edt.disable() else binding.edt.enable()
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.FormInput, 0, 0)
         hint = attributes.getString(R.styleable.FormInput_labelHint).orEmpty()
-        type = attributes.getInteger(R.styleable.FormAuthentication_input_type, 0).let {
+        isActive = attributes.getBoolean(R.styleable.FormInput_isActive, true)
+        type = attributes.getInteger(R.styleable.FormInput_formInputType, 0).let {
             FormType.values()[it]
         }
         attributes.recycle()
     }
 
+    fun setText(text: String) = with(binding){
+        edt.setText(text)
+    }
+
+
     enum class FormType(val typeInfo: Int) {
         TEXT(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL),
-        TEXT_MULTILINE(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+        TEXT_MULTILINE(InputType.TYPE_TEXT_FLAG_MULTI_LINE),
+        NUMBER(InputType.TYPE_CLASS_NUMBER)
     }
 
 }

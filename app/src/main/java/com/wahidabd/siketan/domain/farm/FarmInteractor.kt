@@ -6,11 +6,15 @@ import com.wahidabd.siketan.data.farm.FarmRepository
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
+import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.domain.farm.model.request.ProductParam
 import com.wahidabd.siketan.domain.farm.model.response.EventTani
 import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import com.wahidabd.siketan.domain.farm.model.response.Product
 import com.wahidabd.siketan.domain.farm.model.response.toDomain
+import com.wahidabd.siketan.domain.farm.model.toRequest
 import kotlinx.coroutines.flow.Flow
 
 
@@ -63,5 +67,31 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
             }
 
         }.asFlow()
+
+    override fun addProduct(data: ProductParam): Flow<Resource<ProductAddResponse>> {
+        return object : InternetBoundResource<ProductAddResponse, ProductAddResponse>(){
+            override suspend fun createCall(): Flow<Resource<ProductAddResponse>> {
+                return repository.addProduct(data.toRequest())
+            }
+
+            override suspend fun saveCallRequest(data: ProductAddResponse): ProductAddResponse {
+                return data
+            }
+
+        }.asFlow()
+    }
+
+    override fun addJournal(data: JournalAddRequest): Flow<Resource<ProductAddResponse>> {
+        return object : InternetBoundResource<ProductAddResponse, ProductAddResponse>() {
+            override suspend fun createCall(): Flow<Resource<ProductAddResponse>> {
+                return repository.addJournal(data)
+            }
+
+            override suspend fun saveCallRequest(data: ProductAddResponse): ProductAddResponse {
+                return data
+            }
+
+        }.asFlow()
+    }
 
 }

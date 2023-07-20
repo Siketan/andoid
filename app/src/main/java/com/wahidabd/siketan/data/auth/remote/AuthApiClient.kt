@@ -2,6 +2,7 @@ package com.wahidabd.siketan.data.auth.remote
 
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
+import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -22,6 +23,11 @@ interface AuthApiClient {
     @POST("auth/petani-login")
     suspend fun login(
         @Body data: LoginDataRequest
+    ): Response<AuthDataResponse>
+
+    @POST("auth/petani-login")
+    suspend fun loginPenyuluh(
+        @Body data: LoginPenyuluhRequest
     ): Response<AuthDataResponse>
 
     @POST("auth/petani-register")

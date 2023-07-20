@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_storeFragment"
             app:destination="@id/storeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_dataFormerFragment"
+            app:destination="@id/dataFormerFragment" />
     </fragment>
     <fragment
         android:id="@+id/announcementFragment"
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_journalFragment_to_journalAddFragment"
             app:destination="@id/journalAddFragment" />
+        <action
+            android:id="@+id/action_journalFragment_to_presensiFragment"
+            app:destination="@id/presensiFragment" />
     </fragment>
     <fragment
         android:id="@+id/journalAddFragment"
@@ -53,4 +59,31 @@
         android:name="com.wahidabd.siketan.presentation.store.StoreAddFragment"
         android:label="fragment_store_add"
         tools:layout="@layout/fragment_store_add" />
+    <fragment
+        android:id="@+id/presensiFragment"
+        android:name="com.wahidabd.siketan.presentation.journal.PresensiFragment"
+        android:label="fragment_presensi"
+        tools:layout="@layout/fragment_presensi" />
+    <fragment
+        android:id="@+id/dataFormerFragment"
+        android:name="com.wahidabd.siketan.presentation.plant.DataFormerFragment"
+        android:label="fragment_data_former"
+        tools:layout="@layout/fragment_data_former" >
+        <action
+            android:id="@+id/action_dataFormerFragment_to_addRealizationFragment"
+            app:destination="@id/addRealizationFragment" />
+        <action
+            android:id="@+id/action_dataFormerFragment_to_addPlantReportFragment"
+            app:destination="@id/addPlantReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPlantReportFragment"
+        android:name="com.wahidabd.siketan.presentation.plant.add.AddPlantReportFragment"
+        android:label="fragment_add_plant_report"
+        tools:layout="@layout/fragment_add_plant_report" />
+    <fragment
+        android:id="@+id/addRealizationFragment"
+        android:name="com.wahidabd.siketan.presentation.plant.add.AddRealizationFragment"
+        android:label="fragment_add_realization"
+        tools:layout="@layout/fragment_add_realization" />
 </navigation>

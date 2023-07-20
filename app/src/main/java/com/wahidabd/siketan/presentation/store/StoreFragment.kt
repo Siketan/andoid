@@ -2,6 +2,7 @@ package com.wahidabd.siketan.presentation.store
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showSnackbarMessage
 import com.wahidabd.library.utils.exts.gone
@@ -33,8 +34,11 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>() {
     }
 
     override fun initAction() {
-        binding.imgMyStore.onClick {
-            navigate(StoreFragmentDirections.actionStoreFragmentToStoreAddFragment())
+        binding.apply {
+            imgBack.onClick { findNavController().navigateUp() }
+            imgMyStore.onClick {
+                navigate(StoreFragmentDirections.actionStoreFragmentToStoreAddFragment())
+            }
         }
     }
 

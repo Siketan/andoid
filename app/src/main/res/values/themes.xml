@@ -8,4 +8,10 @@
     <style name="Theme.SiKetan" parent="Base.Theme.SiKetan">
         <item name="android:statusBarColor">@color/primary</item>
     </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/secondary</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+    </style>
 </resources>

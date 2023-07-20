@@ -31,7 +31,7 @@
             android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="List Jurnal Penyeluhan"
+            android:text="List Kegiatan Penyeluhan"
             android:textColor="@color/white"
             android:textSize="26sp" />
 
@@ -77,55 +77,68 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_6dp">
 
-                <TextView
-                    android:id="@+id/tvTop"
+                <LinearLayout
+                    android:id="@+id/linearTop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lapor Kegiatan Harian"
-                    android:background="@drawable/bg_rounded_white_4"
-                    android:elevation="@dimen/dimen_4dp"
-                    style="@style/MyText.Bold"
-                    android:padding="@dimen/dimen_10dp"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:layout_toStartOf="@id/imgDocument"
-                    android:textColor="@color/primary"/>
-
-                <ImageView
-                    android:id="@+id/imgDocument"
-                    android:layout_width="@dimen/dimen_38dp"
-                    android:layout_height="@dimen/dimen_38dp"
-                    android:src="@drawable/ic_document"
-                    android:layout_marginStart="@dimen/dimen_10dp"
                     android:layout_alignParentEnd="true"
-                    android:padding="@dimen/dimen_10dp"
-                    android:background="@drawable/bg_oval_green_dash"/>
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/tvBottom"
+                    <TextView
+                        android:id="@+id/tvTop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lapor Kegiatan Harian"
+                        android:background="@drawable/bg_rounded_white_4"
+                        android:elevation="@dimen/dimen_4dp"
+                        android:layout_margin="@dimen/dimen_4dp"
+                        style="@style/MyText.Bold"
+                        android:padding="@dimen/dimen_10dp"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/primary"/>
+
+                    <ImageView
+                        android:id="@+id/imgDocument"
+                        android:layout_width="@dimen/dimen_38dp"
+                        android:layout_height="@dimen/dimen_38dp"
+                        android:src="@drawable/ic_document"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:padding="@dimen/dimen_10dp"
+                        android:background="@drawable/bg_oval_green_dash"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearBottom"
+                    android:layout_below="@id/linearTop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tambah Jurnal Penyuluhan"
-                    android:background="@drawable/bg_rounded_white_4"
-                    android:elevation="@dimen/dimen_4dp"
-                    style="@style/MyText.Bold"
-                    android:layout_toStartOf="@id/imgEdit"
-                    android:layout_alignTop="@id/imgEdit"
-                    android:layout_marginBottom="@dimen/dimen_2dp"
-                    android:padding="@dimen/dimen_10dp"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:textColor="@color/primary"/>
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/dimen_4dp"
+                    android:layout_alignParentEnd="true">
 
-                <ImageView
-                    android:id="@+id/imgEdit"
-                    android:layout_width="@dimen/dimen_38dp"
-                    android:layout_height="@dimen/dimen_38dp"
-                    android:src="@drawable/ic_edit"
-                    android:layout_marginStart="@dimen/dimen_10dp"
-                    android:padding="@dimen/dimen_10dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/imgDocument"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:background="@drawable/bg_oval_green_dash"/>
+                    <TextView
+                        android:id="@+id/tvBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tambah Jurnal Penyuluhan"
+                        android:background="@drawable/bg_rounded_white_4"
+                        android:elevation="@dimen/dimen_4dp"
+                        android:layout_margin="@dimen/dimen_2dp"
+                        style="@style/MyText.Bold"
+                        android:padding="@dimen/dimen_10dp"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/primary"/>
+
+                    <ImageView
+                        android:id="@+id/imgEdit"
+                        android:layout_width="@dimen/dimen_38dp"
+                        android:layout_height="@dimen/dimen_38dp"
+                        android:src="@drawable/ic_edit"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:padding="@dimen/dimen_10dp"
+                        android:background="@drawable/bg_oval_green_dash"/>
+                </LinearLayout>
             </RelativeLayout>
 
         </com.google.android.material.circularreveal.CircularRevealFrameLayout>

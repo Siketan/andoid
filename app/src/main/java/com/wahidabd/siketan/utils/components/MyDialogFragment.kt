@@ -14,12 +14,15 @@ class MyDialogFragment : BaseDialogFragment<FragmentMyDialogBinding>() {
     companion object {
         fun newInstance(
             dialogType: MyDialogType,
+            onButtonClicked: (() -> Unit)? = null
         ): MyDialogFragment = MyDialogFragment().apply {
             this.type = dialogType
+            this.onButtonClicked = onButtonClicked
         }
     }
 
     private var type: MyDialogType = MyDialogType.ABOUT
+    private var onButtonClicked: (() -> Unit)? = null
 
     override val isDialogCancelable: Boolean = true
     override val tagName: String = MyDialogFragment::class.java.name
@@ -44,7 +47,10 @@ class MyDialogFragment : BaseDialogFragment<FragmentMyDialogBinding>() {
 
     override fun initAction() {
         with(binding) {
-            btn.onClick { dismiss() }
+            btn.onClick {
+                dismiss()
+                onButtonClicked?.invoke()
+            }
         }
     }
 

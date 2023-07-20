@@ -14,3 +14,9 @@ data class LoginDataRequest(
     val email: String,
     val password: String
 )
+
+data class LoginPenyuluhRequest(
+    @SerializedName("NIP")
+    val nip: String,
+    val password: String
+)

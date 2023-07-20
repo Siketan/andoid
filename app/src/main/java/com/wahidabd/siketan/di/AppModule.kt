@@ -18,6 +18,7 @@ import org.koin.dsl.module
 
 
 const val BASE_URL: String = "baseUrl"
+const val ADDRESS_URL: String = "addressUrl"
 
 val appModule = module {
 
@@ -33,22 +34,25 @@ val appModule = module {
     }
 
     single(named(BASE_URL)) { BuildConfig.BASE_URL }
+    single(named(ADDRESS_URL)){"https://dev.farizdotid.com/api/daerahindonesia/"}
 }
 
-val apiModule = module {
-    single {
-        ApiService.createService(
-            get(), get(named(BASE_URL))
-        )
-    }
+//val apiModule = module {
+//    single {
+//        ApiService.createService(
+//            get(), get(named(BASE_URL))
+//        )
+//    }
+//
+//    factory { ErrorParses(get()) }
+//}
 
-    factory { ErrorParses(get()) }
-}
 
 private fun getHeaderInterceptor(pref: PrefManager): Interceptor {
     val headers = HashMap<String, String>()
     headers["Authorization"] = pref.getToken()
     headers["Content-Type"] = "application/json"
+    headers["Content-Type"] = "application/x-www-form-urlencoded"
 
     return HeaderInterceptor(headers)
 }

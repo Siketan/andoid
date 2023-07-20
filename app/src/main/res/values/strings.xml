@@ -8,6 +8,7 @@
     <string name="label_login">Login</string>
     <string name="label_register">Registrasi</string>
     <string name="hint_email_phone">Email/ No. Hp</string>
+    <string name="hint_nik_nip">NIK/NIP</string>
     <string name="hint_email">Email</string>
     <string name="hint_whatsapp">No. Whatsapp</string>
     <string name="hint_name">Nama</string>
@@ -38,4 +39,8 @@
     <string name="message_maintenance">Mohon maaf… Saat ini. Halaman ini sedang dalam perbaikan.</string>
     <string name="format_message_success">TERIMA KASIH… DATA PRODUK TELAH BERHASIL DI SIMPA</string>
     <string name="message_cancel_input">APAKAH ANDA YAQIN UNTUK MEMBATALKAN INPUT DATA ?</string>
+    <string name="baik_kerusakan_25"><![CDATA[BAIK (kerusakan < 25%)]]></string>
+    <string name="sedang_kerusakan_25_50"><![CDATA[SEDANG (kerusakan < 25% - 50%)]]></string>
+    <string name="berat_kerusakan_50_75"><![CDATA[BERAT (kerusakan < 50% - 75%)]]></string>
+    <string name="puso_kerusakan_70"><![CDATA[PUSO (kerusakan > 70%)]]></string>
 </resources>

@@ -10,6 +10,7 @@ import com.wahidabd.library.utils.exts.addTo
 import com.wahidabd.library.utils.rx.apihandlers.genericErrorHandler
 import com.wahidabd.library.utils.rx.transformers.observerScheduler
 import com.wahidabd.library.utils.rx.transformers.singleScheduler
+import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.domain.auth.AuthUseCase
 import com.wahidabd.siketan.domain.auth.model.AuthResponse
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
@@ -44,6 +45,12 @@ class AuthViewModel(
 
     fun login(data: LoginRequest){
         useCase.login(data)
+            .onEach { _login.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun loginPenyuluh(data: LoginPenyuluhRequest){
+        useCase.loginPenyuluh(data)
             .onEach { _login.value = it }
             .launchIn(viewModelScope)
     }

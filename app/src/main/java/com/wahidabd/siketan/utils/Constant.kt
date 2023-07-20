@@ -22,4 +22,5 @@ object Constant {
     const val USER_DESA = "user_desa"
     const val USER_NAME = "user_name"
     const val USER_KECAMATAN = "user_kecamatan"
+    const val ROLE = "role"
 }

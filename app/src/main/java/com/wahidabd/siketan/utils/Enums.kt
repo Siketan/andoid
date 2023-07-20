@@ -7,7 +7,7 @@ package com.wahidabd.siketan.utils
  */
 
 
-enum class UserRole(name: String){
+enum class UserRole(val role: String){
     PETANI("petani"),
     PENYULUH("penyuluh")
 }
