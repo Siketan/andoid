@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.domain.farm.FarmUseCase
 import com.wahidabd.siketan.domain.farm.model.request.ProductParam
 import com.wahidabd.siketan.domain.farm.model.response.Product
@@ -27,8 +27,8 @@ class StoreViewModel(
     private val _products = MutableLiveData<Resource<List<Product>>>()
     val products: LiveData<Resource<List<Product>>> get() = _products
 
-    private val _addProduct = MutableLiveData<Resource<ProductAddResponse>>()
-    val addProduct: LiveData<Resource<ProductAddResponse>> get() = _addProduct
+    private val _addProduct = MutableLiveData<Resource<GenericAddResponse>>()
+    val addProduct: LiveData<Resource<GenericAddResponse>> get() = _addProduct
 
     fun product() {
         useCase.getProduct()

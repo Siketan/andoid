@@ -2,6 +2,7 @@ package com.wahidabd.siketan.domain.auth.model
 
 import com.wahidabd.library.utils.common.emptyString
 import com.wahidabd.siketan.data.auth.model.UserResponse
+import com.wahidabd.siketan.domain.farm.model.response.Journal
 
 data class User(
     val NIK: String? = emptyString(),
@@ -24,7 +25,8 @@ data class User(
     val riwayatChatId: Int? = 0,
     val role: String? = emptyString(),
     val tanamanPetaniId: Int? = 0,
-    val updatedAt: String? = emptyString()
+    val updatedAt: String? = emptyString(),
+    val jurnalHarian: Journal? = null
 )
 
 fun UserResponse.toDomain(): User =

@@ -3,7 +3,6 @@ package com.wahidabd.siketan.presentation.journal
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.navigation.fragment.findNavController
 import com.esafirm.imagepicker.features.ImagePickerConfig
 import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.ReturnMode
@@ -16,14 +15,16 @@ import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
+import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.databinding.FragmentJournalAddBinding
 import com.wahidabd.siketan.presentation.plant.AddressViewModel
 import com.wahidabd.siketan.utils.PrefManager
-import com.wahidabd.siketan.utils.components.MyDialogFragment
 import com.wahidabd.siketan.utils.datePicker
+import com.wahidabd.siketan.utils.showCancelableDialog
+import com.wahidabd.siketan.utils.showSuccessDialog
 import com.wahidabd.siketan.utils.toDateApi
 import com.wahidabd.siketan.utils.toDateString
 import com.wahidabd.siketan.utils.validation.IValidator
@@ -62,7 +63,9 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
 
     override fun initAction() {
         with(binding) {
-            imgBack.onClick { findNavController().navigateUp() }
+            imgBack.onClick { showCancelableDialog() }
+            btnCancel.onClick { showCancelableDialog() }
+
             linearDate.onClick {
                 datePicker { date ->
                     tvDate.text = date.toDateString()
@@ -85,12 +88,6 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
 
     override fun initProcess() {
         with(binding) {
-            btnCancel.onClick {
-                MyDialogFragment.newInstance(
-                    MyDialogFragment.MyDialogType.CANCEL,
-                    onButtonClicked = { findNavController().navigateUp() })
-                    .show(parentFragmentManager, MyDialogFragment::class.java.name)
-            }
 
             btnSave.onClick {
                 if (validateAll() && imageFile != null && dateApi.isNotEmpty()) sendToObservable()
@@ -117,21 +114,20 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
             onSuccess = {
                 binding.progress.gone()
                 showSnackbarMessage(binding.root, it.message)
-                findNavController().navigateUp()
+                showSuccessDialog("JURNAL")
             }
         )
     }
 
     private fun sendToObservable() = with(binding) {
         val judul = tilJournal.edittext
-        val desc = tilDesc.editText
+        val desc = tilDesc.toStringTrim()
 
-        val user = pref.getUser()
         val data = JournalAddRequest(
             nip = pref.getAttemptLoginPenyuluh().nip,
             judul = judul,
             tanggal = dateApi,
-            uraian = desc.toString(),
+            uraian = desc,
             status = "Terbit",
             imageFile!!
         )

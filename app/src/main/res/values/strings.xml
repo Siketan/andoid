@@ -37,7 +37,7 @@
     <string name="format_label_author">Ditulis Oleh : %s</string>
     <string name="message_about">SIKETAN adalah aplikasi Sistem Informasi Kegiatan Penyuluhan pertanian.\n\nAplikasi ini merupakan suatu platform untuk menjalin sinergi antara penyuluh pertanian dengan-petani Kab. Ngawi.\n\nDiharapkan, dapat membantu meningkatkan hubungan dengan petani dilapangan sehingga dapat membantu meningkatkan produktivitas petani di Kab. Ngawi</string>
     <string name="message_maintenance">Mohon maaf… Saat ini. Halaman ini sedang dalam perbaikan.</string>
-    <string name="format_message_success">TERIMA KASIH… DATA PRODUK TELAH BERHASIL DI SIMPA</string>
+    <string name="format_message_success">TERIMA KASIH… %s ANDA TELAH BERHASIL DI SIMPAN</string>
     <string name="message_cancel_input">APAKAH ANDA YAQIN UNTUK MEMBATALKAN INPUT DATA ?</string>
     <string name="baik_kerusakan_25"><![CDATA[BAIK (kerusakan < 25%)]]></string>
     <string name="sedang_kerusakan_25_50"><![CDATA[SEDANG (kerusakan < 25% - 50%)]]></string>

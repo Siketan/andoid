@@ -7,8 +7,10 @@ import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
+import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
+import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import kotlinx.coroutines.flow.Flow
 
 
@@ -23,6 +25,8 @@ interface FarmRepository : BaseRepository {
     suspend fun getInfoTani(): Flow<Resource<InfoTaniDataResponse<InfoTaniResponse>>>
     suspend fun getEvent(): Flow<Resource<InfoTaniDataResponse<EventTaniResponse>>>
     suspend fun getProduct(): Flow<Resource<ProductDataResponse>>
-    suspend fun addProduct(data: ProductRequest): Flow<Resource<ProductAddResponse>>
-    suspend fun addJournal(data: JournalAddRequest): Flow<Resource<ProductAddResponse>>
+    suspend fun addProduct(data: ProductRequest): Flow<Resource<GenericAddResponse>>
+    suspend fun getJournal(): Flow<Resource<JournalResponse>>
+    suspend fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>>
+    suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
 }

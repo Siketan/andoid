@@ -36,5 +36,4 @@ val addressModule = module {
     single<AddressRepository> { AddressDataSource(get(), get()) }
     single<AddressUseCase> { AddressInteractor(get()) }
     viewModel { AddressViewModel(get()) }
-    viewModel { JournalViewModel(get()) }
 }

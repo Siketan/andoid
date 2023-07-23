@@ -24,6 +24,8 @@ import com.wahidabd.siketan.domain.farm.model.request.ProductParam
 import com.wahidabd.siketan.presentation.store.viewmodel.StoreViewModel
 import com.wahidabd.siketan.utils.PrefManager
 import com.wahidabd.siketan.utils.components.MyDialogFragment
+import com.wahidabd.siketan.utils.showCancelableDialog
+import com.wahidabd.siketan.utils.showSuccessDialog
 import com.wahidabd.siketan.utils.uriToFile
 import com.wahidabd.siketan.utils.validation.IValidator
 import com.wahidabd.siketan.utils.validation.NotEmptyTilValidator
@@ -60,12 +62,7 @@ class StoreAddFragment : BaseFragment<FragmentStoreAddBinding>() {
                 )
             }
 
-            btnCancel.onClick {
-                MyDialogFragment.newInstance(
-                    MyDialogFragment.MyDialogType.CANCEL,
-                    onButtonClicked = { findNavController().navigateUp() })
-                    .show(parentFragmentManager, MyDialogFragment::class.java.name)
-            }
+            btnCancel.onClick {showCancelableDialog()}
 
             btnSave.onClick {
                 if (validateAll() && imageFile != null) sendToObservable()
@@ -79,7 +76,7 @@ class StoreAddFragment : BaseFragment<FragmentStoreAddBinding>() {
 
     override fun initUI() {
         with(binding) {
-            imgBack.onClick { findNavController().navigateUp() }
+            imgBack.onClick { showCancelableDialog() }
 
             val user = pref.getUser()
             tilNik.setText(pref.getAttemptLogin().nik)
@@ -123,7 +120,7 @@ class StoreAddFragment : BaseFragment<FragmentStoreAddBinding>() {
                 onSuccess = {
                     progress.gone()
                     showSnackbarMessage(root, it.message)
-                    findNavController().navigateUp()
+                    showSuccessDialog("PRODUK")
                 }
             )
         }
@@ -145,7 +142,6 @@ class StoreAddFragment : BaseFragment<FragmentStoreAddBinding>() {
         val stok = tilStok.edittext.toInt()
         val harga = tilPrice.edittext
         val desc = tilDesc.toStringTrim()
-
 
         productParam = ProductParam(
             nik = nik,

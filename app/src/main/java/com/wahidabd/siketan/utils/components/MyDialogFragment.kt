@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.wahidabd.library.presentation.fragment.BaseDialogFragment
+import com.wahidabd.library.utils.common.emptyString
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.siketan.R
 import com.wahidabd.siketan.databinding.FragmentMyDialogBinding
@@ -14,14 +15,17 @@ class MyDialogFragment : BaseDialogFragment<FragmentMyDialogBinding>() {
     companion object {
         fun newInstance(
             dialogType: MyDialogType,
+            message: String? = emptyString(),
             onButtonClicked: (() -> Unit)? = null
         ): MyDialogFragment = MyDialogFragment().apply {
+            this.message = message.toString()
             this.type = dialogType
             this.onButtonClicked = onButtonClicked
         }
     }
 
     private var type: MyDialogType = MyDialogType.ABOUT
+    private var message: String = emptyString()
     private var onButtonClicked: (() -> Unit)? = null
 
     override val isDialogCancelable: Boolean = true
@@ -78,7 +82,7 @@ class MyDialogFragment : BaseDialogFragment<FragmentMyDialogBinding>() {
 
             MyDialogType.SAVE -> {
                 imgHeader.setImageResource(R.drawable.img_save)
-                tvContent.text = getString(R.string.format_message_success)
+                tvContent.text = getString(R.string.format_message_success, message)
                 tvContent.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow))
                 btn.text = getString(R.string.label_close)
                 btn.backgroundTintList =

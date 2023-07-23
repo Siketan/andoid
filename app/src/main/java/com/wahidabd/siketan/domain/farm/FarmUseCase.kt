@@ -1,9 +1,10 @@
 package com.wahidabd.siketan.domain.farm
 
 import com.wahidabd.library.data.Resource
-import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
+import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.domain.farm.model.request.ProductParam
 import com.wahidabd.siketan.domain.farm.model.response.EventTani
 import com.wahidabd.siketan.domain.farm.model.response.InfoTani
@@ -21,6 +22,8 @@ interface FarmUseCase {
     fun getInfoTani(): Flow<Resource<List<InfoTani>>>
     fun getEvent(): Flow<Resource<List<EventTani>>>
     fun getProduct(): Flow<Resource<List<Product>>>
-    fun addProduct(data: ProductParam): Flow<Resource<ProductAddResponse>>
-    fun addJournal(data: JournalAddRequest): Flow<Resource<ProductAddResponse>>
+    fun addProduct(data: ProductParam): Flow<Resource<GenericAddResponse>>
+    fun getJournal(): Flow<Resource<JournalResponse>>
+    fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>>
+    fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
 }
