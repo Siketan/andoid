@@ -11,7 +11,9 @@ import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import com.wahidabd.siketan.domain.farm.model.request.Chartparam
 import com.wahidabd.siketan.domain.farm.model.request.ProductParam
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import com.wahidabd.siketan.domain.farm.model.response.EventTani
 import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import com.wahidabd.siketan.domain.farm.model.response.Product
@@ -114,6 +116,19 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
             }
 
             override suspend fun saveCallRequest(data: GenericAddResponse): GenericAddResponse {
+                return data
+            }
+
+        }.asFlow()
+    }
+
+    override fun getChart(data: Chartparam): Flow<Resource<ChartModel>> {
+        return object : InternetBoundResource<ChartModel, ChartModel>() {
+            override suspend fun createCall(): Flow<Resource<ChartModel>> {
+                return repository.getChart(data)
+            }
+
+            override suspend fun saveCallRequest(data: ChartModel): ChartModel {
                 return data
             }
 

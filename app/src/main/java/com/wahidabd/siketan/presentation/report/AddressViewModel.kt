@@ -1,4 +1,4 @@
-package com.wahidabd.siketan.presentation.plant
+package com.wahidabd.siketan.presentation.report
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

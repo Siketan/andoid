@@ -2,6 +2,7 @@ package com.wahidabd.siketan.presentation.auth.authentication
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.gone
@@ -63,11 +64,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 onSuccess = {
                     progress.gone()
 
-                    pref.login(true)
-                    pref.setToken(it.token.toString())
+//                    pref.login(true)
+//                    pref.setToken(it.token.toString())
 
-                    MainActivity.start(requireContext())
-                    activity?.finish()
+//                    MainActivity.start(requireContext())
+//                    activity?.finish()
+                    findNavController().navigateUp()
                 }
             )
         }
@@ -79,7 +81,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         val nama = edtName.editText.toStringTrim()
         val password = edtPassword.editText.toStringTrim()
 
-        val data = RegisterRequest(nik, no_wa, nama, password)
+        val data = RegisterRequest(
+            nik = nik,
+            no_wa = no_wa,
+            nama = nama,
+            password = password
+        )
         viewModel.register(data)
     }
 

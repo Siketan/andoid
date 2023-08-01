@@ -10,6 +10,7 @@ import com.wahidabd.siketan.domain.farm.FarmInteractor
 import com.wahidabd.siketan.domain.farm.FarmUseCase
 import com.wahidabd.siketan.presentation.announcement.AnnouncementViewModel
 import com.wahidabd.siketan.presentation.journal.JournalViewModel
+import com.wahidabd.siketan.presentation.report.ReportViewModel
 import com.wahidabd.siketan.presentation.store.viewmodel.StoreViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -41,5 +42,6 @@ val farmModule = module {
     viewModel { AnnouncementViewModel(get()) }
     viewModel { StoreViewModel(get()) }
     viewModel { JournalViewModel(get()) }
+    viewModel { ReportViewModel(get()) }
 
 }

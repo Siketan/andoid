@@ -5,7 +5,9 @@ import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import com.wahidabd.siketan.domain.farm.model.request.Chartparam
 import com.wahidabd.siketan.domain.farm.model.request.ProductParam
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import com.wahidabd.siketan.domain.farm.model.response.EventTani
 import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import com.wahidabd.siketan.domain.farm.model.response.Product
@@ -26,4 +28,5 @@ interface FarmUseCase {
     fun getJournal(): Flow<Resource<JournalResponse>>
     fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>>
     fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
+    fun getChart(data: Chartparam): Flow<Resource<ChartModel>>
 }

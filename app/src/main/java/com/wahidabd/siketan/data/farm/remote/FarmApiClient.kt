@@ -6,11 +6,13 @@ import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 /**
@@ -48,5 +50,11 @@ interface FarmApiClient {
     suspend fun addPresensi(
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
+
+    @GET("chart")
+    suspend fun getChart(
+        @Query("jenisPanen") jenisPanen: String,
+        @Query("jenis") jenis: String
+    ): Response<ChartModel>
 
 }

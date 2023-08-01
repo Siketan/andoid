@@ -20,7 +20,7 @@ import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.databinding.FragmentJournalAddBinding
-import com.wahidabd.siketan.presentation.plant.AddressViewModel
+import com.wahidabd.siketan.presentation.report.AddressViewModel
 import com.wahidabd.siketan.utils.PrefManager
 import com.wahidabd.siketan.utils.datePicker
 import com.wahidabd.siketan.utils.showCancelableDialog

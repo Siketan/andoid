@@ -4,7 +4,6 @@ import android.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.navigation.fragment.findNavController
 import com.esafirm.imagepicker.features.ImagePickerConfig
 import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.ReturnMode
@@ -21,9 +20,8 @@ import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.databinding.FragmentPresensiBinding
-import com.wahidabd.siketan.presentation.plant.AddressViewModel
+import com.wahidabd.siketan.presentation.report.AddressViewModel
 import com.wahidabd.siketan.utils.PrefManager
-import com.wahidabd.siketan.utils.components.MyDialogFragment
 import com.wahidabd.siketan.utils.datePicker
 import com.wahidabd.siketan.utils.showCancelableDialog
 import com.wahidabd.siketan.utils.showSuccessDialog

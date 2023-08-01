@@ -7,6 +7,7 @@ import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import okhttp3.MultipartBody
 import retrofit2.Response
 
@@ -44,5 +45,9 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
 
     override suspend fun addPresensi(body: MultipartBody): Response<GenericAddResponse> {
         return api.addPresensi(body)
+    }
+
+    override suspend fun getChart(jenisPanen: String, jenis: String): Response<ChartModel> {
+        return api.getChart(jenisPanen, jenis)
     }
 }

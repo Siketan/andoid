@@ -14,6 +14,8 @@ import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.data.farm.remote.FarmApi
+import com.wahidabd.siketan.domain.farm.model.request.Chartparam
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -71,13 +73,25 @@ class FarmDataSource(
                 onEmit = { emit(it) })
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>> = flow<Resource<GenericAddResponse>> {
-        enqueue(
-            data.toRequestBody(),
-            err::convertGenericError,
-            webService::addPresensi,
-            onEmit = {emit(it)}
-        )
-    }.flowOn(Dispatchers.IO)
+    override suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>> =
+        flow {
+            enqueue(
+                data.toRequestBody(),
+                err::convertGenericError,
+                webService::addPresensi,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getChart(data: Chartparam): Flow<Resource<ChartModel>> =
+        flow {
+            enqueue(
+                data.jenisPanen.type,
+                data.jenis.type,
+                err::convertGenericError,
+                webService::getChart,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
 
 }

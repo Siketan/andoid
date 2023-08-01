@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.plant.DataFormerFragment">
+    tools:context=".presentation.report.DataFormerFragment">
 
 
     <LinearLayout
@@ -152,6 +152,7 @@
             android:layout_margin="@dimen/dimen_20dp"
             android:src="@drawable/ic_add"
             app:backgroundTint="@color/white"
+            android:visibility="gone"
             app:borderWidth="@dimen/dimen_0dp"
             app:layout_anchor="@id/rvStore"
             app:layout_anchorGravity="end|bottom"

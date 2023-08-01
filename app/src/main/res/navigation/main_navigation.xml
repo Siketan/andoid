@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_presensi" />
     <fragment
         android:id="@+id/dataFormerFragment"
-        android:name="com.wahidabd.siketan.presentation.plant.DataFormerFragment"
+        android:name="com.wahidabd.siketan.presentation.report.DataFormerFragment"
         android:label="fragment_data_former"
         tools:layout="@layout/fragment_data_former" >
         <action
@@ -78,12 +78,12 @@
     </fragment>
     <fragment
         android:id="@+id/addPlantReportFragment"
-        android:name="com.wahidabd.siketan.presentation.plant.add.AddPlantReportFragment"
+        android:name="com.wahidabd.siketan.presentation.report.add.AddPlantReportFragment"
         android:label="fragment_add_plant_report"
         tools:layout="@layout/fragment_add_plant_report" />
     <fragment
         android:id="@+id/addRealizationFragment"
-        android:name="com.wahidabd.siketan.presentation.plant.add.AddRealizationFragment"
+        android:name="com.wahidabd.siketan.presentation.report.add.AddRealizationFragment"
         android:label="fragment_add_realization"
         tools:layout="@layout/fragment_add_realization" />
 </navigation>
