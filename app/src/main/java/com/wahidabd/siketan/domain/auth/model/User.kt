@@ -1,7 +1,7 @@
 package com.wahidabd.siketan.domain.auth.model
 
 import com.wahidabd.library.utils.common.emptyString
-import com.wahidabd.siketan.data.auth.model.UserResponse
+import com.wahidabd.siketan.data.auth.model.user.UserResponse
 import com.wahidabd.siketan.domain.farm.model.response.Journal
 
 data class User(

@@ -3,9 +3,11 @@ package com.wahidabd.siketan.domain.farm
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import com.wahidabd.siketan.data.farm.FarmRepository
+import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
@@ -132,6 +134,18 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
                 return data
             }
 
+        }.asFlow()
+    }
+
+    override fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>> {
+        return object : InternetBoundResource<InputTanamanResponse, InputTanamanResponse>(){
+            override suspend fun createCall(): Flow<Resource<InputTanamanResponse>> {
+                return repository.addTanaman(data)
+            }
+
+            override suspend fun saveCallRequest(data: InputTanamanResponse): InputTanamanResponse {
+                return data
+            }
         }.asFlow()
     }
 

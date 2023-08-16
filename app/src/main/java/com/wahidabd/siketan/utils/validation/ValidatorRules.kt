@@ -2,6 +2,7 @@ package com.wahidabd.siketan.utils.validation
 
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputLayout
+import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.toStringTrim
 
 
@@ -29,4 +30,15 @@ class NotEmptyTilValidator(private val edt: TextInputLayout, private val message
     override fun message(): String {
         return message
     }
+}
+
+class NotEmptyText(private val text: String? = null, private val message: String): IValidator {
+    override fun isValid(): Boolean {
+        return !text.isNullOrEmpty()
+    }
+
+    override fun message(): String {
+        return message
+    }
+
 }

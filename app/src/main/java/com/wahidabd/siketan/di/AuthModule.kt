@@ -9,10 +9,10 @@ import com.wahidabd.siketan.data.auth.remote.AuthApiClient
 import com.wahidabd.siketan.domain.auth.AuthInteractor
 import com.wahidabd.siketan.domain.auth.AuthUseCase
 import com.wahidabd.siketan.presentation.auth.authentication.AuthViewModel
+import com.wahidabd.siketan.presentation.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import retrofit2.Retrofit
 
 
 /**
@@ -31,10 +31,9 @@ val authModule = module {
     }
 
     factory { ErrorParses(get()) }
-
-//    single { get<Retrofit>().create(AuthApiClient::class.java) }
     single { AuthApi(get()) }
     single<AuthRepository> { AuthDataSource(get(), get()) }
     single<AuthUseCase> { AuthInteractor(get()) }
     viewModel { AuthViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
 }

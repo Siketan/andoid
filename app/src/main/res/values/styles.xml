@@ -4,4 +4,12 @@
     <style name="dropdownWhite" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="colorSurface">@color/white</item>
     </style>
+    <style name="dropdownPrimary" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="endIconTint">@color/primary</item>
+    </style>
+    <style name="TextLabel" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+    </style>
 </resources>

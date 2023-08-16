@@ -1,5 +1,7 @@
 package com.wahidabd.siketan.data.auth.model
 
+import com.wahidabd.siketan.data.auth.model.user.UserResponse
+
 
 /**
  * Created by Wahid on 6/9/2023.

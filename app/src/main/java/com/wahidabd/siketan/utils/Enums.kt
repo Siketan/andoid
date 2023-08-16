@@ -21,3 +21,19 @@ enum class ChartKomuditasQuery(val type: String){
     FRUIT("Buah-Buahan"),
     VEGETABLE("Sayuran")
 }
+
+enum class CategoryType(val type: String){
+    PANGAN("Tanaman Pangan"),
+    PERKEBUNAN("Tanaman Perkebunan"),
+    HOLTIKULTURA("Tanaman Holtikultura")
+}
+
+enum class HarverstType(val type: String){
+    MUSIMAN("Musiman"),
+    TAHUNAN("Tahunan")
+}
+
+enum class PlantType(val type: String){
+    FRUIT("Buah"),
+    VEGENT("Sayur")
+}

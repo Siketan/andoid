@@ -1,9 +1,11 @@
 package com.wahidabd.siketan.data.farm.remote
 
 import com.wahidabd.library.data.WebApi
+import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
@@ -49,5 +51,9 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
 
     override suspend fun getChart(jenisPanen: String, jenis: String): Response<ChartModel> {
         return api.getChart(jenisPanen, jenis)
+    }
+
+    override suspend fun addTanaman(body: InputTanamanRequest): Response<InputTanamanResponse> {
+        return api.addTanaman(body)
     }
 }

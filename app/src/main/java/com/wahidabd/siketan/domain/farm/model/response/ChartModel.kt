@@ -8,7 +8,7 @@ package com.wahidabd.siketan.domain.farm.model.response
 
 
 data class ChartModel(
-    val dataChart: List<ChartDataModel>
+    val datachart: List<ChartDataModel>
 )
 
 data class ChartDataModel(

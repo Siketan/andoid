@@ -4,10 +4,12 @@ import com.wahidabd.library.data.LocalDb
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.enqueue
 import com.wahidabd.library.utils.coroutine.handler.ErrorParses
+import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
@@ -90,6 +92,16 @@ class FarmDataSource(
                 data.jenis.type,
                 err::convertGenericError,
                 webService::getChart,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>> =
+        flow {
+            enqueue(
+                data,
+                err::convertGenericError,
+                webService::addTanaman,
                 onEmit = { emit(it) }
             )
         }.flowOn(Dispatchers.IO)

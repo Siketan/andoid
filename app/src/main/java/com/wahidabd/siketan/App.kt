@@ -5,6 +5,7 @@ import com.wahidabd.library.presentation.BaseApplication
 import com.wahidabd.siketan.di.addressModule
 import com.wahidabd.siketan.di.appModule
 import com.wahidabd.siketan.di.authModule
+import com.wahidabd.siketan.di.chatModule
 import com.wahidabd.siketan.di.farmModule
 import org.koin.core.module.Module
 import timber.log.Timber
@@ -25,6 +26,7 @@ class App : BaseApplication() {
             authModule,
             farmModule,
             addressModule,
+            chatModule
         )
 
     override fun initApp() {

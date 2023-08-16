@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.wahidabd.siketan.R
 import com.wahidabd.siketan.utils.components.MyDialogFragment
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,6 +25,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.random.Random
 
 
 /**
@@ -44,6 +46,9 @@ fun emailMatches(value: String): Boolean =
 fun Fragment.navigate(navDirections: NavDirections) {
     findNavController().navigate(navDirections)
 }
+
+fun Fragment.navigateUp() =
+    findNavController().navigateUp()
 
 fun String.dateFormat(): String {
     val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeIndonesia)
@@ -147,4 +152,9 @@ fun Fragment.showSuccessDialog(message: String) {
             findNavController().navigateUp()
         }
     ).show(parentFragmentManager, MyDialogFragment::class.java.name)
+}
+
+fun Context.randomColor(): Int {
+    val colors = this.resources.getIntArray(R.array.androidcolors)
+    return colors[Random.nextInt(colors.size)]
 }

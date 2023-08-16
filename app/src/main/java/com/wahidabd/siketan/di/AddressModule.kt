@@ -8,7 +8,7 @@ import com.wahidabd.siketan.data.address.remote.AddressApi
 import com.wahidabd.siketan.data.address.remote.AddressApiClient
 import com.wahidabd.siketan.domain.address.AddressInteractor
 import com.wahidabd.siketan.domain.address.AddressUseCase
-import com.wahidabd.siketan.presentation.report.AddressViewModel
+import com.wahidabd.siketan.presentation.report.viewmodel.AddressViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
