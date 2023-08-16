@@ -1,14 +1,16 @@
 package com.wahidabd.siketan.data.farm.remote
 
 import com.wahidabd.library.data.WebApi
-import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
+import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
+import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 
 
@@ -31,11 +33,27 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.getProduct()
     }
 
-    override suspend fun postStore(body: MultipartBody): Response<ProductAddResponse> {
+    override suspend fun postStore(body: MultipartBody): Response<GenericAddResponse> {
         return api.postStore(body)
     }
 
-    override suspend fun addJournal(body: MultipartBody): Response<ProductAddResponse> {
+    override suspend fun getJournal(): Response<JournalResponse> {
+        return api.getJournal()
+    }
+
+    override suspend fun addJournal(body: MultipartBody): Response<GenericAddResponse> {
         return api.addJournal(body)
+    }
+
+    override suspend fun addPresensi(body: MultipartBody): Response<GenericAddResponse> {
+        return api.addPresensi(body)
+    }
+
+    override suspend fun getChart(jenisPanen: String, jenis: String): Response<ChartModel> {
+        return api.getChart(jenisPanen, jenis)
+    }
+
+    override suspend fun addTanaman(body: InputTanamanRequest): Response<InputTanamanResponse> {
+        return api.addTanaman(body)
     }
 }

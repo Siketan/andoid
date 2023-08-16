@@ -11,6 +11,7 @@ import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.siketan.databinding.FragmentHomeBinding
 import com.wahidabd.siketan.presentation.auth.AuthActivity
+import com.wahidabd.siketan.presentation.chat.ChatActivity
 import com.wahidabd.siketan.utils.PrefManager
 import com.wahidabd.siketan.utils.components.MyDialogFragment
 import com.wahidabd.siketan.utils.navigate
@@ -33,6 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initAction() {
         with(binding) {
+            fabChat.onClick { ChatActivity.start(requireContext()) }
             imgGrid.onClick {
                 gridContainer.visible()
                 listContainer.gone()
@@ -62,6 +64,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 MyDialogFragment.newInstance(MyDialogFragment.MyDialogType.ABOUT)
                     .show(parentFragmentManager, MyDialogFragment::class.java.name)
             }
+
+            imgUser.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment()) }
 
             imgLogout.onClick {
                 MaterialAlertDialogBuilder(requireContext())

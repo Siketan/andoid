@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
+import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.domain.farm.FarmUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,14 +22,33 @@ import kotlinx.coroutines.flow.onEach
 
 class JournalViewModel(
     private val useCase: FarmUseCase
-) : ViewModel(){
+) : ViewModel() {
 
-    private val _add = MutableLiveData<Resource<ProductAddResponse>>()
-    val add: LiveData<Resource<ProductAddResponse>> get() = _add
+    private val _add = MutableLiveData<Resource<GenericAddResponse>>()
+    val add: LiveData<Resource<GenericAddResponse>> get() = _add
 
-    fun add(data: JournalAddRequest){
+    private val _get = MutableLiveData<Resource<JournalResponse>>()
+    val get: LiveData<Resource<JournalResponse>> get() = _get
+
+    private val _presensi = MutableLiveData<Resource<GenericAddResponse>>()
+    val presensi: LiveData<Resource<GenericAddResponse>> get() = _presensi
+
+
+    fun add(data: JournalAddRequest) {
         useCase.addJournal(data)
             .onEach { _add.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun get() {
+        useCase.getJournal()
+            .onEach { _get.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun presensi(data: PresensiRequest) {
+        useCase.addPresensi(data)
+            .onEach { _presensi.value = it }
             .launchIn(viewModelScope)
     }
 

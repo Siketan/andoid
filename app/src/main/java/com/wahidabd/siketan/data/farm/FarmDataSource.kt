@@ -4,15 +4,20 @@ import com.wahidabd.library.data.LocalDb
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.enqueue
 import com.wahidabd.library.utils.coroutine.handler.ErrorParses
-import com.wahidabd.library.utils.extensions.debug
+import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.request.ProductRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
+import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
+import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
-import com.wahidabd.siketan.data.farm.model.store.response.ProductAddResponse
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.data.farm.remote.FarmApi
+import com.wahidabd.siketan.domain.farm.model.request.Chartparam
+import com.wahidabd.siketan.domain.farm.model.response.ChartModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -48,12 +53,57 @@ class FarmDataSource(
         enqueue(err::convertGenericError, webService::getProduct, onEmit = { emit(it) })
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun addProduct(data: ProductRequest): Flow<Resource<ProductAddResponse>> = flow {
-        enqueue(data.toBody(), err::convertGenericError, webService::postStore, onEmit = {emit(it)})
+    override suspend fun addProduct(data: ProductRequest): Flow<Resource<GenericAddResponse>> =
+        flow {
+            enqueue(
+                data.toBody(),
+                err::convertGenericError,
+                webService::postStore,
+                onEmit = { emit(it) })
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getJournal(): Flow<Resource<JournalResponse>> = flow {
+        enqueue(err::convertGenericError, webService::getJournal, onEmit = { emit(it) })
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun addJournal(data: JournalAddRequest): Flow<Resource<ProductAddResponse>> = flow {
-        enqueue(data.toRequestBody(), err::convertGenericError, webService::addJournal, onEmit = {emit(it)})
-    }.flowOn(Dispatchers.IO)
+    override suspend fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>> =
+        flow {
+            enqueue(
+                data.toRequestBody(),
+                err::convertGenericError,
+                webService::addJournal,
+                onEmit = { emit(it) })
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>> =
+        flow {
+            enqueue(
+                data.toRequestBody(),
+                err::convertGenericError,
+                webService::addPresensi,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getChart(data: Chartparam): Flow<Resource<ChartModel>> =
+        flow {
+            enqueue(
+                data.jenisPanen.type,
+                data.jenis.type,
+                err::convertGenericError,
+                webService::getChart,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>> =
+        flow {
+            enqueue(
+                data,
+                err::convertGenericError,
+                webService::addTanaman,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
 
 }

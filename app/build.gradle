@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "BASE_URL", "\"https://siketan-api.up.railway.app/\"")
+        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -78,6 +78,12 @@ dependencies {
 
     // image picker
     implementation 'com.github.esafirm:android-image-picker:3.0.0'
+
+    // socket
+    implementation "io.socket:socket.io-client:1.0.0"
+
+    // mpchart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // room
     implementation "androidx.room:room-runtime:2.5.1"

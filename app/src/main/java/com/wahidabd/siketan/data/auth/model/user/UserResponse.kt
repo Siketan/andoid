@@ -1,4 +1,4 @@
-package com.wahidabd.siketan.data.auth.model
+package com.wahidabd.siketan.data.auth.model.user
 
 import com.wahidabd.library.utils.common.emptyString
 

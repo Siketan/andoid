@@ -7,6 +7,6 @@ package com.wahidabd.siketan.data.farm.model.store.response
  */
 
 
-data class ProductAddResponse(
+data class GenericAddResponse(
     val message: String,
 )

@@ -1,9 +1,7 @@
 package com.wahidabd.siketan.di
 
-import com.wahidabd.library.data.libs.ApiService
 import com.wahidabd.library.data.libs.OkHttpClientFactory
 import com.wahidabd.library.data.libs.interceptor.HeaderInterceptor
-import com.wahidabd.library.utils.coroutine.handler.ErrorParses
 import com.wahidabd.siketan.BuildConfig
 import com.wahidabd.siketan.utils.PrefManager
 import okhttp3.Interceptor
@@ -34,7 +32,7 @@ val appModule = module {
     }
 
     single(named(BASE_URL)) { BuildConfig.BASE_URL }
-    single(named(ADDRESS_URL)){"https://dev.farizdotid.com/api/daerahindonesia/"}
+    single(named(ADDRESS_URL)) { "https://dev.farizdotid.com/api/daerahindonesia/" }
 }
 
 //val apiModule = module {

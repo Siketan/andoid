@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.profile.ProfileFragment">
+
+    <com.kennyc.view.MultiStateView
+        android:id="@+id/msv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:msv_loadingView="@layout/layout_loading">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_profile"
+                android:layout_width="@dimen/dimen_90dp"
+                android:layout_height="@dimen/dimen_90dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_44dp"
+                android:background="@drawable/bg_oval_white"
+                android:elevation="@dimen/dimen_10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_person"
+                app:tint="@color/colorGray" />
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilNik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:formInputType="text"
+                app:labelHint="NIK" />
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:labelHint="Nama Petani" />
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilNoWhatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:labelHint="No. Whatsapp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKecamatan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="4dp"
+                android:hint="Kecamatan"
+                app:boxStrokeColor="@color/primary"
+                app:endIconDrawable="@drawable/ic_arrow_down"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:endIconTint="@color/primary"
+                app:hintTextColor="@color/primary">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:padding="10dp"
+                    android:popupBackground="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDesa"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="4dp"
+                android:hint="Nama Desa"
+                app:boxStrokeColor="@color/primary"
+                app:endIconDrawable="@drawable/ic_arrow_down"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:endIconTint="@color/primary"
+                app:hintTextColor="@color/primary">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/desa"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:padding="10dp"
+                    android:popupBackground="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.wahidabd.siketan.utils.components.FormInput
+                android:id="@+id/tilAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:labelHint="Alamat" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_36dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancel"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="KEMBALI"
+                    android:textColor="@color/primary"
+                    app:cornerRadius="@dimen/dimen_6dp" />
+
+                <Space
+                    android:id="@+id/spacer"
+                    android:layout_width="@dimen/dimen_10dp"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primary"
+                    android:text="SIMPAN"
+                    android:textColor="@color/white"
+                    app:cornerRadius="@dimen/dimen_6dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.kennyc.view.MultiStateView>
+</LinearLayout>

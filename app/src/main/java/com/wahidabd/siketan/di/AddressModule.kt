@@ -8,8 +8,7 @@ import com.wahidabd.siketan.data.address.remote.AddressApi
 import com.wahidabd.siketan.data.address.remote.AddressApiClient
 import com.wahidabd.siketan.domain.address.AddressInteractor
 import com.wahidabd.siketan.domain.address.AddressUseCase
-import com.wahidabd.siketan.presentation.journal.JournalViewModel
-import com.wahidabd.siketan.presentation.plant.AddressViewModel
+import com.wahidabd.siketan.presentation.report.viewmodel.AddressViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -36,5 +35,4 @@ val addressModule = module {
     single<AddressRepository> { AddressDataSource(get(), get()) }
     single<AddressUseCase> { AddressInteractor(get()) }
     viewModel { AddressViewModel(get()) }
-    viewModel { JournalViewModel(get()) }
 }

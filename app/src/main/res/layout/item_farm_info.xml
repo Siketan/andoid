@@ -48,6 +48,8 @@
         android:layout_height="wrap_content"
         tools:text="Ditulis Oleh: Abd. Wahid"
         style="@style/MyText.Bold"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/colorGray"
         app:layout_constraintTop_toTopOf="@id/card"
         app:layout_constraintStart_toEndOf="@id/card"
@@ -63,6 +65,19 @@
         style="@style/MyText"
         android:textColor="@color/yellow"
         app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        app:layout_constraintStart_toEndOf="@id/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        tools:text="Terbit"
+        style="@style/MyText"
+        android:textColor="@color/yellow"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
         app:layout_constraintStart_toEndOf="@id/card"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="12dp"

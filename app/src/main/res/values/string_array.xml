@@ -7,16 +7,46 @@
     </string-array>
 
     <string-array name="status_product">
-        <item>STOK HABIS</item>
-        <item>BARU</item>
-        <item>DISKON</item>
+        <item>Stok Habis</item>
+        <item>Baru</item>
+        <item>Diskon</item>
     </string-array>
-    
+
     <string-array name="land_status">
         <item>Lahan Sendiri</item>
         <item>Lahan Sewa</item>
     </string-array>
-    
+
+    <string-array name="plant_type">
+        <item>Buah</item>
+        <item>Sayur</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>Tanaman Pangan</item>
+        <item>Tanaman Perkebunan</item>
+        <item>Tanaman Holtikultura</item>
+    </string-array>
+
+    <string-array name="harvest_type">
+        <item>Musiman</item>
+        <item>Tahunan</item>
+    </string-array>
+
+    <string-array name="season_harvest_type">
+        <item>Tebu</item>
+        <item>Tembakau</item>
+    </string-array>
+
+    <string-array name="annual_harvest_type">
+        <item>Kopi</item>
+        <item>Kako</item>
+        <item>Cengkeh</item>
+        <item>Teh</item>
+        <item>Karet</item>
+        <item>Kelapa</item>
+    </string-array>
+
     <string-array name="food">
         <item>Padi Konvensional</item>
         <item>Padi Ramah Lingkungan</item>
@@ -39,43 +69,50 @@
         <item>Tanaman Tembakau</item>
         <item>Tanaman Tebu</item>
     </string-array>
-    
-    <string-array name="holtikultura_fruit">
-        <item>MELON</item>
-        <item>SEMANGKA</item>
-        <item>PISAN</item>
-        <item>BLEWAH</item>
-        <item>MANGGA</item>
-        <item>DURIAN</item>
-        <item>MANGGIS</item>
-        <item>ALPUKAT</item>
-        <item>RAMBUTAN</item>
-        <item>JERUK LEMON</item>
-        <item>JERUK NIPIS</item>
-        <item>JERUK KEPROT</item>
-        <item>JERUT BESAR</item>
-        <item>NANGKA</item>
-        <item>JAMBU BIJI</item>
-        <item>JAMBU AIR</item>
-        <item>SUKUN</item>
-        <item>SIRSAT</item>
-        <item>SAWO</item>
-        <item>DUKU</item>
+
+    <string-array name="season_holtikultura_fruit">
+        <item>Melon</item>
+        <item>Semangka</item>
+        <item>Pisang</item>
+    </string-array>
+
+    <string-array name="growing_season">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="annual_holtikultura_fruit">
+        <item>Blewah</item>
+        <item>Mangga</item>
+        <item>Durian</item>
+        <item>Manggis</item>
+        <item>Alpukat</item>
+        <item>Rambutan</item>
+        <item>Jeruk Lemon</item>
+        <item>Jeruk Nipis</item>
+        <item>Jeruk Keprot</item>
+        <item>Jeruk Besar</item>
+        <item>Nangka</item>
+        <item>Jambu Biji</item>
+        <item>Jambu Air</item>
+        <item>Sukun</item>
+        <item>Sirsat</item>
+        <item>Sawo</item>
+        <item>Duku</item>
     </string-array>
 
     <string-array name="holtikultura_vegetable">
-        <item>SAYUR</item>
-        <item>CABE KECIL</item>
-        <item>CABE BESAR</item>
-        <item>BAWANG MERAH</item>
-        <item>TOMAT</item>
-        <item>TERONG</item>
-        <item>PARE</item>
-        <item>GAMBAS</item>
-        <item>BAYAM</item>
-        <item>KANGKUNG</item>
-        <item>SAWI</item>
-        <item>KACANG PANJANG</item>
+        <item>Cabe Kecil</item>
+        <item>Cabe Besar</item>
+        <item>Bawang Merah</item>
+        <item>Tomat</item>
+        <item>Terong</item>
+        <item>Pare</item>
+        <item>Gambas</item>
+        <item>Bayam</item>
+        <item>Kangkung</item>
+        <item>Sawi</item>
+        <item>Kacang Panjang</item>
     </string-array>
 
     <string-array name="months">

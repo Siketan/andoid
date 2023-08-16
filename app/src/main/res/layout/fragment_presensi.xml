@@ -65,45 +65,71 @@
                 android:layout_marginHorizontal="12dp"
                 app:labelHint="Nama Penyuluh" />
 
-            <com.wahidabd.siketan.utils.components.FormInput
-                android:id="@+id/tilRegion"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKecamatan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                app:labelHint="Kecamatan" />
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="4dp"
+                android:hint="Kecamatan"
+                android:layout_marginHorizontal="@dimen/dimen_12dp"
+                app:endIconDrawable="@drawable/ic_arrow_down"
+                app:endIconTint="@color/primary"
+                app:boxStrokeColor="@color/primary"
+                app:hintTextColor="@color/primary">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/autoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:padding="10dp"
+                    android:popupBackground="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
-                android:id="@+id/relative"
+                android:id="@+id/kelurahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/dimen_8dp">
 
                 <LinearLayout
-                    android:id="@+id/ll"
+                    android:id="@+id/llKelurahan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dimen_12dp"
                     android:layout_marginTop="@dimen/dimen_10dp"
                     android:background="@drawable/bg_rounded_stroke_gray"
+                    android:orientation="vertical"
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/tvKelurahan"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimen_10dp"
+                        android:layout_marginVertical="4dp"
+                        tools:text="1. Desa Kedangsari"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/primary"
+                        style="@style/MyText.Medium"/>
 
                 </LinearLayout>
 
                 <TextView
-                    style="@style/MyText.Medium"
+                    style="@style/MyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/ll"
+                    android:layout_alignStart="@id/llKelurahan"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="@dimen/dimen_30dp"
                     android:background="@color/white"
                     android:paddingHorizontal="@dimen/dimen_12dp"
-                    android:text="Wilayah Binaan"
+                    android:text="Wiliyah Desa Binaan"
                     android:textSize="@dimen/text_size_12sp"
                     android:textColor="@color/primary" />
             </RelativeLayout>
@@ -172,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                app:labelHint="Judul Jurnal" />
+                app:labelHint="Judul Laporan Harian" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -213,7 +239,7 @@
                     android:layout_marginStart="@dimen/dimen_30dp"
                     android:background="@color/white"
                     android:paddingHorizontal="@dimen/dimen_12dp"
-                    android:text="Isikan Foto Jurnal"
+                    android:text="Foto Kegiatan Harian"
                     android:textColor="@color/primary" />
             </RelativeLayout>
 
@@ -224,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="@dimen/dimen_12dp"
-                android:hint="Deskripsi Tanaman">
+                android:hint="Deskripsi Kegiatan">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -237,6 +263,15 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:indeterminateTint="@color/primary"
+                android:layout_marginVertical="@dimen/dimen_12dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,6 +279,7 @@
                 android:layout_marginHorizontal="@dimen/dimen_12dp">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -258,6 +294,7 @@
                     android:layout_height="wrap_content"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

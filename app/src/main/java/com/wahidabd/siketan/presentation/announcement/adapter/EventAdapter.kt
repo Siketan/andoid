@@ -46,7 +46,7 @@ class EventAdapter(
                 data.waktuAcara?.substring(0, 5)
             )
             tvEndDate.text =
-                context.getString(R.string.format_label_end_date, data.waktuAcara?.substring(8, 13))
+                context.getString(R.string.format_label_end_date, data.waktuAcara)
 
             imgImage.setImageUrl(
                 context,

@@ -2,14 +2,17 @@ package com.wahidabd.siketan.data.auth.remote
 
 import com.wahidabd.siketan.data.auth.model.LoginDataRequest
 import com.wahidabd.siketan.data.auth.model.AuthDataResponse
+import com.wahidabd.siketan.data.auth.model.user.DetailPetaniResponse
 import com.wahidabd.siketan.data.auth.model.LoginPenyuluhRequest
 import com.wahidabd.siketan.data.auth.model.RegisterDataRequest
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 
 /**
@@ -34,4 +37,15 @@ interface AuthApiClient {
     suspend fun register(
         @Body data: RegisterDataRequest
     ): Response<AuthDataResponse>
+
+    @GET("daftar-tani/{id}")
+    suspend fun getUser(
+        @Path("id") id: Int
+    ): Response<DetailPetaniResponse>
+
+    @PUT("daftar-tani/{id}")
+    suspend fun editUser(
+        @Path("id") id: Int,
+        @Body body: MultipartBody
+    ): Response<GenericAddResponse>
 }

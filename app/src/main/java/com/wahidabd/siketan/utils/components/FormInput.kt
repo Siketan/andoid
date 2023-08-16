@@ -28,6 +28,7 @@ class FormInput @JvmOverloads constructor(
     private lateinit var binding: LayoutFormInputBinding
     val edittext by lazy { binding.til.toStringTrim() }
     val til by lazy { binding.til }
+    val disable by lazy { binding.til.disable() }
 
     private var hint = emptyString()
     private var type: FormType = FormType.TEXT
@@ -43,7 +44,7 @@ class FormInput @JvmOverloads constructor(
 
         binding.til.hint = hint
         binding.edt.inputType = type.typeInfo
-        if(!isActive) binding.edt.disable() else binding.edt.enable()
+        if(!isActive) binding.til.disable() else binding.til.enable()
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
