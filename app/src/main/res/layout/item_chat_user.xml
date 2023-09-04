@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="@dimen/dimen_6dp"
+    android:elevation="@dimen/dimen_2dp"
+    android:layout_marginVertical="@dimen/dimen_4dp"
+    app:cardBackgroundColor="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_6dp">
+
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/dimen_70dp"
+            android:layout_height="@dimen/dimen_96dp"
+            tools:src="@tools:sample/avatars"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="JENITA PUTRI"
+            android:layout_toEndOf="@id/img_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            style="@style/MyText.Medium"
+            android:textSize="@dimen/text_size_18sp"
+            android:textColor="@color/primary"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            app:dividerColor="@color/primary"
+            android:layout_alignStart="@id/tv_name"
+            android:layout_below="@id/tv_name"
+            android:layout_alignEnd="@id/tv_name"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="ONLINE"
+            style="@style/MyText"
+            android:textSize="@dimen/text_size_12sp"
+            android:textColor="@color/primary"
+            android:layout_alignStart="@id/divider"
+            android:layout_below="@id/divider"
+            android:layout_alignEnd="@id/divider"/>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

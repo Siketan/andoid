@@ -1,12 +1,22 @@
 package com.wahidabd.siketan.presentation.chat
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.extensions.debug
-import com.wahidabd.siketan.BuildConfig
+import com.wahidabd.siketan.data.chat.model.request.ChatJoinRequest
+import com.wahidabd.siketan.data.chat.model.request.ChatLatestRequest
+import com.wahidabd.siketan.data.chat.model.request.ChatSendRequest
+import com.wahidabd.siketan.data.chat.model.response.ChatMessageResponse
+import com.wahidabd.siketan.data.chat.model.response.ChatResponse
+import com.wahidabd.siketan.domain.chat.ChatUseCase
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -17,59 +27,61 @@ import org.json.JSONObject
  */
 
 
-class ChatViewModel : ViewModel() {
+class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
 
-    private var socket: Socket? = null
+    private val _getLatestMessages = MutableLiveData<Resource<ChatResponse>>()
+    val getLatestMessages: LiveData<Resource<ChatResponse>> get() = _getLatestMessages
 
-    fun connectWebSocket(){
-        try {
-            val options = IO.Options()
-            socket = IO.socket(BuildConfig.BASE_URL, options)
+    private val _newMessage = MutableLiveData<ChatMessageResponse>()
 
-            debug { "ChatViewModel: ${socket?.id()}" }
+    private val _join = MutableLiveData<Boolean>()
+    val join: LiveData<Boolean> get() = _join
 
-            socket?.on(Socket.EVENT_CONNECT, onConnect)
-            socket?.on(Socket.EVENT_DISCONNECT, onDisconnect)
-            socket?.on(Socket.EVENT_ERROR, onConnectError)
-            socket?.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError)
+    private var socket: Socket
+    private var onOnline: Emitter.Listener
+    private var onReceived: Emitter.Listener
 
-            socket?.connect()
-        }catch (e: Exception){
-            debug { "Exception: ${e.printStackTrace()}" }
-            e.printStackTrace()
-        }
-    }
+    init {
+        val options = IO.Options()
+        options.transports = arrayOf("websocket")
+        options.upgrade = false
 
-    private val onJoin = Emitter.Listener { args ->
+        socket = IO.socket("http://192.168.0.132:3001")
+//        socket = IO.socket(BuildConfig.BASE_URL)
 
-    }
-
-    private val onConnect = Emitter.Listener { args ->
-        debug { "OnConnect Socket" }
-        debug { "Args: $args" }
-
-        viewModelScope.launch {
+        onOnline = Emitter.Listener { args ->viewModelScope.launch {
             val obj = args[0] as JSONObject
-            debug { "Object: $obj" }
+            val status = obj.getString("status")
+            _join.value = status != "offline"
+        }
+        }
+
+        onReceived = Emitter.Listener { args ->
+            viewModelScope.launch {
+                val obj = args[0] as JSONObject
+                debug { "obj: $obj" }
+            }
         }
     }
 
-    private val onDisconnect = Emitter.Listener { args ->
-        debug { "OnDisconnect Socket" }
-        debug { "Args: $args" }
+    fun onConnect() {
+        socket.connect()
+        socket.on("online", onOnline)
+        socket.on("received", onReceived)
     }
 
-    private val onConnectError = Emitter.Listener { args ->
-        debug { "OnConnectError Socket" }
-        debug { "Args: $args" }
+    fun sendMessage(data: ChatSendRequest){
+        socket.emit("message", data.toObj())
     }
 
-    fun disconnectWebSocket(){
-        socket?.disconnect()
+    fun onJoin(data: ChatJoinRequest) {
+        socket.emit("join", data.toObj())
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        disconnectWebSocket()
+    fun getLatestMessages(data: ChatLatestRequest) {
+        useCase.getLatestChat(data)
+            .onEach { _getLatestMessages.value = it }
+            .launchIn(viewModelScope)
     }
+
 }

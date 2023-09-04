@@ -57,6 +57,13 @@ fun String.dateFormat(): String {
     return output.format(date)
 }
 
+
+fun getCurrentDate(): String {
+    val date = SimpleDateFormat("yyyy-MM-dd", localeIndonesia)
+    return date.format(System.currentTimeMillis())
+}
+
+
 fun Long.toTimeStamp(): String {
     val date = Date(this)
     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeIndonesia)

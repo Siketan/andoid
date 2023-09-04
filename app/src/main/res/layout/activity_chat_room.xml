@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.chat.ChatRoomActivity">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-10dp"
+        android:layout_marginEnd="-10dp"
+        android:background="@drawable/img_app_bar"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/MyText.Bold"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Wahid"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="18dp"
+            android:src="@drawable/img_statistics_white" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_weight="1"
+        tools:itemCount="4"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        tools:listitem="@layout/item_chat_right"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="@dimen/dimen_4dp"
+        android:padding="@dimen/dimen_12dp">
+
+        <EditText
+            android:id="@+id/edt_message"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Tulis pesan.."
+            style="@style/MyText"
+            android:inputType="textMultiLine"
+            android:maxHeight="@dimen/dimen_100dp"
+            android:textColorHint="@color/colorGray"
+            android:textSize="@dimen/text_size_16sp"
+            android:background="@drawable/bg_rounded_white_4"/>
+
+        <ImageView
+            android:id="@+id/img_send"
+            android:layout_width="@dimen/dimen_36dp"
+            android:layout_height="@dimen/dimen_36dp"
+            android:src="@drawable/outline_send_24"
+            android:padding="@dimen/dimen_4dp"
+            app:tint="@color/colorGray"/>
+    </LinearLayout>
+</LinearLayout>

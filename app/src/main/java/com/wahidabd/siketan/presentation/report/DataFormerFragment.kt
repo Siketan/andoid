@@ -59,7 +59,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 reveal = !reveal
             }
             linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment()) }
-            linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddPlantReportFragment()) }
+            linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment()) }
         }
     }
 

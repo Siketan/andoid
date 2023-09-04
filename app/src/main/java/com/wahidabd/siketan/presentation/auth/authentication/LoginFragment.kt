@@ -15,12 +15,13 @@ import com.wahidabd.siketan.databinding.FragmentLoginBinding
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
 import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.common.SiketanBaseFragment
 import com.wahidabd.siketan.utils.emailMatches
 import com.wahidabd.siketan.utils.navDirection
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+class LoginFragment : SiketanBaseFragment<FragmentLoginBinding>() {
 
     private val viewModel: AuthViewModel by viewModel()
     private val pref: PrefManager by inject()
@@ -63,13 +64,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         viewModel.login.observerLiveData(
             viewLifecycleOwner,
             onEmpty = {},
-            onLoading = { binding.progress.visible() },
+            onLoading = { showLoading() },
             onFailure = { _, m ->
-                binding.progress.gone()
+                hideLoading()
                 showToast(m.toString())
             },
             onSuccess = {
-                binding.progress.gone()
+                hideLoading()
 
                 debug { "${it.token}" }
 

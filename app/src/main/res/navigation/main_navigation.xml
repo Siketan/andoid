@@ -76,14 +76,18 @@
             android:id="@+id/action_dataFormerFragment_to_addRealizationFragment"
             app:destination="@id/addRealizationFragment" />
         <action
-            android:id="@+id/action_dataFormerFragment_to_addPlantReportFragment"
-            app:destination="@id/addPlantReportFragment" />
+            android:id="@+id/action_dataFormerFragment_to_plantDataFragment"
+            app:destination="@id/plantDataFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPlantReportFragment"
         android:name="com.wahidabd.siketan.presentation.report.add.AddPlantReportFragment"
         android:label="fragment_add_plant_report"
-        tools:layout="@layout/fragment_add_plant_report" />
+        tools:layout="@layout/fragment_add_plant_report" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/addRealizationFragment"
         android:name="com.wahidabd.siketan.presentation.report.add.AddRealizationFragment"
@@ -94,4 +98,25 @@
         android:name="com.wahidabd.siketan.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/plantDataFragment"
+        android:name="com.wahidabd.siketan.presentation.report.PlantDataFragment"
+        android:label="fragment_plant_data"
+        tools:layout="@layout/fragment_plant_data" >
+        <action
+            android:id="@+id/action_plantDataFragment_to_addPlantReportFragment"
+            app:destination="@id/addPlantReportFragment" />
+        <action
+            android:id="@+id/action_plantDataFragment_to_reportPlantDataFragment"
+            app:destination="@id/reportPlantDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportPlantDataFragment"
+        android:name="com.wahidabd.siketan.presentation.report.ReportPlantDataFragment"
+        android:label="fragment_report_plant_data"
+        tools:layout="@layout/fragment_report_plant_data" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -26,6 +26,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".presentation.chat.ChatRoomActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity
             android:name=".presentation.chat.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan|adjustResize"/>

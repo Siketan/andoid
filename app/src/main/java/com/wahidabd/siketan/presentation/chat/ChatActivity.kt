@@ -10,7 +10,6 @@ import org.koin.android.ext.android.inject
 
 class ChatActivity : BaseActivity<ActivityChatBinding>() {
 
-    private val viewModel: ChatViewModel by inject()
 
     companion object{
         fun start(context: Context){
@@ -27,7 +26,6 @@ class ChatActivity : BaseActivity<ActivityChatBinding>() {
     override fun initAction() {}
 
     override fun initProcess() {
-        viewModel.connectWebSocket()
     }
 
     override fun initObservers() {}

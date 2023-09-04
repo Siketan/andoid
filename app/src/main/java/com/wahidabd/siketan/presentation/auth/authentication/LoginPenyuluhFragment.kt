@@ -17,11 +17,12 @@ import com.wahidabd.siketan.databinding.FragmentLoginPenyuluhBinding
 import com.wahidabd.siketan.domain.auth.model.LoginRequest
 import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.common.SiketanBaseFragment
 import com.wahidabd.siketan.utils.emailMatches
 import com.wahidabd.siketan.utils.navDirection
 import org.koin.android.ext.android.inject
 
-class LoginPenyuluhFragment : BaseFragment<FragmentLoginPenyuluhBinding>() {
+class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>() {
 
     private val pref: PrefManager by inject()
     private val viewModel: AuthViewModel by inject()
@@ -64,13 +65,13 @@ class LoginPenyuluhFragment : BaseFragment<FragmentLoginPenyuluhBinding>() {
         viewModel.login.observerLiveData(
             viewLifecycleOwner,
             onEmpty = {},
-            onLoading = { binding.progress.visible() },
+            onLoading = { showLoading() },
             onFailure = { _, m ->
-                binding.progress.gone()
+                hideLoading()
                 showToast(m.toString())
             },
             onSuccess = {
-                binding.progress.gone()
+                hideLoading()
 
                 debug { "${it.token}" }
 

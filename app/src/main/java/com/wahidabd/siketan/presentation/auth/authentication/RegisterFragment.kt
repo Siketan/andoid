@@ -15,11 +15,12 @@ import com.wahidabd.siketan.databinding.FragmentRegisterBinding
 import com.wahidabd.siketan.domain.auth.model.RegisterRequest
 import com.wahidabd.siketan.presentation.MainActivity
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.common.SiketanBaseFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
+class RegisterFragment : SiketanBaseFragment<FragmentRegisterBinding>() {
 
     private val viewModel: AuthViewModel by viewModel()
     private val pref: PrefManager by inject()
@@ -56,19 +57,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             viewModel.register.observerLiveData(
                 viewLifecycleOwner,
                 onEmpty = {},
-                onLoading = { progress.visible() },
+                onLoading = { showLoading() },
                 onFailure = { _, m ->
-                    progress.gone()
+                    hideLoading()
                     showToast(m.toString())
                 },
                 onSuccess = {
-                    progress.gone()
-
-//                    pref.login(true)
-//                    pref.setToken(it.token.toString())
-
-//                    MainActivity.start(requireContext())
-//                    activity?.finish()
+                    hideLoading()
                     findNavController().navigateUp()
                 }
             )

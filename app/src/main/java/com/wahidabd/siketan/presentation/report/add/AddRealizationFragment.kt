@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.wahidabd.library.presentation.fragment.BaseFragment
+import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.clear
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
@@ -20,12 +21,15 @@ import com.wahidabd.siketan.utils.CategoryType
 import com.wahidabd.siketan.utils.HarverstType
 import com.wahidabd.siketan.utils.PlantType
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.common.SiketanBaseFragment
 import com.wahidabd.siketan.utils.datePicker
+import com.wahidabd.siketan.utils.showCancelableDialog
+import com.wahidabd.siketan.utils.showSuccessDialog
 import com.wahidabd.siketan.utils.toDateApi
 import com.wahidabd.siketan.utils.toDateString
 import org.koin.android.ext.android.inject
 
-class AddRealizationFragment : BaseFragment<FragmentAddRealizationBinding>() {
+class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding>() {
 
     private val pref: PrefManager by inject()
     private var startDate: String? = null
@@ -58,7 +62,8 @@ class AddRealizationFragment : BaseFragment<FragmentAddRealizationBinding>() {
 
     override fun initAction() {
         with(binding) {
-            imgBack.onClick { findNavController().navigateUp() }
+            imgBack.onClick { showCancelableDialog()}
+            btnCancel.onClick { showCancelableDialog() }
             edtStartDate.onClick {
                 datePicker { date ->
                     edtStartDate.setText(date.toDateString())
@@ -75,16 +80,14 @@ class AddRealizationFragment : BaseFragment<FragmentAddRealizationBinding>() {
     }
 
     override fun initProcess() {
-        with(binding){
+        with(binding) {
             btnSubmit.onClick {
                 val id = pref.getUser().id
-                val name = tilName.edittext
-                val kecamatan = tilKecamatan.edittext
-                val desa = tilDesa.edittext
                 val statusLahan = tilStatusLahan.toStringTrim()
                 val luasLahan = tilLuasLahan.edittext
                 val kategori = tilKategori.toStringTrim()
                 val jenisTanaman = tilJenisTanaman.toStringTrim()
+                val jenisPanen = tilJenisPanen.toStringTrim()
                 val komoditas = tilKomoditas.toStringTrim()
                 val musimTanam = tilMusimTanam.toStringTrim()
                 val tanggalTanam = tilBulanTanam.toStringTrim()
@@ -95,12 +98,13 @@ class AddRealizationFragment : BaseFragment<FragmentAddRealizationBinding>() {
                     dataPersonId = id!!,
                     statusLahan = statusLahan,
                     luasLahan = luasLahan,
-                    jenisPanen = jenisTanaman,
+                    jenisPanen = jenisPanen,
+                    jenis = jenisTanaman,
                     kategori = kategori,
                     komoditas = komoditas,
                     musimTanam = musimTanam.toInt(),
-                    tanggalTanam = tanggalTanam,
-                    perkiraanPanen = tanggalPanen,
+                    tanggalTanam = startDate.toString(),
+                    perkiraanPanen = endDate.toString(),
                     perkiraanHasilPanen = produksiPanen.toInt(),
                 )
 
@@ -112,10 +116,20 @@ class AddRealizationFragment : BaseFragment<FragmentAddRealizationBinding>() {
     override fun initObservers() {
         viewModel.addTanaman.observerLiveData(
             viewLifecycleOwner,
-            onLoading = {},
-            onEmpty = {},
-            onFailure = {_, _ ->},
-            onSuccess = {}
+            onLoading = {
+                showLoading()
+            },
+            onEmpty = {
+                hideLoading()
+            },
+            onFailure = { _, message ->
+                hideLoading()
+                showToast(message.toString())
+            },
+            onSuccess = {
+                hideLoading()
+                showSuccessDialog("TANAMAN")
+            }
         )
     }
 

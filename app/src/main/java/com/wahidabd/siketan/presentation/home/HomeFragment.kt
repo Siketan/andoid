@@ -3,16 +3,16 @@ package com.wahidabd.siketan.presentation.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
 import com.wahidabd.library.presentation.fragment.BaseFragment
-import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.siketan.databinding.FragmentHomeBinding
 import com.wahidabd.siketan.presentation.auth.AuthActivity
 import com.wahidabd.siketan.presentation.chat.ChatActivity
+import com.wahidabd.siketan.presentation.chat.ChatRoomActivity
 import com.wahidabd.siketan.utils.PrefManager
+import com.wahidabd.siketan.utils.UserRole
 import com.wahidabd.siketan.utils.components.MyDialogFragment
 import com.wahidabd.siketan.utils.navigate
 import org.koin.android.ext.android.inject
@@ -34,7 +34,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initAction() {
         with(binding) {
-            fabChat.onClick { ChatActivity.start(requireContext()) }
+            fabChat.onClick {
+                val user = prefs.getUser().role
+                if (user == UserRole.PETANI.role) ChatRoomActivity.start(requireContext())
+                else ChatActivity.start(requireContext())
+            }
             imgGrid.onClick {
                 gridContainer.visible()
                 listContainer.gone()
@@ -71,12 +75,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Keluar")
                     .setMessage("Apakah anda yakin ingin keluar dari aplikasi?")
-                    .setPositiveButton("YA"){dialog, _ ->
+                    .setPositiveButton("YA") { dialog, _ ->
                         prefs.logout()
                         AuthActivity.start(requireContext())
                         requireActivity().finish()
                     }
-                    .setNegativeButton("BATAL"){dialog, _ ->
+                    .setNegativeButton("BATAL") { dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()

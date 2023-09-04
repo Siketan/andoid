@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/dimen_6dp"
+    app:cardElevation="@dimen/dimen_2dp"
+    android:layout_marginBottom="@dimen/dimen_8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_header"
+            android:layout_width="@dimen/dimen_92dp"
+            android:layout_height="130dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:cardCornerRadius="@dimen/dimen_4dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/MyText.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_toEndOf="@id/card_header"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_16sp"
+            tools:text="Manggis" />
+
+        <TextView
+            android:id="@+id/tv_kategori"
+            style="@style/MyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_toEndOf="@id/card_header"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_below="@id/tv_name"
+            android:textSize="@dimen/text_size_14sp"
+            tools:text="Tanaman Holtikutura | Buah" />
+
+        <TextView
+            android:id="@+id/tv_jenis_panen"
+            style="@style/MyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_toEndOf="@id/card_header"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:layout_below="@id/tv_kategori"
+            android:textSize="@dimen/text_size_14sp"
+            tools:text="Jenis Panen: Musiman" />
+
+
+        <TextView
+            android:id="@+id/tv_luas_lahan"
+            style="@style/MyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_toEndOf="@id/card_header"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:layout_below="@id/tv_jenis_panen"
+            android:textSize="@dimen/text_size_14sp"
+            tools:text="Luas Lahan: 100" />
+
+        <TextView
+            android:id="@+id/tv_bulan_tanam"
+            style="@style/MyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/dimen_12dp"
+            android:layout_toEndOf="@id/card_header"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:layout_below="@id/tv_luas_lahan"
+            android:textSize="@dimen/text_size_14sp"
+            tools:text="Tanggal: 21 Agustus 2023" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

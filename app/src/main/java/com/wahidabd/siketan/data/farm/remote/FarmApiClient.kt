@@ -5,16 +5,19 @@ import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.TanamanPetaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.domain.farm.model.response.ChartModel
+import go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -63,5 +66,20 @@ interface FarmApiClient {
     suspend fun addTanaman(
         @Body body: InputTanamanRequest
     ): Response<InputTanamanResponse>
+
+    @GET("tanaman-petani/{id}")
+    suspend fun getTanaman(
+        @Path("id") id: Int
+    ): Response<TanamanPetaniResponse>
+
+    @POST("laporan-tanam")
+    suspend fun addLaporan(
+        @Body body: MultipartBody
+    ): Response<GenericAddResponse>
+
+    @GET("laporan-tanam/{id}")
+    suspend fun getLaporan(
+        @Path("id") id: Int
+    ): Response<ReportTanamanResponse>
 
 }

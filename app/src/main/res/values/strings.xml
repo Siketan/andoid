@@ -43,4 +43,8 @@
     <string name="sedang_kerusakan_25_50"><![CDATA[SEDANG (kerusakan < 25% - 50%)]]></string>
     <string name="berat_kerusakan_50_75"><![CDATA[BERAT (kerusakan < 50% - 75%)]]></string>
     <string name="puso_kerusakan_70"><![CDATA[PUSO (kerusakan > 70%)]]></string>
+    <string name="nama_petani">Nama Petani</string>
+    <string name="format_jenis_panen">Jenis Panen: %s</string>
+    <string name="format_luas_lahan">Luas Lahan: %s</string>
+    <string name="format_tanggal">Tanggal : %s</string>
 </resources>

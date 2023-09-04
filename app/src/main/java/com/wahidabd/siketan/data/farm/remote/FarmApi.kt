@@ -6,10 +6,12 @@ import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.TanamanPetaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.store.ProductDataResponse
 import com.wahidabd.siketan.data.farm.model.store.response.GenericAddResponse
 import com.wahidabd.siketan.domain.farm.model.response.ChartModel
+import go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 
@@ -55,5 +57,17 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
 
     override suspend fun addTanaman(body: InputTanamanRequest): Response<InputTanamanResponse> {
         return api.addTanaman(body)
+    }
+
+    override suspend fun getTanaman(id: Int): Response<TanamanPetaniResponse> {
+        return api.getTanaman(id)
+    }
+
+    override suspend fun addLaporan(body: MultipartBody): Response<GenericAddResponse> {
+        return api.addLaporan(body)
+    }
+
+    override suspend fun getLaporan(id: Int): Response<ReportTanamanResponse> {
+        return api.getLaporan(id)
     }
 }

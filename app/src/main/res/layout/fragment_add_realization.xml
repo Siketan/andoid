@@ -31,7 +31,7 @@
             android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="Tambah Laporan Tanaman"
+            android:text="Tambah Tanaman"
             android:textColor="@color/white"
             android:textSize="26sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_marginHorizontal="@dimen/dimen_12dp"
                     android:layout_weight="1"
                     app:formInputType="number"
-                    app:labelHint="Luas Lahan Tanam" />
+                    app:labelHint="Luas Lahan (m2)" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -305,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 app:isActive="true"
-                app:labelHint="Prakiraan Produksi Panen" />
+                app:labelHint="Prakiraan Produksi Panen (10 kw)" />
 
             <LinearLayout
                 android:layout_width="match_parent"

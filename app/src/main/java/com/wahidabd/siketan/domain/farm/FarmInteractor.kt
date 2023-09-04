@@ -4,10 +4,12 @@ import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import com.wahidabd.siketan.data.farm.FarmRepository
 import com.wahidabd.siketan.data.farm.model.farm.request.InputTanamanRequest
+import com.wahidabd.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import com.wahidabd.siketan.data.farm.model.farm.response.EventTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InfoTaniResponse
 import com.wahidabd.siketan.data.farm.model.farm.response.InputTanamanResponse
+import com.wahidabd.siketan.data.farm.model.farm.response.TanamanPetaniResponse
 import com.wahidabd.siketan.data.farm.model.journal.JournalAddRequest
 import com.wahidabd.siketan.data.farm.model.journal.JournalResponse
 import com.wahidabd.siketan.data.farm.model.journal.PresensiRequest
@@ -21,6 +23,7 @@ import com.wahidabd.siketan.domain.farm.model.response.InfoTani
 import com.wahidabd.siketan.domain.farm.model.response.Product
 import com.wahidabd.siketan.domain.farm.model.response.toDomain
 import com.wahidabd.siketan.domain.farm.model.toRequest
+import go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import kotlinx.coroutines.flow.Flow
 
 
@@ -144,6 +147,44 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
             }
 
             override suspend fun saveCallRequest(data: InputTanamanResponse): InputTanamanResponse {
+                return data
+            }
+        }.asFlow()
+    }
+
+    override fun getTanaman(id: Int): Flow<Resource<TanamanPetaniResponse>> {
+        return object : InternetBoundResource<TanamanPetaniResponse, TanamanPetaniResponse>(){
+            override suspend fun createCall(): Flow<Resource<TanamanPetaniResponse>> {
+                return repository.getTanaman(id)
+            }
+
+            override suspend fun saveCallRequest(data: TanamanPetaniResponse): TanamanPetaniResponse {
+                return data
+            }
+
+        }.asFlow()
+    }
+
+    override fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>> {
+        return object : InternetBoundResource<GenericAddResponse, GenericAddResponse>(){
+            override suspend fun createCall(): Flow<Resource<GenericAddResponse>> {
+                return repository.addLaporan(data)
+            }
+
+            override suspend fun saveCallRequest(data: GenericAddResponse): GenericAddResponse {
+                return data
+            }
+
+        }.asFlow()
+    }
+
+    override fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>> {
+        return object : InternetBoundResource<ReportTanamanResponse, ReportTanamanResponse>(){
+            override suspend fun createCall(): Flow<Resource<ReportTanamanResponse>> {
+                return repository.getLaporan(id)
+            }
+
+            override suspend fun saveCallRequest(data: ReportTanamanResponse): ReportTanamanResponse {
                 return data
             }
         }.asFlow()
