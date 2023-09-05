@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.extensions.debug
+import com.wahidabd.siketan.BuildConfig
 import com.wahidabd.siketan.data.chat.model.request.ChatJoinRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatLatestRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatSendRequest
 import com.wahidabd.siketan.data.chat.model.response.ChatMessageResponse
+import com.wahidabd.siketan.data.chat.model.response.ChatPetaniResponse
 import com.wahidabd.siketan.data.chat.model.response.ChatResponse
 import com.wahidabd.siketan.domain.chat.ChatUseCase
 import io.socket.client.IO
@@ -29,6 +31,9 @@ import org.json.JSONObject
 
 class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
 
+    private val _getUserChat = MutableLiveData<Resource<ChatPetaniResponse>>()
+    val getUserChat: LiveData<Resource<ChatPetaniResponse>> get() = _getUserChat
+
     private val _getLatestMessages = MutableLiveData<Resource<ChatResponse>>()
     val getLatestMessages: LiveData<Resource<ChatResponse>> get() = _getLatestMessages
 
@@ -46,14 +51,15 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         options.transports = arrayOf("websocket")
         options.upgrade = false
 
-        socket = IO.socket("http://192.168.0.132:3001")
-//        socket = IO.socket(BuildConfig.BASE_URL)
+//        socket = IO.socket("http://192.168.0.132:3001")
+        socket = IO.socket(BuildConfig.BASE_URL)
 
-        onOnline = Emitter.Listener { args ->viewModelScope.launch {
-            val obj = args[0] as JSONObject
-            val status = obj.getString("status")
-            _join.value = status != "offline"
-        }
+        onOnline = Emitter.Listener { args ->
+            viewModelScope.launch {
+                val obj = args[0] as JSONObject
+                val status = obj.getString("status")
+                _join.value = status != "offline"
+            }
         }
 
         onReceived = Emitter.Listener { args ->
@@ -70,7 +76,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         socket.on("received", onReceived)
     }
 
-    fun sendMessage(data: ChatSendRequest){
+    fun sendMessage(data: ChatSendRequest) {
         socket.emit("message", data.toObj())
     }
 
@@ -81,6 +87,12 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
     fun getLatestMessages(data: ChatLatestRequest) {
         useCase.getLatestChat(data)
             .onEach { _getLatestMessages.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun getPetaniChat(id: Int) {
+        useCase.getPetaniChat(id)
+            .onEach { _getUserChat.value = it }
             .launchIn(viewModelScope)
     }
 

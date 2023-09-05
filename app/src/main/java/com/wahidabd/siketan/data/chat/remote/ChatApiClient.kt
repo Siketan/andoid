@@ -5,6 +5,7 @@ import com.wahidabd.siketan.data.chat.model.response.ChatResponse
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -24,7 +25,7 @@ interface ChatApiClient {
 
     @GET("chat/petani/{id}")
     suspend fun getPetaniChat(
-        @Field("id") id: Int
+        @Path("id") id: Int
     ): Response<ChatPetaniResponse>
 
     @GET("chat/messages/petani")

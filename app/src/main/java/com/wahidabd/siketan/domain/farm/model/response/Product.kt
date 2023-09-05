@@ -53,17 +53,18 @@ data class ProductUser(
 
 fun ProductResponse.toDomain(): Product =
     Product(
-        createdAt,
-        dataPerson?.todDomain(),
-        dataPersonId,
-        deskripsi,
-        fotoTanaman,
-        harga,
-        id,
-        namaProducts,
-        profesiPenjual,
-        satuan,
-        status
+        createdAt = createdAt,
+        dataPerson = dataPerson?.todDomain(),
+        dataPersonId = dataPersonId,
+        deskripsi = deskripsi,
+        fotoTanaman = fotoTanaman,
+        harga = harga,
+        id = id,
+        namaProducts = namaProducts,
+        profesiPenjual = profesiPenjual,
+        status = status,
+        stok = stok,
+        updatedAt = updatedAt
     )
 
 fun ProductUserResponse.todDomain(): ProductUser =

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.wahidabd.library.presentation.fragment.BaseFragment
+import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
@@ -30,14 +31,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
 
-    override fun initUI() {}
+    override fun initUI() {
+    }
 
     override fun initAction() {
         with(binding) {
             fabChat.onClick {
                 val user = prefs.getUser().role
                 if (user == UserRole.PETANI.role) ChatRoomActivity.start(requireContext())
-                else ChatActivity.start(requireContext())
+                else if (user == UserRole.PENYULUH.role) ChatActivity.start(requireContext())
             }
             imgGrid.onClick {
                 gridContainer.visible()

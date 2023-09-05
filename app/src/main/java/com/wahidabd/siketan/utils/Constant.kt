@@ -23,4 +23,6 @@ object Constant {
     const val USER_NAME = "user_name"
     const val USER_KECAMATAN = "user_kecamatan"
     const val ROLE = "role"
+
+    const val RECEIVER_KEY = "receiver_key"
 }

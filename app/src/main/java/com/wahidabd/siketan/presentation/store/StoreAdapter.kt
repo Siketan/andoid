@@ -43,11 +43,11 @@ class StoreAdapter(
                 placeholder = R.drawable.ic_image_placeholder
             )
             tvStock.text = context.getString(R.string.format_label_stock, data.stok.toString())
-//            tvPrice.text = context.getString(
-//                R.string.format_label_price,
-//                data.harga?.toDouble()?.toCurrency()
-//            )
-            tvPrice.text = data.harga
+            tvPrice.text = context.getString(
+                R.string.format_label_price,
+                data.harga?.toDouble()?.toCurrency()
+            )
+//            tvPrice.text = data.harga
             tvTitle.text = data.namaProducts
         }
     }

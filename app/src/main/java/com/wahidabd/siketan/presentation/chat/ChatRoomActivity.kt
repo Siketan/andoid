@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.observerLiveData
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.siketan.databinding.ActivityChatRoomBinding
 import com.wahidabd.siketan.utils.PrefManager
 import com.wahidabd.siketan.utils.common.SiketanBaseActivity
 import com.wahidabd.siketan.data.chat.model.request.ChatJoinRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatLatestRequest
 import com.wahidabd.siketan.presentation.chat.adapter.ChatRoomAdapter
+import com.wahidabd.siketan.utils.Constant
+import com.wahidabd.siketan.utils.UserRole
+import com.wahidabd.siketan.utils.onBackPress
 import org.koin.android.ext.android.inject
 
 class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
@@ -21,8 +25,10 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
     private val pref: PrefManager by inject()
 
     companion object {
-        fun start(context: Context) {
-            context.startActivity(Intent(context, ChatRoomActivity::class.java))
+        fun start(context: Context, id: Int? = 0) {
+            context.startActivity(Intent(context, ChatRoomActivity::class.java)
+                .putExtra(Constant.RECEIVER_KEY, id)
+            )
         }
     }
 
@@ -34,13 +40,17 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
         binding.rvChat.adapter = chatAdapter
     }
 
-    override fun initAction() {}
+    override fun initAction() {
+        binding.imgBack.onClick { onBackPress() }
+    }
 
     override fun initProcess() {
         val user = pref.getUser()
-        val data = ChatLatestRequest(user.desa.toString(), user.id ?: 0)
-        viewModel.onConnect()
-        viewModel.getLatestMessages(data)
+        if (user.role == UserRole.PETANI.role){
+            val data = ChatLatestRequest(user.desa.toString(), user.id ?: 0)
+            viewModel.onConnect()
+            viewModel.getLatestMessages(data)
+        }
     }
 
     override fun initObservers() {

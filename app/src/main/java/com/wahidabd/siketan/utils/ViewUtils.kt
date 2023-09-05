@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Patterns
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -165,3 +166,5 @@ fun Context.randomColor(): Int {
     val colors = this.resources.getIntArray(R.array.androidcolors)
     return colors[Random.nextInt(colors.size)]
 }
+
+fun ComponentActivity.onBackPress() = onBackPressedDispatcher.onBackPressed()

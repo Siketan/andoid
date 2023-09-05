@@ -1,4 +1,4 @@
-package go.ngawikab.siketan.presentation.chat.adapter
+package com.wahidabd.siketan.presentation.chat.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.BaseAsyncRecyclerAdapter
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
+import com.wahidabd.library.utils.exts.setImageUrl
+import com.wahidabd.siketan.R
 import com.wahidabd.siketan.data.chat.model.response.ChatPetaniDataResponse
 import com.wahidabd.siketan.databinding.ItemChatUserBinding
 
@@ -28,13 +30,14 @@ class ChatUserAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ChatUserAdapter.ChatUserViewHolder {
+    ): ChatUserViewHolder {
         return ChatUserViewHolder(getViewBinding(parent, viewType))
     }
 
     inner class ChatUserViewHolder(binding: ViewBinding): BaseAsyncItemViewHolder<ChatPetaniDataResponse>(binding){
         override fun bind(data: ChatPetaniDataResponse) = with(binding as ItemChatUserBinding){
-
+            tvName.text = data.nama
+            imgProfile.setImageUrl(context, data.foto.toString(), R.drawable.placeholder, true)
         }
     }
 }

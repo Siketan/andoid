@@ -49,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="ONLINE"
+            android:visibility="gone"
             style="@style/MyText"
             android:textSize="@dimen/text_size_12sp"
             android:textColor="@color/primary"
