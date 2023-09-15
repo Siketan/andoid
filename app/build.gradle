@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.wahidabd.siketan'
+    namespace 'id.go.ngawikab.siketan'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.wahidabd.siketan"
+        applicationId "id.go.ngawikab.siketan"
         minSdk 24
         targetSdk 33
         versionCode 1

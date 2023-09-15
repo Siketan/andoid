@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.report.add.AddRealizationFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.report.add.AddRealizationFragment">
 
     <LinearLayout
         android:id="@+id/linearTop"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilNik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 app:isActive="false"
                 app:labelHint="Nomor Nik" />
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.wahidabd.siketan.utils.components.FormInput
+                <id.go.ngawikab.siketan.utils.components.FormInput
                     android:id="@+id/tilKecamatan"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     app:isActive="false"
                     app:labelHint="Kecamatan" />
 
-                <com.wahidabd.siketan.utils.components.FormInput
+                <id.go.ngawikab.siketan.utils.components.FormInput
                     android:id="@+id/tilDesa"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.wahidabd.siketan.utils.components.FormInput
+                <id.go.ngawikab.siketan.utils.components.FormInput
                     android:id="@+id/tilLuasLahan"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
@@ -299,7 +299,7 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilProduksiPanen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

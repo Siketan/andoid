@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:background="@drawable/bg_rounded_white_4"
-    tools:context=".utils.components.MyDialogFragment">
+    tools:context="id.go.ngawikab.siketan.utils.components.MyDialogFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgHeader"

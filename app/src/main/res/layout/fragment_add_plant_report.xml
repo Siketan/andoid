@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".presentation.report.add.AddPlantReportFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.report.add.AddPlantReportFragment">
 
     <LinearLayout
         android:id="@+id/linearTop"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilKondisiTanaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

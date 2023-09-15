@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.wahidabd.siketan.presentation.home.HomeFragment"
+        android:name="id.go.ngawikab.siketan.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/announcementFragment"
-        android:name="com.wahidabd.siketan.presentation.announcement.AnnouncementFragment"
+        android:name="id.go.ngawikab.siketan.presentation.announcement.AnnouncementFragment"
         android:label="fragment_announcement"
         tools:layout="@layout/fragment_announcement" />
     <fragment
         android:id="@+id/journalFragment"
-        android:name="com.wahidabd.siketan.presentation.journal.JournalFragment"
+        android:name="id.go.ngawikab.siketan.presentation.journal.JournalFragment"
         android:label="fragment_journal"
         tools:layout="@layout/fragment_journal" >
         <action
@@ -45,12 +45,12 @@
     </fragment>
     <fragment
         android:id="@+id/journalAddFragment"
-        android:name="com.wahidabd.siketan.presentation.journal.JournalAddFragment"
+        android:name="id.go.ngawikab.siketan.presentation.journal.JournalAddFragment"
         android:label="fragment_journal_add"
         tools:layout="@layout/fragment_journal_add" />
     <fragment
         android:id="@+id/storeFragment"
-        android:name="com.wahidabd.siketan.presentation.store.StoreFragment"
+        android:name="id.go.ngawikab.siketan.presentation.store.StoreFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" >
         <action
@@ -59,17 +59,17 @@
     </fragment>
     <fragment
         android:id="@+id/storeAddFragment"
-        android:name="com.wahidabd.siketan.presentation.store.StoreAddFragment"
+        android:name="id.go.ngawikab.siketan.presentation.store.StoreAddFragment"
         android:label="fragment_store_add"
         tools:layout="@layout/fragment_store_add" />
     <fragment
         android:id="@+id/presensiFragment"
-        android:name="com.wahidabd.siketan.presentation.journal.PresensiFragment"
+        android:name="id.go.ngawikab.siketan.presentation.journal.PresensiFragment"
         android:label="fragment_presensi"
         tools:layout="@layout/fragment_presensi" />
     <fragment
         android:id="@+id/dataFormerFragment"
-        android:name="com.wahidabd.siketan.presentation.report.DataFormerFragment"
+        android:name="id.go.ngawikab.siketan.presentation.report.DataFormerFragment"
         android:label="fragment_data_former"
         tools:layout="@layout/fragment_data_former" >
         <action
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPlantReportFragment"
-        android:name="com.wahidabd.siketan.presentation.report.add.AddPlantReportFragment"
+        android:name="id.go.ngawikab.siketan.presentation.report.add.AddPlantReportFragment"
         android:label="fragment_add_plant_report"
         tools:layout="@layout/fragment_add_plant_report" >
         <argument
@@ -90,17 +90,17 @@
     </fragment>
     <fragment
         android:id="@+id/addRealizationFragment"
-        android:name="com.wahidabd.siketan.presentation.report.add.AddRealizationFragment"
+        android:name="id.go.ngawikab.siketan.presentation.report.add.AddRealizationFragment"
         android:label="fragment_add_realization"
         tools:layout="@layout/fragment_add_realization" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.wahidabd.siketan.presentation.profile.ProfileFragment"
+        android:name="id.go.ngawikab.siketan.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/plantDataFragment"
-        android:name="com.wahidabd.siketan.presentation.report.PlantDataFragment"
+        android:name="id.go.ngawikab.siketan.presentation.report.PlantDataFragment"
         android:label="fragment_plant_data"
         tools:layout="@layout/fragment_plant_data" >
         <action
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/reportPlantDataFragment"
-        android:name="com.wahidabd.siketan.presentation.report.ReportPlantDataFragment"
+        android:name="id.go.ngawikab.siketan.presentation.report.ReportPlantDataFragment"
         android:label="fragment_report_plant_data"
         tools:layout="@layout/fragment_report_plant_data" >
         <argument

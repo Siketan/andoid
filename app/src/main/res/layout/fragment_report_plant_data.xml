@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.report.ReportPlantDataFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.report.ReportPlantDataFragment">
 
     <LinearLayout
         android:id="@+id/ll"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.profile.ProfileFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.profile.ProfileFragment">
 
     <com.kennyc.view.MultiStateView
         android:id="@+id/msv"
@@ -30,7 +30,7 @@
                 android:src="@drawable/img_person"
                 app:tint="@color/colorGray" />
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilNik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,14 +39,14 @@
                 app:formInputType="text"
                 app:labelHint="NIK" />
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
                 app:labelHint="Nama Petani" />
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilNoWhatsapp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.wahidabd.siketan.utils.components.FormInput
+            <id.go.ngawikab.siketan.utils.components.FormInput
                 android:id="@+id/tilAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

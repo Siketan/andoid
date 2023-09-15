@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.auth.authentication.RegisterFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterFragment">
 
     <View
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtNik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             app:iconLabel="@drawable/ic_person"
             app:input_type="email" />
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtWhatsapp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:iconLabel="@drawable/ic_whatsapp"
             app:input_type="number" />
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:iconLabel="@drawable/ic_person"
             app:input_type="text" />
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             app:iconLabel="@drawable/ic_password"
             app:input_type="password" />
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtPasswordConf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

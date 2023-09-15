@@ -13,7 +13,7 @@
         android:maxSdkVersion="32" />
 
     <application
-        android:name=".App"
+        android:name="id.go.ngawikab.siketan.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -26,15 +26,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".presentation.chat.ChatRoomActivity"
+            android:name="id.go.ngawikab.siketan.presentation.chat.ChatRoomActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".presentation.chat.ChatActivity"
+            android:name="id.go.ngawikab.siketan.presentation.chat.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
-            android:name=".presentation.auth.SplashActivity"
+            android:name="id.go.ngawikab.siketan.presentation.auth.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,10 +43,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.auth.AuthActivity"
+            android:name="id.go.ngawikab.siketan.presentation.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="id.go.ngawikab.siketan.presentation.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|adjustPan|stateHidden" />
 

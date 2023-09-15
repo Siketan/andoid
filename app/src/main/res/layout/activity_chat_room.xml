@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.chat.ChatRoomActivity">
+    tools:context="id.go.ngawikab.siketan.presentation.chat.ChatRoomActivity">
 
     <LinearLayout
         android:id="@+id/ll"

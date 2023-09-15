@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onBoarding1Fragment"
-        android:name="com.wahidabd.siketan.presentation.auth.onboarding.OnBoarding1Fragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.onboarding.OnBoarding1Fragment"
         android:label="fragment_on_boarding1"
         tools:layout="@layout/fragment_on_boarding1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/onBoarding2Fragment"
-        android:name="com.wahidabd.siketan.presentation.auth.onboarding.OnBoarding2Fragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.onboarding.OnBoarding2Fragment"
         android:label="fragment_on_boarding2"
         tools:layout="@layout/fragment_on_boarding2" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.wahidabd.siketan.presentation.auth.authentication.LoginFragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.authentication.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -37,12 +37,12 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.wahidabd.siketan.presentation.auth.authentication.RegisterFragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/loginPenyuluhFragment"
-        android:name="com.wahidabd.siketan.presentation.auth.authentication.LoginPenyuluhFragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.authentication.LoginPenyuluhFragment"
         android:label="fragment_login_penyuluh"
         tools:layout="@layout/fragment_login_penyuluh" />
 </navigation>

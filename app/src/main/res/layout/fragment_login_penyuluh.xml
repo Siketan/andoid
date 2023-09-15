@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.auth.authentication.LoginPenyuluhFragment">
+    tools:context="id.go.ngawikab.siketan.presentation.auth.authentication.LoginPenyuluhFragment">
 
     <View
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtNik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             app:iconLabel="@drawable/ic_email"
             app:input_type="email" />
 
-        <com.wahidabd.siketan.utils.components.FormAuthentication
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
