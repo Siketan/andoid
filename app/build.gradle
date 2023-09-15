@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.github.esafirm:android-image-picker:3.0.0'
 
     // socket
-    implementation "io.socket:socket.io-client:1.0.0"
+    implementation "io.socket:socket.io-client:2.0.0"
 
     // mpchart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

@@ -18,7 +18,7 @@ data class ChatSendRequest(
 ){
     fun toObj(): JSONObject{
         val obj = JSONObject()
-        obj.put("fromUserId", fromUserId)
+        obj.put("fromId", fromUserId)
         obj.put("toUserId", toUserId)
         obj.put("message", message)
         obj.put("type", type)

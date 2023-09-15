@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.BaseAsyncRecyclerAdapter
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.siketan.R
 import com.wahidabd.siketan.data.chat.model.response.ChatPetaniDataResponse
@@ -38,6 +39,8 @@ class ChatUserAdapter(
         override fun bind(data: ChatPetaniDataResponse) = with(binding as ItemChatUserBinding){
             tvName.text = data.nama
             imgProfile.setImageUrl(context, data.foto.toString(), R.drawable.placeholder, true)
+
+            container.onClick { onItemClick.invoke(data.id) }
         }
     }
 }

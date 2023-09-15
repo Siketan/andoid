@@ -19,7 +19,9 @@ class ChatActivity : SiketanBaseActivity<ActivityChatBinding>() {
     private val viewModel: ChatViewModel by inject()
 
     private val chatUserAdapter by lazy {
-        ChatUserAdapter(this, onItemClick = {})
+        ChatUserAdapter(this, onItemClick = {
+            ChatRoomActivity.start(this, it)
+        })
     }
 
     companion object {

@@ -12,7 +12,8 @@ import com.wahidabd.library.utils.common.emptyString
 data class ChatResponse(
     val user: ChatUserResponse,
     val chatId: Int? = 0,
-    val messages: List<ChatMessageResponse>
+    val partnerId: Int? = 0,
+    val messages: List<ChatMessageResponse>,
 )
 
 data class ChatUserResponse(

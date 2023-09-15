@@ -8,6 +8,7 @@ import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.siketan.BuildConfig
 import com.wahidabd.siketan.data.chat.model.request.ChatJoinRequest
+import com.wahidabd.siketan.data.chat.model.request.ChatLatestPetaniRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatLatestRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatSendRequest
 import com.wahidabd.siketan.data.chat.model.response.ChatMessageResponse
@@ -51,8 +52,8 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         options.transports = arrayOf("websocket")
         options.upgrade = false
 
-//        socket = IO.socket("http://192.168.0.132:3001")
-        socket = IO.socket(BuildConfig.BASE_URL)
+        socket = IO.socket("http://192.168.100.50:3001", options)
+//        socket = IO.socket(BuildConfig.BASE_URL)
 
         onOnline = Emitter.Listener { args ->
             viewModelScope.launch {
@@ -65,7 +66,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         onReceived = Emitter.Listener { args ->
             viewModelScope.launch {
                 val obj = args[0] as JSONObject
-                debug { "obj: $obj" }
+                debug { "chat room: $obj" }
             }
         }
     }
@@ -93,6 +94,12 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
     fun getPetaniChat(id: Int) {
         useCase.getPetaniChat(id)
             .onEach { _getUserChat.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun getLatestChatPetani(data: ChatLatestPetaniRequest){
+        useCase.getLatestChatPetani(data)
+            .onEach { _getLatestMessages.value = it }
             .launchIn(viewModelScope)
     }
 

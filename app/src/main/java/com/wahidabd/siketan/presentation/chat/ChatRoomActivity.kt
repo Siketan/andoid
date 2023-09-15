@@ -3,16 +3,22 @@ package com.wahidabd.siketan.presentation.chat
 import android.content.Context
 import android.content.Intent
 import com.wahidabd.library.utils.common.showToast
+import com.wahidabd.library.utils.exts.clear
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
-import com.wahidabd.siketan.databinding.ActivityChatRoomBinding
-import com.wahidabd.siketan.utils.PrefManager
-import com.wahidabd.siketan.utils.common.SiketanBaseActivity
+import com.wahidabd.library.utils.exts.setImageUrl
+import com.wahidabd.library.utils.exts.toStringTrim
+import com.wahidabd.siketan.R
 import com.wahidabd.siketan.data.chat.model.request.ChatJoinRequest
+import com.wahidabd.siketan.data.chat.model.request.ChatLatestPetaniRequest
 import com.wahidabd.siketan.data.chat.model.request.ChatLatestRequest
+import com.wahidabd.siketan.data.chat.model.request.ChatSendRequest
+import com.wahidabd.siketan.databinding.ActivityChatRoomBinding
 import com.wahidabd.siketan.presentation.chat.adapter.ChatRoomAdapter
 import com.wahidabd.siketan.utils.Constant
+import com.wahidabd.siketan.utils.PrefManager
 import com.wahidabd.siketan.utils.UserRole
+import com.wahidabd.siketan.utils.common.SiketanBaseActivity
 import com.wahidabd.siketan.utils.onBackPress
 import org.koin.android.ext.android.inject
 
@@ -23,11 +29,14 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
 
     private val viewModel: ChatViewModel by inject()
     private val pref: PrefManager by inject()
+    private var partnerId = 0
+    private var chatId = 0
 
     companion object {
         fun start(context: Context, id: Int? = 0) {
-            context.startActivity(Intent(context, ChatRoomActivity::class.java)
-                .putExtra(Constant.RECEIVER_KEY, id)
+            context.startActivity(
+                Intent(context, ChatRoomActivity::class.java)
+                    .putExtra(Constant.RECEIVER_KEY, id)
             )
         }
     }
@@ -36,20 +45,28 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
         ActivityChatRoomBinding.inflate(layoutInflater)
 
     override fun initUI() {
+
+        partnerId = intent.getIntExtra(Constant.RECEIVER_KEY, 0)
+
         chatAdapter = ChatRoomAdapter(pref.getUser().id)
         binding.rvChat.adapter = chatAdapter
     }
 
     override fun initAction() {
         binding.imgBack.onClick { onBackPress() }
+        binding.imgSend.onClick { sendMessage() }
     }
 
     override fun initProcess() {
+        viewModel.onConnect()
+
         val user = pref.getUser()
-        if (user.role == UserRole.PETANI.role){
+        if (user.role == UserRole.PETANI.role) {
             val data = ChatLatestRequest(user.desa.toString(), user.id ?: 0)
-            viewModel.onConnect()
             viewModel.getLatestMessages(data)
+        } else if (user.role == UserRole.PENYULUH.role) {
+            val data = ChatLatestPetaniRequest(user.id ?: 0, partnerId)
+            viewModel.getLatestChatPetani(data)
         }
     }
 
@@ -70,12 +87,32 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
                 hideDialogLoading()
 
                 binding.tvName.text = it.user.nama
+                binding.imgProfile.setImageUrl(
+                    this,
+                    it.user.foto.toString(),
+                    R.drawable.placeholder,
+                    true
+                )
                 chatAdapter.addPrevMessages(it.messages)
 
+                partnerId = it.partnerId ?: 0
+                chatId = it.chatId ?: 0
                 val data = ChatJoinRequest(pref.getUser().id ?: 0, it.chatId ?: 0)
                 viewModel.onJoin(data)
             }
         )
+    }
+
+    private fun sendMessage() {
+        val message = binding.edtMessage.toStringTrim()
+        val data = ChatSendRequest(
+            fromUserId = pref.getUser().id ?: 0,
+            toUserId = partnerId,
+            message = message,
+            chatId = chatId
+        )
+        viewModel.sendMessage(data)
+        binding.edtMessage.clear()
     }
 
 }

@@ -28,7 +28,7 @@ interface ChatApiClient {
         @Path("id") id: Int
     ): Response<ChatPetaniResponse>
 
-    @GET("chat/messages/petani")
+    @GET("chat/msesages/petani")
     suspend fun getLatestChatPetani(
         @Query("userId") userId: Int,
         @Query("partnerId") partnerId: Int

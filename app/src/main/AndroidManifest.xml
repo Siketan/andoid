@@ -28,7 +28,7 @@
         <activity
             android:name=".presentation.chat.ChatRoomActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".presentation.chat.ChatActivity"
             android:exported="false"
