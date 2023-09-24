@@ -34,5 +34,5 @@ data class ChatMessageResponse(
 )
 
 data class AttachmentChat(
-    val link: String
+    val link: String? = null
 )

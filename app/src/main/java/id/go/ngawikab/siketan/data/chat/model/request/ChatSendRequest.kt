@@ -13,16 +13,16 @@ data class ChatSendRequest(
     val fromUserId: Int,
     val toUserId: Int,
     val message: String,
-    val type: String? = "personal",
-    val chatId: Int
+    val chatId: Int,
+    val waktu: String
 ){
     fun toObj(): JSONObject{
         val obj = JSONObject()
         obj.put("fromId", fromUserId)
         obj.put("toUserId", toUserId)
         obj.put("message", message)
-        obj.put("type", type)
         obj.put("chatId", chatId)
+        obj.put("waktu", waktu)
         return obj
     }
 }

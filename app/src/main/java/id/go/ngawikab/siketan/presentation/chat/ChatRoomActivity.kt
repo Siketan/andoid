@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.presentation.chat
 import android.content.Context
 import android.content.Intent
 import com.wahidabd.library.utils.common.showToast
+import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.clear
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
@@ -19,6 +20,7 @@ import id.go.ngawikab.siketan.utils.Constant
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.SiketanBaseActivity
+import id.go.ngawikab.siketan.utils.getCurrentDate
 import id.go.ngawikab.siketan.utils.onBackPress
 import org.koin.android.ext.android.inject
 
@@ -47,6 +49,7 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
     override fun initUI() {
 
         partnerId = intent.getIntExtra(Constant.RECEIVER_KEY, 0)
+        debug { "partenrId: $partnerId" }
 
         chatAdapter = ChatRoomAdapter(pref.getUser().id)
         binding.rvChat.adapter = chatAdapter
@@ -95,21 +98,28 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
                 )
                 chatAdapter.addPrevMessages(it.messages)
 
-                partnerId = it.partnerId ?: 0
+                if (pref.getUser().role == UserRole.PETANI.role) partnerId = it.partnerId ?: 0
                 chatId = it.chatId ?: 0
                 val data = ChatJoinRequest(pref.getUser().id ?: 0, it.chatId ?: 0)
                 viewModel.onJoin(data)
             }
         )
+
+        viewModel.newMessage.observe(this) { newMessage ->
+            chatAdapter.addNewMessage(newMessage)
+        }
     }
 
     private fun sendMessage() {
         val message = binding.edtMessage.toStringTrim()
+
+        debug { "Send message: $message" }
         val data = ChatSendRequest(
             fromUserId = pref.getUser().id ?: 0,
             toUserId = partnerId,
             message = message,
-            chatId = chatId
+            chatId = chatId,
+            waktu = getCurrentDate()
         )
         viewModel.sendMessage(data)
         binding.edtMessage.clear()

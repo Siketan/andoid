@@ -17,8 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-//        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
-        buildConfigField("String", "BASE_URL", "\"http://app-api.siketan.id/\"")
+        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
+//        buildConfigField("String", "BASE_URL", "\"http://app-api.siketan.id/\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

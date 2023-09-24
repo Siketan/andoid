@@ -17,6 +17,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.internal.format
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -64,6 +65,10 @@ fun getCurrentDate(): String {
     return date.format(System.currentTimeMillis())
 }
 
+fun getCurrentDateTimeStamp(): String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeIndonesia)
+    return format.format(System.currentTimeMillis())
+}
 
 fun Long.toTimeStamp(): String {
     val date = Date(this)

@@ -20,8 +20,8 @@ class ChatActivity : SiketanBaseActivity<ActivityChatBinding>() {
 
     private val chatUserAdapter by lazy {
         ChatUserAdapter(this, onItemClick = {
-//            ChatRoomActivity.start(this, it)
-            showToast("Dalam pengembangan!")
+            ChatRoomActivity.start(this, it)
+//            showToast("Dalam pengembangan!")
         })
     }
 

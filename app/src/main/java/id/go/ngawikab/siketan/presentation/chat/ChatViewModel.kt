@@ -10,6 +10,7 @@ import id.go.ngawikab.siketan.data.chat.model.request.ChatJoinRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatLatestPetaniRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatLatestRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatSendRequest
+import id.go.ngawikab.siketan.data.chat.model.response.AttachmentChat
 import id.go.ngawikab.siketan.data.chat.model.response.ChatMessageResponse
 import id.go.ngawikab.siketan.data.chat.model.response.ChatPetaniResponse
 import id.go.ngawikab.siketan.data.chat.model.response.ChatResponse
@@ -38,6 +39,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
     val getLatestMessages: LiveData<Resource<ChatResponse>> get() = _getLatestMessages
 
     private val _newMessage = MutableLiveData<ChatMessageResponse>()
+    val newMessage: LiveData<ChatMessageResponse> get() = _newMessage
 
     private val _join = MutableLiveData<Boolean>()
     val join: LiveData<Boolean> get() = _join
@@ -51,7 +53,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         options.transports = arrayOf("websocket")
         options.upgrade = false
 
-        socket = IO.socket("http://192.168.100.50:3001", options)
+        socket = IO.socket("http://192.168.1.6:3001", options)
 //        socket = IO.socket(BuildConfig.BASE_URL)
 
         onOnline = Emitter.Listener { args ->
@@ -65,7 +67,28 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         onReceived = Emitter.Listener { args ->
             viewModelScope.launch {
                 val obj = args[0] as JSONObject
-                debug { "chat room: $obj" }
+                val id = obj.getString("id")
+                val attachmentId = obj.getString("attachmentId")
+                val pesan = obj.getString("pesan")
+                val chatId = obj.getString("chatId")
+                val waktu = obj.getString("waktu")
+                val fromId = obj.getString("fromId")
+//                val attachment = obj.getJSONObject("attachment").getString("link")
+
+//                val attachmentChat = AttachmentChat(link = attachment)
+                val data = ChatMessageResponse(
+                    id = id.toIntOrNull(),
+                    attachmentId = attachmentId.toIntOrNull(),
+                    pesan = pesan,
+                    chatId = chatId.toIntOrNull(),
+                    waktu = waktu,
+                    fromId = fromId.toIntOrNull()
+//                    attachment = attachmentChat
+                )
+
+                _newMessage.value = data
+
+                debug { "New Message: $obj" }
             }
         }
     }
@@ -78,10 +101,13 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
 
     fun sendMessage(data: ChatSendRequest) {
         socket.emit("message", data.toObj())
+
+        debug { "Send Message: $data" }
     }
 
     fun onJoin(data: ChatJoinRequest) {
         socket.emit("join", data.toObj())
+        debug { "On Join: $data" }
     }
 
     fun getLatestMessages(data: ChatLatestRequest) {
