@@ -2,9 +2,16 @@ package id.go.ngawikab.siketan.presentation.chat
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import androidx.core.widget.doAfterTextChanged
+import com.esafirm.imagepicker.features.ImagePickerConfig
+import com.esafirm.imagepicker.features.ImagePickerMode
+import com.esafirm.imagepicker.features.ReturnMode
+import com.esafirm.imagepicker.features.registerImagePicker
+import com.wahidabd.library.utils.common.emptyString
 import com.wahidabd.library.utils.common.showToast
-import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.clear
+import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
@@ -20,9 +27,11 @@ import id.go.ngawikab.siketan.utils.Constant
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.SiketanBaseActivity
-import id.go.ngawikab.siketan.utils.getCurrentDate
+import id.go.ngawikab.siketan.utils.convertFileToBase64
+import id.go.ngawikab.siketan.utils.getCurrentDateTimeStamp
 import id.go.ngawikab.siketan.utils.onBackPress
 import org.koin.android.ext.android.inject
+import java.io.File
 
 class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
 
@@ -33,6 +42,8 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
     private val pref: PrefManager by inject()
     private var partnerId = 0
     private var chatId = 0
+
+    private var imageFile: File? = null
 
     companion object {
         fun start(context: Context, id: Int? = 0) {
@@ -49,15 +60,30 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
     override fun initUI() {
 
         partnerId = intent.getIntExtra(Constant.RECEIVER_KEY, 0)
-        debug { "partenrId: $partnerId" }
 
-        chatAdapter = ChatRoomAdapter(pref.getUser().id)
+        chatAdapter = ChatRoomAdapter(pref.getUser().id, this)
         binding.rvChat.adapter = chatAdapter
+
+        handleSendButton()
+        binding.edtMessage.doAfterTextChanged { handleSendButton() }
     }
 
-    override fun initAction() {
-        binding.imgBack.onClick { onBackPress() }
-        binding.imgSend.onClick { sendMessage() }
+    override fun initAction() = with(binding) {
+        imgBack.onClick { onBackPress() }
+        imgSend.onClick { sendMessage() }
+        imgClose.onClick {
+            imageFile = null
+            checkImagePreview()
+            handleSendButton()
+        }
+        imgFile.onClick {
+            imageLauncher.launch(
+                ImagePickerConfig(
+                    mode = ImagePickerMode.SINGLE,
+                    returnMode = ReturnMode.GALLERY_ONLY
+                )
+            )
+        }
     }
 
     override fun initProcess() {
@@ -85,6 +111,7 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
             onFailure = { _, message ->
                 hideDialogLoading()
                 showToast(message.toString())
+                onBackPress()
             },
             onSuccess = {
                 hideDialogLoading()
@@ -108,21 +135,45 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
         viewModel.newMessage.observe(this) { newMessage ->
             chatAdapter.addNewMessage(newMessage)
         }
+
+        viewModel.errorMessage.observe(this) { error ->
+            showToast(error)
+        }
     }
 
     private fun sendMessage() {
+        val convertImage = if (imageFile != null) convertFileToBase64(imageFile) else emptyString()
         val message = binding.edtMessage.toStringTrim()
-
-        debug { "Send message: $message" }
         val data = ChatSendRequest(
             fromUserId = pref.getUser().id ?: 0,
             toUserId = partnerId,
             message = message,
             chatId = chatId,
-            waktu = getCurrentDate()
+            waktu = getCurrentDateTimeStamp(),
+            image = convertImage
         )
         viewModel.sendMessage(data)
         binding.edtMessage.clear()
+        imageFile = null
+        checkImagePreview()
+        handleSendButton()
     }
 
+    private val imageLauncher = registerImagePicker { picker ->
+        picker.forEach { image ->
+            binding.imgPicker.setImageURI(image.uri)
+            imageFile = File(image.path)
+
+            checkImagePreview()
+        }
+    }
+
+    private fun checkImagePreview() = with(binding) {
+        imgPicker.visibility = if (imageFile == null) View.GONE else View.VISIBLE
+        imgClose.visibility = if (imageFile == null) View.GONE else View.VISIBLE
+    }
+
+    private fun handleSendButton() = with(binding) {
+        imgSend.isClickable = edtMessage.toStringTrim().isNotNull() || imageFile != null
+    }
 }

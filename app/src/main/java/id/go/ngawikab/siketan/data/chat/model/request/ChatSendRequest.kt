@@ -1,6 +1,8 @@
 package id.go.ngawikab.siketan.data.chat.model.request
 
+import com.wahidabd.library.utils.common.emptyString
 import org.json.JSONObject
+import java.io.File
 
 
 /**
@@ -14,7 +16,8 @@ data class ChatSendRequest(
     val toUserId: Int,
     val message: String,
     val chatId: Int,
-    val waktu: String
+    val waktu: String,
+    val image: String? = emptyString()
 ){
     fun toObj(): JSONObject{
         val obj = JSONObject()
@@ -23,6 +26,7 @@ data class ChatSendRequest(
         obj.put("message", message)
         obj.put("chatId", chatId)
         obj.put("waktu", waktu)
+        obj.put("image", image)
         return obj
     }
 }

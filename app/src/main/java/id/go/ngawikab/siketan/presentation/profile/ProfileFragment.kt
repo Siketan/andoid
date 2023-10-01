@@ -103,10 +103,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     tilName.setText(res.nama.toString())
                     tilNoWhatsapp.setText(res.NoWa ?: "")
                     tilAddress.setText(res.alamat ?: "")
-                    kecamatan.setText(res.kecamatan,false)
+                    kecamatan.setText(res.kecamatan, false)
                     desa.setText(res.desa, false)
 
-                    if (res.foto?.isNotEmpty() == true){
+                    if (res.foto?.isNotEmpty() == true) {
                         imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
                     }
 
@@ -117,21 +117,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 viewLifecycleOwner,
                 onLoading = {},
                 onEmpty = {},
-                onFailure = {_, _ ->},
+                onFailure = { _, _ -> },
                 onSuccess = {
                     showToast(it.message)
 
                     pref.setUser(
                         User(
-                        id = data.id,
-                        NIK = data.NIK,
-                        nama = data.nama,
-                        NoWa = data.NoWa,
-                        alamat = data.alamat,
-                        kecamatan = data.kecamatan,
-                        desa = data.desa,
-                        role = "petani"
-                    )
+                            id = data.id,
+                            NIK = data.NIK,
+                            nama = data.nama,
+                            NoWa = data.NoWa,
+                            alamat = data.alamat,
+                            kecamatan = data.kecamatan,
+                            desa = data.desa,
+                            role = "petani"
+                        )
                     )
                 }
             )
@@ -217,7 +217,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         )
     }
 
-    private fun validate() = with(binding){
+    private fun validate() = with(binding) {
         validators.add(NotEmptyTilValidator(tilNik.til, "Nik Tidak Boleh Kosong"))
         validators.add(NotEmptyTilValidator(tilName.til, "Nama Tidak Boleh Kosong"))
         validators.add(NotEmptyTilValidator(tilAddress.til, "Nik Tidak Boleh Kosong"))
@@ -226,9 +226,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         validators.add(NotEmptyTilValidator(tilDesa, "Kecamatan tidak boleh kosong"))
     }
 
-    private fun validateAll(): Boolean{
-        for (validator in validators){
-            if (!validator.isValid()){
+    private fun validateAll(): Boolean {
+        for (validator in validators) {
+            if (!validator.isValid()) {
                 val error = validator.message()
                 showToast(error)
                 return false

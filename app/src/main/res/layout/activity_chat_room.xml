@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,24 +32,24 @@
             android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:gravity="end"
-            tools:text="Wahid"
             android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:textSize="26sp"
+            tools:text="Wahid" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/dimen_46dp"
             android:layout_height="@dimen/dimen_68dp"
-            android:layout_marginEnd="@dimen/dimen_22dp"
-            app:cardCornerRadius="@dimen/dimen_4dp"
             android:layout_marginVertical="@dimen/dimen_10dp"
-            android:layout_marginStart="@dimen/dimen_10dp">
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_22dp"
+            app:cardCornerRadius="@dimen/dimen_4dp">
 
             <ImageView
                 android:id="@+id/img_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:src="@tools:sample/avatars"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -60,37 +59,80 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
         android:layout_weight="1"
-        tools:itemCount="4"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:reverseLayout="true"
-        tools:listitem="@layout/item_chat_right"/>
+        tools:itemCount="4"
+        tools:listitem="@layout/item_chat_right" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:elevation="@dimen/dimen_4dp"
-        android:padding="@dimen/dimen_12dp">
-
-        <EditText
-            android:id="@+id/edt_message"
-            android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Tulis pesan.."
-            style="@style/MyText"
-            android:inputType="textMultiLine"
-            android:maxHeight="@dimen/dimen_100dp"
-            android:textColorHint="@color/colorGray"
-            android:textSize="@dimen/text_size_16sp"
-            android:background="@drawable/bg_rounded_white_4"/>
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/img_send"
-            android:layout_width="@dimen/dimen_36dp"
-            android:layout_height="@dimen/dimen_36dp"
-            android:src="@drawable/outline_send_24"
-            android:padding="@dimen/dimen_4dp"
-            app:tint="@color/colorGray"/>
-    </LinearLayout>
+            android:id="@+id/imgPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:src="@tools:sample/avatars"
+            android:maxHeight="@dimen/dimen_200dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:layout_marginEnd="@dimen/dimen_12dp"
+            android:layout_marginBottom="@dimen/dimen_12dp"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/dimen_6dp"
+            android:visibility="gone"
+            android:src="@drawable/baseline_close_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dimen_4dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/imgPicker"
+            android:padding="@dimen/dimen_12dp">
+
+            <ImageView
+                android:id="@+id/img_file"
+                android:layout_width="@dimen/dimen_36dp"
+                android:layout_height="@dimen/dimen_36dp"
+                android:padding="@dimen/dimen_8dp"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_file"
+                app:tint="@color/primary" />
+
+            <EditText
+                android:id="@+id/edt_message"
+                style="@style/MyText"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                android:background="@drawable/bg_rounded_white_4"
+                android:hint="Tulis pesan.."
+                android:inputType="textMultiLine"
+                android:layout_gravity="center_vertical"
+                android:maxHeight="@dimen/dimen_100dp"
+                android:textColorHint="@color/colorGray"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_send"
+                android:layout_width="@dimen/dimen_36dp"
+                android:layout_height="@dimen/dimen_36dp"
+                android:padding="@dimen/dimen_6dp"
+                android:clickable="false"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_send"
+                app:tint="@color/primary" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

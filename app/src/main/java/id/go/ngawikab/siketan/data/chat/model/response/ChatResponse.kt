@@ -30,9 +30,5 @@ data class ChatMessageResponse(
     val createdAt: String? = emptyString(),
     val updatedAt: String? = emptyString(),
     val waktu: String? = emptyString(),
-    val attachment: AttachmentChat? = null
-)
-
-data class AttachmentChat(
-    val link: String? = null
+    val attachment: String? = null
 )

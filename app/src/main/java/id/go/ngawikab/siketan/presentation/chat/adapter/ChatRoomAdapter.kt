@@ -1,13 +1,21 @@
 package id.go.ngawikab.siketan.presentation.chat.adapter
 
+import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.wahidabd.library.utils.extensions.debug
+import com.wahidabd.library.utils.exts.isNotNull
+import com.wahidabd.library.utils.exts.setImageUrl
+import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.data.chat.model.response.ChatMessageResponse
 import id.go.ngawikab.siketan.databinding.ItemChatLeftBinding
 import id.go.ngawikab.siketan.databinding.ItemChatRightBinding
+import id.go.ngawikab.siketan.utils.convertTimestamp
 
 
 /**
@@ -16,7 +24,10 @@ import id.go.ngawikab.siketan.databinding.ItemChatRightBinding
  */
 
 
-class ChatRoomAdapter(private val id: Int?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatRoomAdapter(
+    private val id: Int?,
+    private val context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val LEFT = 0
@@ -41,28 +52,27 @@ class ChatRoomAdapter(private val id: Int?) : RecyclerView.Adapter<RecyclerView.
 
     private val listDiffer = AsyncListDiffer(this, differCallback)
     private var list = ArrayList<ChatMessageResponse>()
-//        get() = listDiffer.currentList
-//        set(value) = listDiffer.submitList(value.asReversed())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == LEFT) LeftViewHolder(
             ItemChatLeftBinding.inflate(
-                LayoutInflater.from(
-                    parent.context
-                ), parent, false
-            )
+                LayoutInflater.from(context),
+                parent,
+                false
+            ), context
         )
         else RightViewHolder(
             ItemChatRightBinding.inflate(
-                LayoutInflater.from(parent.context),
+                LayoutInflater.from(context),
                 parent,
                 false
-            )
+            ), context
         )
     }
 
     override fun getItemCount(): Int = list.size
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = list[position]
         when (holder) {
@@ -71,17 +81,27 @@ class ChatRoomAdapter(private val id: Int?) : RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    class RightViewHolder(private val binding: ItemChatRightBinding) :
+    class RightViewHolder(private val binding: ItemChatRightBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(data: ChatMessageResponse) = with(binding) {
             tvMessage.text = data.pesan
+            tvTime.text = data.waktu?.convertTimestamp()
+
+            img.visibleIf { data.attachment.isNotNull() }
+            img.setImageUrl(context, data.attachment.toString())
         }
     }
 
-    class LeftViewHolder(private val binding: ItemChatLeftBinding) :
+    class LeftViewHolder(private val binding: ItemChatLeftBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(data: ChatMessageResponse) = with(binding) {
             tvMessage.text = data.pesan
+            tvTime.text = data.waktu?.convertTimestamp()
+
+            img.visibleIf { data.attachment.isNotNull() }
+            img.setImageUrl(context, data.attachment.toString())
         }
     }
 

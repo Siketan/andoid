@@ -2,22 +2,28 @@ package id.go.ngawikab.siketan.utils
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.text.TextUtils
+import android.util.Base64
 import android.util.Patterns
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.utils.components.MyDialogFragment
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.internal.format
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -25,6 +31,10 @@ import java.io.OutputStream
 import java.text.DateFormatSymbols
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Locale
 import kotlin.random.Random
@@ -59,6 +69,22 @@ fun String.dateFormat(): String {
     return output.format(date)
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+fun String.convertTimestamp(): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val dateTime = LocalDateTime.parse(this, formatter)
+
+    val now = LocalDateTime.now(ZoneId.of("Asia/Jakarta"))
+    val difference = ChronoUnit.SECONDS.between(dateTime, now)
+
+    return when {
+        difference < 60 -> "$difference detik lalu"
+        difference < 3600 -> "${difference / 60} menit lalu"
+        difference < 86400 -> "${difference / 3600} jam lalu"
+        difference < 172800 -> "kemarin"
+        else -> dateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))
+    }
+}
 
 fun getCurrentDate(): String {
     val date = SimpleDateFormat("yyyy-MM-dd", localeIndonesia)
@@ -173,3 +199,11 @@ fun Context.randomColor(): Int {
 }
 
 fun ComponentActivity.onBackPress() = onBackPressedDispatcher.onBackPressed()
+
+fun convertFileToBase64(file: File? = null): String {
+    val bitmap = BitmapFactory.decodeFile(file?.path)
+    val outputStream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+    val imageBytes = outputStream.toByteArray()
+    return Base64.encodeToString(imageBytes, Base64.DEFAULT) ?: emptyString()
+}
