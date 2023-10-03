@@ -16,14 +16,16 @@
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="@dimen/dimen_200dp"
-            android:maxHeight="@dimen/dimen_200dp"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:scaleType="centerCrop"
+            android:layout_margin="@dimen/dimen_2dp"
+            android:minWidth="@dimen/dimen_120dp"
+            android:minHeight="@dimen/dimen_120dp"
+            android:maxWidth="@dimen/dimen_200dp"
+            android:maxHeight="@dimen/dimen_200dp"
             tools:src="@tools:sample/avatars" />
 
         <RelativeLayout

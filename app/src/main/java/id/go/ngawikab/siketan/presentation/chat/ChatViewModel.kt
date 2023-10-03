@@ -55,7 +55,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         options.transports = arrayOf("websocket")
         options.upgrade = false
 
-        socket = IO.socket("http://192.168.1.45:3001", options)
+        socket = IO.socket("http://192.168.100.50:3001", options)
 //        socket = IO.socket(BuildConfig.BASE_URL)
 
         onOnline = Emitter.Listener { args ->

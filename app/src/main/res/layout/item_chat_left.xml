@@ -6,46 +6,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="6dp"
     android:orientation="vertical"
-    android:gravity="start"
-    android:elevation="4dp"
-    android:background="@drawable/bg_chat_receiver">
+    android:elevation="4dp">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:src="@tools:sample/avatars"
-        android:layout_marginTop="@dimen/dimen_2dp"
-        android:maxHeight="@dimen/dimen_200dp"
-        android:visibility="gone"
-        android:maxWidth="@dimen/dimen_200dp"
-        android:scaleType="centerCrop"/>
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="2dp">
+        android:orientation="vertical"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/bg_chat_receiver">
 
-        <TextView
-            android:id="@+id/tv_message"
+        <ImageView
+            android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Ini pesan dokter"
-            android:textColor="@color/black"
-            android:layout_marginVertical="4dp"
-            android:layout_marginHorizontal="8dp"/>
+            tools:src="@tools:sample/avatars"
+            android:adjustViewBounds="true"
+            android:layout_margin="2dp"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:minWidth="@dimen/dimen_120dp"
+            android:minHeight="@dimen/dimen_120dp"
+            android:maxWidth="@dimen/dimen_200dp"
+            android:maxHeight="@dimen/dimen_200dp"
+            android:layout_marginTop="@dimen/dimen_2dp"/>
 
-        <TextView
-            android:id="@+id/tv_time"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="20:23"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:layout_marginEnd="@dimen/dimen_8dp"
-            android:layout_toEndOf="@id/tv_message"
-            android:layout_below="@id/tv_message"
-            tools:ignore="SmallSp" />
-    </RelativeLayout>
+            android:orientation="horizontal"
+            android:layout_margin="2dp">
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Ini pesan dokter"
+                android:textColor="@color/black"
+                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="20:23"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_toEndOf="@id/tv_message"
+                android:layout_below="@id/tv_message"
+                tools:ignore="SmallSp" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

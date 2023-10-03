@@ -88,6 +88,9 @@ class ChatRoomAdapter(
             tvMessage.text = data.pesan
             tvTime.text = data.waktu?.convertTimestamp()
 
+            if (data.attachment.isNotNull()) debug { "Image Visibility : ${data.attachment}" }
+            else debug { "Image Visibility : GONE" }
+
             img.visibleIf { data.attachment.isNotNull() }
             img.setImageUrl(context, data.attachment.toString())
         }
