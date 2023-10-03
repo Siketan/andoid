@@ -23,6 +23,7 @@ import id.go.ngawikab.siketan.data.chat.model.request.ChatLatestRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatSendRequest
 import id.go.ngawikab.siketan.databinding.ActivityChatRoomBinding
 import id.go.ngawikab.siketan.presentation.chat.adapter.ChatRoomAdapter
+import id.go.ngawikab.siketan.presentation.chat.dialog.ShowImageDialogFragment
 import id.go.ngawikab.siketan.utils.Constant
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
@@ -83,6 +84,10 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
                     returnMode = ReturnMode.GALLERY_ONLY
                 )
             )
+        }
+        chatAdapter.setOnItemClickListener { image ->
+            ShowImageDialogFragment.newInstance(image)
+                .show(supportFragmentManager, ChatRoomActivity::class.java.name)
         }
     }
 

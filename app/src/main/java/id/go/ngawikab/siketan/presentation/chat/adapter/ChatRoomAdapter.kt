@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.isNotNull
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.data.chat.model.response.ChatMessageResponse
@@ -34,6 +35,7 @@ class ChatRoomAdapter(
         private const val RIGHT = 1
     }
 
+
     private val differCallback = object : DiffUtil.ItemCallback<ChatMessageResponse>() {
         override fun areItemsTheSame(
             oldItem: ChatMessageResponse,
@@ -52,6 +54,11 @@ class ChatRoomAdapter(
 
     private val listDiffer = AsyncListDiffer(this, differCallback)
     private var list = ArrayList<ChatMessageResponse>()
+
+    private var listener: ((String) -> Unit)? = null
+    fun setOnItemClickListener(listener: (String) -> Unit){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == LEFT) LeftViewHolder(
@@ -76,15 +83,15 @@ class ChatRoomAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = list[position]
         when (holder) {
-            is LeftViewHolder -> holder.bind(item)
-            is RightViewHolder -> holder.bind(item)
+            is LeftViewHolder -> holder.bind(item, listener)
+            is RightViewHolder -> holder.bind(item, listener)
         }
     }
 
     class RightViewHolder(private val binding: ItemChatRightBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(data: ChatMessageResponse) = with(binding) {
+        fun bind(data: ChatMessageResponse, listener: ((String) -> Unit)? = null) = with(binding) {
             tvMessage.text = data.pesan
             tvTime.text = data.waktu?.convertTimestamp()
 
@@ -93,18 +100,25 @@ class ChatRoomAdapter(
 
             img.visibleIf { data.attachment.isNotNull() }
             img.setImageUrl(context, data.attachment.toString())
+
+            img.onClick {
+                listener?.invoke(data.attachment.toString())
+            }
         }
     }
 
     class LeftViewHolder(private val binding: ItemChatLeftBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(data: ChatMessageResponse) = with(binding) {
+        fun bind(data: ChatMessageResponse, listener: ((String) -> Unit)? = null) = with(binding) {
             tvMessage.text = data.pesan
             tvTime.text = data.waktu?.convertTimestamp()
 
             img.visibleIf { data.attachment.isNotNull() }
             img.setImageUrl(context, data.attachment.toString())
+            img.onClick {
+                listener?.invoke(data.attachment.toString())
+            }
         }
     }
 
