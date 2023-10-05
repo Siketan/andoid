@@ -15,6 +15,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.wahidabd.library.presentation.fragment.BaseFragment
+import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.observerLiveData
@@ -74,7 +75,10 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
             onLoading = {
                 binding.msv.showLoadingState()
             },
-            onFailure = { _, _ -> },
+            onFailure = { _, message ->
+                binding.msv.showDefaultState()
+                showToast(message.toString())
+            },
             onSuccess = {
                 binding.msv.showDefaultState()
                 barChart(it)
