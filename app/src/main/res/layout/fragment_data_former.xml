@@ -49,13 +49,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll"
         app:msv_loadingView="@layout/layout_default_loading"
-        app:msv_viewState="loading">
+        app:msv_viewState="content">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/dimen_16dp"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/dimen_16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,30 +66,32 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart"
                     android:layout_width="match_parent"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_height="360dp"/>
+                    android:layout_height="wrap_content"
+                    android:minHeight="500dp"
+                    android:layout_marginHorizontal="16dp" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"/>
+                    android:layout_marginHorizontal="16dp" />
 
                 <TextView
+                    style="@style/MyText.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Musim tanam seluruh komoditas"
-                    style="@style/MyText.Medium"
-                    android:textSize="14sp"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="22dp"
                     android:gravity="start"
-                    android:layout_marginTop="22dp"/>
+                    android:text="Musim tanam seluruh komoditas"
+                    android:textSize="14sp" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pie_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="360dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="500dp"
                     android:layout_marginHorizontal="@dimen/dimen_16dp"
-                    android:layout_marginTop="@dimen/dimen_12dp"/>
+                    android:layout_marginTop="@dimen/dimen_12dp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -108,10 +110,10 @@
             android:layout_height="match_parent"
             android:layout_below="@id/ll"
             android:clipToPadding="false"
-            android:visibility="invisible"
             android:nestedScrollingEnabled="false"
             android:paddingHorizontal="@dimen/dimen_8dp"
             android:paddingVertical="@dimen/dimen_10dp"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <com.google.android.material.circularreveal.CircularRevealFrameLayout

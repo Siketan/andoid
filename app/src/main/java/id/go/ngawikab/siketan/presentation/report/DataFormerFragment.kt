@@ -27,6 +27,7 @@ import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
+import id.go.ngawikab.siketan.utils.common.Dummy
 import id.go.ngawikab.siketan.utils.navigate
 import id.go.ngawikab.siketan.utils.randomColor
 import org.koin.android.ext.android.inject
@@ -77,7 +78,8 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
             },
             onFailure = { _, message ->
                 binding.msv.showDefaultState()
-                showToast(message.toString())
+                barChart(Dummy.generateChartDummy())
+                pieChart(Dummy.generateChartDummy())
             },
             onSuccess = {
                 binding.msv.showDefaultState()
@@ -158,7 +160,9 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
             horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
             orientation = Legend.LegendOrientation.HORIZONTAL
             setDrawInside(false)
-            xEntrySpace = 7f
+            form = Legend.LegendForm.SQUARE
+            formSize = 9f
+            textSize = 11f
             isWordWrapEnabled = true
         }
 

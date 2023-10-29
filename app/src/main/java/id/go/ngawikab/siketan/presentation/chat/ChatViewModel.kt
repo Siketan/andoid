@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.extensions.debug
+import id.go.ngawikab.siketan.BuildConfig
 import id.go.ngawikab.siketan.data.chat.model.request.ChatJoinRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatLatestPetaniRequest
 import id.go.ngawikab.siketan.data.chat.model.request.ChatLatestRequest
@@ -55,7 +56,7 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         options.transports = arrayOf("websocket")
         options.upgrade = false
 
-        socket = IO.socket("http://192.168.100.50:3001", options)
+        socket = IO.socket(BuildConfig.BASE_URL, options)
 //        socket = IO.socket(BuildConfig.BASE_URL)
 
         onOnline = Emitter.Listener { args ->
@@ -69,9 +70,8 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
         onReceived = Emitter.Listener { args ->
             viewModelScope.launch {
                 val obj = args[0] as JSONObject
+                debug { "New Message -> $obj" }
                 try {
-//                    val id = obj.getString("id")
-//                val attachmentId = obj.getString("attachmentId")
                     val pesan = obj.getString("pesan")
                     val chatId = obj.getString("chatId")
                     val waktu = obj.getString("waktu")
@@ -79,7 +79,6 @@ class ChatViewModel(private val useCase: ChatUseCase) : ViewModel() {
                     val attachment = obj.getString("attachment")
 
                     val data = ChatMessageResponse(
-//                        id = id.toIntOrNull(),
                         pesan = pesan,
                         chatId = chatId.toIntOrNull(),
                         waktu = waktu,

@@ -3,12 +3,12 @@ package id.go.ngawikab.siketan.presentation.chat.adapter
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
@@ -56,7 +56,7 @@ class ChatRoomAdapter(
     private var list = ArrayList<ChatMessageResponse>()
 
     private var listener: ((String) -> Unit)? = null
-    fun setOnItemClickListener(listener: (String) -> Unit){
+    fun setOnItemClickListener(listener: (String) -> Unit) {
         this.listener = listener
     }
 
@@ -95,10 +95,7 @@ class ChatRoomAdapter(
             tvMessage.text = data.pesan
             tvTime.text = data.waktu?.convertTimestamp()
 
-            if (data.attachment.isNotNull()) debug { "Image Visibility : ${data.attachment}" }
-            else debug { "Image Visibility : GONE" }
-
-            img.visibleIf { data.attachment.isNotNull() }
+            img.visibility = if (data.attachment == null) View.GONE else View.VISIBLE
             img.setImageUrl(context, data.attachment.toString())
 
             img.onClick {
@@ -114,7 +111,7 @@ class ChatRoomAdapter(
             tvMessage.text = data.pesan
             tvTime.text = data.waktu?.convertTimestamp()
 
-            img.visibleIf { data.attachment.isNotNull() }
+            img.visibility = if (data.attachment == null) View.GONE else View.VISIBLE
             img.setImageUrl(context, data.attachment.toString())
             img.onClick {
                 listener?.invoke(data.attachment.toString())
