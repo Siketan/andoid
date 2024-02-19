@@ -70,7 +70,7 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
             }
 
             override suspend fun saveCallRequest(data: ProductDataResponse): List<Product> {
-                return data.productPetani.map {
+                return data.data.map {
                     it.toDomain()
                 }
             }

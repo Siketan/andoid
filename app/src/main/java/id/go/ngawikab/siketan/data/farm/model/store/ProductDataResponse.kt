@@ -9,5 +9,5 @@ package id.go.ngawikab.siketan.data.farm.model.store
 
 data class ProductDataResponse(
     val message: String,
-    val productPetani: List<ProductResponse>
+    val data: List<ProductResponse>
 )

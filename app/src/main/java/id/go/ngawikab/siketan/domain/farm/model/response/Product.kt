@@ -1,8 +1,11 @@
 package id.go.ngawikab.siketan.domain.farm.model.response
 
+import com.google.gson.annotations.SerializedName
 import com.wahidabd.library.utils.common.emptyString
+import id.go.ngawikab.siketan.data.farm.model.store.DataPenyuluhResponse
+import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
-import id.go.ngawikab.siketan.data.farm.model.store.ProductUserResponse
+import id.go.ngawikab.siketan.data.farm.model.store.ProductUserAccountResponse
 
 
 /**
@@ -13,8 +16,8 @@ import id.go.ngawikab.siketan.data.farm.model.store.ProductUserResponse
 
 data class Product(
     val createdAt: String? = emptyString(),
-    val dataPerson: ProductUser? = null,
-    val dataPersonId: Int? = 0,
+    val dataAccount: ProductUserAccount? = null,
+    val dataPersonId: String? = emptyString(),
     val deskripsi: String? = emptyString(),
     val fotoTanaman: String? = emptyString(),
     val harga: String? = emptyString(),
@@ -27,35 +30,27 @@ data class Product(
     val updatedAt: String? = emptyString()
 )
 
-data class ProductUser(
-    val NIK: String? = emptyString(),
-    val NIP: String? = emptyString(),
-    val NoWa: String? = emptyString(),
-    val alamat: String? = emptyString(),
+data class ProductUserAccount(
+    val isVerified: Boolean? = true,
+    val noWa: String? = emptyString(),
+//    val dataPetani: DataPetaniResponse? = null,
+    val accountID: String? = emptyString(),
     val createdAt: String? = emptyString(),
-    val desa: String? = emptyString(),
+    val peran: String? = emptyString(),
+    val nama: String? = emptyString(),
+    val pekerjaan: String? = emptyString(),
     val foto: String? = emptyString(),
     val id: Int? = 0,
-    val jurnalKegiatanId: Int? = 0,
-    val kecamatan: String? = emptyString(),
-    val kelompokId: Int? = 0,
-    val laporanTanamId: Int? = 0,
-    val nama: String? = emptyString(),
-    val password: String? = emptyString(),
-    val presesiKehadiranId: Int? = 0,
-    val rattingId: Int? = 0,
-    val responseRatingId: Int? = 0,
-    val riwayatChatId: Int? = 0,
-    val role: String? = emptyString(),
-    val tanamanPetaniId: Int? = 0,
+    val email: String? = emptyString(),
+//    val dataPenyuluh: DataPenyuluhResponse? = null,
     val updatedAt: String? = emptyString()
 )
 
 fun ProductResponse.toDomain(): Product =
     Product(
         createdAt = createdAt,
-        dataPerson = dataPerson?.todDomain(),
-        dataPersonId = dataPersonId,
+        dataAccount = tblAkun?.todDomain(),
+        dataPersonId = accountID,
         deskripsi = deskripsi,
         fotoTanaman = fotoTanaman,
         harga = harga,
@@ -67,20 +62,17 @@ fun ProductResponse.toDomain(): Product =
         updatedAt = updatedAt
     )
 
-fun ProductUserResponse.todDomain(): ProductUser =
-    ProductUser(
-        NIK,
-        NIP,
-        NoWa,
-        alamat,
+fun ProductUserAccountResponse.todDomain(): ProductUserAccount =
+    ProductUserAccount(
+        isVerified,
+        noWa,
+        accountID,
         createdAt,
-        desa,
+        peran,
+        nama,
+        pekerjaan,
         foto,
         id,
-        jurnalKegiatanId,
-        kecamatan,
-        kelompokId,
-        laporanTanamId,
-        nama,
-        password
+        email,
+        updatedAt,
     )
