@@ -1,6 +1,7 @@
 package id.go.ngawikab.siketan.data.farm.remote
 
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
@@ -55,11 +56,12 @@ interface FarmApiClient {
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
 
-    @GET("chart")
+    @GET("tanaman-petani/petani/{id}")
     suspend fun getChart(
-        @Query("jenisPanen") jenisPanen: String,
+        @Path("id") id: Int,
+        @Query("musim") musim: String,
         @Query("jenis") jenis: String
-    ): Response<ChartModel>
+    ): Response<ChartResponse>
 
     @POST("tanaman-petani")
     suspend fun addTanaman(

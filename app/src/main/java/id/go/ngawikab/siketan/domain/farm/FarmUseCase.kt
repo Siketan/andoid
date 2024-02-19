@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.domain.farm
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
@@ -33,7 +34,7 @@ interface FarmUseCase {
     fun getJournal(): Flow<Resource<JournalResponse>>
     fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>>
     fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
-    fun getChart(data: Chartparam): Flow<Resource<ChartModel>>
+    fun getChart(data: Chartparam): Flow<Resource<ChartResponse>>
     fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>>
     fun getTanaman(id: Int): Flow<Resource<TanamanPetaniResponse>>
     fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>

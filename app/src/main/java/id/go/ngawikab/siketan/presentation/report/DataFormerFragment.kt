@@ -21,10 +21,13 @@ import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visibleIf
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.databinding.FragmentDataFormerBinding
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
+import id.go.ngawikab.siketan.utils.ChartKomuditasQuery
+import id.go.ngawikab.siketan.utils.ChartTypeQuery
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.Dummy
@@ -66,7 +69,13 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
     }
 
     override fun initProcess() {
-        viewModel.getChart(dataQuery)
+        val userId = pref.getUser().id
+        val query = Chartparam(
+            userId,
+            ChartTypeQuery.BULANAN,
+            ChartKomuditasQuery.VEGETABLE
+        )
+        viewModel.getChart(query)
     }
 
     override fun initObservers() {
@@ -89,7 +98,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         )
     }
 
-    private fun barChart(data: ChartModel) = with(binding) {
+    private fun barChart(data: ChartResponse) = with(binding) {
         with(barChart) {
             setDrawBarShadow(false)
             setDrawValueAboveBar(true)
@@ -120,10 +129,10 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         barChart.legend.isEnabled = true
 
         val list = ArrayList<BarDataSet>()
-        data.datachart.forEachIndexed { index, model ->
+        data.data?.forEachIndexed { index, model ->
             val value = BarDataSet(
-                listOf(BarEntry(index.toFloat(), model.count.toFloat())),
-                model.label
+                listOf(model?.count?.let { BarEntry(index.toFloat(), it.toFloat()) }),
+                model?.komoditas
             )
 
             value.color = requireContext().randomColor()
@@ -136,9 +145,10 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         barChart.data = dataset
     }
 
-    private fun pieChart(data: ChartModel) = with(binding) {
-        val entries = data.datachart.map {
-            PieEntry(it.count.toFloat(), "${it.label} ${it.tahunPanen}")
+    private fun pieChart(data: ChartResponse) = with(binding) {
+        val entries = data.data?.map {
+            it?.count?.toFloat()
+                ?.let { it1 -> PieEntry(it1, "${it.komoditas} ${it.periodeMusimTanam}") }
         }
 
         // Create the dataset and customize it

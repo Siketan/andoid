@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartDataResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
@@ -26,8 +28,8 @@ import kotlinx.coroutines.flow.onEach
 
 class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
 
-    private val _chart = MutableLiveData<Resource<ChartModel>>()
-    val chart: LiveData<Resource<ChartModel>> get() = _chart
+    private val _chart = MutableLiveData<Resource<ChartResponse>>()
+    val chart: LiveData<Resource<ChartResponse>> get() = _chart
 
     private val _addTanaman = MutableLiveData<Resource<InputTanamanResponse>>()
     val addTanaman: LiveData<Resource<InputTanamanResponse>> get() = _addTanaman

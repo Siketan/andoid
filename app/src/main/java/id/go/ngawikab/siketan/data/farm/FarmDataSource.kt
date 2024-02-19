@@ -7,6 +7,7 @@ import com.wahidabd.library.utils.coroutine.handler.ErrorParses
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.ProductRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
@@ -88,10 +89,11 @@ class FarmDataSource(
             )
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun getChart(data: Chartparam): Flow<Resource<ChartModel>> =
+    override suspend fun getChart(data: Chartparam): Flow<Resource<ChartResponse>> =
         flow {
             enqueue(
-                data.jenisPanen.type,
+                data.id ?: 0,
+                data.musim.type,
                 data.jenis.type,
                 err::convertGenericError,
                 webService::getChart,

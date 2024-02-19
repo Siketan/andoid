@@ -2,6 +2,7 @@ package id.go.ngawikab.siketan.data.farm.remote
 
 import com.wahidabd.library.data.WebApi
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
@@ -51,8 +52,8 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.addPresensi(body)
     }
 
-    override suspend fun getChart(jenisPanen: String, jenis: String): Response<ChartModel> {
-        return api.getChart(jenisPanen, jenis)
+    override suspend fun getChart(id:Int ,musim: String, jenis: String): Response<ChartResponse> {
+        return api.getChart(id,musim, jenis)
     }
 
     override suspend fun addTanaman(body: InputTanamanRequest): Response<InputTanamanResponse> {

@@ -11,6 +11,7 @@ import id.go.ngawikab.siketan.utils.ChartTypeQuery
 
 
 data class Chartparam(
-    val jenisPanen: ChartTypeQuery = ChartTypeQuery.TAHUNAN,
+    val id: Int? = 0,
+    val musim: ChartTypeQuery = ChartTypeQuery.TAHUNAN,
     val jenis: ChartKomuditasQuery = ChartKomuditasQuery.FRUIT
 )

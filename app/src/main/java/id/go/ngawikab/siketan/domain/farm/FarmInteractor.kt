@@ -5,6 +5,7 @@ import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import id.go.ngawikab.siketan.data.farm.FarmRepository
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
@@ -127,13 +128,13 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
         }.asFlow()
     }
 
-    override fun getChart(data: Chartparam): Flow<Resource<ChartModel>> {
-        return object : InternetBoundResource<ChartModel, ChartModel>() {
-            override suspend fun createCall(): Flow<Resource<ChartModel>> {
+    override fun getChart(data: Chartparam): Flow<Resource<ChartResponse>> {
+        return object : InternetBoundResource<ChartResponse, ChartResponse>() {
+            override suspend fun createCall(): Flow<Resource<ChartResponse>> {
                 return repository.getChart(data)
             }
 
-            override suspend fun saveCallRequest(data: ChartModel): ChartModel {
+            override suspend fun saveCallRequest(data: ChartResponse): ChartResponse {
                 return data
             }
 

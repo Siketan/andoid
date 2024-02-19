@@ -5,6 +5,7 @@ import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.ProductRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
@@ -36,7 +37,7 @@ interface FarmRepository : BaseRepository {
     suspend fun getJournal(): Flow<Resource<JournalResponse>>
     suspend fun addJournal(data: JournalAddRequest): Flow<Resource<GenericAddResponse>>
     suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
-    suspend fun getChart(data: Chartparam): Flow<Resource<ChartModel>>
+    suspend fun getChart(data: Chartparam): Flow<Resource<ChartResponse>>
     suspend fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>>
     suspend fun getTanaman(id: Int): Flow<Resource<TanamanPetaniResponse>>
     suspend fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
