@@ -27,7 +27,7 @@ data class ProductRequest(
 ) {
     fun toBody(): MultipartBody =
         MultipartBody.Builder().setType(MultipartBody.FORM).apply {
-            addFormDataPart("NIK", nik.toString())
+            addFormDataPart("nik", nik.toString())
             addFormDataPart("profesiPenjual", profesiPenjual.toString())
             addFormDataPart("namaProducts", namaProducts.toString())
             addFormDataPart("stok", stok.toString())
