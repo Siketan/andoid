@@ -30,7 +30,14 @@
         android:id="@+id/announcementFragment"
         android:name="id.go.ngawikab.siketan.presentation.announcement.AnnouncementFragment"
         android:label="fragment_announcement"
-        tools:layout="@layout/fragment_announcement" />
+        tools:layout="@layout/fragment_announcement" >
+        <action
+            android:id="@+id/action_announcementFragment_to_announcementDetailFragment"
+            app:destination="@id/announcementDetailFragment" />
+        <action
+            android:id="@+id/action_announcementFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/journalFragment"
         android:name="id.go.ngawikab.siketan.presentation.journal.JournalFragment"
@@ -118,5 +125,23 @@
         <argument
             android:name="id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementDetailFragment"
+        android:name="id.go.ngawikab.siketan.presentation.announcement.AnnouncementDetailFragment"
+        android:label="fragment_announcement_detail"
+        tools:layout="@layout/fragment_announcement_detail" >
+        <argument
+            android:name="info"
+            app:argType="id.go.ngawikab.siketan.domain.farm.model.response.InfoTani" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="id.go.ngawikab.siketan.presentation.announcement.EventDetailFragment"
+        android:label="fragment_event_detail"
+        tools:layout="@layout/fragment_event_detail" >
+        <argument
+            android:name="event"
+            app:argType="id.go.ngawikab.siketan.domain.farm.model.response.EventTani" />
     </fragment>
 </navigation>

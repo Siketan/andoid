@@ -9,7 +9,10 @@ import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
+import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentAnnouncementBinding
+import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
+import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import id.go.ngawikab.siketan.presentation.announcement.adapter.AnnouncementAdapter
 import id.go.ngawikab.siketan.presentation.announcement.adapter.EventAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,8 +20,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
 
     private val viewModel: AnnouncementViewModel by viewModel()
-    private val mAdapter by lazy { AnnouncementAdapter(requireContext()) }
-    private val eventAdapter by lazy { EventAdapter(requireContext()) }
+    private val mAdapter by lazy { AnnouncementAdapter(requireContext(),{
+        setOnClickDetailInfo(it)
+    }) }
+    private val eventAdapter by lazy { EventAdapter(requireContext(),{
+        setOnClickDetailEvent(it)
+    }) }
 
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
@@ -98,6 +105,15 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
                 }
             )
         }
+    }
+
+    private fun setOnClickDetailEvent(data: EventTani){
+        findNavController().navigate(AnnouncementFragmentDirections.actionAnnouncementFragmentToEventDetailFragment(data))
+    }
+
+    private fun setOnClickDetailInfo(data: InfoTani){
+        findNavController().navigate(AnnouncementFragmentDirections.actionAnnouncementFragmentToAnnouncementDetailFragment(data))
+
     }
 
 }

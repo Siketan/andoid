@@ -21,6 +21,7 @@ import id.go.ngawikab.siketan.utils.dateFormat
 
 class EventAdapter(
     private val context: Context,
+    private val onClick:(EventTani)->Unit,
     items: ArrayList<EventTani> = arrayListOf()
 ) : BaseAsyncRecyclerAdapter<EventTani, EventAdapter.EventViewHolder>(items) {
 
@@ -53,6 +54,10 @@ class EventAdapter(
                 data.fotoKegiatan.toString(),
                 placeholder = R.drawable.ic_image_placeholder
             )
+            tvToMore.setOnClickListener {
+                onClick(data)
+            }
+
         }
     }
 }

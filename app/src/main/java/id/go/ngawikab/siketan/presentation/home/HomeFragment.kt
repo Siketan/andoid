@@ -2,6 +2,7 @@ package id.go.ngawikab.siketan.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showToast
@@ -39,7 +40,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initAction() {
         with(binding) {
             fabChat.onClick {
-                val user = prefs.getUser().role
+//                val user = prefs.getUser().role
+                /* For Testing Inquires*/
+                val user = UserRole.PETANI.role
+                Toast.makeText(requireContext(), user,Toast.LENGTH_SHORT).show()
                 if (user == UserRole.PETANI.role) ChatRoomActivity.start(requireContext())
                 else if (user == UserRole.PENYULUH.role) ChatActivity.start(requireContext())
             }

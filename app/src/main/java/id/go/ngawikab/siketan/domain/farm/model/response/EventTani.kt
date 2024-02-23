@@ -1,7 +1,9 @@
 package id.go.ngawikab.siketan.domain.farm.model.response
 
+import android.os.Parcelable
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
+import kotlinx.parcelize.Parcelize
 
 
 /**
@@ -9,7 +11,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
  * Github github.com/wahidabd.
  */
 
-
+@Parcelize
 data class EventTani(
     val createdAt: String? = emptyString(),
     val createdBy: String? = emptyString(),
@@ -22,7 +24,7 @@ data class EventTani(
     val tempat: String? = emptyString(),
     val updatedAt: String? = emptyString(),
     val waktuAcara: String? = emptyString()
-)
+):Parcelable
 
 fun EventTaniResponse.toDomain(): EventTani =
     EventTani(
