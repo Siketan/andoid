@@ -4,15 +4,20 @@ import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import id.go.ngawikab.siketan.data.auth.AuthRepository
 import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
+import id.go.ngawikab.siketan.data.auth.model.FarmerGroup
+import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
+import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.auth.model.AuthResponse
 import id.go.ngawikab.siketan.domain.auth.model.LoginRequest
+import id.go.ngawikab.siketan.domain.auth.model.OpsiPenyuluh
 import id.go.ngawikab.siketan.domain.auth.model.RegisterRequest
 import id.go.ngawikab.siketan.domain.auth.model.toData
 import id.go.ngawikab.siketan.domain.auth.model.toDomain
+import id.go.ngawikab.siketan.domain.auth.model.todDomain
 import kotlinx.coroutines.flow.Flow
 
 
@@ -80,6 +85,32 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
             override suspend fun saveCallRequest(data: GenericAddResponse): GenericAddResponse {
                 return data
             }
+        }.asFlow()
+
+    override suspend fun penyuluh(): Flow<Resource<List<OpsiPenyuluh>>> =
+        object : InternetBoundResource<List<OpsiPenyuluh>, OpsiPenyuluhResponse>() {
+            override suspend fun createCall(): Flow<Resource<OpsiPenyuluhResponse>> {
+                return repository.getPenyuluh()
+            }
+
+            override suspend fun saveCallRequest(data: OpsiPenyuluhResponse): List<OpsiPenyuluh> {
+                return data.dataDaftarPenyuluh.map {
+                    it.todDomain()
+                }
+            }
+
+        }.asFlow()
+
+    override suspend fun farmerGroups(desa:String): Flow<Resource<List<FarmerGroup>>> =
+        object : InternetBoundResource<List<FarmerGroup>, FarmerGroupsResponse>() {
+            override suspend fun createCall(): Flow<Resource<FarmerGroupsResponse>> {
+                return repository.getFarmerGroups(desa)
+            }
+
+            override suspend fun saveCallRequest(data: FarmerGroupsResponse): List<FarmerGroup> {
+                return data.kelompokTani
+            }
+
         }.asFlow()
 
 }

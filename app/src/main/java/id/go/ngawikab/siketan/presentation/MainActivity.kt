@@ -2,6 +2,7 @@ package id.go.ngawikab.siketan.presentation
 
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
 import com.wahidabd.library.presentation.activity.BaseActivity
 import com.wahidabd.library.utils.permission.requestPermission
 import com.wahidabd.library.utils.permission.showPermissionDialog
@@ -22,7 +23,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
-    override fun initUI() {}
+    override fun initUI() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
 
     override fun initAction() {}
 

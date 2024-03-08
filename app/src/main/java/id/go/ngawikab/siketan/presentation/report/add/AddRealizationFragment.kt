@@ -93,17 +93,17 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
                 val produksiPanen = tilProduksiPanen.edittext
 
                 val data = InputTanamanRequest(
-                    dataPersonId = id!!,
-                    statusLahan = statusLahan,
+                    fk_petaniId = id!!,
+                    statusKepemilikanLahan = statusLahan,
                     luasLahan = luasLahan,
-                    jenisPanen = jenisPanen,
-                    jenis = jenisTanaman,
+                    jenis = jenisPanen,
                     kategori = kategori,
                     komoditas = komoditas,
-                    musimTanam = musimTanam.toInt(),
-                    tanggalTanam = startDate.toString(),
-                    perkiraanPanen = endDate.toString(),
-                    perkiraanHasilPanen = produksiPanen.toInt(),
+                    periodeMusimTanam=jenisTanaman,
+                    periodeBulanTanam = startDate.toString(),
+                    prakiraanBulanPanen = endDate.toString(),
+                    prakiraanProduksiPanen = produksiPanen.toInt(),
+                    prakiraanLuasPanen = produksiPanen.toInt(),
                 )
 
                 viewModel.addTanaman(data)

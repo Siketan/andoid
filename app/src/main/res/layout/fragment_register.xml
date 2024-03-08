@@ -7,6 +7,7 @@
     tools:context="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterFragment">
 
     <View
+        android:id="@+id/img_bg_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/img_bg_login" />
@@ -83,7 +84,7 @@
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_rounded_secondary_4"
-            android:text="@string/label_register2"
+            android:text="@string/label_selanjutnya"
             android:textAllCaps="false"
             android:textSize="@dimen/text_size_12sp"
             android:layout_marginBottom="30dp"/>

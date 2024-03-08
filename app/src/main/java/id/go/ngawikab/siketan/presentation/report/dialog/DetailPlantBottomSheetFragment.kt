@@ -6,20 +6,19 @@ import android.view.ViewGroup
 import com.wahidabd.library.presentation.fragment.BaseBottomSheetDialogFragment
 import com.wahidabd.library.utils.exts.onClick
 import id.go.ngawikab.siketan.R
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniDataResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.databinding.FragmentDetailPlantBottomSheetBinding
 
 class DetailPlantBottomSheetFragment : BaseBottomSheetDialogFragment<FragmentDetailPlantBottomSheetBinding>() {
 
-
-    private var data = TanamanPetaniDataResponse()
+    private var data = PlantFarmerData()
     private var onButtonClicked: (Int) -> Unit = {}
     private var onDetailClicked: (Int) -> Unit = {}
 
     companion object {
         private const val KEY_DATA = "key_data"
         fun newInstance(
-            data: TanamanPetaniDataResponse,
+            data: PlantFarmerData,
             onButtonClicked: (Int) -> Unit,
             onDetailClicked: (Int) -> Unit
         ): DetailPlantBottomSheetFragment {
@@ -50,14 +49,14 @@ class DetailPlantBottomSheetFragment : BaseBottomSheetDialogFragment<FragmentDet
             tvTitle.text = data.komoditas
             tvKategori.text = " : ${data.kategori}"
             tvJenisTanaman.text = " : ${(data.jenis ?: "-")}"
-            tvJenisPanen.text = " : ${(data.jenisPanen ?: "-")}"
-            tvMusimTanam.text = " : ${(data.musimTanam ?: "-")}"
-            tvTanggalTanam.text = " : ${(data.tanggalTanam ?: "-")}"
-            tvPrakiraanPanen.text = " : ${(data.perkiraanPanen ?: "-")}"
-            tvStatusLahan.text = " : ${(data.statusLahan ?: "-")}"
+            tvJenisPanen.text = " : ${(data.jenis ?: "-")}"
+            tvMusimTanam.text = " : ${(data.periodeMusimTanam ?: "-")}"
+            tvTanggalTanam.text = " : ${(data.periodeBulanTanam ?: "-")}"
+            tvPrakiraanPanen.text = " : ${(data.prakiraanBulanPanen ?: "-")}"
+            tvStatusLahan.text = " : ${(data.statusKepemilikanLahan ?: "-")}"
             tvLuasLahan.text = " : ${(data.luasLahan ?: "-")}"
-            tvPrakiraanHasilPanen.text = " : ${(data.perkiraanHasilPanen ?: "-")}"
-            tvRealisasiHasilPanen.text = " : ${(data.realisasiHasilPanen ?: "-")}"
+            tvPrakiraanHasilPanen.text = " : ${(data.prakiraanProduksiPanen ?: "-")}"
+            tvRealisasiHasilPanen.text = " : ${(data.prakiraanProduksiPanen ?: "-")}"
         }
     }
 

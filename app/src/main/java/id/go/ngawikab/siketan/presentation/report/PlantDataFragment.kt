@@ -7,7 +7,7 @@ import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import id.go.ngawikab.siketan.databinding.FragmentPlantDataBinding
 import go.ngawikab.siketan.presentation.report.adapter.PlantDataFormerAdapter
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniDataResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.presentation.report.dialog.DetailPlantBottomSheetFragment
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
@@ -47,7 +47,7 @@ class PlantDataFragment : SiketanBaseFragment<FragmentPlantDataBinding>() {
     }
 
     override fun initProcess() {
-        viewModel.getTanaman(pref.getUser().id!!)
+        viewModel.getTanaman(pref.getUser().id!!,1,10)
     }
 
     override fun initObservers() {
@@ -67,13 +67,13 @@ class PlantDataFragment : SiketanBaseFragment<FragmentPlantDataBinding>() {
                 },
                 onSuccess = {
                     hideLoading()
-                    plantAdapter.setData = it.tani.tanamanPetanis
+                    plantAdapter.setData = it.data
                 }
             )
         }
     }
 
-    private fun showDetail(data: TanamanPetaniDataResponse) {
+    private fun showDetail(data: PlantFarmerData) {
         DetailPlantBottomSheetFragment.newInstance(
             data,
             onButtonClicked = {

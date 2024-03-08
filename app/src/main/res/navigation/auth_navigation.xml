@@ -39,10 +39,24 @@
         android:id="@+id/registerFragment"
         android:name="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_registerDataFragment"
+            app:destination="@id/registerDataFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginPenyuluhFragment"
         android:name="id.go.ngawikab.siketan.presentation.auth.authentication.LoginPenyuluhFragment"
         android:label="fragment_login_penyuluh"
         tools:layout="@layout/fragment_login_penyuluh" />
+    <fragment
+        android:id="@+id/registerDataFragment"
+        android:name="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterDataFragment"
+        android:label="fragment_register_data"
+        tools:layout="@layout/fragment_register_data" >
+        <argument
+            android:name="baseData"
+            app:argType="id.go.ngawikab.siketan.domain.auth.model.RegisterBaseData"
+            app:nullable="true" />
+    </fragment>
 </navigation>

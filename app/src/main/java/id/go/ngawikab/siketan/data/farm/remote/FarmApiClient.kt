@@ -6,12 +6,11 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -63,15 +62,17 @@ interface FarmApiClient {
         @Query("jenis") jenis: String
     ): Response<ChartResponse>
 
-    @POST("tanaman-petani")
+    @GET("tanaman-petani/petani/{id}")
+    suspend fun getTanaman(
+        @Path("id") id: Int,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
+    ): Response<PlantFarmerResponse>
+
+    @POST("list-tanaman")
     suspend fun addTanaman(
         @Body body: InputTanamanRequest
     ): Response<InputTanamanResponse>
-
-    @GET("tanaman-petani/{id}")
-    suspend fun getTanaman(
-        @Path("id") id: Int
-    ): Response<TanamanPetaniResponse>
 
     @POST("laporan-tanam")
     suspend fun addLaporan(

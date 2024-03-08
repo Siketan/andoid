@@ -10,8 +10,15 @@ import com.google.gson.annotations.SerializedName
 
 data class RegisterDataRequest(
     @SerializedName("NIK")
-    val nik: String,
+    val NIK: String,
+    @SerializedName("NoWa")
     val no_wa: String,
     val nama: String,
     val password: String,
+    val alamat:String,
+    val desa:String,
+    val kecamatan:String,
+    val gapoktan:String,
+    val penyuluh:Int,
+    val namaKelompok:String
 )

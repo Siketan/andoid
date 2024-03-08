@@ -2,10 +2,12 @@ package id.go.ngawikab.siketan.data.auth.remote
 
 import com.wahidabd.library.data.WebApi
 import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
+import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginDataRequest
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
+import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -38,4 +40,13 @@ class AuthApi (private val api: AuthApiClient) : WebApi, AuthApiClient {
     override suspend fun editUser(id: Int, body: MultipartBody): Response<GenericAddResponse> {
         return api.editUser(id, body)
     }
+
+    override suspend fun getPenyuluh(): Response<OpsiPenyuluhResponse> {
+        return api.getPenyuluh()
+    }
+
+    override suspend fun getKelompokTani(desa: String): Response<FarmerGroupsResponse> {
+        return api.getKelompokTani(desa)
+    }
+
 }

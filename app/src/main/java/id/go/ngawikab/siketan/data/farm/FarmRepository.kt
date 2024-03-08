@@ -10,7 +10,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
@@ -39,7 +39,7 @@ interface FarmRepository : BaseRepository {
     suspend fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
     suspend fun getChart(data: Chartparam): Flow<Resource<ChartResponse>>
     suspend fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>>
-    suspend fun getTanaman(id: Int): Flow<Resource<TanamanPetaniResponse>>
+    suspend fun getTanaman(id: Int,page:Int,limit:Int): Flow<Resource<PlantFarmerResponse>>
     suspend fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
     suspend fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
 }

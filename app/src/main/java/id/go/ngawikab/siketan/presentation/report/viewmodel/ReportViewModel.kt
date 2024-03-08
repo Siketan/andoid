@@ -7,14 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
-import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,8 +32,8 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
     private val _addTanaman = MutableLiveData<Resource<InputTanamanResponse>>()
     val addTanaman: LiveData<Resource<InputTanamanResponse>> get() = _addTanaman
 
-    private val _getTanaman = MutableLiveData<Resource<TanamanPetaniResponse>>()
-    val getTanaman: LiveData<Resource<TanamanPetaniResponse>> get() = _getTanaman
+    private val _getTanaman = MutableLiveData<Resource<PlantFarmerResponse>>()
+    val getTanaman: LiveData<Resource<PlantFarmerResponse>> get() = _getTanaman
 
     private val _addLaporan = MutableLiveData<Resource<GenericAddResponse>>()
     val addLaporan: LiveData<Resource<GenericAddResponse>> get() = _addLaporan
@@ -56,8 +54,8 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
             .launchIn(viewModelScope)
     }
 
-    fun getTanaman(id: Int){
-        useCase.getTanaman(id)
+    fun getTanaman(id: Int,page:Int,limit:Int){
+        useCase.getTanaman(id,page,limit)
             .onEach { _getTanaman.value = it }
             .launchIn(viewModelScope)
     }

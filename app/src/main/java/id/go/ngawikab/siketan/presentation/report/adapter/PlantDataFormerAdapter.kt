@@ -10,7 +10,7 @@ import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.R
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniDataResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.databinding.ItemTanamanBinding
 
 
@@ -22,10 +22,10 @@ import id.go.ngawikab.siketan.databinding.ItemTanamanBinding
 
 class PlantDataFormerAdapter(
     private val context: Context,
-    items: ArrayList<TanamanPetaniDataResponse> = arrayListOf(),
-    private val onItemClick: (TanamanPetaniDataResponse) -> Unit,
-    private val onMoreClick: (TanamanPetaniDataResponse) -> Unit
-): BaseAsyncRecyclerAdapter<TanamanPetaniDataResponse, PlantDataFormerAdapter.PlantDataFormerViewHolder>(items){
+    items: ArrayList<PlantFarmerData> = arrayListOf(),
+    private val onItemClick: (PlantFarmerData) -> Unit,
+    private val onMoreClick: (PlantFarmerData) -> Unit
+): BaseAsyncRecyclerAdapter<PlantFarmerData, PlantDataFormerAdapter.PlantDataFormerViewHolder>(items){
     override fun getViewBinding(parent: ViewGroup, viewType: Int): ViewBinding {
         return ItemTanamanBinding.inflate(LayoutInflater.from(context), parent, false)
     }
@@ -37,15 +37,15 @@ class PlantDataFormerAdapter(
         return PlantDataFormerViewHolder(getViewBinding(parent, viewType))
     }
 
-    inner class PlantDataFormerViewHolder(binding: ViewBinding): BaseAsyncItemViewHolder<TanamanPetaniDataResponse>(binding){
-        override fun bind(data: TanamanPetaniDataResponse) = with(binding as ItemTanamanBinding) {
-            tvJenisPanen.visibleIf { data.jenisPanen.isNotNull() }
+    inner class PlantDataFormerViewHolder(binding: ViewBinding): BaseAsyncItemViewHolder<PlantFarmerData>(binding){
+        override fun bind(data: PlantFarmerData) = with(binding as ItemTanamanBinding) {
+            tvJenisPanen.visibleIf { data.jenis.isNotNull() }
 
             tvName.text = data.komoditas
             tvKategori.text = data.kategori
             tvLuasLahan.text = context.getString(R.string.format_luas_lahan, data.luasLahan)
-            tvBulanTanam.text = context.getString(R.string.format_tanggal, data.perkiraanPanen)
-            tvJenisPanen.text = context.getString(R.string.format_jenis_panen, data.jenisPanen)
+            tvBulanTanam.text = context.getString(R.string.format_tanggal, data.prakiraanBulanPanen)
+            tvJenisPanen.text = context.getString(R.string.format_jenis_panen, data.jenis)
 
             cardRoot.onClick { onItemClick.invoke(data) }
         }

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="id.go.ngawikab.siketan.presentation.auth.authentication.RegisterDataFragment">
+
+    <View
+        android:id="@+id/img_bg_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_bg_login" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/bg_rounded_black_opacity_10"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
+            android:id="@+id/edtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:hintLabel="@string/hint_alamat"
+            app:iconLabel="@drawable/ic_person"
+            app:input_type="email" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilKecamatan"
+            app:boxStrokeColor="@color/white"
+            android:textColorHint="@color/white"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:hint="Kecamatan"
+            app:endIconDrawable="@drawable/ic_arrow_down"
+            app:endIconTint="@color/primary"
+            app:hintTextColor="@color/white">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/kecamatan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:popupBackground="@color/white"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDesa"
+            android:textColorHint="@color/white"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:hint="Nama Desa"
+            app:boxStrokeColor="@color/primary"
+            app:endIconDrawable="@drawable/ic_arrow_down"
+            app:endIconTint="@color/primary"
+            app:hintTextColor="@color/primary">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/desa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:popupBackground="@color/white"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPenyuluh"
+            style="@style/autoCompleteTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:hint="Penyuluh"
+            app:boxStrokeColor="@color/primary"
+            app:endIconDrawable="@drawable/ic_arrow_down"
+            app:endIconTint="@color/primary"
+            android:textColorHint="@color/white"
+            app:hintTextColor="@color/primary">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/penyuluh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:popupBackground="@color/white"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <id.go.ngawikab.siketan.utils.components.FormAuthentication
+            android:id="@+id/edtGapoktan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:hintLabel="Gapoktan"
+            app:iconLabel="@drawable/ic_person"
+            app:input_type="number" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilKelompokTani"
+            style="@style/autoCompleteTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginHorizontal="28dp"
+            android:textColorHint="@color/white"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:hint="Kelompok Tani"
+            app:boxStrokeColor="@color/primary"
+            app:endIconDrawable="@drawable/ic_arrow_down"
+            app:endIconTint="@color/primary"
+            app:hintTextColor="@color/primary">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/kelompokTani"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:popupBackground="@color/white"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnlogin"
+            style="@style/MyText.Medium.White"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_rounded_secondary_4"
+            android:text="@string/label_register2"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_12sp"
+            android:layout_marginBottom="30dp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/MyText.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:text="Data Petani"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/ll"
+        app:layout_constraintStart_toStartOf="@id/ll"
+        app:layout_constraintTop_toTopOf="@id/ll" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
