@@ -48,12 +48,7 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>() {
     }
     private fun subscribe(){
         lifecycleScope.launch {
-            // repeatOnLifecycle launches the block in a new coroutine every time the
-            // lifecycle is in the STARTED state and cancels it when it's STOPPED.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Start listening for values.
-                // This happens when lifecycle is STARTED and stops
-                // collecting when the lifecycle is STOPPED
                 viewModel.products.collectLatest {
                     pagingAdapter.submitData(it)
                 }

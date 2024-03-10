@@ -65,15 +65,15 @@ interface FarmApiClient {
     @GET("tanaman-petani/petani/{id}")
     suspend fun getChart(
         @Path("id") id: Int,
-        @Query("musim") musim: String,
-        @Query("jenis") jenis: String
+        @Query("musim") musim: String?,
+        @Query("jenis") jenis: String?
     ): Response<ChartResponse>
 
     @GET("tanaman-petani/petani/{id}")
     suspend fun getTanaman(
         @Path("id") id: Int,
-        @Query("page") page: Int,
-        @Query("limit") limit: Int
+        @Query("page") page: Int?,
+        @Query("limit") limit: Int?=20
     ): Response<PlantFarmerResponse>
 
     @POST("list-tanaman")

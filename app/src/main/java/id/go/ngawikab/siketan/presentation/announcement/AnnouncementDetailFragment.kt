@@ -10,6 +10,7 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentAnnouncementDetailBinding
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
+import id.go.ngawikab.siketan.utils.dateFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AnnouncementDetailFragment : BaseFragment<FragmentAnnouncementDetailBinding>() {
@@ -34,10 +35,10 @@ class AnnouncementDetailFragment : BaseFragment<FragmentAnnouncementDetailBindin
                 placeholder = R.drawable.ic_image_placeholder
             )
             tvCategory.text = data.kategori
-            tvDate.text = data.tanggal
+            tvDate.text = data.tanggal?.dateFormat()
             tvTitle.text = data.judul
             tvDesc.text = data.isi
-            tvAuthor.text = data.createdAt
+            tvAuthor.text = "Dibuat oleh: " + data.createdBy
         }
 
     }

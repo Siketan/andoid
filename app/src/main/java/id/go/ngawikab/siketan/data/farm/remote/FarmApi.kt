@@ -57,7 +57,7 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.addPresensi(body)
     }
 
-    override suspend fun getChart(id:Int ,musim: String, jenis: String): Response<ChartResponse> {
+    override suspend fun getChart(id:Int ,musim: String?, jenis: String?): Response<ChartResponse> {
         return api.getChart(id,musim, jenis)
     }
 
@@ -65,8 +65,8 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.addTanaman(body)
     }
 
-    override suspend fun getTanaman(id: Int, page:Int,limit:Int): Response<PlantFarmerResponse> {
-        return api.getTanaman(id,page,limit)
+    override suspend fun getTanaman(id: Int, page:Int?,limit: Int?): Response<PlantFarmerResponse> {
+        return api.getTanaman(id,page)
     }
 
     override suspend fun addLaporan(body: MultipartBody): Response<GenericAddResponse> {

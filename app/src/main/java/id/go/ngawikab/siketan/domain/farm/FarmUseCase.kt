@@ -6,6 +6,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
@@ -38,7 +39,7 @@ interface FarmUseCase {
     fun addPresensi(data: PresensiRequest): Flow<Resource<GenericAddResponse>>
     fun getChart(data: Chartparam): Flow<Resource<ChartResponse>>
     fun addTanaman(data: InputTanamanRequest): Flow<Resource<InputTanamanResponse>>
-    fun getTanaman(id: Int,page:Int,limit:Int): Flow<Resource<PlantFarmerResponse>>
+    fun getTanaman(id: Int): Flow<PagingData<PlantFarmerData>>
     fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
     fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
     fun getProductsbyPaging():Flow<PagingData<ProductResponse>>

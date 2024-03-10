@@ -10,6 +10,7 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentEventDetailBinding
 import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
+import id.go.ngawikab.siketan.utils.dateFormat
 
 class EventDetailFragment : BaseFragment<FragmentEventDetailBinding>() {
 
@@ -33,7 +34,7 @@ class EventDetailFragment : BaseFragment<FragmentEventDetailBinding>() {
             tvTitle.text = data.namaKegiatan
             tvDesc.text = data.isi
             tvAuthor.text = data.peserta
-            tvPlace.text= "${data.tempat},"
+            tvPlace.text= data.tempat
             tvTime.text = data.waktuAcara
         }
 

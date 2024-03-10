@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -32,9 +36,6 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
     private val _addTanaman = MutableLiveData<Resource<InputTanamanResponse>>()
     val addTanaman: LiveData<Resource<InputTanamanResponse>> get() = _addTanaman
 
-    private val _getTanaman = MutableLiveData<Resource<PlantFarmerResponse>>()
-    val getTanaman: LiveData<Resource<PlantFarmerResponse>> get() = _getTanaman
-
     private val _addLaporan = MutableLiveData<Resource<GenericAddResponse>>()
     val addLaporan: LiveData<Resource<GenericAddResponse>> get() = _addLaporan
 
@@ -47,6 +48,10 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
             .launchIn(viewModelScope)
     }
 
+  fun tanaman(id:Int) : Flow<PagingData<PlantFarmerData>> {
+      return useCase.getTanaman(id).distinctUntilChanged()
+  }
+
 
     fun addTanaman(data: InputTanamanRequest){
         useCase.addTanaman(data)
@@ -54,11 +59,6 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
             .launchIn(viewModelScope)
     }
 
-    fun getTanaman(id: Int,page:Int,limit:Int){
-        useCase.getTanaman(id,page,limit)
-            .onEach { _getTanaman.value = it }
-            .launchIn(viewModelScope)
-    }
 
     fun addLaporan(data: LaporanTanamanRequest){
         useCase.addLaporan(data)

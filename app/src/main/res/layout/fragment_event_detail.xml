@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_marginStart="-10dp"
+            android:layout_marginEnd="-10dp"
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +28,7 @@
 
             <TextView
                 style="@style/MyText.Bold"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
                 android:layout_weight="1"
@@ -90,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_4dp"
-                    android:text="Fikri Sandi" />
+                    android:text="Sinen" />
 
                 <TextView
                     android:id="@+id/tvTime"

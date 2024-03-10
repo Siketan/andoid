@@ -11,6 +11,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
@@ -155,17 +156,8 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
         }.asFlow()
     }
 
-    override fun getTanaman(id: Int,page:Int,limit:Int): Flow<Resource<PlantFarmerResponse>> {
-        return object : InternetBoundResource<PlantFarmerResponse, PlantFarmerResponse>(){
-            override suspend fun createCall(): Flow<Resource<PlantFarmerResponse>> {
-                return repository.getTanaman(id,page,limit)
-            }
-
-            override suspend fun saveCallRequest(data: PlantFarmerResponse): PlantFarmerResponse {
-                return data
-            }
-
-        }.asFlow()
+    override fun getTanaman(id: Int): Flow<PagingData<PlantFarmerData>> {
+        return repository.getTanaman(id)
     }
 
     override fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>> {

@@ -32,21 +32,8 @@ class StoreViewModel(
 
     val products = useCase.getProductsbyPaging().distinctUntilChanged()
 
-    private val _productsPaging = MutableLiveData<PagingData<ProductResponse>>()
-    val productsPaging: LiveData<PagingData<ProductResponse>> get() = _productsPaging
-
     private val _addProduct = MutableLiveData<Resource<GenericAddResponse>>()
     val addProduct: LiveData<Resource<GenericAddResponse>> get() = _addProduct
-
-    init {
-        getProductsPaging()
-    }
-
-    fun getProductsPaging() {
-        useCase.getProductsbyPaging()
-            .onEach { _productsPaging.value = it }
-            .launchIn(viewModelScope)
-    }
 
     fun addProduct(data: ProductParam) {
         useCase.addProduct(data)

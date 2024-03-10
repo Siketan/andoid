@@ -72,8 +72,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         val userId = pref.getUser().id
         val query = Chartparam(
             userId,
-            ChartTypeQuery.BULANAN,
-            ChartKomuditasQuery.VEGETABLE
         )
         viewModel.getChart(query)
     }

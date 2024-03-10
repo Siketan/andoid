@@ -15,6 +15,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
@@ -114,21 +115,7 @@ class FarmDataSource(
             )
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun getTanaman(
-        id: Int,
-        page: Int,
-        limit: Int
-    ): Flow<Resource<PlantFarmerResponse>> =
-        flow {
-            enqueue(
-                id,
-                page,
-                limit,
-                err::convertGenericError,
-                webService::getTanaman,
-                onEmit = { emit(it) }
-            )
-        }.flowOn(Dispatchers.IO)
+
 
 
     override suspend fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>> =
@@ -160,5 +147,14 @@ class FarmDataSource(
             ), pagingSourceFactory = {StorePagingSource(webService)}
         ).flow
 
+    override fun getTanaman(
+        id: Int,
+    ): Flow<PagingData<PlantFarmerData>> =
+        Pager(
+             config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {TanamanPagingSource(webService,id)}
+        ).flow
 
 }
