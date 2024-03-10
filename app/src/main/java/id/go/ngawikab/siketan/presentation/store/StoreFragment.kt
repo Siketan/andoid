@@ -2,24 +2,27 @@ package id.go.ngawikab.siketan.presentation.store
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import com.wahidabd.library.presentation.fragment.BaseFragment
-import com.wahidabd.library.utils.common.showSnackbarMessage
-import com.wahidabd.library.utils.exts.gone
-import com.wahidabd.library.utils.exts.observerLiveData
-import com.wahidabd.library.utils.exts.onClick
-import com.wahidabd.library.utils.exts.visible
 import id.go.ngawikab.siketan.databinding.FragmentStoreBinding
 import id.go.ngawikab.siketan.presentation.store.viewmodel.StoreViewModel
 import id.go.ngawikab.siketan.utils.navigate
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.wahidabd.library.utils.exts.onClick as onClick1
 
 class StoreFragment : BaseFragment<FragmentStoreBinding>() {
 
     private val viewModel: StoreViewModel by viewModel()
-    private val storeAdapter by lazy {
-        StoreAdapter(requireContext())
-    }
+    private lateinit var pagingAdapter: StorePagingAdapter
 
     override fun getViewBinding(
         layoutInflater: LayoutInflater,
@@ -30,44 +33,81 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>() {
     }
 
     override fun initUI() {
-        binding.rvStore.adapter = storeAdapter
+        pagingAdapter = StorePagingAdapter(requireContext())
+        binding.rvStore.apply {
+            adapter = pagingAdapter.withLoadStateHeaderAndFooter(
+                header = StoreLoadStateAdapter{pagingAdapter.retry()},
+                footer = StoreLoadStateAdapter{pagingAdapter.retry()}
+            )
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        subscribe()
+        loadState()
+    }
+    private fun subscribe(){
+        lifecycleScope.launch {
+            // repeatOnLifecycle launches the block in a new coroutine every time the
+            // lifecycle is in the STARTED state and cancels it when it's STOPPED.
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Start listening for values.
+                // This happens when lifecycle is STARTED and stops
+                // collecting when the lifecycle is STOPPED
+                viewModel.products.collectLatest {
+                    pagingAdapter.submitData(it)
+                }
+            }
+        }
+    }
+
+    private fun loadState(){
+        pagingAdapter.addLoadStateListener { loadState ->
+            binding.apply {
+                rvStore.isVisible = loadState.source.refresh is LoadState.NotLoading
+                progress.isVisible = loadState.source.refresh is LoadState.Loading
+
+                rvStore.isVisible = !(loadState.source.refresh is LoadState.NotLoading &&
+                        loadState.append.endOfPaginationReached && pagingAdapter.itemCount < 1)
+            }
+        }
     }
 
     override fun initAction() {
         binding.apply {
-            imgBack.onClick { findNavController().navigateUp() }
-            imgMyStore.onClick {
+            imgBack.onClick1 { findNavController().navigateUp() }
+            imgMyStore.onClick1 {
                 navigate(StoreFragmentDirections.actionStoreFragmentToStoreAddFragment())
             }
         }
     }
 
     override fun initProcess() {
-        viewModel.product()
+//        viewModel.product()
     }
 
     override fun initObservers() {
-        with(binding) {
-            viewModel.products.observerLiveData(
-                viewLifecycleOwner,
-                onLoading = {
-                    progress.visible()
-                },
-                onEmpty = {
-                    progress.gone()
-                    showSnackbarMessage(root, "Data tidak ditemukan")
-                },
-                onFailure = { _, m ->
-                    progress.gone()
-                    showSnackbarMessage(root, m.toString())
-                },
-                onSuccess = {
-                    progress.gone()
-                    rvStore.visible()
-                    storeAdapter.setData = it
-                }
-            )
-        }
+//        with(binding) {
+//            viewModel.products.observerLiveData(
+//                viewLifecycleOwner,
+//                onLoading = {
+//                    progress.visible()
+//                },
+//                onEmpty = {
+//                    progress.gone()
+//                    showSnackbarMessage(root, "Data tidak ditemukan")
+//                },
+//                onFailure = { _, m ->
+//                    progress.gone()
+//                    showSnackbarMessage(root, m.toString())
+//                },
+//                onSuccess = {
+//                    progress.gone()
+//                    rvStore.visible()
+//                    storeAdapter.setData = it
+//                }
+//            )
+//        }
     }
 
 }

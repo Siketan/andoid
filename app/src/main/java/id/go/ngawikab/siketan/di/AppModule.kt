@@ -41,6 +41,6 @@ private fun getHeaderInterceptor(pref: PrefManager): Interceptor {
     headers["Authorization"] = pref.getToken()
     headers["Content-Type"] = "application/json"
     headers["Content-Type"] = "application/x-www-form-urlencoded"
-
+    headers["Content-Type"] = "multipart/form-data"
     return HeaderInterceptor(headers)
 }

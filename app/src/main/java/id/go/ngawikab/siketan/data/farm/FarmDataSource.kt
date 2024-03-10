@@ -1,5 +1,8 @@
 package id.go.ngawikab.siketan.data.farm
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.wahidabd.library.data.LocalDb
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.enqueue
@@ -21,6 +24,7 @@ import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.data.farm.remote.FarmApi
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -146,5 +150,15 @@ class FarmDataSource(
                 onEmit = { emit(it) }
             )
         }.flowOn(Dispatchers.IO)
+
+    override fun getProductsbyPaging(
+    ): Flow<PagingData<ProductResponse>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {StorePagingSource(webService)}
+        ).flow
+
 
 }

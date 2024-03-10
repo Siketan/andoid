@@ -15,6 +15,7 @@ import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -34,14 +35,20 @@ interface FarmApiClient {
     @GET("event-tani")
     suspend fun getEvent(): Response<InfoTaniDataResponse<EventTaniResponse>>
 
-    @GET("product-petani")
+    @GET("product-petani?page=1")
     suspend fun getProduct(): Response<ProductDataResponse>
+
+    @GET("product-petani")
+    suspend fun getProductbyPaging(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int? = 10
+    ): Response<ProductDataResponse>
 
     @POST("daftar-penjual/add")
     suspend fun postStore(
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
-    
+
     @GET("jurnal-kegiatan")
     suspend fun getJournal(): Response<JournalResponse>
 

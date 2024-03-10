@@ -9,5 +9,6 @@ package id.go.ngawikab.siketan.data.farm.model.store
 
 data class ProductDataResponse(
     val message: String,
-    val data: List<ProductResponse>
+    val data: List<ProductResponse>,
+    val maxPages: Int
 )

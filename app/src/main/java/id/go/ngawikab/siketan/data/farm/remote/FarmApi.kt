@@ -37,6 +37,10 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.getProduct()
     }
 
+    override suspend fun getProductbyPaging(page: Int,limit: Int?): Response<ProductDataResponse> {
+        return api.getProductbyPaging(page)
+    }
+
     override suspend fun postStore(body: MultipartBody): Response<GenericAddResponse> {
         return api.postStore(body)
     }

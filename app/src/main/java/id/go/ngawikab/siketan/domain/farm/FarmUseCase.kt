@@ -1,5 +1,6 @@
 package id.go.ngawikab.siketan.domain.farm
 
+import androidx.paging.PagingData
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
@@ -17,6 +18,7 @@ import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import kotlinx.coroutines.flow.Flow
 
 
@@ -39,4 +41,5 @@ interface FarmUseCase {
     fun getTanaman(id: Int,page:Int,limit:Int): Flow<Resource<PlantFarmerResponse>>
     fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
     fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
+    fun getProductsbyPaging():Flow<PagingData<ProductResponse>>
 }
