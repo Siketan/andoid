@@ -197,31 +197,24 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBulanTanam"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                style="@style/dropdownPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_44dp"
                 android:layout_marginHorizontal="@dimen/dimen_12dp"
                 android:layout_marginTop="4dp"
-                android:hint="Tanggal Tanaman"
-                app:hintTextColor="@color/ef_grey"
-                app:endIconDrawable="@drawable/ic_arrow_down"
-                app:boxStrokeColor="@color/primary"
-                app:endIconMode="custom"
-                app:endIconTint="@color/primary">
+                android:hint="Bulan Tanam"
+                app:endIconDrawable="@drawable/ic_arrow_down">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtStartDate"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/autoCompleteBulanTanam"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:focusable="false"
-                    android:clickable="true"
                     android:padding="10dp"
                     android:popupBackground="@color/white"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -274,25 +267,19 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBulanPanen"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                style="@style/dropdownPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_44dp"
                 android:layout_marginHorizontal="@dimen/dimen_12dp"
                 android:layout_marginTop="4dp"
-                android:hint="Tanggal Panen"
-                app:hintTextColor="@color/ef_grey"
-                app:endIconDrawable="@drawable/ic_arrow_down"
-                app:boxStrokeColor="@color/primary"
-                app:endIconMode="custom"
-                app:endIconTint="@color/primary">
+                android:hint="Bulan Panen"
+                app:endIconDrawable="@drawable/ic_arrow_down">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEndDate"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/autoCompleteBulanPanen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:focusable="false"
-                    android:clickable="true"
                     android:padding="10dp"
                     android:popupBackground="@color/white"
                     android:textColor="@color/black"

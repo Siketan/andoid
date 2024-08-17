@@ -24,15 +24,15 @@ package id.go.ngawikab.siketan.data.farm.model.farm.request
 
 data class InputTanamanRequest(
     val fk_petaniId: Int,
-    val statusKepemilikanLahan: String,
-    val luasLahan: String,
-    val kategori: String,
     val jenis: String,
-    val periodeMusimTanam:String,
+    val kategori: String,
     val komoditas: String,
     val periodeBulanTanam: String,
+    val periodeMusimTanam:String,
     val prakiraanBulanPanen: String,
     val prakiraanLuasPanen: Int,
+    val statusKepemilikanLahan: String,
+    val luasLahan: String,
     val prakiraanProduksiPanen: Int? = null,
 
 )

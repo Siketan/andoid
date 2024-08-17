@@ -11,15 +11,16 @@ import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
-import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 
 /**
@@ -42,16 +43,36 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
     private val _getLaporan = MutableLiveData<Resource<ReportTanamanResponse>>()
     val getLaporan: LiveData<Resource<ReportTanamanResponse>> get() = _getLaporan
 
+    private val _petani = MutableLiveData<Resource<List<OpsiPetani>>>()
+    val petani: LiveData<Resource<List<OpsiPetani>>> get() = _petani
+
+    val selectedFarmerId : LiveData<Int> get() = _selectedFarmerId
+    private val _selectedFarmerId = MutableLiveData<Int>()
+
+
+    fun selectFarmer(id:Int){
+        viewModelScope.launch {
+            _selectedFarmerId.value=id
+        }
+    }
+
     fun getChart(data: Chartparam) {
         useCase.getChart(data)
             .onEach { _chart.value = it }
             .launchIn(viewModelScope)
     }
 
-  fun tanaman(id:Int) : Flow<PagingData<PlantFarmerData>> {
+    fun tanaman(id:Int) : Flow<PagingData<PlantFarmerData>> {
       return useCase.getTanaman(id).distinctUntilChanged()
-  }
+    }
 
+    fun getPetani(id:Int) {
+        viewModelScope.launch {
+            useCase.getPetani(id)
+                .onEach { _petani.value = it}
+                .launchIn(viewModelScope)
+        }
+    }
 
     fun addTanaman(data: InputTanamanRequest){
         useCase.addTanaman(data)

@@ -3,10 +3,11 @@ package id.go.ngawikab.siketan.domain.auth.model
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.data.auth.model.user.UserResponse
 import id.go.ngawikab.siketan.domain.farm.model.response.Journal
+import timber.log.Timber
 
 data class User(
-    val NIK: String? = emptyString(),
-    val NIP: String? = emptyString(),
+    val nik: String? = emptyString(),
+    val nkk: String? = emptyString(),
     val NoWa: String? = emptyString(),
     val alamat: String? = emptyString(),
     val createdAt: String? = emptyString(),
@@ -15,6 +16,7 @@ data class User(
     val id: Int? = 0,
     val jurnalKegiatanId: Int? = 0,
     val kecamatan: String? = emptyString(),
+    val kecamatanBinaan: String?= emptyString(),
     val kelompokId: Int? = 0,
     val laporanTanamId: Int? = 0,
     val nama: String? = emptyString(),
@@ -27,6 +29,7 @@ data class User(
     val tanamanPetaniId: Int? = 0,
     val updatedAt: String? = emptyString(),
     val jurnalHarian: Journal? = null
+
 )
 
 fun UserResponse.toDomain(): User =
@@ -41,6 +44,7 @@ fun UserResponse.toDomain(): User =
         id,
         jurnalKegiatanId,
         kecamatan,
+        kecamatanBinaan =kecamatanBinaan,
         kelompokId,
         laporanTanamId,
         nama,
@@ -49,7 +53,11 @@ fun UserResponse.toDomain(): User =
         rattingId,
         responseRatingId,
         riwayatChatId,
-        role,
+        role = if(kecamatanBinaan==null || kecamatanBinaan == emptyString()){
+            Timber.tag("User NIP ").d(NIP)
+            "petani"}else{
+            Timber.tag("User NIP ").d(NIP)
+                "penyuluh"},
         tanamanPetaniId,
-        updatedAt
+        updatedAt,
     )

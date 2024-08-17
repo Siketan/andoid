@@ -30,5 +30,7 @@ data class UserResponse(
     val riwayatChatId: Int? = 0,
     val role: String? = emptyString(),
     val tanamanPetaniId: Int? = 0,
-    val updatedAt: String? = emptyString()
+    val updatedAt: String? = emptyString(),
+    val kecamatanBinaan: String? = emptyString(),
+
 )

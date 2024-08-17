@@ -7,13 +7,12 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
-
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 
@@ -71,6 +70,10 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
 
     override suspend fun addLaporan(body: MultipartBody): Response<GenericAddResponse> {
         return api.addLaporan(body)
+    }
+
+    override suspend fun getPetani(id: Int): Response<OpsiPetaniResponse> {
+        return api.getPetani(id)
     }
 
     override suspend fun getLaporan(id: Int): Response<ReportTanamanResponse> {

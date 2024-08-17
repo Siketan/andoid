@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingData
 import com.wahidabd.library.data.BaseRepository
 import com.wahidabd.library.data.Resource
+import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.ProductRequest
@@ -12,6 +13,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
@@ -47,4 +49,5 @@ interface FarmRepository : BaseRepository {
     suspend fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
     fun getProductsbyPaging():Flow<PagingData<ProductResponse>>
     fun getTanaman(id: Int): Flow<PagingData<PlantFarmerData>>
+    suspend fun getPetani(id:Int): Flow<Resource<OpsiPetaniResponse>>
 }

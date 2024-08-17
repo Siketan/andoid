@@ -43,7 +43,6 @@ class AuthViewModel(
     init {
         _login.value = Resource.default()
         _register.value = Resource.default()
-        penyuluh()
     }
 
     fun login(data: LoginRequest){
@@ -64,7 +63,7 @@ class AuthViewModel(
             .launchIn(viewModelScope)
     }
 
-    private fun penyuluh() {
+    fun penyuluh() {
         viewModelScope.launch {
             useCase.penyuluh()
                 .onEach { _penyuluh.value = it }

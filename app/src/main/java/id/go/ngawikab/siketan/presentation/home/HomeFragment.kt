@@ -10,6 +10,7 @@ import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
+import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.databinding.FragmentHomeBinding
 import id.go.ngawikab.siketan.presentation.auth.AuthActivity
 import id.go.ngawikab.siketan.presentation.chat.ChatActivity
@@ -38,12 +39,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initAction() {
+        val user = prefs.getUser().role
         with(binding) {
             fabChat.onClick {
-//                val user = prefs.getUser().role
-                /* For Testing Inquires*/
-                val user = UserRole.PETANI.role
-                Toast.makeText(requireContext(), user,Toast.LENGTH_SHORT).show()
                 if (user == UserRole.PETANI.role) ChatRoomActivity.start(requireContext())
                 else if (user == UserRole.PENYULUH.role) ChatActivity.start(requireContext())
             }
@@ -55,7 +53,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 gridContainer.gone()
                 listContainer.visible()
             }
-
+            cardForm.gone()
+            cardForm.visibleIf { user == UserRole.PENYULUH.role }
             cardData.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToDataFormerFragment()) }
             cardAnnouncement.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToAnnouncementFragment()) }
             cardForm.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment()) }

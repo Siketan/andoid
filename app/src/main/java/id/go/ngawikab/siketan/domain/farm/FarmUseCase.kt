@@ -7,19 +7,19 @@ import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
-import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.domain.farm.model.request.ProductParam
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
+import id.go.ngawikab.siketan.domain.auth.model.OpsiPenyuluh
+import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import kotlinx.coroutines.flow.Flow
 
 
@@ -43,4 +43,6 @@ interface FarmUseCase {
     fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
     fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
     fun getProductsbyPaging():Flow<PagingData<ProductResponse>>
+
+    suspend fun getPetani(id:Int): Flow<Resource<List<OpsiPetani>>>
 }

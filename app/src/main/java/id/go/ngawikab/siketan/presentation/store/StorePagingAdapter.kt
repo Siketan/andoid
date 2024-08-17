@@ -1,6 +1,8 @@
 package id.go.ngawikab.siketan.presentation.store
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -8,6 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
+import com.wahidabd.library.utils.common.showToast
+import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
@@ -55,6 +59,18 @@ class StorePagingAdapter(private val context: Context): PagingDataAdapter<Produc
             )
 //            tvPrice.text = data.harga
             tvTitle.text = data.namaProducts
+            btnCall.onClick {
+                val contactNumber = data.tblAkun?.noWa
+                val message = "Hi, aku ingin menanyakan tentang produk "+data.namaProducts+" ,apakah masih tersedia?"
+                val url = "https://api.whatsapp.com/send?phone=${contactNumber}&text=${Uri.encode(message)}"
+               try{
+                   val intent = Intent(Intent.ACTION_VIEW)
+                   intent.data = Uri.parse("whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}")
+                   context.startActivity(intent)
+               }catch (e:Exception){
+                   showToast("Whatsapp wasn't installed!")
+               }
+            }
         }
     }
 }

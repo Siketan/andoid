@@ -22,7 +22,7 @@ data class JournalAddRequest(
 ) {
     fun toRequestBody(): MultipartBody =
         MultipartBody.Builder().setType(MultipartBody.FORM).apply {
-            addFormDataPart("NIP", nip)
+            addFormDataPart("NIK", nip)
             addFormDataPart("judul", judul)
             addFormDataPart("tanggalDibuat", tanggal)
             addFormDataPart("uraian", uraian)

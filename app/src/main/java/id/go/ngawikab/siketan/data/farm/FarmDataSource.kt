@@ -15,17 +15,17 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
-import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
+import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.data.farm.remote.FarmApi
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -116,7 +116,15 @@ class FarmDataSource(
         }.flowOn(Dispatchers.IO)
 
 
-
+    override suspend fun getPetani(id:Int): Flow<Resource<OpsiPetaniResponse>> =
+        flow {
+            enqueue(
+                id,
+                err::convertGenericError,
+                webService::getPetani,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
 
     override suspend fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>> =
         flow {

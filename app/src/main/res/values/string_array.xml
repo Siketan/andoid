@@ -17,6 +17,21 @@
         <item>Lahan Sewa</item>
     </string-array>
 
+    <string-array name="month">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
+
     <string-array name="plant_type">
         <item>Buah</item>
         <item>Sayur</item>
@@ -77,8 +92,8 @@
     </string-array>
 
     <string-array name="growing_season">
-        <item>1</item>
-        <item>2</item>
+        <item>Musiman</item>
+        <item>Tahunan</item>
     </string-array>
 
     <string-array name="annual_holtikultura_fruit">

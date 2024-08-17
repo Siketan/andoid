@@ -72,7 +72,7 @@ class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>(
                 debug { "Login Token --> ${it.token}" }
 
                 pref.login(true)
-                pref.setToken(it.token.toString())
+                pref.setToken(it.token!!)
                 pref.setUser(it.user!!)
 
                 MainActivity.start(requireContext())

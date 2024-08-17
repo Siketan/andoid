@@ -130,6 +130,7 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
     }
 
     private fun setPenyuluh() = with(binding) {
+        viewModel.penyuluh()
         viewModel.penyuluh.observerLiveData(
             viewLifecycleOwner,
             onLoading = {},

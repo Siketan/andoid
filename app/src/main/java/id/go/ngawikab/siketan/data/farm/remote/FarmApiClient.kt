@@ -6,6 +6,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
@@ -90,5 +91,10 @@ interface FarmApiClient {
     suspend fun getLaporan(
         @Path("id") id: Int
     ): Response<ReportTanamanResponse>
+
+    @GET("daftar-petani/{id}")
+    suspend fun getPetani(
+        @Path("id") id: Int
+    ): Response<OpsiPetaniResponse>
 
 }

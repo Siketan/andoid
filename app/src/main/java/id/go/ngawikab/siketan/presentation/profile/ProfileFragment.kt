@@ -13,6 +13,7 @@ import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showEmptyState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.clear
+import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
@@ -99,13 +100,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     msv.showDefaultState()
                     val role = pref.getUser().role
                     val res = it.detailTani
-                    tilNik.setText(if (role == UserRole.PETANI.role) res.NIK.toString() else res.NIP.toString())
+                    tilNik.setText( res.nik.toString())
                     tilName.setText(res.nama.toString())
                     tilNoWhatsapp.setText(res.NoWa ?: "")
                     tilAddress.setText(res.alamat ?: "")
                     kecamatan.setText(res.kecamatan, false)
                     desa.setText(res.desa, false)
-
+                    btnSave.gone()
+                    btnCancel.gone()
                     if (res.foto?.isNotEmpty() == true) {
                         imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
                     }
@@ -124,7 +126,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     pref.setUser(
                         User(
                             id = data.id,
-                            NIK = data.NIK,
+                            nik = data.NIK,
                             nama = data.nama,
                             NoWa = data.NoWa,
                             alamat = data.alamat,
