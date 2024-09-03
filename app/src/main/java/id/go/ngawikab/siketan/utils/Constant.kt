@@ -24,5 +24,10 @@ object Constant {
     const val USER_KECAMATAN = "user_kecamatan"
     const val ROLE = "role"
 
+    // id penyuluh (untuk petani)
+    const val PENYULUH_ID = "penyuluh_id"
+    const val PENYULUH_NAMA = "penyuluh_nama"
+    const val PENYULUH_NOTELP = "penyuluh_notelp"
+
     const val RECEIVER_KEY = "receiver_key"
 }

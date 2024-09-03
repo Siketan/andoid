@@ -1,5 +1,6 @@
 package id.go.ngawikab.siketan.presentation.journal
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -33,10 +34,10 @@ class JournalDetailFragment : BaseFragment<FragmentJournalDetailBinding>() {
                 placeholder = R.drawable.ic_image_placeholder
             )
             tvTitle.text = context?.getString(R.string.format_underline, data.judul)
-            tvDesc.text = data.uraian
+            tvDesc.text = Html.fromHtml(data.uraian, Html.FROM_HTML_MODE_LEGACY)
             tvAuthor.text = context?.getString(R.string.format_label_author, data.dataPenyuluh?.nama)
-            tvPlace.text = data.statusJurnal
-            tvTime.text = data.tanggalDibuat?.dateFormat()
+            tvPlace.text = data.tanggalDibuat?.dateFormat()
+            tvTime.text = data.statusJurnal
         }
     }
 

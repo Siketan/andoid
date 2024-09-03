@@ -8,6 +8,7 @@ import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.address.response.ResponseAddress
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroup
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.domain.auth.AuthUseCase
 import id.go.ngawikab.siketan.domain.auth.model.AuthResponse
 import id.go.ngawikab.siketan.domain.auth.model.LoginRequest
@@ -31,6 +32,9 @@ class AuthViewModel(
     private val _login = MutableLiveData<Resource<AuthResponse>>()
     val login: LiveData<Resource<AuthResponse>> get() = _login
 
+    private val _user = MutableLiveData<Resource<DetailPetaniResponse>>()
+    val user: LiveData<Resource<DetailPetaniResponse>> get() = _user
+
     private val _register = MutableLiveData<Resource<AuthResponse>>()
     val register: LiveData<Resource<AuthResponse>> get() = _register
 
@@ -43,6 +47,12 @@ class AuthViewModel(
     init {
         _login.value = Resource.default()
         _register.value = Resource.default()
+    }
+
+    fun user(id: Int) {
+        useCase.getUser(id)
+            .onEach { _user.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun login(data: LoginRequest){

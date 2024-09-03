@@ -33,5 +33,6 @@ data class UserResponse(
     val tanamanPetaniId: Int? = 0,
     val updatedAt: String? = emptyString(),
     val kecamatanBinaan: String? = emptyString(),
-
+    val fk_penyuluhId: Int? = 0,
+    val dataPenyuluh: Penyuluh? = null,
 )

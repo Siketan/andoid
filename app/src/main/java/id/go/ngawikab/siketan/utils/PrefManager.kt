@@ -70,14 +70,29 @@ class PrefManager(context: Context) {
         prefs.edit().apply{
             putInt(USER_ID, data.id ?: 0)
             putString(USER_PHOTO, data.foto)
-            putString(USER_WA, data.NoWa)
+            putString(USER_WA, data.noTelp)
             putString(USER_ADDRESS, data.alamat)
             putString(USER_DESA, data.desa)
             putString(USER_KECAMATAN, data.kecamatan)
             putString(USER_NAME, data.nama)
             putString(ROLE, data.role)
+            if (data.role == UserRole.PETANI.role) {
+                putInt(PENYULUH_ID, data.fk_penyuluhId ?: 0)
+                putString(PENYULUH_NAMA, data.dataPenyuluh?.nama)
+                putString(PENYULUH_NOTELP, data.dataPenyuluh?.noTelp)
+            }
         }.apply()
     }
+
+    fun setUserPenyuluh(data: User) = with(Constant) {
+        prefs.edit().apply{
+            putInt(PENYULUH_ID, data.fk_penyuluhId ?: 0)
+            putString(PENYULUH_NAMA, data.dataPenyuluh?.nama)
+            putString(PENYULUH_NOTELP, data.dataPenyuluh?.noTelp)
+        }.apply()
+    }
+
+
 
     fun getUser(): User = with(Constant){
         return User(
@@ -89,6 +104,9 @@ class PrefManager(context: Context) {
             desa = prefs.getString(USER_DESA, emptyString()),
             kecamatan = prefs.getString(USER_KECAMATAN, emptyString()),
             role = prefs.getString(ROLE, emptyString()),
+            fk_penyuluhId = prefs.getInt(PENYULUH_ID, 0),
+            nama_penyuluh = prefs.getString(PENYULUH_NAMA, emptyString()),
+            no_penyuluh = prefs.getString(PENYULUH_NOTELP, emptyString())
         )
     }
 

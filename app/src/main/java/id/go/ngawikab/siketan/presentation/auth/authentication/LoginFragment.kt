@@ -1,5 +1,6 @@
 package id.go.ngawikab.siketan.presentation.auth.authentication
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.wahidabd.library.utils.common.showToast
@@ -12,6 +13,7 @@ import id.go.ngawikab.siketan.databinding.FragmentLoginBinding
 import id.go.ngawikab.siketan.domain.auth.model.LoginRequest
 import id.go.ngawikab.siketan.presentation.MainActivity
 import id.go.ngawikab.siketan.utils.PrefManager
+import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
 import id.go.ngawikab.siketan.utils.emailMatches
 import id.go.ngawikab.siketan.utils.navDirection
@@ -58,6 +60,23 @@ class LoginFragment : SiketanBaseFragment<FragmentLoginBinding>() {
     }
 
     override fun initObservers() {
+        viewModel.user.observerLiveData(
+            viewLifecycleOwner,
+            onEmpty = {},
+            onLoading = { showLoading() },
+            onFailure = { _, m ->
+                hideLoading()
+                showToast(m.toString())
+            },
+            onSuccess = {
+                hideLoading()
+
+                pref.setUserPenyuluh(it.detailTani!!)
+                MainActivity.start(requireContext())
+                activity?.finish()
+            }
+        )
+
         viewModel.login.observerLiveData(
             viewLifecycleOwner,
             onEmpty = {},
@@ -74,9 +93,11 @@ class LoginFragment : SiketanBaseFragment<FragmentLoginBinding>() {
                 pref.login(true)
                 pref.setToken(it.token!!)
                 pref.setUser(it.user!!)
-
-                MainActivity.start(requireContext())
-                activity?.finish()
+                if(it.user.role!! == UserRole.PETANI.role) viewModel.user(it.user.id!!)
+                else {
+                    MainActivity.start(requireContext())
+                    activity?.finish()
+                }
             }
         )
     }
