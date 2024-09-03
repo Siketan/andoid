@@ -17,6 +17,7 @@ import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.databinding.ItemStoreBinding
 import id.go.ngawikab.siketan.domain.farm.model.response.Product
+import id.go.ngawikab.siketan.utils.formatPhoneNumber
 import id.go.ngawikab.siketan.utils.toCurrency
 
 class StorePagingAdapter(private val context: Context): PagingDataAdapter<ProductResponse, StorePagingAdapter.ViewHolder>(
@@ -60,7 +61,7 @@ class StorePagingAdapter(private val context: Context): PagingDataAdapter<Produc
 //            tvPrice.text = data.harga
             tvTitle.text = data.namaProducts
             btnCall.onClick {
-                val contactNumber = data.tblAkun?.noWa
+                val contactNumber = formatPhoneNumber(data.tblAkun?.noWa)
                 val message = "Hi, aku ingin menanyakan tentang produk "+data.namaProducts+" ,apakah masih tersedia?"
                 val url = "https://api.whatsapp.com/send?phone=${contactNumber}&text=${Uri.encode(message)}"
                try{

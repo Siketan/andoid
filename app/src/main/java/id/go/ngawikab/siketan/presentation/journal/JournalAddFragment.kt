@@ -176,14 +176,14 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
                 autoComplete.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        setKeluraha(it.data[i].id)
+                        setKelurahan(it.data[i].id)
                     }
                 }
             }
         )
     }
 
-    private fun setKeluraha(id: Long) = with(binding) {
+    private fun setKelurahan(id: Long) = with(binding) {
         addressViewModel.kelurahan(id)
         addressViewModel.kelurahan.observerLiveData(
             viewLifecycleOwner,

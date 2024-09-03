@@ -7,6 +7,7 @@ import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroup
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
@@ -72,6 +73,17 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
             }
 
             override suspend fun saveCallRequest(data: DetailPetaniResponse): DetailPetaniResponse {
+                return data
+            }
+        }.asFlow()
+
+    override fun getUserPenyuluh(id: Int): Flow<Resource<DetailPenyuluhResponse>> =
+        object : InternetBoundResource<DetailPenyuluhResponse, DetailPenyuluhResponse>() {
+            override suspend fun createCall(): Flow<Resource<DetailPenyuluhResponse>> {
+                return repository.getUserPenyuluh(id)
+            }
+
+            override suspend fun saveCallRequest(data: DetailPenyuluhResponse): DetailPenyuluhResponse {
                 return data
             }
         }.asFlow()

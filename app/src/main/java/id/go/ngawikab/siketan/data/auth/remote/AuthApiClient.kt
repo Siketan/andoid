@@ -6,6 +6,7 @@ import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import okhttp3.MultipartBody
@@ -44,6 +45,11 @@ interface AuthApiClient {
     suspend fun getUser(
         @Path("id") id: Int
     ): Response<DetailPetaniResponse>
+
+    @GET("daftar-penyuluh/{id}")
+    suspend fun getUserPenyuluh(
+        @Path("id") id: Int
+    ): Response<DetailPenyuluhResponse>
 
     @PUT("daftar-tani/{id}")
     suspend fun editUser(

@@ -1,5 +1,8 @@
 package id.go.ngawikab.siketan.presentation.home
 
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -18,6 +21,7 @@ import id.go.ngawikab.siketan.presentation.chat.ChatRoomActivity
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.components.MyDialogFragment
+import id.go.ngawikab.siketan.utils.formatPhoneNumber
 import id.go.ngawikab.siketan.utils.navigate
 import org.koin.android.ext.android.inject
 
@@ -42,7 +46,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val user = prefs.getUser().role
         with(binding) {
             fabChat.onClick {
-                if (user == UserRole.PETANI.role) ChatRoomActivity.start(requireContext())
+                if (user == UserRole.PETANI.role) {
+
+//                    Log.d("Penyuluh", prefs.getUser().id.toString())
+//                    val contactNumber = formatPhoneNumber("a")
+//                    val message = "Hi, aku ingin menanyakan tentang produk "+data.namaProducts+" ,apakah masih tersedia?"
+//                    val url = "https://api.whatsapp.com/send?phone=${contactNumber}&text=${Uri.encode(message)}"
+//                    try{
+//                        val intent = Intent(Intent.ACTION_VIEW)
+//                        intent.data = Uri.parse("whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}")
+//                        context.startActivity(intent)
+//                    }catch (e:Exception){
+//                        showToast("Whatsapp wasn't installed!")
+//                    }
+//                    ChatRoomActivity.start(requireContext())
+                }
                 else if (user == UserRole.PENYULUH.role) ChatActivity.start(requireContext())
             }
             imgGrid.onClick {
@@ -54,7 +72,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 listContainer.visible()
             }
             cardForm.gone()
+            listForm.gone()
             cardForm.visibleIf { user == UserRole.PENYULUH.role }
+            listForm.visibleIf { user == UserRole.PENYULUH.role }
             cardData.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToDataFormerFragment()) }
             cardAnnouncement.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToAnnouncementFragment()) }
             cardForm.onClick { navigate(HomeFragmentDirections.actionHomeFragmentToJournalFragment()) }

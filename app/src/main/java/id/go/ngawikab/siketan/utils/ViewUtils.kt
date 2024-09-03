@@ -207,3 +207,11 @@ fun convertFileToBase64(file: File? = null): String {
     val imageBytes = outputStream.toByteArray()
     return Base64.encodeToString(imageBytes, Base64.DEFAULT) ?: emptyString()
 }
+
+fun formatPhoneNumber(phoneNumber: String?): String? {
+    return if (phoneNumber != null && phoneNumber.startsWith("0")) {
+        "+62" + phoneNumber.substring(1)
+    } else {
+        phoneNumber
+    }
+}

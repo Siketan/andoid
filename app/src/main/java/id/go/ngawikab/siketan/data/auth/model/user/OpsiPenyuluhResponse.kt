@@ -1,10 +1,14 @@
 package id.go.ngawikab.siketan.data.auth.model.user
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class OpsiPenyuluhResponse(
 	val dataDaftarPenyuluh: List<Penyuluh> ,
 	val message: String? = null
 )
 
+@Parcelize
 data class Penyuluh(
 	val desa: String? = null,
 	val noTelp: String? = null,
@@ -13,7 +17,7 @@ data class Penyuluh(
 	val accountID: String? = null,
 	val createdAt: String? = null,
 	val password: String? = null,
-	val deletedAt: Any? = null,
+	val deletedAt: String? = null,
 	val nama: String? = null,
 	val foto: String? = null,
 	val kecamatan: String? = null,
@@ -23,7 +27,6 @@ data class Penyuluh(
 	val kecamatanBinaan: String? = null,
 	val email: String? = null,
 	val updatedAt: String? = null
-)
-
+): Parcelable
 
 

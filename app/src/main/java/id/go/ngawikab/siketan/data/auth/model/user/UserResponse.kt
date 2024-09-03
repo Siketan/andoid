@@ -13,6 +13,7 @@ data class UserResponse(
     val NIK: String? = emptyString(),
     val NIP: String? = emptyString(),
     val NoWa: String? = emptyString(),
+    val noTelp: String? = emptyString(),
     val alamat: String? = emptyString(),
     val createdAt: String? = emptyString(),
     val desa: String? = emptyString(),

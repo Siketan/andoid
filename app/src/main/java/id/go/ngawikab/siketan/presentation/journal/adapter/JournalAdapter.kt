@@ -10,6 +10,8 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.journal.Jounal
 import id.go.ngawikab.siketan.databinding.ItemFarmInfoBinding
+import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
+import id.go.ngawikab.siketan.domain.farm.model.response.Journal
 import id.go.ngawikab.siketan.utils.dateFormat
 
 
@@ -21,6 +23,7 @@ import id.go.ngawikab.siketan.utils.dateFormat
 
 class JournalAdapter(
     private val context: Context,
+    private val onClick:(Jounal)->Unit,
     items: ArrayList<Jounal> = arrayListOf(),
 ) : BaseAsyncRecyclerAdapter<Jounal, JournalAdapter.JournalViewHolder>(items) {
 
@@ -43,7 +46,9 @@ class JournalAdapter(
                 tvDate.text = journal.tanggalDibuat?.dateFormat()
                 tvStatus.text = journal.statusJurnal
                 tvAuthor.text = context.getString(R.string.format_label_author, journal.dataPenyuluh?.nama)
-
+                binding.root.setOnClickListener {
+                    onClick(journal)
+                }
                 imgImage.setImageUrl(
                     context,
                     journal.gambar.toString(),

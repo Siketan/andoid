@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_journalFragment_to_presensiFragment"
             app:destination="@id/presensiFragment" />
+        <action
+            android:id="@+id/action_journalFragment_to_journalDetailFragment"
+            app:destination="@id/journalDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/journalAddFragment"
@@ -143,5 +146,14 @@
         <argument
             android:name="event"
             app:argType="id.go.ngawikab.siketan.domain.farm.model.response.EventTani" />
+    </fragment>
+    <fragment
+        android:id="@+id/journalDetailFragment"
+        android:name="id.go.ngawikab.siketan.presentation.journal.JournalDetailFragment"
+        android:label="fragment_journal_detail"
+        tools:layout="@layout/fragment_journal_detail">
+        <argument
+            android:name="journal"
+            app:argType="id.go.ngawikab.siketan.data.farm.model.journal.Jounal" />
     </fragment>
 </navigation>

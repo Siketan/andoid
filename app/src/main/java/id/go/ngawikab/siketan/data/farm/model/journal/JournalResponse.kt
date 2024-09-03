@@ -1,7 +1,9 @@
 package id.go.ngawikab.siketan.data.farm.model.journal
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import id.go.ngawikab.siketan.data.auth.model.user.Penyuluh
+import kotlinx.parcelize.Parcelize
 
 data class JournalResponse(
 
@@ -11,7 +13,7 @@ data class JournalResponse(
 	@field:SerializedName("newData")
 	val newData: List<Jounal>
 )
-
+@Parcelize
 data class Jounal(
 
 	@field:SerializedName("createdAt")
@@ -49,4 +51,4 @@ data class Jounal(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+): Parcelable

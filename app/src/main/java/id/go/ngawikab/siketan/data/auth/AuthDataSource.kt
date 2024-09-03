@@ -9,6 +9,7 @@ import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginDataRequest
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
@@ -54,6 +55,11 @@ class AuthDataSource(
 
     override suspend fun getUser(id: Int): Flow<Resource<DetailPetaniResponse>> = flow {
         enqueue(id, err::convertGenericError, webService::getUser, onEmit = { emit(it) })
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getUserPenyuluh(id: Int): Flow<Resource<DetailPenyuluhResponse>> =
+        flow {
+        enqueue(id, err::convertGenericError, webService::getUserPenyuluh, onEmit = { emit(it) })
     }.flowOn(Dispatchers.IO)
 
     override suspend fun editUser(data: UserEditeRequest): Flow<Resource<GenericAddResponse>> =

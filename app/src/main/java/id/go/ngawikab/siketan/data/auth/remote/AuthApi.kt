@@ -7,6 +7,7 @@ import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginDataRequest
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import okhttp3.MultipartBody
@@ -35,6 +36,10 @@ class AuthApi (private val api: AuthApiClient) : WebApi, AuthApiClient {
 
     override suspend fun getUser(id: Int): Response<DetailPetaniResponse> {
         return api.getUser(id)
+    }
+
+    override suspend fun getUserPenyuluh(id: Int): Response<DetailPenyuluhResponse> {
+        return api.getUserPenyuluh(id)
     }
 
     override suspend fun editUser(id: Int, body: MultipartBody): Response<GenericAddResponse> {

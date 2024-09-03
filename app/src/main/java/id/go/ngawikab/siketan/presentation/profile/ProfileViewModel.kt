@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
+import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
@@ -21,6 +22,10 @@ import kotlinx.coroutines.flow.onEach
 
 class ProfileViewModel(private val useCase: AuthUseCase) : ViewModel() {
 
+    private val _userPenyuluh = MutableLiveData<Resource<DetailPenyuluhResponse>>()
+
+    val userPenyuluh: LiveData<Resource<DetailPenyuluhResponse>> get() = _userPenyuluh
+
     private val _user = MutableLiveData<Resource<DetailPetaniResponse>>()
     val user: LiveData<Resource<DetailPetaniResponse>> get() = _user
 
@@ -30,6 +35,11 @@ class ProfileViewModel(private val useCase: AuthUseCase) : ViewModel() {
     fun user(id: Int) {
         useCase.getUser(id)
             .onEach { _user.value = it }
+            .launchIn(viewModelScope)
+    }
+    fun userPenyuluh(id: Int) {
+        useCase.getUserPenyuluh(id)
+            .onEach { _userPenyuluh.value = it }
             .launchIn(viewModelScope)
     }
 

@@ -36,11 +36,16 @@ class AnnouncementAdapter(
 
     inner class AnnouncementViewHolder(binding: ViewBinding) :
         BaseAsyncItemViewHolder<InfoTani>(binding) {
+
         override fun bind(data: InfoTani) = with(binding as ItemFarmInfoBinding) {
             tvTitle.text = context.getString(R.string.format_underline, data.judul)
             tvAuthor.text = context.getString(R.string.format_label_author, data.createdBy)
             tvDate.text = data.createdAt?.dateFormat()
-            tvToMore.setOnClickListener {
+            tvToMore.text = context.getString(R.string.label_read_more)
+//            tvToMore.setOnClickListener {
+//                onClick(data)
+//            }
+            binding.root.setOnClickListener {
                 onClick(data)
             }
 

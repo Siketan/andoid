@@ -1,5 +1,6 @@
 package id.go.ngawikab.siketan.presentation.profile
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -13,6 +14,8 @@ import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showEmptyState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.clear
+import com.wahidabd.library.utils.exts.disable
+import com.wahidabd.library.utils.exts.enable
 import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
@@ -50,7 +53,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         attachRoot: Boolean
     ): FragmentProfileBinding = FragmentProfileBinding.inflate(layoutInflater)
 
-
     override fun initUI() {
         with(binding) {
             tilNik.disable
@@ -72,14 +74,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     )
                 )
             }
-
             btnCancel.onClick { navigateUp() }
             btnSave.onClick { if (validateAll()) sendToObserver() }
         }
     }
 
     override fun initProcess() {
-        viewModel.user(pref.getUser().id ?: 0)
+        val user = pref.getUser()
+        if (user.role == UserRole.PETANI.role)
+            viewModel.user(pref.getUser().id ?: 0)
+        if (user.role == UserRole.PENYULUH.role)
+            viewModel.userPenyuluh(pref.getUser().id ?: 0)
         setKecamatan()
         validate()
     }
@@ -98,20 +103,53 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 },
                 onSuccess = {
                     msv.showDefaultState()
-                    val role = pref.getUser().role
                     val res = it.detailTani
-                    tilNik.setText( res.nik.toString())
+//                    Log.d("LOG NIK", res.nik.toString())
+//                    Log.d("LOG Name", res.nama.toString())
+//                    Log.d("LOG No Whatsapp", res.noTelp.toString())
+//                    Log.d("LOG Adress", res.alamat.toString())
+//                    Log.d("LOG kecamatan", res.kecamatan.toString())
+//                    Log.d("LOG desa", res.desa.toString())
+                    tilNik.setText(res.nik.toString())
                     tilName.setText(res.nama.toString())
-                    tilNoWhatsapp.setText(res.NoWa ?: "")
+                    tilNoWhatsapp.setText(res.noTelp ?: "")
                     tilAddress.setText(res.alamat ?: "")
                     kecamatan.setText(res.kecamatan, false)
                     desa.setText(res.desa, false)
-                    btnSave.gone()
-                    btnCancel.gone()
                     if (res.foto?.isNotEmpty() == true) {
                         imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
                     }
+                },
+            )
 
+            viewModel.userPenyuluh.observerLiveData(
+                viewLifecycleOwner,
+                onLoading = {
+                    msv.showLoadingState()
+                },
+                onEmpty = {},
+                onFailure = { _, mess ->
+                    msv.showEmptyState()
+                    showToast(mess.toString())
+                },
+                onSuccess = {
+                    msv.showDefaultState()
+                    val res = it.dataDaftarPenyuluh
+//                    Log.d("LOG NIK", res.nik.toString())
+//                    Log.d("LOG Name", res.nama.toString())
+//                    Log.d("LOG No Whatsapp", res.noTelp.toString())
+//                    Log.d("LOG Adress", res.alamat.toString())
+//                    Log.d("LOG kecamatan", res.kecamatan.toString())
+//                    Log.d("LOG desa", res.desa.toString())
+                    tilNik.setText(res.nik.toString())
+                    tilName.setText(res.nama.toString())
+                    tilNoWhatsapp.setText(res.noTelp ?: "")
+                    tilAddress.setText(res.alamat ?: "")
+                    kecamatan.setText(res.kecamatan, false)
+                    desa.setText(res.desa, false)
+                    if (res.foto?.isNotEmpty() == true) {
+                        imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
+                    }
                 },
             )
 
@@ -119,7 +157,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 viewLifecycleOwner,
                 onLoading = {},
                 onEmpty = {},
-                onFailure = { _, _ -> },
+                onFailure = { _, _ ->
+                    showToast("Update data gagal")
+                },
                 onSuccess = {
                     showToast(it.message)
 

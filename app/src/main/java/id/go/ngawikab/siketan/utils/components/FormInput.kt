@@ -61,6 +61,9 @@ class FormInput @JvmOverloads constructor(
         edt.setText(text)
     }
 
+    fun getText(): String = with(binding){
+        return edt.text.toString()
+    }
 
     enum class FormType(val typeInfo: Int) {
         TEXT(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL),
