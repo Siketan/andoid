@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             fabChat.onClick {
                 if (user.role == UserRole.PETANI.role) {
                     val contactNumber = formatPhoneNumber(user.no_penyuluh?.trim())
-                    val message = "Hi, Pak/Bu "+user.nama_penyuluh+", saya "+user.nama+" keperluan saya menghubungi ialah ..."
+                    val message = "Hi, Bapak/Ibu "+user.nama_penyuluh+", saya "+user.nama+" keperluan saya menghubungi ialah ..."
                     try{
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.data = Uri.parse("whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}")

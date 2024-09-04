@@ -18,10 +18,12 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.databinding.ItemChatBinding
 import id.go.ngawikab.siketan.databinding.ItemTanamanBinding
+import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.utils.formatPhoneNumber
 
 class ChatPagingAdapter(
     private val context: Context,
+    private val pref: User,
 ): PagingDataAdapter<Petani, ChatPagingAdapter.ViewHolder>(
     diffUtilCallback
 ) {
@@ -60,11 +62,11 @@ class ChatPagingAdapter(
         override fun bind(data: Petani) = with(binding as ItemChatBinding) {
             tvNama.text = data.nama
             tvNoTelp.text = data.noTelp
-            tvDesa.text = data.desa
-            tvKecamatan.text = data.kecamatan
+            tvDesa.text = "Desa "+data.desa
+            tvKecamatan.text = "Kec "+data.kecamatan
             btnCall.onClick {
                 val contactNumber = formatPhoneNumber(data.noTelp)
-                val message = "Hi, Bapak/Ibu "+data.nama+" aku ingin menanyakan tentang ... "
+                val message = "Hi, Bapak/Ibu "+data.nama+", saya "+pref.nama+" saya ingin menanyakan tentang ... "
                 val uri = "whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}"
                 try{
                     val intent = Intent(Intent.ACTION_VIEW)

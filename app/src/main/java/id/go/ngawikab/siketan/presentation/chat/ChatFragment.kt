@@ -46,7 +46,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     override fun initUI() {
-        pagingAdapter = ChatPagingAdapter(requireContext())
+        pagingAdapter = ChatPagingAdapter(requireContext(), pref.getUser())
         binding.rvChat.apply {
             adapter = pagingAdapter.withLoadStateHeaderAndFooter(
                 header = StoreLoadStateAdapter{pagingAdapter.retry()},
