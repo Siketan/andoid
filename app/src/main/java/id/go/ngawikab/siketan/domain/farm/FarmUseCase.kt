@@ -6,6 +6,8 @@ import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
@@ -17,6 +19,7 @@ import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.domain.auth.model.OpsiPenyuluh
 import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
@@ -43,6 +46,7 @@ interface FarmUseCase {
     fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>>
     fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
     fun getProductsbyPaging():Flow<PagingData<ProductResponse>>
+    fun getPetanibyPaging(id: Int):Flow<PagingData<Petani>>
 
     suspend fun getPetani(id:Int): Flow<Resource<List<OpsiPetani>>>
 }

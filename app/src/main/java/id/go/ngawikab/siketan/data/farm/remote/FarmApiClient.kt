@@ -97,4 +97,10 @@ interface FarmApiClient {
         @Path("id") id: Int
     ): Response<OpsiPetaniResponse>
 
+    @GET("daftar-petani/{id}")
+    suspend fun getPetanibyPaging(
+        @Path("id") id: Int,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int? = 10
+    ): Response<OpsiPetaniResponse>
 }

@@ -12,5 +12,5 @@ fun Petani.todDomain(): OpsiPetani =
     OpsiPetani(
         nik = nik,
         nama = nama,
-        id = id
+        id = id!!
     )

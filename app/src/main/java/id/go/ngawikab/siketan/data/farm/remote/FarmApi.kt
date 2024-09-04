@@ -40,6 +40,10 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.getProductbyPaging(page)
     }
 
+    override suspend fun getPetanibyPaging(id: Int, page:Int,limit: Int?): Response<OpsiPetaniResponse> {
+        return api.getPetanibyPaging(id,page)
+    }
+
     override suspend fun postStore(body: MultipartBody): Response<GenericAddResponse> {
         return api.postStore(body)
     }

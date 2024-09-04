@@ -92,5 +92,4 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
             .onEach { _getLaporan.value = it }
             .launchIn(viewModelScope)
     }
-
 }

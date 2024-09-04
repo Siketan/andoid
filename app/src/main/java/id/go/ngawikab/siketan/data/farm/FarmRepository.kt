@@ -14,6 +14,7 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
@@ -24,6 +25,7 @@ import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import kotlinx.coroutines.flow.Flow
 
@@ -49,5 +51,6 @@ interface FarmRepository : BaseRepository {
     suspend fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>>
     fun getProductsbyPaging():Flow<PagingData<ProductResponse>>
     fun getTanaman(id: Int): Flow<PagingData<PlantFarmerData>>
+    fun getPetanibyPaging(id: Int): Flow<PagingData<Petani>>
     suspend fun getPetani(id:Int): Flow<Resource<OpsiPetaniResponse>>
 }

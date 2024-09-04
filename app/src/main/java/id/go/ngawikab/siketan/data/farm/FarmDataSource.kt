@@ -16,11 +16,13 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
+import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
@@ -165,4 +167,13 @@ class FarmDataSource(
             ), pagingSourceFactory = {TanamanPagingSource(webService,id)}
         ).flow
 
+    override fun getPetanibyPaging(
+        id:Int,
+    ): Flow<PagingData<Petani>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {PetaniPagingSource(webService, id)}
+        ).flow
 }

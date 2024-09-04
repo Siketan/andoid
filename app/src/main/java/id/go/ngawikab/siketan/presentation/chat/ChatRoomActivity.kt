@@ -39,7 +39,7 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
     private lateinit var chatAdapter: ChatRoomAdapter
     private var initPrevMessageLoading = false
 
-    private val viewModel: ChatViewModel by inject()
+    private val viewModel: ChatRoomViewModel by inject()
     private val pref: PrefManager by inject()
     private var partnerId = 0
     private var chatId = 0

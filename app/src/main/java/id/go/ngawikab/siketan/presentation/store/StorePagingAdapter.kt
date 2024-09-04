@@ -20,16 +20,24 @@ import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.utils.formatPhoneNumber
 import id.go.ngawikab.siketan.utils.toCurrency
 
-class StorePagingAdapter(private val context: Context): PagingDataAdapter<ProductResponse, StorePagingAdapter.ViewHolder>(
+class StorePagingAdapter(
+    private val context: Context
+): PagingDataAdapter<ProductResponse, StorePagingAdapter.ViewHolder>(
     diffUtilCallback
 ) {
 
     companion object{
         val diffUtilCallback = object : DiffUtil.ItemCallback<ProductResponse>() {
-            override fun areItemsTheSame(oldItem: ProductResponse, newItem: ProductResponse): Boolean =
+            override fun areItemsTheSame(
+                oldItem: ProductResponse,
+                newItem: ProductResponse
+            ): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: ProductResponse, newItem: ProductResponse): Boolean =
+            override fun areContentsTheSame(
+                oldItem: ProductResponse,
+                newItem: ProductResponse
+            ): Boolean =
                 oldItem == newItem
         }
     }
@@ -63,10 +71,10 @@ class StorePagingAdapter(private val context: Context): PagingDataAdapter<Produc
             btnCall.onClick {
                 val contactNumber = formatPhoneNumber(data.tblAkun?.noWa)
                 val message = "Hi, aku ingin menanyakan tentang produk "+data.namaProducts+" ,apakah masih tersedia?"
-                val url = "https://api.whatsapp.com/send?phone=${contactNumber}&text=${Uri.encode(message)}"
+                val uri = "whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}"
                try{
                    val intent = Intent(Intent.ACTION_VIEW)
-                   intent.data = Uri.parse("whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}")
+                   intent.data = Uri.parse(uri)
                    context.startActivity(intent)
                }catch (e:Exception){
                    showToast("Whatsapp wasn't installed!")

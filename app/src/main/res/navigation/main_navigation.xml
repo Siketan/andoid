@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/announcementFragment"
@@ -156,4 +159,8 @@
             android:name="journal"
             app:argType="id.go.ngawikab.siketan.data.farm.model.journal.Jounal" />
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="id.go.ngawikab.siketan.presentation.chat.ChatFragment"
+        android:label="ChatFragment" />
 </navigation>

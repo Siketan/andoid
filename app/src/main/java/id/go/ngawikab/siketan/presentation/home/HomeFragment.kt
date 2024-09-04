@@ -21,8 +21,6 @@ import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.databinding.FragmentHomeBinding
 import id.go.ngawikab.siketan.presentation.auth.AuthActivity
-import id.go.ngawikab.siketan.presentation.chat.ChatActivity
-import id.go.ngawikab.siketan.presentation.chat.ChatRoomActivity
 import id.go.ngawikab.siketan.presentation.profile.ProfileViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
@@ -43,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun initUI() {
-        debug { "User id: ${prefs.getUser().id}" }
+//        debug { "User id: ${prefs.getUser().id}" }
     }
 
     override fun initAction() {
@@ -51,9 +49,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding) {
             fabChat.onClick {
                 if (user.role == UserRole.PETANI.role) {
-                    Log.d("TES", user.toString())
                     val contactNumber = formatPhoneNumber(user.no_penyuluh?.trim())
-                    val message = "Hi, Pak/Bu "+user.nama_penyuluh+", saya "+user.nama+" {sebutkan keperluan}..."
+                    val message = "Hi, Pak/Bu "+user.nama_penyuluh+", saya "+user.nama+" keperluan saya menghubungi ialah ..."
                     try{
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.data = Uri.parse("whatsapp://send?phone=${contactNumber}&text=${Uri.encode(message)}")
@@ -62,7 +59,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         showToast("Whatsapp wasn't installed!")
                     }
                 }
-                else if (user.role == UserRole.PENYULUH.role) ChatActivity.start(requireContext())
+                else if (user.role == UserRole.PENYULUH.role){
+                    navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment())
+                }
             }
             imgGrid.onClick {
                 gridContainer.visible()
