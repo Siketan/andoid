@@ -14,23 +14,26 @@ import java.io.File
 
 
 data class UserEditeRequest(
-    val id: Int? = 0,
-    val NIK: String? = emptyString(),
+    val nik: String? = emptyString(),
     val nama: String? = emptyString(),
-    val NoWa: String? = emptyString(),
+    val whatsapp: String? = emptyString(),
     val alamat: String? = emptyString(),
     val kecamatan: String? = emptyString(),
     val desa: String? = emptyString(),
-    val foto: File? = null
+    val foto: File? = null,
+    val password: String? = emptyString(),
+    val passwordBaru: String? = emptyString(),
 ) {
     fun toBody(): MultipartBody =
         MultipartBody.Builder().setType(MultipartBody.FORM).apply {
-            addFormDataPart("NIK", NIK.toString())
+            addFormDataPart("nik", nik.toString())
             addFormDataPart("nama", nama.toString())
-            addFormDataPart("NoWa", NoWa.toString())
+            addFormDataPart("whatsapp", whatsapp.toString())
             addFormDataPart("alamat", alamat.toString())
             addFormDataPart("desa", desa.toString())
             addFormDataPart("kecamatan", kecamatan.toString())
+            addFormDataPart("password", password.toString())
+            addFormDataPart("passwordBaru", passwordBaru.toString())
             if (foto != null){
                 addFormDataPart("foto", foto.name ,foto.asRequestBody("image/jpg".toMediaTypeOrNull()))
             }

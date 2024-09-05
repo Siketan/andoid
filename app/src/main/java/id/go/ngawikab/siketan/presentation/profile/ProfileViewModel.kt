@@ -22,26 +22,8 @@ import kotlinx.coroutines.flow.onEach
 
 class ProfileViewModel(private val useCase: AuthUseCase) : ViewModel() {
 
-    private val _userPenyuluh = MutableLiveData<Resource<DetailPenyuluhResponse>>()
-
-    val userPenyuluh: LiveData<Resource<DetailPenyuluhResponse>> get() = _userPenyuluh
-
-    private val _user = MutableLiveData<Resource<DetailPetaniResponse>>()
-    val user: LiveData<Resource<DetailPetaniResponse>> get() = _user
-
     private val _edit = MutableLiveData<Resource<GenericAddResponse>>()
     val edit: LiveData<Resource<GenericAddResponse>> get() = _edit
-
-    fun user(id: Int) {
-        useCase.getUser(id)
-            .onEach { _user.value = it }
-            .launchIn(viewModelScope)
-    }
-    fun userPenyuluh(id: Int) {
-        useCase.getUserPenyuluh(id)
-            .onEach { _userPenyuluh.value = it }
-            .launchIn(viewModelScope)
-    }
 
     fun edit(data: UserEditeRequest){
         useCase.editUser(data)

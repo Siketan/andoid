@@ -49,4 +49,6 @@
     <string name="format_tanggal">Tanggal : %s</string>
     <string name="hint_alamat">Alamat</string>
     <string name="label_selanjutnya">Selanjunya</string>
+    <string name="keterangan_checkbox_ganti_pass">Ganti Password</string>
+    <string name="hint_password_baru">Password Baru</string>
 </resources>

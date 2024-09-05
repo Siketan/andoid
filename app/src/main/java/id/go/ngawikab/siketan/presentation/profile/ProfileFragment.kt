@@ -1,9 +1,9 @@
 package id.go.ngawikab.siketan.presentation.profile
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import com.esafirm.imagepicker.features.ImagePickerConfig
 import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.ReturnMode
@@ -11,12 +11,8 @@ import com.esafirm.imagepicker.features.registerImagePicker
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.extensions.showDefaultState
-import com.wahidabd.library.utils.extensions.showEmptyState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.clear
-import com.wahidabd.library.utils.exts.disable
-import com.wahidabd.library.utils.exts.enable
-import com.wahidabd.library.utils.exts.gone
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
@@ -74,131 +70,96 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     )
                 )
             }
+            checkBoxChangePassword.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) tilPassword.visibility = LinearLayout.VISIBLE
+                else tilPassword.visibility = LinearLayout.GONE
+            }
             btnCancel.onClick { navigateUp() }
             btnSave.onClick { if (validateAll()) sendToObserver() }
         }
     }
 
     override fun initProcess() {
-        val user = pref.getUser()
-        if (user.role == UserRole.PETANI.role)
-            viewModel.user(pref.getUser().id ?: 0)
-        if (user.role == UserRole.PENYULUH.role)
-            viewModel.userPenyuluh(pref.getUser().id ?: 0)
+        tampilkanData()
         setKecamatan()
         validate()
     }
 
     override fun initObservers() {
         with(binding) {
-            viewModel.user.observerLiveData(
-                viewLifecycleOwner,
-                onLoading = {
-                    msv.showLoadingState()
-                },
-                onEmpty = {},
-                onFailure = { _, mess ->
-                    msv.showEmptyState()
-                    showToast(mess.toString())
-                },
-                onSuccess = {
-                    msv.showDefaultState()
-                    val res = it.detailTani
-//                    Log.d("LOG NIK", res.nik.toString())
-//                    Log.d("LOG Name", res.nama.toString())
-//                    Log.d("LOG No Whatsapp", res.noTelp.toString())
-//                    Log.d("LOG Adress", res.alamat.toString())
-//                    Log.d("LOG kecamatan", res.kecamatan.toString())
-//                    Log.d("LOG desa", res.desa.toString())
-                    tilNik.setText(res.nik.toString())
-                    tilName.setText(res.nama.toString())
-                    tilNoWhatsapp.setText(res.noTelp ?: "")
-                    tilAddress.setText(res.alamat ?: "")
-                    kecamatan.setText(res.kecamatan, false)
-                    desa.setText(res.desa, false)
-                    if (res.foto?.isNotEmpty() == true) {
-                        imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
-                    }
-                },
-            )
-
-            viewModel.userPenyuluh.observerLiveData(
-                viewLifecycleOwner,
-                onLoading = {
-                    msv.showLoadingState()
-                },
-                onEmpty = {},
-                onFailure = { _, mess ->
-                    msv.showEmptyState()
-                    showToast(mess.toString())
-                },
-                onSuccess = {
-                    msv.showDefaultState()
-                    val res = it.dataDaftarPenyuluh
-//                    Log.d("LOG NIK", res.nik.toString())
-//                    Log.d("LOG Name", res.nama.toString())
-//                    Log.d("LOG No Whatsapp", res.noTelp.toString())
-//                    Log.d("LOG Adress", res.alamat.toString())
-//                    Log.d("LOG kecamatan", res.kecamatan.toString())
-//                    Log.d("LOG desa", res.desa.toString())
-                    tilNik.setText(res.nik.toString())
-                    tilName.setText(res.nama.toString())
-                    tilNoWhatsapp.setText(res.noTelp ?: "")
-                    tilAddress.setText(res.alamat ?: "")
-                    kecamatan.setText(res.kecamatan, false)
-                    desa.setText(res.desa, false)
-                    if (res.foto?.isNotEmpty() == true) {
-                        imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
-                    }
-                },
-            )
-
             viewModel.edit.observerLiveData(
                 viewLifecycleOwner,
-                onLoading = {},
+                onLoading = {
+                    msv.showLoadingState()
+                },
                 onEmpty = {},
                 onFailure = { _, _ ->
+                    msv.showDefaultState()
                     showToast("Update data gagal")
                 },
                 onSuccess = {
+                    msv.showDefaultState()
                     showToast(it.message)
-
                     pref.setUser(
                         User(
-                            id = data.id,
-                            nik = data.NIK,
+                            id = pref.getUser().id,
+                            nik = data.nik,
                             nama = data.nama,
-                            NoWa = data.NoWa,
+                            noTelp = data.whatsapp,
                             alamat = data.alamat,
                             kecamatan = data.kecamatan,
                             desa = data.desa,
-                            role = "petani"
+                            role = pref.getUser().role,
                         )
                     )
+                    val password = when {
+                        !data.passwordBaru.isNullOrEmpty() -> data.passwordBaru
+                        else -> data.password
+                    }
+                    pref.setPassword(password)
                 }
             )
         }
     }
 
+    private fun tampilkanData() = with(binding){
+        val res = pref.getUser()
+        val phoneNumber = when {
+            !res.noTelp.isNullOrEmpty() -> res.noTelp
+            !res.NoWa.isNullOrEmpty() -> res.NoWa
+            else -> ""
+        }
+        tilNik.setText(res.nik.toString())
+        tilName.setText(res.nama.toString())
+        tilNoWhatsapp.setText(phoneNumber)
+        tilAddress.setText(res.alamat ?: "")
+        kecamatan.setText(res.kecamatan, false)
+        desa.setText(res.desa, false)
+        if (res.foto?.isNotEmpty() == true) {
+            imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
+        }
+    }
+
     private fun sendToObserver() = with(binding) {
-        val name = tilName.edittext
-        val nowa = tilNoWhatsapp.edittext
-        val nik = tilNik.edittext
+        val name = tilName.getText()
+        val nowa = tilNoWhatsapp.getText()
+        val nik = tilNik.getText()
         val kecamatan = tilKecamatan.toStringTrim()
         val desa = tilDesa.toStringTrim()
-        val address = tilAddress.edittext
-
+        val address = tilAddress.getText()
+        val password = pref.getAttemptLogin().password.trim()
+        val passwordBaru = tilPassword.getText().trim()
         data = UserEditeRequest(
-            id = pref.getUser().id,
-            NIK = nik,
+            nik = nik,
             nama = name,
             alamat = address,
             kecamatan = kecamatan,
             desa = desa,
-            NoWa = nowa,
-            foto = imageFile
+            whatsapp = nowa,
+            foto = imageFile,
+            password = password,
+            passwordBaru = passwordBaru
         )
-
         viewModel.edit(data)
     }
 

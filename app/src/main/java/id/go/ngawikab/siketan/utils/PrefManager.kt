@@ -84,6 +84,12 @@ class PrefManager(context: Context) {
         }.apply()
     }
 
+    fun setPassword(data: String?) =  with(Constant) {
+        prefs.edit().apply{
+            putString(PASSWORD, data)
+        }.apply()
+    }
+
     fun setUserPenyuluh(data: User) = with(Constant) {
         prefs.edit().apply{
             putInt(PENYULUH_ID, data.fk_penyuluhId ?: 0)
@@ -97,6 +103,7 @@ class PrefManager(context: Context) {
     fun getUser(): User = with(Constant){
         return User(
             id = prefs.getInt(USER_ID, 0),
+            nik = prefs.getString(NIK, emptyString()),
             foto = prefs.getString(USER_PHOTO, emptyString()),
             nama = prefs.getString(USER_NAME, emptyString()),
             NoWa = prefs.getString(USER_WA, emptyString()),

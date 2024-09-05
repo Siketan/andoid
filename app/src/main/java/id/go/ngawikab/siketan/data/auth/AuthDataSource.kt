@@ -65,7 +65,6 @@ class AuthDataSource(
     override suspend fun editUser(data: UserEditeRequest): Flow<Resource<GenericAddResponse>> =
         flow {
             enqueue(
-                data.id ?: 0,
                 data.toBody(),
                 err::convertGenericError,
                 webService::editUser,

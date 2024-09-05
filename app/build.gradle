@@ -18,8 +18,7 @@ android {
         versionName "1.1.1"
 
 //        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
-//        buildConfigField("String", "BASE_URL", "\"http://192.168.56.1:3001/\"")
-//        buildConfigField("String", "BASE_URL", "\"http://89.116.179.252:6969/\"")
+//        buildConfigField("String", "BASE_URL", "\"http://192.168.31.87:3001/\"")
 //        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3001/\"")
         buildConfigField("String", "BASE_URL", "\"https://api.siketan.id/\"")
 

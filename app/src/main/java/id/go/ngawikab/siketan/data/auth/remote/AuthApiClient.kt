@@ -51,9 +51,8 @@ interface AuthApiClient {
         @Path("id") id: Int
     ): Response<DetailPenyuluhResponse>
 
-    @PUT("daftar-tani/{id}")
+    @PUT("auth/updateprofile")
     suspend fun editUser(
-        @Path("id") id: Int,
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
 

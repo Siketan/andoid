@@ -108,6 +108,21 @@
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
                 app:labelHint="Alamat" />
 
+            <CheckBox
+                android:id="@+id/checkBoxChangePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="@string/keterangan_checkbox_ganti_pass" />
+
+            <id.go.ngawikab.siketan.utils.components.FormInput
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:labelHint="@string/hint_password_baru"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

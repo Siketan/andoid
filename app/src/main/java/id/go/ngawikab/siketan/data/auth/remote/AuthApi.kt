@@ -42,8 +42,8 @@ class AuthApi (private val api: AuthApiClient) : WebApi, AuthApiClient {
         return api.getUserPenyuluh(id)
     }
 
-    override suspend fun editUser(id: Int, body: MultipartBody): Response<GenericAddResponse> {
-        return api.editUser(id, body)
+    override suspend fun editUser(body: MultipartBody): Response<GenericAddResponse> {
+        return api.editUser(body)
     }
 
     override suspend fun getPenyuluh(): Response<OpsiPenyuluhResponse> {
