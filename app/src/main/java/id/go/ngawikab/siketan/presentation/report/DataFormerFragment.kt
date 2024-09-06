@@ -4,6 +4,7 @@ package id.go.ngawikab.siketan.presentation.report
 import android.R
 import android.graphics.Color
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,8 +56,11 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
 
 
     override fun initUI() {
+        Log.d("TES", "INI KAN PETANI COK=="+pref.getUser().role+"==")
         with(binding) {
-            fabAdd.visibleIf { pref.getUser().role == UserRole.PETANI.role }
+            fabAdd.visibleIf {
+                pref.getUser().role === UserRole.PETANI.role
+            }
         }
 
         if (pref.getUser().role == UserRole.PENYULUH.role){
@@ -67,33 +71,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         }
     }
 
-
-    private fun setListPetani() = with(binding) {
-        viewModel.getPetani(pref.getUser().id!!)
-        viewModel.petani.observerLiveData(
-            viewLifecycleOwner,
-            onLoading = {},
-            onEmpty = {},
-            onFailure = { _, _ -> },
-            onSuccess = {
-                val res = it
-                val adapter = ArrayAdapter(
-                    requireContext(),
-                    R.layout.simple_list_item_1,
-                    res.map { f -> f.nama }
-                )
-                listPetani.apply {
-                    setAdapter(adapter)
-                    setOnItemClickListener { _, _, i, _ ->
-                        petaniIdValue = res[i].id
-                        viewModel.selectFarmer(res[i].id)
-                    }
-                }
-            }
-        )
-    }
-
-
     override fun initAction() {
         with(binding) {
             imgBack.onClick { findNavController().navigateUp() }
@@ -101,10 +78,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 fabAdd.isExpanded = reveal
                 reveal = !reveal
             }
-            fabAdd.hide()
-            fabAdd.visibleIf {
-                pref.getUser().role === UserRole.PETANI.role
-            }
+//            fabAdd.hide()
 
             linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment()) }
             linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment()) }
@@ -150,6 +124,31 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 binding.msv.showDefaultState()
                 barChart(it)
                 pieChart(it)
+            }
+        )
+    }
+
+    private fun setListPetani() = with(binding) {
+        viewModel.getPetani(pref.getUser().id!!)
+        viewModel.petani.observerLiveData(
+            viewLifecycleOwner,
+            onLoading = {},
+            onEmpty = {},
+            onFailure = { _, _ -> },
+            onSuccess = {
+                val res = it
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.simple_list_item_1,
+                    res.map { f -> f.nama }
+                )
+                listPetani.apply {
+                    setAdapter(adapter)
+                    setOnItemClickListener { _, _, i, _ ->
+                        petaniIdValue = res[i].id
+                        viewModel.selectFarmer(res[i].id)
+                    }
+                }
             }
         )
     }

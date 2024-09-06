@@ -114,11 +114,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    override fun initObservers() {
-
-    }
-
     override fun initProcess() {
+        Log.d("JWT", prefs.getToken())
+    }
+    override fun initObservers() {
 
     }
 }

@@ -37,10 +37,15 @@ val appModule = module {
 
 
 private fun getHeaderInterceptor(pref: PrefManager): Interceptor {
-    val headers = HashMap<String, String>()
-    headers["Authorization"] = pref.getToken()
-    headers["Content-Type"] = "application/json"
-    headers["Content-Type"] = "application/x-www-form-urlencoded"
-    headers["Content-Type"] = "multipart/form-data"
-    return HeaderInterceptor(headers)
+    return Interceptor { chain ->
+        val requestBuilder = chain.request().newBuilder()
+        val token = pref.getToken()
+        if (!token.isNullOrEmpty()) {
+            requestBuilder.addHeader("Authorization", token)
+        }
+        requestBuilder.addHeader("Content-Type", "application/json")
+        requestBuilder.addHeader("Content-Type", "application/x-www-form-urlencoded")
+        requestBuilder.addHeader("Content-Type", "multipart/form-data")
+        chain.proceed(requestBuilder.build())
+    }
 }

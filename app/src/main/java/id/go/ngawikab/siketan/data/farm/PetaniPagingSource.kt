@@ -13,7 +13,7 @@ class PetaniPagingSource(
 ) : PagingSource<Int, Petani>() {
 
     private val STARTING_PAGE_INDEX = 1
-    private val PAGE_SIZE = 20 // Define your page size here
+    private val PAGE_SIZE = 20
 
     override fun getRefreshKey(state: PagingState<Int, Petani>): Int? =
         state.anchorPosition?.let { pos ->

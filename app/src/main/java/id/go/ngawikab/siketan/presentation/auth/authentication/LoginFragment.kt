@@ -91,7 +91,7 @@ class LoginFragment : SiketanBaseFragment<FragmentLoginBinding>() {
                 debug { "Login Token --> ${it.token}" }
 
                 pref.login(true)
-                pref.setToken(it.token!!)
+                pref.setToken(it.token.toString()!!)
                 pref.setUser(it.user!!)
                 if(it.user.role!! == UserRole.PETANI.role) viewModel.user(it.user.id!!)
                 else {
