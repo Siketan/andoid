@@ -61,7 +61,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         with(binding) {
             fabAdd.hide()
             fabAdd.visibleIf {
-                pref.getUser().role === UserRole.PETANI.role
+                pref.getUser().role == UserRole.PETANI.role
             }
         }
 
@@ -102,7 +102,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 val query = Chartparam(
                     user?.id,
                 )
-                Log.d("DATA FORMER FRAGMENT", user.toString())
                 with(binding){
                     if (!fabAdd.isVisible)
                         fabAdd.visible()
