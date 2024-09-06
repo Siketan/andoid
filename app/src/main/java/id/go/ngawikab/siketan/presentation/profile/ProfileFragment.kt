@@ -150,8 +150,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         val address = tilAddress.getText()
         val password = pref.getAttemptLogin().password.trim()
         val passwordBaru = tilPassword.getText().trim()
-//        Log.d("PASSWORD", "+++"+password+"+++")
-//        Log.d("PASSWORD BARU", "+++"+passwordBaru+"+++")
         data = UserEditeRequest(
             nik = nik,
             nama = name,

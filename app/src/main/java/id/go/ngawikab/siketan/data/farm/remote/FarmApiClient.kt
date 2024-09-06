@@ -70,7 +70,7 @@ interface FarmApiClient {
         @Query("jenis") jenis: String?
     ): Response<ChartResponse>
 
-    @GET("tanaman-petani/petani/{id}")
+    @GET("tanaman-petani/petani/{id}/all")
     suspend fun getTanaman(
         @Path("id") id: Int,
         @Query("page") page: Int?,

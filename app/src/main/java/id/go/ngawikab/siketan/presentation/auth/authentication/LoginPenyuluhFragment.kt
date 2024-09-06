@@ -69,8 +69,6 @@ class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>(
             onSuccess = {
                 hideLoading()
 
-                debug { "Login Token --> ${it.token}" }
-
                 pref.login(true)
                 pref.setToken(it.token.toString()!!)
                 pref.setUser(it.user!!)

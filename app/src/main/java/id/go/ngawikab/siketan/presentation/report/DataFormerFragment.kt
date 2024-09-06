@@ -56,7 +56,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
 
 
     override fun initUI() {
-        Log.d("TES", "INI KAN PETANI COK=="+pref.getUser().role+"==")
         with(binding) {
             fabAdd.visibleIf {
                 pref.getUser().role === UserRole.PETANI.role

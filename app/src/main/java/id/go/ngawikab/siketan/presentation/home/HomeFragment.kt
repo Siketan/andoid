@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun initUI() {
-//        debug { "User id: ${prefs.getUser().id}" }
+
     }
 
     override fun initAction() {
@@ -115,7 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initProcess() {
-        Log.d("JWT", prefs.getToken())
+
     }
     override fun initObservers() {
 

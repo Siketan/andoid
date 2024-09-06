@@ -61,5 +61,4 @@ class ReportPlantDataFragment : SiketanBaseFragment<FragmentReportPlantDataBindi
             }
         )
     }
-
 }
