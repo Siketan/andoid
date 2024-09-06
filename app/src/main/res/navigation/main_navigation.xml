@@ -105,7 +105,11 @@
         android:id="@+id/addRealizationFragment"
         android:name="id.go.ngawikab.siketan.presentation.report.add.AddRealizationFragment"
         android:label="fragment_add_realization"
-        tools:layout="@layout/fragment_add_realization" />
+        tools:layout="@layout/fragment_add_realization" >
+        <argument
+            android:name="user"
+            app:argType="id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani" />
+    </fragment>>
     <fragment
         android:id="@+id/profileFragment"
         android:name="id.go.ngawikab.siketan.presentation.profile.ProfileFragment"
@@ -122,6 +126,9 @@
         <action
             android:id="@+id/action_plantDataFragment_to_reportPlantDataFragment"
             app:destination="@id/reportPlantDataFragment" />
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/reportPlantDataFragment"

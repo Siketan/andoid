@@ -15,6 +15,7 @@ import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
+import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -46,13 +47,13 @@ class ReportViewModel(private val useCase: FarmUseCase) : ViewModel() {
     private val _petani = MutableLiveData<Resource<List<OpsiPetani>>>()
     val petani: LiveData<Resource<List<OpsiPetani>>> get() = _petani
 
-    val selectedFarmerId : LiveData<Int> get() = _selectedFarmerId
-    private val _selectedFarmerId = MutableLiveData<Int>()
+    val selectedFarmerId : LiveData<OpsiPetani> get() = _selectedFarmerId
+    private val _selectedFarmerId = MutableLiveData<OpsiPetani>()
 
 
-    fun selectFarmer(id:Int){
+    fun selectFarmer(data: OpsiPetani){
         viewModelScope.launch {
-            _selectedFarmerId.value=id
+            _selectedFarmerId.value = data
         }
     }
 

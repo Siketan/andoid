@@ -43,10 +43,12 @@
     <string name="sedang_kerusakan_25_50"><![CDATA[SEDANG (kerusakan < 25% - 50%)]]></string>
     <string name="berat_kerusakan_50_75"><![CDATA[BERAT (kerusakan < 50% - 75%)]]></string>
     <string name="puso_kerusakan_70"><![CDATA[PUSO (kerusakan > 70%)]]></string>
-    <string name="nama_petani">Nama Petani</string>
+    <string name="hint_petani">Nama Petani</string>
+    <string name="hint_penyuluh">Nama Penyuluh</string>
     <string name="format_jenis_panen">Jenis Panen: %s</string>
     <string name="format_luas_lahan">Luas Lahan: %s</string>
     <string name="format_tanggal">Tanggal : %s</string>
+    <string name="format_judul_laporan">Laporan %s</string>
     <string name="hint_alamat">Alamat</string>
     <string name="label_selanjutnya">Selanjunya</string>
     <string name="keterangan_checkbox_ganti_pass">Ganti Password</string>

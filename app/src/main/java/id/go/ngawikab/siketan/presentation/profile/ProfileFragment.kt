@@ -19,6 +19,7 @@ import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.library.utils.exts.visibleIf
+import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.databinding.FragmentProfileBinding
 import id.go.ngawikab.siketan.domain.auth.model.User
@@ -54,8 +55,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         with(binding) {
             tilNik.disable
             tilName.disable
-
             val user = pref.getUser()
+            if (user.role == UserRole.PENYULUH.role) {
+                tilName.setHint(getString(R.string.hint_penyuluh))
+            }
             btnSave.visibleIf { user.role == UserRole.PETANI.role }
             spacer.visibleIf { user.role == UserRole.PETANI.role }
         }

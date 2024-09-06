@@ -61,6 +61,10 @@ class FormInput @JvmOverloads constructor(
         edt.setText(text)
     }
 
+    fun setHint(text: String) = with(binding){
+        til.hint = text
+    }
+
     fun getText(): String = with(binding){
         return edt.text.toString()
     }

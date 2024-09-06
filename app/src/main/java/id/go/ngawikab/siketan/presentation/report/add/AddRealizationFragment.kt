@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.presentation.report.add
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.clear
@@ -19,6 +20,7 @@ import id.go.ngawikab.siketan.utils.CategoryType
 import id.go.ngawikab.siketan.utils.HarverstType
 import id.go.ngawikab.siketan.utils.PlantType
 import id.go.ngawikab.siketan.utils.PrefManager
+import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
 import id.go.ngawikab.siketan.utils.showCancelableDialog
 import id.go.ngawikab.siketan.utils.showSuccessDialog
@@ -28,6 +30,7 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
 
     private val pref: PrefManager by inject()
     private val viewModel: ReportViewModel by inject()
+    private val data: AddRealizationFragmentArgs by navArgs()
 
 
     override fun getViewBinding(
@@ -41,10 +44,17 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
     override fun initUI() {
         with(binding) {
             val user = pref.getUser()
-            tilNik.setText(pref.getAttemptLogin().nik)
-            tilName.setText(user.nama.toString())
-            tilKecamatan.setText(user.kecamatan.toString())
-            tilDesa.setText(user.desa.toString())
+            if (user.role == UserRole.PETANI.role){
+                tilNik.setText(pref.getAttemptLogin().nik)
+                tilName.setText(user.nama.toString())
+                tilKecamatan.setText(user.kecamatan.toString())
+                tilDesa.setText(user.desa.toString())
+            }else {
+                tilNik.setText(data.user.nik.toString())
+                tilName.setText(data.user.nama.toString())
+                tilKecamatan.setText(data.user.kecamatan.toString())
+                tilDesa.setText(data.user.desa.toString())
+            }
         }
 
         setupStatusLahan()
@@ -65,7 +75,10 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
     override fun initProcess() {
         with(binding) {
             btnSubmit.onClick {
-                val id = pref.getUser().id
+                val id = when {
+                    (pref.getUser().role == UserRole.PENYULUH.role) -> data.user.id
+                    else -> pref.getUser().id
+                }
                 val statusLahan = if (tilStatusLahan.toStringTrim() == "Lahan Sendiri") {
                     "MILIK SENDIRI"
                 } else {

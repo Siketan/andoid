@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.R
+import id.go.ngawikab.siketan.domain.auth.model.User
+import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import id.go.ngawikab.siketan.utils.components.MyDialogFragment
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -53,7 +55,6 @@ fun Fragment.navDirection(direction: NavDirections) =
 
 fun emailMatches(value: String): Boolean =
     !TextUtils.isEmpty(value) && Patterns.EMAIL_ADDRESS.matcher(value).matches()
-
 
 fun Fragment.navigate(navDirections: NavDirections) {
     findNavController().navigate(navDirections)
@@ -214,4 +215,14 @@ fun formatPhoneNumber(phoneNumber: String?): String? {
     } else {
         phoneNumber
     }
+}
+
+fun User.toOpsiPetani(): OpsiPetani {
+    return OpsiPetani(
+        nik = this.nik,
+        nama = this.nama,
+        id = this.id ?: 0,
+        desa = this.desa,
+        kecamatan = this.kecamatan
+    )
 }

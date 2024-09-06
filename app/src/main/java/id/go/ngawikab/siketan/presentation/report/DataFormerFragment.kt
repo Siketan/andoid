@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.BarData
@@ -26,6 +27,7 @@ import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
+import com.wahidabd.library.utils.exts.visible
 
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
@@ -37,6 +39,7 @@ import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.Dummy
 import id.go.ngawikab.siketan.utils.navigate
 import id.go.ngawikab.siketan.utils.randomColor
+import id.go.ngawikab.siketan.utils.toOpsiPetani
 import org.koin.android.ext.android.inject
 
 class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
@@ -44,7 +47,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
     private val pref: PrefManager by inject()
     private var reveal: Boolean = true
 
-    private var petaniIdValue: Int? = null
     private val viewModel: ReportViewModel by inject()
 
     override fun getViewBinding(
@@ -57,6 +59,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
 
     override fun initUI() {
         with(binding) {
+            fabAdd.hide()
             fabAdd.visibleIf {
                 pref.getUser().role === UserRole.PETANI.role
             }
@@ -77,34 +80,38 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 fabAdd.isExpanded = reveal
                 reveal = !reveal
             }
-//            fabAdd.hide()
-
-            linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment()) }
-            linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment()) }
         }
     }
 
     override fun initProcess() {
-
-        if(pref.getUser().role == UserRole.PETANI.role){
-            val userId = pref.getUser().id
+        if(pref.getUser().role == UserRole.PETANI.role) {
+            val user = pref.getUser()
             val query = Chartparam(
-                userId,
+                user.id,
             )
             viewModel.getChart(query)
+            with(binding) {
+                linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment(user.toOpsiPetani())) }
+                linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment(user.id ?: 0)) }
+            }
         }else{
             viewModel.selectedFarmerId.observe(
                 viewLifecycleOwner
             ) {
-                val userId = viewModel.selectedFarmerId.value
+                val user = it
                 val query = Chartparam(
-                    userId,
+                    user?.id,
                 )
+                Log.d("DATA FORMER FRAGMENT", user.toString())
+                with(binding){
+                    if (!fabAdd.isVisible)
+                        fabAdd.visible()
+                    linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment(user)) }
+                    linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment(user.id)) }
+                }
                 viewModel.getChart(query)
             }
         }
-
-
     }
 
     override fun initObservers() {
@@ -131,10 +138,15 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         viewModel.getPetani(pref.getUser().id!!)
         viewModel.petani.observerLiveData(
             viewLifecycleOwner,
-            onLoading = {},
+            onLoading = {
+                msv.showLoadingState()
+            },
             onEmpty = {},
-            onFailure = { _, _ -> },
+            onFailure = { _, _ ->
+                msv.showDefaultState()
+            },
             onSuccess = {
+                msv.showDefaultState()
                 val res = it
                 val adapter = ArrayAdapter(
                     requireContext(),
@@ -144,8 +156,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 listPetani.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        petaniIdValue = res[i].id
-                        viewModel.selectFarmer(res[i].id)
+                        viewModel.selectFarmer(res[i])
                     }
                 }
             }

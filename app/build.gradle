@@ -19,8 +19,8 @@ android {
 
 //        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
 //        buildConfigField("String", "BASE_URL", "\"http://192.168.31.87:3001/\"")
-        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3001/\"")
-//        buildConfigField("String", "BASE_URL", "\"https://api.siketan.id/\"")
+//        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3001/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.siketan.id/\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
