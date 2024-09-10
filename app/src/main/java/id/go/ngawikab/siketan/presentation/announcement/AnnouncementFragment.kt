@@ -1,7 +1,12 @@
 package id.go.ngawikab.siketan.presentation.announcement
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.setMargins
 import androidx.navigation.fragment.findNavController
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showSnackbarMessage
@@ -44,17 +49,23 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
         with(binding) {
             imgBack.onClick { findNavController().navigateUp() }
             rgContainer.setOnCheckedChangeListener { radioGroup, _ ->
-                if (radioGroup.checkedRadioButtonId == rbNews.id) {
-                    viewModel.infoTani()
-                } else {
-                    viewModel.event()
-                }
+                viewModel.currentPage = 0
+                viewModel.selectedRadioButtonId = radioGroup.checkedRadioButtonId
+                viewModel.fetchData()
+            }
+            btnNext.onClick {
+                viewModel.loadNextPage()
+            }
+            btnPrevious.onClick {
+                viewModel.loadPreviousPage()
             }
         }
     }
 
     override fun initProcess() {
-        viewModel.infoTani()
+        with(binding){
+            rbNews.performClick()
+        }
     }
 
     override fun initObservers() {
@@ -78,7 +89,8 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
                     progress.gone()
                     rvInfo.visible()
                     rvEvent.gone()
-                    mAdapter.setData = it
+                    mAdapter.setData = ArrayList(it)
+                    updatePaginationButtons()
                 }
             )
 
@@ -101,9 +113,79 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
                     progress.gone()
                     rvInfo.gone()
                     rvEvent.visible()
-                    eventAdapter.setData = it
+                    eventAdapter.setData = ArrayList(it)
+                    updatePaginationButtons()
                 }
             )
+        }
+    }
+
+    private fun updatePaginationButtons() {
+        val totalItems = if (viewModel.selectedRadioButtonId == R.id.rbNews) {
+            viewModel.getInfoTaniSize()
+        } else {
+            viewModel.getEventTaniSize()
+        }
+
+        val totalPages = (totalItems + viewModel.pageSize - 1) / viewModel.pageSize
+        val currentPage = viewModel.currentPage
+        binding.btnPrevious.isEnabled = currentPage > 0
+        binding.btnNext.isEnabled = currentPage < totalPages - 1
+        updatePageButtons(currentPage, totalPages)
+    }
+
+    private fun updatePageButtons(currentPage: Int, totalPages: Int) {
+        binding.paginationContainer.removeAllViews()
+
+        val startPage: Int
+        val endPage: Int
+
+        when {
+            totalPages <= 3 -> {
+                startPage = 0
+                endPage = totalPages - 1
+            }
+            currentPage <= 1 -> {
+                startPage = 0
+                endPage = 2
+            }
+            currentPage >= totalPages - 2 -> {
+                startPage = totalPages - 3
+                endPage = totalPages - 1
+            }
+            else -> {
+                startPage = currentPage - 1
+                endPage = currentPage + 1
+            }
+        }
+
+        for (i in startPage..endPage) {
+            val pageButton = Button(requireContext()).apply {
+                text = (i + 1).toString()
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(0,0,0,0)
+                }
+                setTextColor(ContextCompat.getColor(context, R.color.white))
+                if (i == currentPage) {
+                    setBackgroundResource(R.drawable.pagination_button_selected)
+                } else {
+                    setBackgroundResource(R.drawable.pagination_button_bg)
+                }
+
+                setOnClickListener {
+                    viewModel.currentPage = i
+                    if (viewModel.selectedRadioButtonId == R.id.rbNews) {
+                        viewModel.updateInfoTani()
+                    } else {
+                        viewModel.updateEventTani()
+                    }
+                    updatePaginationButtons()
+                }
+            }
+            binding.paginationContainer.addView(pageButton)
         }
     }
 
@@ -115,5 +197,4 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding>() {
         findNavController().navigate(AnnouncementFragmentDirections.actionAnnouncementFragmentToAnnouncementDetailFragment(data))
 
     }
-
 }
