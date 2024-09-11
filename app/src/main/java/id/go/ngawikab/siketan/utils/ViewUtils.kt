@@ -210,11 +210,12 @@ fun convertFileToBase64(file: File? = null): String {
 }
 
 fun formatPhoneNumber(phoneNumber: String?): String? {
-    return if (phoneNumber != null && phoneNumber.startsWith("0")) {
-        "+62" + phoneNumber.substring(1)
-    } else {
-        phoneNumber
-    }
+    return when {
+        phoneNumber == null -> ""
+        phoneNumber.startsWith("0") -> "+62" + phoneNumber.trim().substring(1)
+        phoneNumber.startsWith("+62") -> phoneNumber
+        else -> "0$phoneNumber"
+    }.replace("\\s".toRegex(), "")
 }
 
 fun User.toOpsiPetani(): OpsiPetani {

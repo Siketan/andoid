@@ -34,23 +34,6 @@ class AnnouncementViewModel(
 
     var selectedRadioButtonId: Int = R.id.rbNews
 
-//    fun infoTani() {
-//        useCase.getInfoTani()
-//            .onEach {
-//                _infoTani.value = it
-//            }
-//            .launchIn(viewModelScope)
-//    }
-//
-//    fun event() {
-//        useCase.getEvent()
-//            .onEach {
-//                _event.value = it
-//            }
-//            .onEmpty { _event.value = Resource.empty() }
-//            .launchIn(viewModelScope)
-//    }
-
     var currentPage = 0
     val pageSize = 5
     private val allInfoTani = mutableListOf<InfoTani>()
