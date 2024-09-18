@@ -32,7 +32,7 @@ val appModule = module {
     }
 
     single(named(BASE_URL)) { BuildConfig.BASE_URL }
-    single(named(ADDRESS_URL)) { "https://dev.farizdotid.com/api/daerahindonesia/" }
+    single(named(ADDRESS_URL)) { BuildConfig.BASE_URL }
 }
 
 

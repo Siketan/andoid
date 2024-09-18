@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName
 data class Address(
     @SerializedName("id")
     val id: Long,
-    @SerializedName("id_kecamatan", alternate = ["id_kota"])
+    @SerializedName("kecamatanId")
     val idCity: Long,
     @SerializedName("nama")
     val name: String

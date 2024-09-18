@@ -11,6 +11,6 @@ import id.go.ngawikab.siketan.domain.address.model.Address
 
 
 data class ResponseAddress(
-    @SerializedName("kecamatan", alternate = ["kelurahan"])
+    @SerializedName("data")
     val data: List<Address>
 )
