@@ -47,13 +47,13 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
             if (user.role == UserRole.PETANI.role){
                 tilNik.setText(pref.getAttemptLogin().nik)
                 tilName.setText(user.nama.toString())
-                tilKecamatan.setText(user.kecamatan.toString())
-                tilDesa.setText(user.desa.toString())
+                tilKecamatan.setText(user.kecamatanData?.nama.toString())
+                tilDesa.setText(user.desaData?.nama.toString())
             }else {
                 tilNik.setText(data.user.nik.toString())
                 tilName.setText(data.user.nama.toString())
-                tilKecamatan.setText(data.user.kecamatan.toString())
-                tilDesa.setText(data.user.desa.toString())
+                tilKecamatan.setText(data.user.kecamatanData?.nama.toString())
+                tilDesa.setText(data.user.desaData?.nama.toString())
             }
         }
 

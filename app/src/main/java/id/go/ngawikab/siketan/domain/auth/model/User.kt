@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.domain.auth.model
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.data.auth.model.user.Penyuluh
 import id.go.ngawikab.siketan.data.auth.model.user.UserResponse
+import id.go.ngawikab.siketan.domain.address.model.Address
 import id.go.ngawikab.siketan.domain.farm.model.response.Journal
 import timber.log.Timber
 
@@ -13,11 +14,11 @@ data class User(
     val noTelp: String? = emptyString(),
     val alamat: String? = emptyString(),
     val createdAt: String? = emptyString(),
-    val desa: String? = emptyString(),
+    val desaData: Address? = null,
     val foto: String? = emptyString(),
     val id: Int? = 0,
     val jurnalKegiatanId: Int? = 0,
-    val kecamatan: String? = emptyString(),
+    val kecamatanData: Address? = null,
     val kecamatanBinaan: String?= emptyString(),
     val kelompokId: Int? = 0,
     val laporanTanamId: Int? = 0,
@@ -45,12 +46,12 @@ fun UserResponse.toDomain(): User =
         noTelp,
         alamat,
         createdAt,
-        desa,
+        desaData,
         foto,
         id,
         jurnalKegiatanId,
-        kecamatan,
-        kecamatanBinaan =kecamatanBinaan,
+        kecamatanData,
+        kecamatanBinaan,
         kelompokId,
         laporanTanamId,
         nama,

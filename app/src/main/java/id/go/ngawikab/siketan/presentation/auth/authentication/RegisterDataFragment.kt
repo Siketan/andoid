@@ -1,6 +1,5 @@
 package id.go.ngawikab.siketan.presentation.auth.authentication
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -12,7 +11,6 @@ import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.toStringTrim
 import id.go.ngawikab.siketan.databinding.FragmentRegisterDataBinding
-import id.go.ngawikab.siketan.domain.auth.model.RegisterBaseData
 import id.go.ngawikab.siketan.domain.auth.model.RegisterRequest
 import id.go.ngawikab.siketan.presentation.report.viewmodel.AddressViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
@@ -44,14 +42,15 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
         return FragmentRegisterDataBinding.inflate(layoutInflater)
     }
 
-    override fun initUI() {}
+    override fun initUI() {
+        binding.edtGapoktan.editText.isEnabled = false
+    }
 
     override fun initAction() {
         with(binding) {
             btnlogin.onClick {
                 reqToObservers()
             }
-
         }
     }
 
@@ -114,14 +113,14 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 kecamatan.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
                         tilDesa.clear()
                         desaValue = null
-                        kecValue = res[i].name
+                        kecValue = res[i].nama
                         setDesa(res[i].id)
                     }
                 }
@@ -165,13 +164,13 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 desa.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        desaValue = res[i].name
-                        setKelompokTani(desaValue!!)
+                        desaValue = res[i].nama
+                        setKelompokTani(res[i].id.toString())
 
                     }
                 }
@@ -183,7 +182,6 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
         with(binding) {
             edtGapoktan.editText.setText(gapoktanName)
             gapoktanValue = gapoktanName
-
         }
     }
 
@@ -202,15 +200,13 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
                     res.map { f -> f.namaKelompok }
                 )
                 kelompokTani.apply {
-                    setGapoktan(it[0].gapoktan ?: "")
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
+                        setGapoktan(it[i].gapoktan ?: "")
                         namaKelompokValue = res[i].namaKelompok
                     }
                 }
             }
         )
     }
-
-
 }

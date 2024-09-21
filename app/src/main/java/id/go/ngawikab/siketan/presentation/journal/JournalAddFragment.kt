@@ -171,7 +171,7 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    it.data.map { f -> f.name })
+                    it.data.map { f -> f.nama })
 
                 autoComplete.apply {
                     setAdapter(adapter)
@@ -201,7 +201,7 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
                 tvKelurahan.text = ""
                 kelurahan.visibleIf { it.data.isNotEmpty() }
                 it.data.forEachIndexed { index, address ->
-                    tvKelurahan.append("${index + 1}. ${address.name}\n")
+                    tvKelurahan.append("${index + 1}. ${address.nama}\n")
                 }
             }
         )

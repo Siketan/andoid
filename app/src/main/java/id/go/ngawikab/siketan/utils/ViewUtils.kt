@@ -223,7 +223,7 @@ fun User.toOpsiPetani(): OpsiPetani {
         nik = this.nik,
         nama = this.nama,
         id = this.id ?: 0,
-        desa = this.desa,
-        kecamatan = this.kecamatan
+        desaData = this.desaData,
+        kecamatanData = this.kecamatanData
     )
 }

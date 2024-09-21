@@ -120,7 +120,8 @@
             android:layout_marginTop="@dimen/dimen_20dp"
             app:hintLabel="Gapoktan"
             app:iconLabel="@drawable/ic_person"
-            app:input_type="number" />
+            app:input_type="number"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilKelompokTani"

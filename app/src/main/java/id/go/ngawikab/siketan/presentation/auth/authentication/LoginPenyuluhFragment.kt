@@ -11,6 +11,7 @@ import com.wahidabd.library.utils.exts.toStringTrim
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.databinding.FragmentLoginPenyuluhBinding
+import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.presentation.MainActivity
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
@@ -58,6 +59,26 @@ class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>(
     }
 
     override fun initObservers() {
+        viewModel.userProfile.observerLiveData(
+            viewLifecycleOwner,
+            onEmpty = {},
+            onLoading = { showLoading() },
+            onFailure = { _, m ->
+                hideLoading()
+                showToast(m.toString())
+            },
+            onSuccess = {
+                hideLoading()
+                val res = User(
+                    kecamatanData = it.userRole.kecamatanData,
+                    desaData =it.userRole.desaData
+                )
+                pref.setUserKecamatanDesa(res)
+                MainActivity.start(requireContext())
+                activity?.finish()
+            }
+        )
+
         viewModel.login.observerLiveData(
             viewLifecycleOwner,
             onEmpty = {},
@@ -72,9 +93,7 @@ class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>(
                 pref.login(true)
                 pref.setToken(it.token.toString()!!)
                 pref.setUser(it.user!!)
-
-                MainActivity.start(requireContext())
-                activity?.finish()
+                viewModel.userProfile()
             }
         )
     }

@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.utils
 import android.content.Context
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
+import id.go.ngawikab.siketan.domain.address.model.Address
 import id.go.ngawikab.siketan.domain.auth.model.LoginRequest
 import id.go.ngawikab.siketan.domain.auth.model.User
 
@@ -72,8 +73,6 @@ class PrefManager(context: Context) {
             putString(USER_PHOTO, data.foto)
             putString(USER_WA, data.noTelp)
             putString(USER_ADDRESS, data.alamat)
-            putString(USER_DESA, data.desa)
-            putString(USER_KECAMATAN, data.kecamatan)
             putString(USER_NAME, data.nama)
             putString(ROLE, data.role)
             if (data.role == UserRole.PETANI.role) {
@@ -83,6 +82,16 @@ class PrefManager(context: Context) {
             }
         }.apply()
     }
+
+    fun setUserKecamatanDesa(data: User) = with(Constant) {
+        prefs.edit().apply{
+            putInt(USER_DESA_ID, data.desaData?.id?.toInt() ?: 0)
+            putString(USER_DESA, data.desaData?.nama)
+            putInt(USER_KECAMATAN_ID, data.kecamatanData?.id?.toInt() ?: 0)
+            putString(USER_KECAMATAN, data.kecamatanData?.nama)
+        }.apply()
+    }
+
 
     fun setPassword(data: String?) =  with(Constant) {
         prefs.edit().apply{
@@ -108,8 +117,14 @@ class PrefManager(context: Context) {
             nama = prefs.getString(USER_NAME, emptyString()),
             NoWa = prefs.getString(USER_WA, emptyString()),
             alamat = prefs.getString(USER_ADDRESS, emptyString()),
-            desa = prefs.getString(USER_DESA, emptyString()),
-            kecamatan = prefs.getString(USER_KECAMATAN, emptyString()),
+            desaData = Address(
+                id = prefs.getInt(USER_DESA_ID, 0).toLong(),
+                nama = prefs.getString(USER_DESA, emptyString()) ?: ""
+            ),
+            kecamatanData = Address(
+                id = prefs.getInt(USER_KECAMATAN_ID, 0).toLong(),
+                nama = prefs.getString(USER_KECAMATAN, emptyString())  ?: emptyString()
+            ),
             role = prefs.getString(ROLE, emptyString()),
             fk_penyuluhId = prefs.getInt(PENYULUH_ID, 0),
             nama_penyuluh = prefs.getString(PENYULUH_NAMA, emptyString()),

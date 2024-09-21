@@ -2,7 +2,7 @@ package id.go.ngawikab.siketan.data.auth.model.user
 
 import id.go.ngawikab.siketan.domain.auth.model.User
 
-data class DetailPenyuluhResponse(
+data class DetailUserProfileResponse(
     val message: String,
-    val dataDaftarPenyuluh: Penyuluh
+    val userRole: User
 )

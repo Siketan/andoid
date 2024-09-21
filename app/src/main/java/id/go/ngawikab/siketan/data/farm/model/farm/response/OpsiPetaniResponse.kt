@@ -1,6 +1,7 @@
 package id.go.ngawikab.siketan.data.farm.model.farm.response
 
 import com.google.gson.annotations.SerializedName
+import id.go.ngawikab.siketan.domain.address.model.Address
 
 data class OpsiPetaniResponse(
 	@SerializedName("petanis")
@@ -11,7 +12,7 @@ data class OpsiPetaniResponse(
 
 data class Petani(
 	@SerializedName("id") val id: Int? = null,
-	@SerializedName("desa") val desa: String? = null,
+	@SerializedName("desaData") val desaData: Address? = null,
 	@SerializedName("fkKelompokId") val fkKelompokId: Int? = null,
 	@SerializedName("fkPenyuluhId")	val fkPenyuluhId: Int? = null,
 	@SerializedName("noTelp") val noTelp: String? = null,
@@ -24,7 +25,7 @@ data class Petani(
 	@SerializedName("deletedAt") val deletedAt: Any? = null,
 	@SerializedName("foto") val foto: String? = null,
 	@SerializedName("nama") val nama: String? = null,
-	@SerializedName("kecamatan") val kecamatan: String? = null,
+	@SerializedName("kecamatanData") val kecamatanData: Address? = null,
 	@SerializedName("email") val email: String? = null,
 	@SerializedName("updatedAt") val updatedAt: String? = null
 )

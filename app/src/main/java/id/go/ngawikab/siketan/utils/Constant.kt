@@ -19,8 +19,10 @@ object Constant {
     const val USER_PHOTO = "user_photo"
     const val USER_WA = "user_wa"
     const val USER_ADDRESS = "user_address"
+    const val USER_DESA_ID = "user_desa_id"
     const val USER_DESA = "user_desa"
     const val USER_NAME = "user_name"
+    const val USER_KECAMATAN_ID = "user_kecamatan_id"
     const val USER_KECAMATAN = "user_kecamatan"
     const val ROLE = "role"
 

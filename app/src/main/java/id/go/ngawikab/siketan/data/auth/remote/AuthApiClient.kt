@@ -6,7 +6,7 @@ import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
+import id.go.ngawikab.siketan.data.auth.model.user.DetailUserProfileResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import okhttp3.MultipartBody
@@ -14,7 +14,6 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 
@@ -41,15 +40,14 @@ interface AuthApiClient {
         @Body data: RegisterDataRequest
     ): Response<AuthDataResponse>
 
+    @GET("auth/profile")
+    suspend fun getUserProfile(
+    ): Response<DetailUserProfileResponse>
+
     @GET("daftar-tani/{id}")
     suspend fun getUser(
         @Path("id") id: Int
     ): Response<DetailPetaniResponse>
-
-    @GET("daftar-penyuluh/{id}")
-    suspend fun getUserPenyuluh(
-        @Path("id") id: Int
-    ): Response<DetailPenyuluhResponse>
 
     @POST("auth/updateprofile")
     suspend fun editUser(

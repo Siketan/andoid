@@ -1,6 +1,7 @@
 package id.go.ngawikab.siketan.data.auth.model.user
 
 import android.os.Parcelable
+import id.go.ngawikab.siketan.domain.address.model.Address
 import kotlinx.parcelize.Parcelize
 
 data class OpsiPenyuluhResponse(
@@ -10,7 +11,7 @@ data class OpsiPenyuluhResponse(
 
 @Parcelize
 data class Penyuluh(
-	val desa: String? = null,
+	val desaData: Address? = null,
 	val noTelp: String? = null,
 	val alamat: String? = null,
 	val nik: String? = null,
@@ -20,9 +21,9 @@ data class Penyuluh(
 	val deletedAt: String? = null,
 	val nama: String? = null,
 	val foto: String? = null,
-	val kecamatan: String? = null,
+	val kecamatanData: Address? = null,
 	val desaBinaan: String? = null,
-	val id: Int ,
+	val id: Int,
 	val namaProduct: String? = null,
 	val kecamatanBinaan: String? = null,
 	val email: String? = null,

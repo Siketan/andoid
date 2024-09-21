@@ -1,6 +1,8 @@
 package id.go.ngawikab.siketan.domain.address.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
 /**
@@ -8,12 +10,12 @@ import com.google.gson.annotations.SerializedName
  * Github github.com/wahidabd.
  */
 
-
+@Parcelize
 data class Address(
     @SerializedName("id")
     val id: Long,
     @SerializedName("kecamatanId")
-    val idCity: Long,
+    val kecamatanId: Long? = null,
     @SerializedName("nama")
-    val name: String
-)
+    val nama: String
+): Parcelable

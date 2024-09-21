@@ -1,6 +1,5 @@
 package id.go.ngawikab.siketan.presentation.profile
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -22,6 +21,7 @@ import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.databinding.FragmentProfileBinding
+import id.go.ngawikab.siketan.domain.address.model.Address
 import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.presentation.report.viewmodel.AddressViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
@@ -40,8 +40,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val pref: PrefManager by inject()
 
     private var imageFile: File? = null
-    private var kecValue: String? = null
-    private var desaValue: String? = null
     private var data = UserEditeRequest()
     private val validators = mutableListOf<IValidator>()
 
@@ -86,6 +84,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun initProcess() {
         tampilkanData()
         setKecamatan()
+        viewModel.kecValue?.let { setDesa(it.toLong()) }
         validate()
     }
 
@@ -111,9 +110,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                             nama = data.nama,
                             noTelp = data.whatsapp,
                             alamat = data.alamat,
-                            kecamatan = data.kecamatan,
-                            desa = data.desa,
                             role = pref.getUser().role,
+                        )
+                    )
+                    pref.setUserKecamatanDesa(
+                        User(
+                            kecamatanData = Address(
+                                id = data.kecamatanId?.toLong() ?: 0,
+                                nama = data.kecamatan ?: ""
+                            ),
+                            desaData = Address(
+                                id = data.desaId?.toLong() ?: 0,
+                                nama = data.desa ?: ""
+                            )
                         )
                     )
                     val password = when {
@@ -137,8 +146,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         tilName.setText(res.nama.toString())
         tilNoWhatsapp.setText(phoneNumber)
         tilAddress.setText(res.alamat ?: "")
-        kecamatan.setText(res.kecamatan, false)
-        desa.setText(res.desa, false)
+        kecamatan.setText(res.kecamatanData?.nama, false)
+        desa.setText(res.desaData?.nama, false)
+        viewModel.kecValue = res.kecamatanData?.id?.toInt()
+        viewModel.desaValue = res.desaData?.id?.toInt()
         if (res.foto?.isNotEmpty() == true) {
             imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
         }
@@ -158,7 +169,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             nama = name,
             alamat = address,
             kecamatan = kecamatan,
+            kecamatanId = viewModel.kecValue,
             desa = desa,
+            desaId = viewModel.desaValue,
             whatsapp = nowa,
             foto = imageFile,
             password = password,
@@ -185,14 +198,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 kecamatan.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
                         tilDesa.clear()
-                        desaValue = null
-                        kecValue = res[i].name
+                        viewModel.kecValue = res[i].id.toInt()
                         setDesa(res[i].id)
                     }
                 }
@@ -212,12 +224,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 desa.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        desaValue = res[i].name
+                        viewModel.desaValue = res[i].id.toInt()
                     }
                 }
             }

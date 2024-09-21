@@ -20,6 +20,8 @@ data class UserEditeRequest(
     val alamat: String? = emptyString(),
     val kecamatan: String? = emptyString(),
     val desa: String? = emptyString(),
+    val kecamatanId: Int? = 0,
+    val desaId: Int? = 0,
     val foto: File? = null,
     val password: String? = emptyString(),
     val passwordBaru: String? = emptyString(),
@@ -30,8 +32,8 @@ data class UserEditeRequest(
             addFormDataPart("nama", nama.toString())
             addFormDataPart("whatsapp", whatsapp.toString())
             addFormDataPart("alamat", alamat.toString())
-            addFormDataPart("desa", desa.toString())
-            addFormDataPart("kecamatan", kecamatan.toString())
+            addFormDataPart("desaId", desaId.toString())
+            addFormDataPart("kecamatanId", kecamatanId.toString())
             addFormDataPart("password", password.toString())
             addFormDataPart("passwordBaru", passwordBaru.toString())
             if (foto != null){

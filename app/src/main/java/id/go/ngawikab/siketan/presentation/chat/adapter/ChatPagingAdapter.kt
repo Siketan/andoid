@@ -62,8 +62,8 @@ class ChatPagingAdapter(
         override fun bind(data: Petani) = with(binding as ItemChatBinding) {
             tvNama.text = data.nama
             tvNoTelp.text = data.noTelp
-            tvDesa.text = "Desa "+data.desa
-            tvKecamatan.text = "Kec "+data.kecamatan
+            tvDesa.text = "Desa "+data.desaData?.nama.toString()
+            tvKecamatan.text = "Kec "+data.kecamatanData?.nama.toString()
             btnCall.onClick {
                 val contactNumber = formatPhoneNumber(data.noTelp)
                 val message = "Hi, Bapak/Ibu "+data.nama+", saya "+pref.nama+" saya ingin menanyakan tentang ... "

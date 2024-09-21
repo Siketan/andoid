@@ -31,11 +31,10 @@ class RegisterFragment : SiketanBaseFragment<FragmentRegisterBinding>() {
         return FragmentRegisterBinding.inflate(layoutInflater)
     }
 
-    override fun initUI() {}
+    override fun initUI() {
+    }
 
     override fun initAction() {
-
-
         with(binding) {
 
             btnlogin.onClick {

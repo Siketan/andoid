@@ -7,8 +7,8 @@ import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroup
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
+import id.go.ngawikab.siketan.data.auth.model.user.DetailUserProfileResponse
 import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
@@ -66,6 +66,17 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
 
         }.asFlow()
 
+    override fun getUserProfile(): Flow<Resource<DetailUserProfileResponse>> =
+        object : InternetBoundResource<DetailUserProfileResponse, DetailUserProfileResponse>() {
+            override suspend fun createCall(): Flow<Resource<DetailUserProfileResponse>> {
+                return repository.getUserProfile()
+            }
+
+            override suspend fun saveCallRequest(data: DetailUserProfileResponse): DetailUserProfileResponse {
+                return data
+            }
+        }.asFlow()
+
     override fun getUser(id: Int): Flow<Resource<DetailPetaniResponse>> =
         object : InternetBoundResource<DetailPetaniResponse, DetailPetaniResponse>() {
             override suspend fun createCall(): Flow<Resource<DetailPetaniResponse>> {
@@ -73,17 +84,6 @@ class AuthInteractor(private val repository: AuthRepository) : AuthUseCase {
             }
 
             override suspend fun saveCallRequest(data: DetailPetaniResponse): DetailPetaniResponse {
-                return data
-            }
-        }.asFlow()
-
-    override fun getUserPenyuluh(id: Int): Flow<Resource<DetailPenyuluhResponse>> =
-        object : InternetBoundResource<DetailPenyuluhResponse, DetailPenyuluhResponse>() {
-            override suspend fun createCall(): Flow<Resource<DetailPenyuluhResponse>> {
-                return repository.getUserPenyuluh(id)
-            }
-
-            override suspend fun saveCallRequest(data: DetailPenyuluhResponse): DetailPenyuluhResponse {
                 return data
             }
         }.asFlow()

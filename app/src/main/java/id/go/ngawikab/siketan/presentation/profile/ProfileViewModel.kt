@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPenyuluhResponse
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.auth.AuthUseCase
@@ -24,6 +22,9 @@ class ProfileViewModel(private val useCase: AuthUseCase) : ViewModel() {
 
     private val _edit = MutableLiveData<Resource<GenericAddResponse>>()
     val edit: LiveData<Resource<GenericAddResponse>> get() = _edit
+
+    var kecValue: Int? = 0
+    var desaValue: Int? = 0
 
     fun edit(data: UserEditeRequest){
         useCase.editUser(data)

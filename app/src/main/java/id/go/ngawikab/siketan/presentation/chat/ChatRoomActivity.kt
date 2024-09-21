@@ -96,7 +96,7 @@ class ChatRoomActivity : SiketanBaseActivity<ActivityChatRoomBinding>() {
 
         val user = pref.getUser()
         if (user.role == UserRole.PETANI.role) {
-            val data = ChatLatestRequest(user.desa.toString(), user.id ?: 0)
+            val data = ChatLatestRequest(user.desaData?.nama.toString(), user.id ?: 0)
             viewModel.getLatestMessages(data)
         } else if (user.role == UserRole.PENYULUH.role) {
             val data = ChatLatestPetaniRequest(user.id ?: 0, partnerId)
