@@ -1,6 +1,5 @@
 package id.go.ngawikab.siketan.data.farm
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
@@ -12,7 +11,7 @@ class StorePagingSource (
     private val service: FarmApi,
 ): PagingSource<Int, ProductResponse>() {
 
-    val STARTING_PAGE_INDEX = 1
+    private val STARTING_PAGE_INDEX = 1
     override fun getRefreshKey(state: PagingState<Int, ProductResponse>): Int? =
         state.anchorPosition?.let { pos ->
             state.closestPageToPosition(pos)?.prevKey?.plus(1)

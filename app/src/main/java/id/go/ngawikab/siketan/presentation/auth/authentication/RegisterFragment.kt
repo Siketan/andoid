@@ -10,7 +10,6 @@ import com.wahidabd.library.utils.exts.toStringTrim
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentRegisterBinding
 import id.go.ngawikab.siketan.domain.auth.model.RegisterBaseData
-import id.go.ngawikab.siketan.domain.auth.model.RegisterRequest
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
 import org.koin.android.ext.android.inject
@@ -67,22 +66,20 @@ class RegisterFragment : SiketanBaseFragment<FragmentRegisterBinding>() {
     override fun initProcess() {}
 
     override fun initObservers() {
-        with(binding) {
-            viewModel.register.observerLiveData(
-                viewLifecycleOwner,
-                onEmpty = {},
-                onLoading = { showLoading() },
-                onFailure = { _, m ->
-                    hideLoading()
-                    showToast(m.toString())
-                },
-                onSuccess = {
-                    hideLoading()
-                    findNavController().navigateUp()
-                    findNavController().navigateUp()
-                }
-            )
-        }
+        viewModel.register.observerLiveData(
+            viewLifecycleOwner,
+            onEmpty = {},
+            onLoading = { showLoading() },
+            onFailure = { _, m ->
+                hideLoading()
+                showToast(m.toString())
+            },
+            onSuccess = {
+                hideLoading()
+                findNavController().navigateUp()
+                findNavController().navigateUp()
+            }
+        )
     }
 
 

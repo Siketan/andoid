@@ -2,26 +2,17 @@ package id.go.ngawikab.siketan.presentation.home
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showToast
-import com.wahidabd.library.utils.extensions.debug
-import com.wahidabd.library.utils.extensions.showDefaultState
-import com.wahidabd.library.utils.extensions.showEmptyState
-import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.gone
-import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
-import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.databinding.FragmentHomeBinding
 import id.go.ngawikab.siketan.presentation.auth.AuthActivity
-import id.go.ngawikab.siketan.presentation.profile.ProfileViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.components.MyDialogFragment

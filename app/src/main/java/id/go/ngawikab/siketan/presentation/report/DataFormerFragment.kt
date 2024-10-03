@@ -3,8 +3,6 @@ package id.go.ngawikab.siketan.presentation.report
 //noinspection SuspiciousImport
 import android.R
 import android.graphics.Color
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,6 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.wahidabd.library.presentation.fragment.BaseFragment
-import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.observerLiveData

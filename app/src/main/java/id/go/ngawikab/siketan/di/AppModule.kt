@@ -1,7 +1,6 @@
 package id.go.ngawikab.siketan.di
 
 import com.wahidabd.library.data.libs.OkHttpClientFactory
-import com.wahidabd.library.data.libs.interceptor.HeaderInterceptor
 import id.go.ngawikab.siketan.BuildConfig
 import id.go.ngawikab.siketan.utils.PrefManager
 import okhttp3.Interceptor

@@ -12,10 +12,6 @@ import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.data.farm.model.journal.Jounal
 import id.go.ngawikab.siketan.databinding.FragmentJournalBinding
-import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
-import id.go.ngawikab.siketan.domain.farm.model.response.Journal
-import id.go.ngawikab.siketan.presentation.announcement.AnnouncementFragmentDirections
-import id.go.ngawikab.siketan.presentation.announcement.adapter.EventAdapter
 import id.go.ngawikab.siketan.presentation.journal.adapter.JournalAdapter
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole

@@ -209,7 +209,7 @@ fun convertFileToBase64(file: File? = null): String {
     return Base64.encodeToString(imageBytes, Base64.DEFAULT) ?: emptyString()
 }
 
-fun formatPhoneNumber(phoneNumber: String?): String? {
+fun formatPhoneNumber(phoneNumber: String?): String {
     return when {
         phoneNumber == null -> ""
         phoneNumber.startsWith("0") -> "+62" + phoneNumber.trim().substring(1)

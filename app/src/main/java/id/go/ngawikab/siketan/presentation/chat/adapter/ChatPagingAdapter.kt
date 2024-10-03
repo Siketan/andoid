@@ -10,14 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
 import com.wahidabd.library.utils.common.showToast
-import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.onClick
-import com.wahidabd.library.utils.exts.visibleIf
-import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
-import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
 import id.go.ngawikab.siketan.databinding.ItemChatBinding
-import id.go.ngawikab.siketan.databinding.ItemTanamanBinding
 import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.utils.formatPhoneNumber
 

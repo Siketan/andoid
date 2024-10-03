@@ -9,7 +9,6 @@ import com.wahidabd.library.utils.exts.layoutInflater
 import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.ItemFarmInfoBinding
-import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import id.go.ngawikab.siketan.utils.dateFormat
 

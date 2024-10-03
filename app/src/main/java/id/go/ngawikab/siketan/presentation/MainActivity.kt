@@ -24,7 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initUI() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     override fun initAction() {}

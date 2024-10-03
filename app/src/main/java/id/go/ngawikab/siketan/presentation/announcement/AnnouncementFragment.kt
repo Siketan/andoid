@@ -1,12 +1,10 @@
 package id.go.ngawikab.siketan.presentation.announcement
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.setMargins
 import androidx.navigation.fragment.findNavController
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showSnackbarMessage

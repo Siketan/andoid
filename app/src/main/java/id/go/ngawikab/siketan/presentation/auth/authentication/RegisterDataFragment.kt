@@ -60,23 +60,21 @@ class RegisterDataFragment : SiketanBaseFragment<FragmentRegisterDataBinding>() 
     }
 
     override fun initObservers() {
-        with(binding) {
-            viewModel.register.observerLiveData(
-                viewLifecycleOwner,
-                onEmpty = {},
-                onLoading = { showLoading() },
-                onFailure = { _, m ->
-                    hideLoading()
-                    showToast(m.toString())
-                },
-                onSuccess = {
-                    hideLoading()
-                    findNavController().navigateUp()
-                    findNavController().navigateUp()
-                    showToast("Mohon tunggu data anda diaktivasi oleh admin.")
-                }
-            )
-        }
+        viewModel.register.observerLiveData(
+            viewLifecycleOwner,
+            onEmpty = {},
+            onLoading = { showLoading() },
+            onFailure = { _, m ->
+                hideLoading()
+                showToast(m.toString())
+            },
+            onSuccess = {
+                hideLoading()
+                findNavController().navigateUp()
+                findNavController().navigateUp()
+                showToast("Mohon tunggu data anda diaktivasi oleh admin.")
+            }
+        )
     }
 
     private fun reqToObservers() = with(binding) {

@@ -1,6 +1,6 @@
 package id.go.ngawikab.siketan.presentation.journal
 
-import android.R
+import android.R.layout.simple_list_item_1
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -150,7 +150,7 @@ class PresensiFragment : BaseFragment<FragmentPresensiBinding>() {
             onSuccess = {
                 val adapter = ArrayAdapter(
                     requireContext(),
-                    R.layout.simple_list_item_1,
+                    simple_list_item_1,
                     it.data.map { f -> f.nama })
 
                 autoComplete.apply {

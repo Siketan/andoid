@@ -18,7 +18,6 @@ import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanaman
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
-import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse

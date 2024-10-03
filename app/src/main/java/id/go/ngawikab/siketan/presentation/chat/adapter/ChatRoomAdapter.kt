@@ -9,10 +9,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
-import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.data.chat.model.response.ChatMessageResponse
 import id.go.ngawikab.siketan.databinding.ItemChatLeftBinding
 import id.go.ngawikab.siketan.databinding.ItemChatRightBinding

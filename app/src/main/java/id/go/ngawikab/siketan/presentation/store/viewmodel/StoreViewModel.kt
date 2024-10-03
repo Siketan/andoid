@@ -1,23 +1,16 @@
 package id.go.ngawikab.siketan.presentation.store.viewmodel
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.wahidabd.library.data.Resource
-import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.domain.farm.model.request.ProductParam
-import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onEmpty
 
 
 /**

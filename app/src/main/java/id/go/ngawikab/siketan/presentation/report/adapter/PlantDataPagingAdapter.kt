@@ -9,14 +9,10 @@ import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
 import com.wahidabd.library.utils.exts.isNotNull
 import com.wahidabd.library.utils.exts.onClick
-import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.library.utils.exts.visibleIf
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
-import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
-import id.go.ngawikab.siketan.databinding.ItemStoreBinding
 import id.go.ngawikab.siketan.databinding.ItemTanamanBinding
-import id.go.ngawikab.siketan.utils.toCurrency
 
 class PlantDataPagingAdapter(
     private val context: Context,

@@ -3,7 +3,6 @@ package id.go.ngawikab.siketan.presentation.chat
 import android.content.Context
 import android.content.Intent
 import com.wahidabd.library.utils.common.showToast
-import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import id.go.ngawikab.siketan.databinding.ActivityChatBinding
 import id.go.ngawikab.siketan.presentation.chat.adapter.ChatUserAdapter

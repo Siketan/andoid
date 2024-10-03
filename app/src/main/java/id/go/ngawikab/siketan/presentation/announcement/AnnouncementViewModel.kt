@@ -1,6 +1,5 @@
 package id.go.ngawikab.siketan.presentation.announcement
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +11,6 @@ import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onEmpty
-import java.lang.Math.ceil
 
 
 /**

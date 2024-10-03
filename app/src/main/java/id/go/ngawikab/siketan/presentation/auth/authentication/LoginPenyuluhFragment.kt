@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.wahidabd.library.utils.common.showToast
-import com.wahidabd.library.utils.extensions.debug
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.toStringTrim
@@ -91,7 +90,7 @@ class LoginPenyuluhFragment : SiketanBaseFragment<FragmentLoginPenyuluhBinding>(
                 hideLoading()
 
                 pref.login(true)
-                pref.setToken(it.token.toString()!!)
+                pref.setToken(it.token.toString())
                 pref.setUser(it.user!!)
                 viewModel.userProfile()
             }

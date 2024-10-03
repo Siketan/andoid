@@ -10,7 +10,6 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentEventDetailBinding
 import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
-import id.go.ngawikab.siketan.utils.dateFormat
 
 class EventDetailFragment : BaseFragment<FragmentEventDetailBinding>() {
 

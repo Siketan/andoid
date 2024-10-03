@@ -109,7 +109,7 @@
         <argument
             android:name="user"
             app:argType="id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani" />
-    </fragment>>
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="id.go.ngawikab.siketan.presentation.profile.ProfileFragment"

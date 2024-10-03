@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
 import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
-import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.remote.FarmApi
 import timber.log.Timber
 
@@ -13,7 +12,7 @@ class TanamanPagingSource(
     private val petani: Int
 ) : PagingSource<Int, PlantFarmerData>() {
 
-    val STARTING_PAGE_INDEX = 1
+    private val STARTING_PAGE_INDEX = 1
 //    private val PAGE_SIZE = 20
 
     override fun getRefreshKey(state: PagingState<Int, PlantFarmerData>): Int? =

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.auth.model.FarmerGroup
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
-import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailUserProfileResponse
 import id.go.ngawikab.siketan.domain.auth.AuthUseCase
 import id.go.ngawikab.siketan.domain.auth.model.AuthResponse

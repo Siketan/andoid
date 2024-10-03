@@ -10,8 +10,6 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.journal.Jounal
 import id.go.ngawikab.siketan.databinding.ItemFarmInfoBinding
-import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
-import id.go.ngawikab.siketan.domain.farm.model.response.Journal
 import id.go.ngawikab.siketan.utils.dateFormat
 
 

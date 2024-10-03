@@ -75,11 +75,6 @@ class PrefManager(context: Context) {
             putString(USER_ADDRESS, data.alamat)
             putString(USER_NAME, data.nama)
             putString(ROLE, data.role)
-            if (data.role == UserRole.PETANI.role) {
-                putInt(PENYULUH_ID, data.fk_penyuluhId ?: 0)
-                putString(PENYULUH_NAMA, data.dataPenyuluh?.nama)
-                putString(PENYULUH_NOTELP, data.dataPenyuluh?.noTelp)
-            }
         }.apply()
     }
 
@@ -101,7 +96,7 @@ class PrefManager(context: Context) {
 
     fun setUserPenyuluh(data: User) = with(Constant) {
         prefs.edit().apply{
-            putInt(PENYULUH_ID, data.fk_penyuluhId ?: 0)
+            putInt(PENYULUH_ID, data.dataPenyuluh?.id ?: 0)
             putString(PENYULUH_NAMA, data.dataPenyuluh?.nama)
             putString(PENYULUH_NOTELP, data.dataPenyuluh?.noTelp)
         }.apply()

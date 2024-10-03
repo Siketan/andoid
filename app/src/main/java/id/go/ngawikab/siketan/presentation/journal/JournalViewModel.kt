@@ -10,7 +10,6 @@ import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
-import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

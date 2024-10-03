@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.wahidabd.library.presentation.adapter.viewholder.BaseAsyncItemViewHolder
 import com.wahidabd.library.utils.common.showToast
@@ -16,7 +15,6 @@ import com.wahidabd.library.utils.exts.setImageUrl
 import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.databinding.ItemStoreBinding
-import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.utils.formatPhoneNumber
 import id.go.ngawikab.siketan.utils.toCurrency
 

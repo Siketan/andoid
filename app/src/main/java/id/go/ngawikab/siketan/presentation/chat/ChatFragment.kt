@@ -1,10 +1,7 @@
 package id.go.ngawikab.siketan.presentation.chat
 
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -16,16 +13,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.exts.onClick
-import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.databinding.FragmentChatBinding
-import id.go.ngawikab.siketan.databinding.FragmentStoreBinding
 import id.go.ngawikab.siketan.presentation.chat.adapter.ChatPagingAdapter
-import id.go.ngawikab.siketan.presentation.store.StoreFragmentDirections
 import id.go.ngawikab.siketan.presentation.store.StoreLoadStateAdapter
-import id.go.ngawikab.siketan.presentation.store.StorePagingAdapter
-import id.go.ngawikab.siketan.presentation.store.viewmodel.StoreViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
-import id.go.ngawikab.siketan.utils.navigate
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

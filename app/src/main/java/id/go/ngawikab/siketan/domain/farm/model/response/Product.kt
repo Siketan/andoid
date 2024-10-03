@@ -1,9 +1,6 @@
 package id.go.ngawikab.siketan.domain.farm.model.response
 
-import com.google.gson.annotations.SerializedName
 import com.wahidabd.library.utils.common.emptyString
-import id.go.ngawikab.siketan.data.farm.model.store.DataPenyuluhResponse
-import id.go.ngawikab.siketan.data.farm.model.store.DataPetaniResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductUserAccountResponse
 
