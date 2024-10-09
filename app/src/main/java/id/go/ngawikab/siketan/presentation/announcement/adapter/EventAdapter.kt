@@ -21,6 +21,7 @@ import id.go.ngawikab.siketan.utils.dateFormat
 
 class EventAdapter(
     private val context: Context,
+    private val onClick:(EventTani)->Unit,
     items: ArrayList<EventTani> = arrayListOf()
 ) : BaseAsyncRecyclerAdapter<EventTani, EventAdapter.EventViewHolder>(items) {
 
@@ -40,19 +41,26 @@ class EventAdapter(
         override fun bind(data: EventTani) = with(binding as ItemEventBinding) {
             tvTitle.text = data.namaKegiatan
             tvAuthor.text = data.tanggalAcara?.dateFormat()
-            tvToMore.text = context.getString(R.string.format_label_location, data.tempat)
-            tvStartDate.text = context.getString(
-                R.string.format_label_start_date,
-                data.waktuAcara?.substring(0, 5)
-            )
-            tvEndDate.text =
-                context.getString(R.string.format_label_end_date, data.waktuAcara)
+//            tvToMore.text = context.getString(R.string.format_label_location, data.tempat)
+            tvToMore.text = context.getString(R.string.label_read_more)
+//            tvStartDate.text = context.getString(
+//                R.string.format_label_start_date,
+//                data.waktuAcara?.substring(0, 5)
+//            )
+            tvStartDate.text = context.getString(R.string.format_label_location, data.tempat)
+            tvEndDate.text = context.getString(R.string.format_label_end_date, data.waktuAcara)
 
             imgImage.setImageUrl(
                 context,
                 data.fotoKegiatan.toString(),
                 placeholder = R.drawable.ic_image_placeholder
             )
+            binding.root.setOnClickListener {
+                onClick(data)
+            }
+//            tvToMore.setOnClickListener {
+//                onClick(data)
+//            }
         }
     }
 }

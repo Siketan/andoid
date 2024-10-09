@@ -1,7 +1,8 @@
 package id.go.ngawikab.siketan.utils.common
 
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartDataModel
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartDataResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
+
 
 
 /**
@@ -11,52 +12,57 @@ import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 
 
 object Dummy {
-    fun generateChartDummy(): ChartModel {
-        val list = ArrayList<ChartDataModel>()
+    fun generateChartDummy(): ChartResponse {
+        val list = ArrayList<ChartDataResponse>()
         list.add(
-            ChartDataModel(
-                label = "mangga",
-                total = "100",
-                count = 100,
-                tahunPanen = 2022
+            ChartDataResponse(
+                komoditas = "Mangga",
+                count = 20,
+                kategori = "Musiman",
+                jenis = "Buah",
+                periodeMusimTanam = "Tanaman Musiman"
             )
         )
 
         list.add(
-            ChartDataModel(
-                label = "mangga",
-                total = "110",
-                count = 90,
-                tahunPanen = 2023
+            ChartDataResponse(
+                komoditas = "Mangga",
+                count = 20,
+                kategori = "Musiman",
+                jenis = "Buah",
+                periodeMusimTanam = "Tanaman Musiman"
             )
         )
 
         list.add(
-            ChartDataModel(
-                label = "jeruk",
-                total = "120",
-                count = 150,
-                tahunPanen = 2023
+            ChartDataResponse(
+                komoditas = "Mangga",
+                count = 20,
+                kategori = "Musiman",
+                jenis = "Buah",
+                periodeMusimTanam = "Tanaman Musiman"
             )
         )
 
         list.add(
-            ChartDataModel(
-                label = "wortel",
-                total = "100",
-                count = 100,
-                tahunPanen = 2022
+            ChartDataResponse(
+                komoditas = "Wortel",
+                count = 20,
+                kategori = "Musiman",
+                jenis = "Buah",
+                periodeMusimTanam = "Tanaman Musiman"
             )
         )
 
         list.add(
-            ChartDataModel(
-                label = "wortel",
-                total = "100",
-                count = 100,
-                tahunPanen = 2023
+            ChartDataResponse(
+                komoditas = "Mangga",
+                count = 20,
+                kategori = "Musiman",
+                jenis = "Buah",
+                periodeMusimTanam = "Tanaman Musiman"
             )
         )
-        return ChartModel(list)
+        return ChartResponse(list)
     }
 }

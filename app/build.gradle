@@ -8,17 +8,16 @@ plugins {
 
 android {
     namespace 'id.go.ngawikab.siketan'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "id.go.ngawikab.siketan"
         minSdk 24
-        targetSdk 33
-        versionCode 3
-        versionName "1.1.1"
+        targetSdk 34
+        versionCode 4
+        versionName "1.2.1"
 
-//        buildConfigField("String", "BASE_URL", "\"https://siketan-api.cyclic.app/\"")
-        buildConfigField("String", "BASE_URL", "\"http://app-api.siketan.id/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.siketan.id/\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

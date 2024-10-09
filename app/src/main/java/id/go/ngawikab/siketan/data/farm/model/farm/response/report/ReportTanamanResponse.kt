@@ -10,11 +10,12 @@ import com.wahidabd.library.utils.common.emptyString
 
 
 data class ReportTanamanResponse(
-    val daftarTani: DaftarTaniTanamanResponse
+    val daftarTani: DaftarTaniTanamanResponse,
 )
 
 data class DaftarTaniTanamanResponse(
-    val laporanTanams: List<ReportTanamanDataResponse>
+    val laporanTanams: List<ReportTanamanDataResponse>,
+    val komoditas: String?= emptyString()
 )
 
 data class ReportTanamanDataResponse(

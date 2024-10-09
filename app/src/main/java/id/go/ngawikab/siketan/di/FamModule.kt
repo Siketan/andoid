@@ -9,6 +9,7 @@ import id.go.ngawikab.siketan.data.farm.remote.FarmApiClient
 import id.go.ngawikab.siketan.domain.farm.FarmInteractor
 import id.go.ngawikab.siketan.domain.farm.FarmUseCase
 import id.go.ngawikab.siketan.presentation.announcement.AnnouncementViewModel
+import id.go.ngawikab.siketan.presentation.chat.ChatViewModel
 import id.go.ngawikab.siketan.presentation.journal.JournalViewModel
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.presentation.store.viewmodel.StoreViewModel
@@ -42,5 +43,5 @@ val farmModule = module {
     viewModel { StoreViewModel(get()) }
     viewModel { JournalViewModel(get()) }
     viewModel { ReportViewModel(get()) }
-
+    viewModel { ChatViewModel(get()) }
 }

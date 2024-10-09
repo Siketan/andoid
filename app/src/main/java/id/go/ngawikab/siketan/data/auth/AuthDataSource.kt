@@ -5,10 +5,13 @@ import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.enqueue
 import com.wahidabd.library.utils.coroutine.handler.ErrorParses
 import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
+import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginDataRequest
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
+import id.go.ngawikab.siketan.data.auth.model.user.DetailUserProfileResponse
+import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.data.auth.remote.AuthApi
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
@@ -50,6 +53,10 @@ class AuthDataSource(
             enqueue(data, err::convertGenericError, webService::register, onEmit = { emit(it) })
         }.flowOn(Dispatchers.IO)
 
+    override suspend fun getUserProfile(): Flow<Resource<DetailUserProfileResponse>> = flow {
+        enqueue(err::convertGenericError, webService::getUserProfile, onEmit = { emit(it) })
+    }.flowOn(Dispatchers.IO)
+
     override suspend fun getUser(id: Int): Flow<Resource<DetailPetaniResponse>> = flow {
         enqueue(id, err::convertGenericError, webService::getUser, onEmit = { emit(it) })
     }.flowOn(Dispatchers.IO)
@@ -57,10 +64,28 @@ class AuthDataSource(
     override suspend fun editUser(data: UserEditeRequest): Flow<Resource<GenericAddResponse>> =
         flow {
             enqueue(
-                data.id ?: 0,
                 data.toBody(),
                 err::convertGenericError,
                 webService::editUser,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getPenyuluh(): Flow<Resource<OpsiPenyuluhResponse>> =
+        flow {
+            enqueue(
+                err::convertGenericError,
+                webService::getPenyuluh,
+                onEmit = { emit(it) }
+            )
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getFarmerGroups(desa: String): Flow<Resource<FarmerGroupsResponse>> =
+        flow {
+            enqueue(
+                desa,
+                err::convertGenericError,
+                webService::getKelompokTani,
                 onEmit = { emit(it) }
             )
         }.flowOn(Dispatchers.IO)

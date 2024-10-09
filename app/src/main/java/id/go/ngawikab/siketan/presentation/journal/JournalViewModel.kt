@@ -33,7 +33,6 @@ class JournalViewModel(
     private val _presensi = MutableLiveData<Resource<GenericAddResponse>>()
     val presensi: LiveData<Resource<GenericAddResponse>> get() = _presensi
 
-
     fun add(data: JournalAddRequest) {
         useCase.addJournal(data)
             .onEach { _add.value = it }

@@ -52,7 +52,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/dimen_0dp"
-            android:checked="true"
             android:text="News / Artikel"
             android:textColor="@color/primary" />
 
@@ -65,6 +64,45 @@
             android:text="Event / Acara Tani"
             android:textColor="@color/primary" />
     </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrevious"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button_left"
+            app:backgroundTint="@color/secondary"
+            app:icon="@drawable/baseline_keyboard_arrow_left_24"
+            app:iconPadding="0dp"
+            android:padding="0dp"
+            app:iconGravity="textStart"/>
+
+        <LinearLayout
+            android:id="@+id/paginationContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:backgroundTint="@color/secondary"
+            android:background="@drawable/rounded_button_right"
+            app:icon="@drawable/baseline_keyboard_arrow_right_24"
+            app:iconPadding="0dp"
+            android:padding="0dp"
+            app:iconGravity="textStart"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInfo"

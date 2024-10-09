@@ -2,16 +2,18 @@ package id.go.ngawikab.siketan.data.auth.remote
 
 import id.go.ngawikab.siketan.data.auth.model.LoginDataRequest
 import id.go.ngawikab.siketan.data.auth.model.AuthDataResponse
+import id.go.ngawikab.siketan.data.auth.model.FarmerGroupsResponse
 import id.go.ngawikab.siketan.data.auth.model.user.DetailPetaniResponse
 import id.go.ngawikab.siketan.data.auth.model.LoginPenyuluhRequest
 import id.go.ngawikab.siketan.data.auth.model.RegisterDataRequest
+import id.go.ngawikab.siketan.data.auth.model.user.DetailUserProfileResponse
+import id.go.ngawikab.siketan.data.auth.model.user.OpsiPenyuluhResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 
@@ -38,14 +40,26 @@ interface AuthApiClient {
         @Body data: RegisterDataRequest
     ): Response<AuthDataResponse>
 
+    @GET("auth/profile")
+    suspend fun getUserProfile(
+    ): Response<DetailUserProfileResponse>
+
     @GET("daftar-tani/{id}")
     suspend fun getUser(
         @Path("id") id: Int
     ): Response<DetailPetaniResponse>
 
-    @PUT("daftar-tani/{id}")
+    @POST("auth/updateprofile")
     suspend fun editUser(
-        @Path("id") id: Int,
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
+
+    @GET("opsi-penyuluh")
+    suspend fun getPenyuluh(
+    ): Response<OpsiPenyuluhResponse>
+
+    @GET("/kelompok-tani/desa/{desa}")
+    suspend fun getKelompokTani(
+        @Path("desa") desa: String,
+    ): Response<FarmerGroupsResponse>
 }

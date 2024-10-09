@@ -1,29 +1,35 @@
 package id.go.ngawikab.siketan.domain.farm
 
+import androidx.paging.PagingData
 import com.wahidabd.library.data.Resource
 import com.wahidabd.library.utils.coroutine.boundResource.InternetBoundResource
 import id.go.ngawikab.siketan.data.farm.FarmRepository
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
 import id.go.ngawikab.siketan.data.farm.model.farm.request.LaporanTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.Petani
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerData
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalAddRequest
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.PresensiRequest
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
+import id.go.ngawikab.siketan.data.farm.model.store.ProductResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
 import id.go.ngawikab.siketan.domain.farm.model.request.ProductParam
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.domain.farm.model.response.EventTani
 import id.go.ngawikab.siketan.domain.farm.model.response.InfoTani
+import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import id.go.ngawikab.siketan.domain.farm.model.response.Product
 import id.go.ngawikab.siketan.domain.farm.model.response.toDomain
+import id.go.ngawikab.siketan.domain.farm.model.response.todDomain
 import id.go.ngawikab.siketan.domain.farm.model.toRequest
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import kotlinx.coroutines.flow.Flow
 
 
@@ -70,7 +76,7 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
             }
 
             override suspend fun saveCallRequest(data: ProductDataResponse): List<Product> {
-                return data.productPetani.map {
+                return data.data.map {
                     it.toDomain()
                 }
             }
@@ -127,13 +133,13 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
         }.asFlow()
     }
 
-    override fun getChart(data: Chartparam): Flow<Resource<ChartModel>> {
-        return object : InternetBoundResource<ChartModel, ChartModel>() {
-            override suspend fun createCall(): Flow<Resource<ChartModel>> {
+    override fun getChart(data: Chartparam): Flow<Resource<ChartResponse>> {
+        return object : InternetBoundResource<ChartResponse, ChartResponse>() {
+            override suspend fun createCall(): Flow<Resource<ChartResponse>> {
                 return repository.getChart(data)
             }
 
-            override suspend fun saveCallRequest(data: ChartModel): ChartModel {
+            override suspend fun saveCallRequest(data: ChartResponse): ChartResponse {
                 return data
             }
 
@@ -152,18 +158,22 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
         }.asFlow()
     }
 
-    override fun getTanaman(id: Int): Flow<Resource<TanamanPetaniResponse>> {
-        return object : InternetBoundResource<TanamanPetaniResponse, TanamanPetaniResponse>(){
-            override suspend fun createCall(): Flow<Resource<TanamanPetaniResponse>> {
-                return repository.getTanaman(id)
+    override fun getTanaman(id: Int): Flow<PagingData<PlantFarmerData>> {
+        return repository.getTanaman(id)
+    }
+    override suspend fun getPetani(id:Int): Flow<Resource<List<OpsiPetani>>> =
+        object : InternetBoundResource<List<OpsiPetani>, OpsiPetaniResponse>() {
+            override suspend fun createCall(): Flow<Resource<OpsiPetaniResponse>> {
+                return repository.getPetani(id)
             }
 
-            override suspend fun saveCallRequest(data: TanamanPetaniResponse): TanamanPetaniResponse {
-                return data
+            override suspend fun saveCallRequest(data: OpsiPetaniResponse): List<OpsiPetani> {
+                return data.petanis.map {
+                    it.todDomain()
+                }
             }
 
         }.asFlow()
-    }
 
     override fun addLaporan(data: LaporanTanamanRequest): Flow<Resource<GenericAddResponse>> {
         return object : InternetBoundResource<GenericAddResponse, GenericAddResponse>(){
@@ -178,6 +188,7 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
         }.asFlow()
     }
 
+
     override fun getLaporan(id: Int): Flow<Resource<ReportTanamanResponse>> {
         return object : InternetBoundResource<ReportTanamanResponse, ReportTanamanResponse>(){
             override suspend fun createCall(): Flow<Resource<ReportTanamanResponse>> {
@@ -188,6 +199,14 @@ class FarmInteractor(private val repository: FarmRepository) : FarmUseCase {
                 return data
             }
         }.asFlow()
+    }
+
+    override fun getProductsbyPaging(): Flow<PagingData<ProductResponse>> {
+        return repository.getProductsbyPaging()
+    }
+
+    override fun getPetanibyPaging(id: Int): Flow<PagingData<Petani>> {
+        return repository.getPetanibyPaging(id)
     }
 
 }

@@ -11,6 +11,7 @@ import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
 import id.go.ngawikab.siketan.utils.navigateUp
 import go.ngawikab.siketan.presentation.report.adapter.ReportPlantDataAdapter
+import id.go.ngawikab.siketan.R
 import org.koin.android.ext.android.inject
 
 class ReportPlantDataFragment : SiketanBaseFragment<FragmentReportPlantDataBinding>() {
@@ -57,9 +58,9 @@ class ReportPlantDataFragment : SiketanBaseFragment<FragmentReportPlantDataBindi
             },
             onSuccess = {
                 hideLoading()
+                binding.tvTitle.text = getString(R.string.format_judul_laporan, it.daftarTani.komoditas.toString())
                 reportPlantDataAdapter.setData = it.daftarTani.laporanTanams
             }
         )
     }
-
 }

@@ -2,7 +2,6 @@ package id.go.ngawikab.siketan.data.chat.model.request
 
 import com.wahidabd.library.utils.common.emptyString
 import org.json.JSONObject
-import java.io.File
 
 
 /**

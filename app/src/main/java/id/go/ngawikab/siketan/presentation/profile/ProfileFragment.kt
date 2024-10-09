@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.presentation.profile
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import com.esafirm.imagepicker.features.ImagePickerConfig
 import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.ReturnMode
@@ -10,7 +11,6 @@ import com.esafirm.imagepicker.features.registerImagePicker
 import com.wahidabd.library.presentation.fragment.BaseFragment
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.extensions.showDefaultState
-import com.wahidabd.library.utils.extensions.showEmptyState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.clear
 import com.wahidabd.library.utils.exts.observerLiveData
@@ -18,8 +18,10 @@ import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.setImageUrl
 import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.library.utils.exts.visibleIf
+import id.go.ngawikab.siketan.R
 import id.go.ngawikab.siketan.data.auth.model.user.UserEditeRequest
 import id.go.ngawikab.siketan.databinding.FragmentProfileBinding
+import id.go.ngawikab.siketan.domain.address.model.Address
 import id.go.ngawikab.siketan.domain.auth.model.User
 import id.go.ngawikab.siketan.presentation.report.viewmodel.AddressViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
@@ -38,8 +40,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val pref: PrefManager by inject()
 
     private var imageFile: File? = null
-    private var kecValue: String? = null
-    private var desaValue: String? = null
     private var data = UserEditeRequest()
     private val validators = mutableListOf<IValidator>()
 
@@ -49,13 +49,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         attachRoot: Boolean
     ): FragmentProfileBinding = FragmentProfileBinding.inflate(layoutInflater)
 
-
     override fun initUI() {
         with(binding) {
             tilNik.disable
             tilName.disable
-
             val user = pref.getUser()
+            if (user.role == UserRole.PENYULUH.role) {
+                tilName.setHint(getString(R.string.hint_penyuluh))
+            }
             btnSave.visibleIf { user.role == UserRole.PETANI.role }
             spacer.visibleIf { user.role == UserRole.PETANI.role }
         }
@@ -71,92 +72,111 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     )
                 )
             }
-
+            checkBoxChangePassword.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) tilPassword.visibility = LinearLayout.VISIBLE
+                else tilPassword.visibility = LinearLayout.GONE
+            }
             btnCancel.onClick { navigateUp() }
             btnSave.onClick { if (validateAll()) sendToObserver() }
         }
     }
 
     override fun initProcess() {
-        viewModel.user(pref.getUser().id ?: 0)
+        tampilkanData()
         setKecamatan()
+        viewModel.kecValue?.let { setDesa(it.toLong()) }
         validate()
     }
 
     override fun initObservers() {
         with(binding) {
-            viewModel.user.observerLiveData(
+            viewModel.edit.observerLiveData(
                 viewLifecycleOwner,
                 onLoading = {
                     msv.showLoadingState()
                 },
                 onEmpty = {},
-                onFailure = { _, mess ->
-                    msv.showEmptyState()
-                    showToast(mess.toString())
+                onFailure = { _, _ ->
+                    msv.showDefaultState()
+                    showToast("Update data gagal")
                 },
                 onSuccess = {
                     msv.showDefaultState()
-                    val role = pref.getUser().role
-                    val res = it.detailTani
-                    tilNik.setText(if (role == UserRole.PETANI.role) res.NIK.toString() else res.NIP.toString())
-                    tilName.setText(res.nama.toString())
-                    tilNoWhatsapp.setText(res.NoWa ?: "")
-                    tilAddress.setText(res.alamat ?: "")
-                    kecamatan.setText(res.kecamatan, false)
-                    desa.setText(res.desa, false)
-
-                    if (res.foto?.isNotEmpty() == true) {
-                        imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
-                    }
-
-                },
-            )
-
-            viewModel.edit.observerLiveData(
-                viewLifecycleOwner,
-                onLoading = {},
-                onEmpty = {},
-                onFailure = { _, _ -> },
-                onSuccess = {
                     showToast(it.message)
-
                     pref.setUser(
                         User(
-                            id = data.id,
-                            NIK = data.NIK,
+                            id = pref.getUser().id,
+                            nik = data.nik,
                             nama = data.nama,
-                            NoWa = data.NoWa,
+                            noTelp = data.whatsapp,
                             alamat = data.alamat,
-                            kecamatan = data.kecamatan,
-                            desa = data.desa,
-                            role = "petani"
+                            role = pref.getUser().role,
                         )
                     )
+                    pref.setUserKecamatanDesa(
+                        User(
+                            kecamatanData = Address(
+                                id = data.kecamatanId?.toLong() ?: 0,
+                                nama = data.kecamatan ?: ""
+                            ),
+                            desaData = Address(
+                                id = data.desaId?.toLong() ?: 0,
+                                nama = data.desa ?: ""
+                            )
+                        )
+                    )
+                    val password = when {
+                        !data.passwordBaru.isNullOrEmpty() -> data.passwordBaru
+                        else -> data.password
+                    }
+                    pref.setPassword(password)
                 }
             )
         }
     }
 
+    private fun tampilkanData() = with(binding){
+        val res = pref.getUser()
+        val phoneNumber = when {
+            !res.noTelp.isNullOrEmpty() -> res.noTelp
+            !res.NoWa.isNullOrEmpty() -> res.NoWa
+            else -> ""
+        }
+        tilNik.setText(res.nik.toString())
+        tilName.setText(res.nama.toString())
+        tilNoWhatsapp.setText(phoneNumber)
+        tilAddress.setText(res.alamat ?: "")
+        kecamatan.setText(res.kecamatanData?.nama, false)
+        desa.setText(res.desaData?.nama, false)
+        viewModel.kecValue = res.kecamatanData?.id?.toInt()
+        viewModel.desaValue = res.desaData?.id?.toInt()
+        if (res.foto?.isNotEmpty() == true) {
+            imgProfile.setImageUrl(requireContext(), res.foto.toString(), true)
+        }
+    }
+
     private fun sendToObserver() = with(binding) {
-        val name = tilName.edittext
-        val nowa = tilNoWhatsapp.edittext
-        val nik = tilNik.edittext
+        val name = tilName.getText()
+        val nowa = tilNoWhatsapp.getText()
+        val nik = tilNik.getText()
         val kecamatan = tilKecamatan.toStringTrim()
         val desa = tilDesa.toStringTrim()
-        val address = tilAddress.edittext
-
+        val address = tilAddress.getText()
+        val password = pref.getAttemptLogin().password.trim()
+        val passwordBaru = tilPassword.getText().trim()
         data = UserEditeRequest(
-            id = pref.getUser().id,
-            NIK = nik,
+            nik = nik,
             nama = name,
             alamat = address,
             kecamatan = kecamatan,
+            kecamatanId = viewModel.kecValue,
             desa = desa,
-            NoWa = nowa,
-            foto = imageFile
+            desaId = viewModel.desaValue,
+            whatsapp = nowa,
+            foto = imageFile,
+            password = password,
+            passwordBaru = passwordBaru
         )
-
         viewModel.edit(data)
     }
 
@@ -178,14 +198,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 kecamatan.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
                         tilDesa.clear()
-                        desaValue = null
-                        kecValue = res[i].name
+                        viewModel.kecValue = res[i].id.toInt()
                         setDesa(res[i].id)
                     }
                 }
@@ -205,12 +224,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    res.map { f -> f.name }
+                    res.map { f -> f.nama }
                 )
                 desa.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        desaValue = res[i].name
+                        viewModel.desaValue = res[i].id.toInt()
                     }
                 }
             }

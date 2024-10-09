@@ -1,8 +1,13 @@
 package id.go.ngawikab.siketan.presentation.report
 
+//noinspection SuspiciousImport
+import android.R
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.BarData
@@ -15,21 +20,23 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.wahidabd.library.presentation.fragment.BaseFragment
-import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.extensions.showDefaultState
 import com.wahidabd.library.utils.extensions.showLoadingState
 import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
+import com.wahidabd.library.utils.exts.visible
+
 import com.wahidabd.library.utils.exts.visibleIf
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.databinding.FragmentDataFormerBinding
 import id.go.ngawikab.siketan.domain.farm.model.request.Chartparam
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.utils.PrefManager
 import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.Dummy
 import id.go.ngawikab.siketan.utils.navigate
 import id.go.ngawikab.siketan.utils.randomColor
+import id.go.ngawikab.siketan.utils.toOpsiPetani
 import org.koin.android.ext.android.inject
 
 class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
@@ -37,7 +44,6 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
     private val pref: PrefManager by inject()
     private var reveal: Boolean = true
 
-    private var dataQuery = Chartparam()
     private val viewModel: ReportViewModel by inject()
 
     override fun getViewBinding(
@@ -47,9 +53,20 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
     ): FragmentDataFormerBinding =
         FragmentDataFormerBinding.inflate(layoutInflater)
 
+
     override fun initUI() {
         with(binding) {
-            fabAdd.visibleIf { pref.getUser().role == UserRole.PETANI.role }
+            fabAdd.hide()
+            fabAdd.visibleIf {
+                pref.getUser().role == UserRole.PETANI.role
+            }
+        }
+
+        if (pref.getUser().role == UserRole.PENYULUH.role){
+            binding.tilListPetani.visibility= View.VISIBLE
+            setListPetani()
+        }else{
+            binding.tilListPetani.visibility= View.GONE
         }
     }
 
@@ -60,13 +77,37 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
                 fabAdd.isExpanded = reveal
                 reveal = !reveal
             }
-            linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment()) }
-            linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment()) }
         }
     }
 
     override fun initProcess() {
-        viewModel.getChart(dataQuery)
+        if(pref.getUser().role == UserRole.PETANI.role) {
+            val user = pref.getUser()
+            val query = Chartparam(
+                user.id,
+            )
+            viewModel.getChart(query)
+            with(binding) {
+                linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment(user.toOpsiPetani())) }
+                linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment(user.id ?: 0)) }
+            }
+        }else{
+            viewModel.selectedFarmerId.observe(
+                viewLifecycleOwner
+            ) {
+                val user = it
+                val query = Chartparam(
+                    user?.id,
+                )
+                with(binding){
+                    if (!fabAdd.isVisible)
+                        fabAdd.visible()
+                    linearTop.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToAddRealizationFragment(user)) }
+                    linearBottom.onClick { navigate(DataFormerFragmentDirections.actionDataFormerFragmentToPlantDataFragment(user.id)) }
+                }
+                viewModel.getChart(query)
+            }
+        }
     }
 
     override fun initObservers() {
@@ -76,7 +117,7 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
             onLoading = {
                 binding.msv.showLoadingState()
             },
-            onFailure = { _, message ->
+            onFailure = { _, _ ->
                 binding.msv.showDefaultState()
                 barChart(Dummy.generateChartDummy())
                 pieChart(Dummy.generateChartDummy())
@@ -89,7 +130,36 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         )
     }
 
-    private fun barChart(data: ChartModel) = with(binding) {
+    private fun setListPetani() = with(binding) {
+        viewModel.getPetani(pref.getUser().id!!)
+        viewModel.petani.observerLiveData(
+            viewLifecycleOwner,
+            onLoading = {
+                msv.showLoadingState()
+            },
+            onEmpty = {},
+            onFailure = { _, _ ->
+                msv.showDefaultState()
+            },
+            onSuccess = {
+                msv.showDefaultState()
+                val res = it
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.simple_list_item_1,
+                    res.map { f -> f.nama }
+                )
+                listPetani.apply {
+                    setAdapter(adapter)
+                    setOnItemClickListener { _, _, i, _ ->
+                        viewModel.selectFarmer(res[i])
+                    }
+                }
+            }
+        )
+    }
+
+    private fun barChart(data: ChartResponse) = with(binding) {
         with(barChart) {
             setDrawBarShadow(false)
             setDrawValueAboveBar(true)
@@ -120,10 +190,10 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         barChart.legend.isEnabled = true
 
         val list = ArrayList<BarDataSet>()
-        data.datachart.forEachIndexed { index, model ->
+        data.data?.forEachIndexed { index, model ->
             val value = BarDataSet(
-                listOf(BarEntry(index.toFloat(), model.count.toFloat())),
-                model.label
+                listOf(model?.count?.let { BarEntry(index.toFloat(), it.toFloat()) }),
+                model?.komoditas
             )
 
             value.color = requireContext().randomColor()
@@ -136,9 +206,10 @@ class DataFormerFragment : BaseFragment<FragmentDataFormerBinding>() {
         barChart.data = dataset
     }
 
-    private fun pieChart(data: ChartModel) = with(binding) {
-        val entries = data.datachart.map {
-            PieEntry(it.count.toFloat(), "${it.label} ${it.tahunPanen}")
+    private fun pieChart(data: ChartResponse) = with(binding) {
+        val entries = data.data?.map {
+            it?.count?.toFloat()
+                ?.let { it1 -> PieEntry(it1, "${it.komoditas} ${it.periodeMusimTanam}") }
         }
 
         // Create the dataset and customize it

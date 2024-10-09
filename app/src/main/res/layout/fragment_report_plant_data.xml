@@ -24,13 +24,14 @@
             android:src="@drawable/ic_back" />
 
         <TextView
+            android:id="@+id/tv_title"
             style="@style/MyText.Bold"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="List Tanaman"
+            android:text="List Laporan"
             android:textColor="@color/white"
             android:textSize="26sp" />
 

@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.wahidabd.library.utils.common.emptyString
 import id.go.ngawikab.siketan.R
+import id.go.ngawikab.siketan.domain.auth.model.User
+import id.go.ngawikab.siketan.domain.farm.model.response.OpsiPetani
 import id.go.ngawikab.siketan.utils.components.MyDialogFragment
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -53,7 +55,6 @@ fun Fragment.navDirection(direction: NavDirections) =
 
 fun emailMatches(value: String): Boolean =
     !TextUtils.isEmpty(value) && Patterns.EMAIL_ADDRESS.matcher(value).matches()
-
 
 fun Fragment.navigate(navDirections: NavDirections) {
     findNavController().navigate(navDirections)
@@ -206,4 +207,23 @@ fun convertFileToBase64(file: File? = null): String {
     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
     val imageBytes = outputStream.toByteArray()
     return Base64.encodeToString(imageBytes, Base64.DEFAULT) ?: emptyString()
+}
+
+fun formatPhoneNumber(phoneNumber: String?): String {
+    return when {
+        phoneNumber == null -> ""
+        phoneNumber.startsWith("0") -> "+62" + phoneNumber.trim().substring(1)
+        phoneNumber.startsWith("+62") -> phoneNumber
+        else -> "0$phoneNumber"
+    }.replace("\\s".toRegex(), "")
+}
+
+fun User.toOpsiPetani(): OpsiPetani {
+    return OpsiPetani(
+        nik = this.nik,
+        nama = this.nama,
+        id = this.id ?: 0,
+        desaData = this.desaData,
+        kecamatanData = this.kecamatanData
+    )
 }

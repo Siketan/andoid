@@ -171,19 +171,19 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
                 val adapter = ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_list_item_1,
-                    it.data.map { f -> f.name })
+                    it.data.map { f -> f.nama })
 
                 autoComplete.apply {
                     setAdapter(adapter)
                     setOnItemClickListener { _, _, i, _ ->
-                        setKeluraha(it.data[i].id)
+                        setKelurahan(it.data[i].id)
                     }
                 }
             }
         )
     }
 
-    private fun setKeluraha(id: Long) = with(binding) {
+    private fun setKelurahan(id: Long) = with(binding) {
         addressViewModel.kelurahan(id)
         addressViewModel.kelurahan.observerLiveData(
             viewLifecycleOwner,
@@ -201,7 +201,7 @@ class JournalAddFragment : BaseFragment<FragmentJournalAddBinding>() {
                 tvKelurahan.text = ""
                 kelurahan.visibleIf { it.data.isNotEmpty() }
                 it.data.forEachIndexed { index, address ->
-                    tvKelurahan.append("${index + 1}. ${address.name}\n")
+                    tvKelurahan.append("${index + 1}. ${address.nama}\n")
                 }
             }
         )

@@ -1,7 +1,6 @@
 package id.go.ngawikab.siketan.di
 
 import com.wahidabd.library.data.libs.OkHttpClientFactory
-import com.wahidabd.library.data.libs.interceptor.HeaderInterceptor
 import id.go.ngawikab.siketan.BuildConfig
 import id.go.ngawikab.siketan.utils.PrefManager
 import okhttp3.Interceptor
@@ -32,15 +31,20 @@ val appModule = module {
     }
 
     single(named(BASE_URL)) { BuildConfig.BASE_URL }
-    single(named(ADDRESS_URL)) { "https://dev.farizdotid.com/api/daerahindonesia/" }
+    single(named(ADDRESS_URL)) { BuildConfig.BASE_URL }
 }
 
 
 private fun getHeaderInterceptor(pref: PrefManager): Interceptor {
-    val headers = HashMap<String, String>()
-    headers["Authorization"] = pref.getToken()
-    headers["Content-Type"] = "application/json"
-    headers["Content-Type"] = "application/x-www-form-urlencoded"
-
-    return HeaderInterceptor(headers)
+    return Interceptor { chain ->
+        val requestBuilder = chain.request().newBuilder()
+        val token = pref.getToken()
+        if (!token.isNullOrEmpty()) {
+            requestBuilder.addHeader("Authorization", token)
+        }
+        requestBuilder.addHeader("Content-Type", "application/json")
+        requestBuilder.addHeader("Content-Type", "application/x-www-form-urlencoded")
+        requestBuilder.addHeader("Content-Type", "multipart/form-data")
+        chain.proceed(requestBuilder.build())
+    }
 }

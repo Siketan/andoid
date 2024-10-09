@@ -20,4 +20,15 @@ fun LoginRequest.toData(): LoginDataRequest =
     LoginDataRequest(nik, password)
 
 fun RegisterRequest.toData(): RegisterDataRequest =
-    RegisterDataRequest(nik, no_wa, nama, password)
+    RegisterDataRequest(
+        NIK,
+        no_wa,
+        nama,
+        password,
+        alamat,
+        desa,
+        kecamatan,
+        gapoktan,
+        penyuluh,
+        namaKelompok
+    )

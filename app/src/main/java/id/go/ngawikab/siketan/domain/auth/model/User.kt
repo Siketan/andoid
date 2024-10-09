@@ -1,20 +1,25 @@
 package id.go.ngawikab.siketan.domain.auth.model
 
 import com.wahidabd.library.utils.common.emptyString
+import id.go.ngawikab.siketan.data.auth.model.user.Penyuluh
 import id.go.ngawikab.siketan.data.auth.model.user.UserResponse
+import id.go.ngawikab.siketan.domain.address.model.Address
 import id.go.ngawikab.siketan.domain.farm.model.response.Journal
+import timber.log.Timber
 
 data class User(
-    val NIK: String? = emptyString(),
-    val NIP: String? = emptyString(),
+    val nik: String? = emptyString(),
+    val nkk: String? = emptyString(),
     val NoWa: String? = emptyString(),
+    val noTelp: String? = emptyString(),
     val alamat: String? = emptyString(),
     val createdAt: String? = emptyString(),
-    val desa: String? = emptyString(),
+    val desaData: Address? = null,
     val foto: String? = emptyString(),
     val id: Int? = 0,
     val jurnalKegiatanId: Int? = 0,
-    val kecamatan: String? = emptyString(),
+    val kecamatanData: Address? = null,
+    val kecamatanBinaan: String?= emptyString(),
     val kelompokId: Int? = 0,
     val laporanTanamId: Int? = 0,
     val nama: String? = emptyString(),
@@ -26,7 +31,11 @@ data class User(
     val role: String? = emptyString(),
     val tanamanPetaniId: Int? = 0,
     val updatedAt: String? = emptyString(),
-    val jurnalHarian: Journal? = null
+    val fk_penyuluhId: Int? = 0,
+    val nama_penyuluh: String? = emptyString(),
+    val no_penyuluh: String? = emptyString(),
+    val dataPenyuluh: Penyuluh? = null,
+    val jurnalHarian: Journal? = null,
 )
 
 fun UserResponse.toDomain(): User =
@@ -34,13 +43,15 @@ fun UserResponse.toDomain(): User =
         NIK,
         NIP,
         NoWa,
+        noTelp,
         alamat,
         createdAt,
-        desa,
+        desaData,
         foto,
         id,
         jurnalKegiatanId,
-        kecamatan,
+        kecamatanData,
+        kecamatanBinaan,
         kelompokId,
         laporanTanamId,
         nama,
@@ -49,7 +60,15 @@ fun UserResponse.toDomain(): User =
         rattingId,
         responseRatingId,
         riwayatChatId,
-        role,
+        role = if(kecamatanBinaan==null || kecamatanBinaan == emptyString()){
+            Timber.tag("User NIP ").d(NIP)
+            "petani"}else{
+            Timber.tag("User NIP ").d(NIP)
+                "penyuluh"},
         tanamanPetaniId,
-        updatedAt
+        updatedAt,
+        fk_penyuluhId,
+        dataPenyuluh?.nama,
+        dataPenyuluh?.noTelp,
+        dataPenyuluh
     )

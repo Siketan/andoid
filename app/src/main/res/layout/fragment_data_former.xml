@@ -16,6 +16,7 @@
         android:background="@drawable/img_app_bar"
         android:gravity="center">
 
+
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
@@ -62,6 +63,32 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilListPetani"
+                    app:boxStrokeColor="@color/primary"
+                    android:textColorHint="@color/black"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_54dp"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="Pilih Petani"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:endIconTint="@color/primary"
+                    android:layout_marginBottom="@dimen/dimen_24dp"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/listPetani"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        android:padding="10dp"
+                        android:textColorHint="@color/white"
+                        android:popupBackground="@color/white"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart"

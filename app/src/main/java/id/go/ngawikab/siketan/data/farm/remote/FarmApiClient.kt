@@ -1,16 +1,17 @@
 package id.go.ngawikab.siketan.data.farm.remote
 
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -34,14 +35,20 @@ interface FarmApiClient {
     @GET("event-tani")
     suspend fun getEvent(): Response<InfoTaniDataResponse<EventTaniResponse>>
 
-    @GET("product-petani")
+    @GET("product-petani?page=1")
     suspend fun getProduct(): Response<ProductDataResponse>
+
+    @GET("product-petani")
+    suspend fun getProductbyPaging(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int? = 10
+    ): Response<ProductDataResponse>
 
     @POST("daftar-penjual/add")
     suspend fun postStore(
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
-    
+
     @GET("jurnal-kegiatan")
     suspend fun getJournal(): Response<JournalResponse>
 
@@ -55,21 +62,24 @@ interface FarmApiClient {
         @Body body: MultipartBody
     ): Response<GenericAddResponse>
 
-    @GET("chart")
+    @GET("tanaman-petani/petani/{id}")
     suspend fun getChart(
-        @Query("jenisPanen") jenisPanen: String,
-        @Query("jenis") jenis: String
-    ): Response<ChartModel>
+        @Path("id") id: Int,
+        @Query("musim") musim: String?,
+        @Query("jenis") jenis: String?
+    ): Response<ChartResponse>
 
-    @POST("tanaman-petani")
+    @GET("tanaman-petani/petani/{id}/all")
+    suspend fun getTanaman(
+        @Path("id") id: Int,
+        @Query("page") page: Int?,
+        @Query("limit") limit: Int?=20
+    ): Response<PlantFarmerResponse>
+
+    @POST("list-tanaman")
     suspend fun addTanaman(
         @Body body: InputTanamanRequest
     ): Response<InputTanamanResponse>
-
-    @GET("tanaman-petani/{id}")
-    suspend fun getTanaman(
-        @Path("id") id: Int
-    ): Response<TanamanPetaniResponse>
 
     @POST("laporan-tanam")
     suspend fun addLaporan(
@@ -81,4 +91,15 @@ interface FarmApiClient {
         @Path("id") id: Int
     ): Response<ReportTanamanResponse>
 
+    @GET("daftar-petani/{id}")
+    suspend fun getPetani(
+        @Path("id") id: Int
+    ): Response<OpsiPetaniResponse>
+
+    @GET("daftar-petani/{id}")
+    suspend fun getPetanibyPaging(
+        @Path("id") id: Int,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int? = 10
+    ): Response<OpsiPetaniResponse>
 }

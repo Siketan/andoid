@@ -1,6 +1,6 @@
 package id.go.ngawikab.siketan.presentation.journal
 
-import android.R
+import android.R.layout.simple_list_item_1
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -150,8 +150,8 @@ class PresensiFragment : BaseFragment<FragmentPresensiBinding>() {
             onSuccess = {
                 val adapter = ArrayAdapter(
                     requireContext(),
-                    R.layout.simple_list_item_1,
-                    it.data.map { f -> f.name })
+                    simple_list_item_1,
+                    it.data.map { f -> f.nama })
 
                 autoComplete.apply {
                     setAdapter(adapter)
@@ -181,7 +181,7 @@ class PresensiFragment : BaseFragment<FragmentPresensiBinding>() {
                 tvKelurahan.text = ""
                 kelurahan.visibleIf { it.data.isNotEmpty() }
                 it.data.forEachIndexed { index, address ->
-                    tvKelurahan.append("${index + 1}. ${address.name}\n")
+                    tvKelurahan.append("${index + 1}. ${address.nama}\n")
                 }
             }
         )

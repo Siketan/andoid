@@ -21,6 +21,7 @@ import id.go.ngawikab.siketan.utils.dateFormat
 
 class AnnouncementAdapter(
     private val context: Context,
+    private val onClick:(InfoTani)->Unit,
     item: ArrayList<InfoTani> = arrayListOf(),
 ) : BaseAsyncRecyclerAdapter<InfoTani, AnnouncementAdapter.AnnouncementViewHolder>(item) {
 
@@ -34,10 +35,18 @@ class AnnouncementAdapter(
 
     inner class AnnouncementViewHolder(binding: ViewBinding) :
         BaseAsyncItemViewHolder<InfoTani>(binding) {
+
         override fun bind(data: InfoTani) = with(binding as ItemFarmInfoBinding) {
             tvTitle.text = context.getString(R.string.format_underline, data.judul)
             tvAuthor.text = context.getString(R.string.format_label_author, data.createdBy)
             tvDate.text = data.createdAt?.dateFormat()
+            tvToMore.text = context.getString(R.string.label_read_more)
+//            tvToMore.setOnClickListener {
+//                onClick(data)
+//            }
+            binding.root.setOnClickListener {
+                onClick(data)
+            }
 
             imgImage.setImageUrl(
                 context,

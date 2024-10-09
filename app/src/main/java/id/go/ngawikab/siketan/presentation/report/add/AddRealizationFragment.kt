@@ -3,6 +3,7 @@ package id.go.ngawikab.siketan.presentation.report.add
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.wahidabd.library.utils.common.showToast
 import com.wahidabd.library.utils.exts.clear
@@ -12,27 +13,24 @@ import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.toStringTrim
 import com.wahidabd.library.utils.exts.visible
 import id.go.ngawikab.siketan.R
-import id.go.ngawikab.siketan.databinding.FragmentAddRealizationBinding
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
+import id.go.ngawikab.siketan.databinding.FragmentAddRealizationBinding
 import id.go.ngawikab.siketan.presentation.report.viewmodel.ReportViewModel
 import id.go.ngawikab.siketan.utils.CategoryType
 import id.go.ngawikab.siketan.utils.HarverstType
 import id.go.ngawikab.siketan.utils.PlantType
 import id.go.ngawikab.siketan.utils.PrefManager
+import id.go.ngawikab.siketan.utils.UserRole
 import id.go.ngawikab.siketan.utils.common.SiketanBaseFragment
-import id.go.ngawikab.siketan.utils.datePicker
 import id.go.ngawikab.siketan.utils.showCancelableDialog
 import id.go.ngawikab.siketan.utils.showSuccessDialog
-import id.go.ngawikab.siketan.utils.toDateApi
-import id.go.ngawikab.siketan.utils.toDateString
 import org.koin.android.ext.android.inject
 
 class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding>() {
 
     private val pref: PrefManager by inject()
-    private var startDate: String? = null
-    private var endDate: String? = null
     private val viewModel: ReportViewModel by inject()
+    private val data: AddRealizationFragmentArgs by navArgs()
 
 
     override fun getViewBinding(
@@ -46,64 +44,72 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
     override fun initUI() {
         with(binding) {
             val user = pref.getUser()
-            tilNik.setText(pref.getAttemptLogin().nik)
-            tilName.setText(user.nama.toString())
-            tilKecamatan.setText(user.kecamatan.toString())
-            tilDesa.setText(user.desa.toString())
+            if (user.role == UserRole.PETANI.role){
+                tilNik.setText(pref.getAttemptLogin().nik)
+                tilName.setText(user.nama.toString())
+                tilKecamatan.setText(user.kecamatanData?.nama.toString())
+                tilDesa.setText(user.desaData?.nama.toString())
+            }else {
+                tilNik.setText(data.user.nik.toString())
+                tilName.setText(data.user.nama.toString())
+                tilKecamatan.setText(data.user.kecamatanData?.nama.toString())
+                tilDesa.setText(data.user.desaData?.nama.toString())
+            }
         }
 
         setupStatusLahan()
         setupKategori()
         setupJenisTanaman()
         setupMusimTanam()
+        setupBulan()
     }
 
     override fun initAction() {
         with(binding) {
             imgBack.onClick { showCancelableDialog() }
             btnCancel.onClick { showCancelableDialog() }
-            edtStartDate.onClick {
-                datePicker { date ->
-                    edtStartDate.setText(date.toDateString())
-                    startDate = date.toDateApi()
-                }
-            }
-            edtEndDate.onClick {
-                datePicker { date ->
-                    edtEndDate.setText(date.toDateString())
-                    endDate = date.toDateApi()
-                }
-            }
+
         }
     }
 
     override fun initProcess() {
         with(binding) {
             btnSubmit.onClick {
-                val id = pref.getUser().id
-                val statusLahan = tilStatusLahan.toStringTrim()
+                val id = when {
+                    (pref.getUser().role == UserRole.PENYULUH.role) -> data.user.id
+                    else -> pref.getUser().id
+                }
+                val statusLahan = if (tilStatusLahan.toStringTrim() == "Lahan Sendiri") {
+                    "MILIK SENDIRI"
+                } else {
+                    "TANAH SEWA"
+                }
                 val luasLahan = tilLuasLahan.edittext
                 val kategori = tilKategori.toStringTrim()
                 val jenisTanaman = tilJenisTanaman.toStringTrim()
                 val jenisPanen = tilJenisPanen.toStringTrim()
                 val komoditas = tilKomoditas.toStringTrim()
-                val musimTanam = tilMusimTanam.toStringTrim()
-                val tanggalTanam = tilBulanTanam.toStringTrim()
-                val tanggalPanen = tilBulanPanen.toStringTrim()
+                val bulanTanam = tilBulanTanam.toStringTrim()
+                val bulanPanen = tilBulanPanen.toStringTrim()
                 val produksiPanen = tilProduksiPanen.edittext
+                val periodeMusimTanam = if (tilMusimTanam.toStringTrim() == "Musiman") {
+                    "Tanaman Semusim"
+                } else {
+                    "Tanaman Tahunan"
+                }
 
                 val data = InputTanamanRequest(
-                    dataPersonId = id!!,
-                    statusLahan = statusLahan,
+                    fk_petaniId = id!!,
+                    statusKepemilikanLahan = statusLahan,
                     luasLahan = luasLahan,
-                    jenisPanen = jenisPanen,
-                    jenis = jenisTanaman,
+                    jenis = jenisPanen,
                     kategori = kategori,
                     komoditas = komoditas,
-                    musimTanam = musimTanam.toInt(),
-                    tanggalTanam = startDate.toString(),
-                    perkiraanPanen = endDate.toString(),
-                    perkiraanHasilPanen = produksiPanen.toInt(),
+                    periodeMusimTanam = periodeMusimTanam,
+                    periodeBulanTanam = bulanTanam,
+                    prakiraanBulanPanen = bulanPanen,
+                    prakiraanProduksiPanen = produksiPanen.toInt(),
+                    prakiraanLuasPanen = produksiPanen.toInt(),
                 )
 
                 viewModel.addTanaman(data)
@@ -131,9 +137,17 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
         )
     }
 
+    private fun setupBulan() = with(binding) {
+        val list = resources.getStringArray(R.array.month)
+        setArrayAdapter(list, autoCompleteBulanTanam, onclick = {})
+        setArrayAdapter(list, autoCompleteBulanPanen, onclick = {})
+    }
+
     private fun setupStatusLahan() = with(binding) {
         val list = resources.getStringArray(R.array.land_status)
-        setArrayAdapter(list, autoCompleteStatusLahan, onclick = {})
+        setArrayAdapter(list, autoCompleteStatusLahan, onclick = {
+
+        })
     }
 
     private fun setupKategori() = with(binding) {
@@ -151,7 +165,6 @@ class AddRealizationFragment : SiketanBaseFragment<FragmentAddRealizationBinding
                 }
 
                 CategoryType.PERKEBUNAN.type -> {
-                    tilBulanTanam.gone()
                     tilJenisTanaman.gone()
                     tilJenisPanen.visible()
                     clearTextInputLayout()

@@ -8,7 +8,6 @@ import com.wahidabd.library.utils.common.emptyString
  * Github github.com/wahidabd.
  */
 
-
 data class Journal(
     val id: Int? = 0,
     val judul: String? = emptyString(),

@@ -13,13 +13,16 @@ enum class UserRole(val role: String){
 }
 
 enum class ChartTypeQuery(val type: String){
-    TAHUNAN("Tahunan"),
-    BULANAN("Bulanan")
+    TAHUNAN("semusim"),
+    BULANAN("tahunan"),
+    EMPTY("")
 }
 
 enum class ChartKomuditasQuery(val type: String){
-    FRUIT("Buah-Buahan"),
-    VEGETABLE("Sayuran")
+    FRUIT("buah"),
+    VEGETABLE("sayur"),
+    EMPTY("")
+
 }
 
 enum class CategoryType(val type: String){

@@ -77,8 +77,8 @@ class StoreAddFragment : BaseFragment<FragmentStoreAddBinding>() {
             val user = pref.getUser()
             tilNik.setText(pref.getAttemptLogin().nik)
             tilName.setText(user.nama.toString())
-            tilKecamatan.setText(user.kecamatan.toString())
-            tilDesa.setText(user.desa.toString())
+            tilKecamatan.setText(user.kecamatanData?.nama.toString())
+            tilDesa.setText(user.desaData?.nama.toString())
 
             // set units
             val units = resources.getStringArray(R.array.unit)

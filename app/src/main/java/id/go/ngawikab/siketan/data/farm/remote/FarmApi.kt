@@ -2,16 +2,17 @@ package id.go.ngawikab.siketan.data.farm.remote
 
 import com.wahidabd.library.data.WebApi
 import id.go.ngawikab.siketan.data.farm.model.farm.request.InputTanamanRequest
+import id.go.ngawikab.siketan.data.farm.model.farm.response.ChartResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.EventTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniDataResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InfoTaniResponse
 import id.go.ngawikab.siketan.data.farm.model.farm.response.InputTanamanResponse
-import id.go.ngawikab.siketan.data.farm.model.farm.response.TanamanPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.OpsiPetaniResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.PlantFarmerResponse
+import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import id.go.ngawikab.siketan.data.farm.model.journal.JournalResponse
 import id.go.ngawikab.siketan.data.farm.model.store.ProductDataResponse
 import id.go.ngawikab.siketan.data.farm.model.store.response.GenericAddResponse
-import id.go.ngawikab.siketan.domain.farm.model.response.ChartModel
-import id.go.ngawikab.siketan.data.farm.model.farm.response.report.ReportTanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 
@@ -35,6 +36,14 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.getProduct()
     }
 
+    override suspend fun getProductbyPaging(page: Int,limit: Int?): Response<ProductDataResponse> {
+        return api.getProductbyPaging(page)
+    }
+
+    override suspend fun getPetanibyPaging(id: Int, page:Int,limit: Int?): Response<OpsiPetaniResponse> {
+        return api.getPetanibyPaging(id,page)
+    }
+
     override suspend fun postStore(body: MultipartBody): Response<GenericAddResponse> {
         return api.postStore(body)
     }
@@ -51,20 +60,24 @@ class FarmApi(private val api: FarmApiClient) : WebApi, FarmApiClient {
         return api.addPresensi(body)
     }
 
-    override suspend fun getChart(jenisPanen: String, jenis: String): Response<ChartModel> {
-        return api.getChart(jenisPanen, jenis)
+    override suspend fun getChart(id:Int ,musim: String?, jenis: String?): Response<ChartResponse> {
+        return api.getChart(id,musim, jenis)
     }
 
     override suspend fun addTanaman(body: InputTanamanRequest): Response<InputTanamanResponse> {
         return api.addTanaman(body)
     }
 
-    override suspend fun getTanaman(id: Int): Response<TanamanPetaniResponse> {
-        return api.getTanaman(id)
+    override suspend fun getTanaman(id: Int, page:Int?,limit: Int?): Response<PlantFarmerResponse> {
+        return api.getTanaman(id,page)
     }
 
     override suspend fun addLaporan(body: MultipartBody): Response<GenericAddResponse> {
         return api.addLaporan(body)
+    }
+
+    override suspend fun getPetani(id: Int): Response<OpsiPetaniResponse> {
+        return api.getPetani(id)
     }
 
     override suspend fun getLaporan(id: Int): Response<ReportTanamanResponse> {

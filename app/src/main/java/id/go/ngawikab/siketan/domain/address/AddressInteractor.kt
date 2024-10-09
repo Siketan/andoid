@@ -3,9 +3,7 @@ package id.go.ngawikab.siketan.domain.address
 import com.wahidabd.library.data.Resource
 import id.go.ngawikab.siketan.data.address.AddressRepository
 import id.go.ngawikab.siketan.data.address.response.ResponseAddress
-import id.go.ngawikab.siketan.domain.address.AddressUseCase
 import kotlinx.coroutines.flow.Flow
-
 
 /**
  * Created by Wahid on 7/19/2023.

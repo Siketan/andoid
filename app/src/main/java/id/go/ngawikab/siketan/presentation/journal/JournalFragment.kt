@@ -10,6 +10,7 @@ import com.wahidabd.library.utils.exts.observerLiveData
 import com.wahidabd.library.utils.exts.onClick
 import com.wahidabd.library.utils.exts.visible
 import com.wahidabd.library.utils.exts.visibleIf
+import id.go.ngawikab.siketan.data.farm.model.journal.Jounal
 import id.go.ngawikab.siketan.databinding.FragmentJournalBinding
 import id.go.ngawikab.siketan.presentation.journal.adapter.JournalAdapter
 import id.go.ngawikab.siketan.utils.PrefManager
@@ -22,7 +23,11 @@ class JournalFragment : BaseFragment<FragmentJournalBinding>() {
 
     private val viewModel: JournalViewModel by viewModel()
     private val journalAdapter by lazy {
-        JournalAdapter(requireContext())
+        JournalAdapter(requireContext(),
+            {
+            setOnClickDetailJournal(it)
+        }
+        )
     }
 
     private val pref: PrefManager by inject()
@@ -80,5 +85,7 @@ class JournalFragment : BaseFragment<FragmentJournalBinding>() {
             )
         }
     }
-
+    private fun setOnClickDetailJournal(data: Jounal){
+        findNavController().navigate(JournalFragmentDirections.actionJournalFragmentToJournalDetailFragment(data))
+    }
 }

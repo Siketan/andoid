@@ -14,11 +14,11 @@ import retrofit2.http.Query
 
 interface AddressApiClient {
 
-    @GET("kecamatan?id_kota=3521")
+    @GET("wilayah/kecamatan")
     suspend fun kecamatan(): Response<ResponseAddress>
 
-    @GET("kelurahan")
+    @GET("wilayah/desa")
     suspend fun kelurahan(
-        @Query("id_kecamatan") id_kecamatan: Long
+        @Query("kecamatanId") kecamatanId: Long
     ): Response<ResponseAddress>
 }

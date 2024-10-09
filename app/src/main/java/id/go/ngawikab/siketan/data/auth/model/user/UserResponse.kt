@@ -1,6 +1,7 @@
 package id.go.ngawikab.siketan.data.auth.model.user
 
 import com.wahidabd.library.utils.common.emptyString
+import id.go.ngawikab.siketan.domain.address.model.Address
 
 
 /**
@@ -13,13 +14,16 @@ data class UserResponse(
     val NIK: String? = emptyString(),
     val NIP: String? = emptyString(),
     val NoWa: String? = emptyString(),
+    val noTelp: String? = emptyString(),
     val alamat: String? = emptyString(),
     val createdAt: String? = emptyString(),
-    val desa: String? = emptyString(),
+    val desaId: Int? = 0,
+    val desaData: Address? = null,
     val foto: String? = emptyString(),
     val id: Int? = 0,
     val jurnalKegiatanId: Int? = 0,
-    val kecamatan: String? = emptyString(),
+    val kecamatanId: Int? = 0,
+    val kecamatanData: Address? = null,
     val kelompokId: Int? = 0,
     val laporanTanamId: Int? = 0,
     val nama: String? = emptyString(),
@@ -30,5 +34,8 @@ data class UserResponse(
     val riwayatChatId: Int? = 0,
     val role: String? = emptyString(),
     val tanamanPetaniId: Int? = 0,
-    val updatedAt: String? = emptyString()
+    val updatedAt: String? = emptyString(),
+    val kecamatanBinaan: String? = emptyString(),
+    val fk_penyuluhId: Int? = 0,
+    val dataPenyuluh: Penyuluh? = null,
 )
